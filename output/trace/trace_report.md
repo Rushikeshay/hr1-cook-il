@@ -10,6 +10,7 @@ Each tracer unit's value at every pipeline stage.
 | 01a_snap_parse | Cook SNAP households (IDHS office table) | 404720 | idhs/offices/snap_offices_2026_05.html table row 55 |
 | 02_snap_series | observed change vs prior month | -45429 | IDHS office table |
 | 02_snap_series | excess change beyond mid trend | -43420 | observed - trend change |
+| 05_snap | mid: people off SNAP (residence) | 128190 | wave 1 stock |
 
 ## zip:60623
 
@@ -23,6 +24,10 @@ Each tracer unit's value at every pipeline stage.
 | 01d_geo_acs | snap_hh | 8113.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | mcd_19_64 | 13315.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | hfs_aca_cook | 9179.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
+| 06_zip_alloc | mid mcd_people_off_dec_2028 | 2902 | Chicago; border=False |
+| 06_zip_alloc | mid snap_people_off_dec_2028 | 5594 | Chicago; border=False |
+| 06_zip_alloc | mid mcd_federal_usd_2028 | 22720401 | Chicago; border=False |
+| 06_zip_alloc | mid snap_federal_usd_2028 | 13090763 | Chicago; border=False |
 
 ## zip:60426
 
@@ -36,6 +41,10 @@ Each tracer unit's value at every pipeline stage.
 | 01d_geo_acs | snap_hh | 3339.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | mcd_19_64 | 5375.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | hfs_aca_cook | 3334.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
+| 06_zip_alloc | mid mcd_people_off_dec_2028 | 1054 | suburban Cook; border=False |
+| 06_zip_alloc | mid snap_people_off_dec_2028 | 2302 | suburban Cook; border=False |
+| 06_zip_alloc | mid mcd_federal_usd_2028 | 8252513 | suburban Cook; border=False |
+| 06_zip_alloc | mid snap_federal_usd_2028 | 5387657 | suburban Cook; border=False |
 
 ## pums:2020HU0051747-01
 
@@ -84,3 +93,9 @@ Each tracer unit's value at every pipeline stage.
 | step | stage | value | note |
 |---|---|---|---|
 | 04_medicaid | mid: people off coverage | 113416 | cumulative, all components |
+
+## office:COOK COUNTY
+
+| step | stage | value | note |
+|---|---|---|---|
+| 05_snap | mid: projected Cook SNAP persons Dec 2028 | 625531 | residence basis |

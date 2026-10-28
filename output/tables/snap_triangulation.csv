@@ -1,0 +1,3 @@
+measure,ours,external,external_source,note,ours_over_external
+Cook time-limited SNAP adults before the cutoffs (Apr 2026),98989.66805820841,213848.76056926954,IDHS via GCFD (Jul 2025): ~450k newly time-limited statewide x Cook share of IL SNAP,"our PUMS exemption proxies are broad (disability, caregiver, student), so our pool is smaller; wave 2 is calibrated, so the pool size mostly cancels",0.4628956828868028
+Cook first-wave time-limit losses (May-June 2026 excess),63799.99678180475,70332.48125389309,IDHS (Sun-Times Jul 2026): ~148k statewide work-requirement losses by ~June 2026 x Cook share,,0.9071199486264855

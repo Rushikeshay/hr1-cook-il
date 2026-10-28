@@ -1,10 +1,10 @@
 # Check report
 
-Generated 2026-10-28 15:43
+Generated 2026-10-28 16:41
 
 | step | PASS | WARN |
 |---|---|---|
-| 00b_manifest | 237 | 0 |
+| 00b_manifest | 249 | 0 |
 | 01a_snap_parse | 170 | 2 |
 | 01b_hfs_parse | 17 | 0 |
 | 01c_cch_parse | 72 | 0 |
@@ -14,6 +14,8 @@ Generated 2026-10-28 15:43
 | 02_snap_series | 11 | 0 |
 | 03_pums_shares | 42 | 0 |
 | 04_medicaid | 39 | 1 |
+| 05_snap | 51 | 0 |
+| 06_zip_alloc | 15 | 0 |
 
 ## Not passing
 

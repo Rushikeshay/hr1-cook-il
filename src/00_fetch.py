@@ -38,6 +38,11 @@ FILES = {
     "idhs/snap_county_2025_09.pdf": "https://www.dhs.state.il.us/OneNetLibrary/27897/documents/SNAP/SEPTEMBER%2025%20SNAP%20Individual%20Counts%20by%20Counties1.pdf",
     # Urban Institute for RWJF (Buettgens et al., Mar 2026): state 2028 Medicaid expansion losses (triangulation)
     "rwjf/urban_medicaid_work_req_2028.pdf": "https://www.rwjf.org/content/dam/farm/reports/reports/2026/rwjf485284",
+    # IDHS SNAP utility standards: Oct 2025 (MR #25.33) and current manual chart (WAG 25-03-02 (1))
+    "idhs/mr_25_33_utility_standards_2025_10.html": "https://www.dhs.state.il.us/page.aspx?item=171481",
+    "idhs/wag_25_03_02_snap_standards.html": "https://www.dhs.state.il.us/page.aspx?item=21738",
+    "idhs/pm_13_01_08_b_utility_allowance.html": "https://www.dhs.state.il.us/page.aspx?item=16169",
+    "idhs/pm_13_01_08_excess_shelter.html": "https://www.dhs.state.il.us/page.aspx?item=16164",
     # Geography
     "geo/cb_2020_us_zcta520_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2020/shp/cb_2020_us_zcta520_500k.zip",
     "geo/cb_2024_us_county_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip",

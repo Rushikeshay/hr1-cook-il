@@ -1,0 +1,7 @@
+fiscal_year,scenario,fallback_standard,cut_per_household_month,usd_per_year_per_10k_households
+fy2026,low,limited,26.7,3204000.0
+fy2026,mid,limited,26.7,3204000.0
+fy2026,high,telephone,143.7,17244000.0
+fy2027,low,limited,27.9,3347999.9999999995
+fy2027,mid,limited,27.9,3347999.9999999995
+fy2027,high,telephone,148.79999999999998,17856000.0

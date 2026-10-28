@@ -164,11 +164,26 @@ snap:
     ages: {value: [18, 64], status: observed}
     child_exempt_under: {value: 14, status: observed}
     statewide_newly_time_limited: {value: 450000, status: observed, note: "IDHS estimate via GCFD (Jul 2025): ABAWD pool 190k -> ~450k; >340k at risk"}
-    second_wave_loss_rate:
-      low:  {value: null, status: derived, note: "calibrated to observed May 2026 drop x 0.75"}
-      mid:  {value: null, status: derived, note: "calibrated to observed May 2026 drop"}
-      high: {value: null, status: derived, note: "calibrated to observed May 2026 drop x 1.25"}
-    calibration_multipliers: {low: 0.75, mid: 1.0, high: 1.25, status: assumed}
+    # Second wave (April 2027). rate = observed first-wave excess drop / time-limited pool (PUMS share x Apr 2026
+    # caseload); wave 2 = rate x multiplier x pool in early 2027 (PUMS share x projected caseload). Computed in 05_snap.
+    calibration_window:
+      value: ["2026-05", "2026-06"]
+      status: assumed
+      source: "params.yaml decision 2026-10-28"
+      note: >-
+        Excess drop beyond the mid trend, May-June 2026 (62k office basis). Matches IDHS's ~148k statewide
+        work-requirement losses by ~June 2026 x Cook ~45% = ~67k. May only (43k) and May-Sept (102k) are sensitivities.
+    caseload_projection:
+      value: flat_from_latest
+      status: assumed
+      note: Cook SNAP persons held at the latest IDHS month (Sept 2026) until the second wave; no further trend
+    calibration_multipliers: {low: 1.0, mid: 1.0, high: 1.0, status: assumed, note: "set to 1.0 on 2026-10-28; scenarios now differ by pool (second_wave_pool)"}
+    # Decision 2026-10-28 (user): who can be cut in April 2027.
+    second_wave_pool:
+      low:  {value: survivors, status: assumed, note: "only time-limited adults who survived wave 1 (pool 2026 - wave-1 losses); no new entrants"}
+      mid:  {value: midpoint, status: assumed, note: "average of low and high pools (user: 35-40k expected; CBPP Oct 2026: caseloads still falling)"}
+      high: {value: refilled, status: assumed, note: "PLAN: PUMS time-limited share x projected caseload (pool fully refilled by new entrants/returners)"}
+      source: "https://www.cbpp.org/blog/snap-participation-has-dropped-to-its-lowest-point-in-17-years-even-though-economic-conditions"
 
   noncitizen:
     effective_date: {value: 2026-04-01, status: observed}
@@ -199,25 +214,44 @@ snap:
     mid:  {value: from_sept2025_county_office_ratio, status: derived}
     high: {value: from_sept2025_county_office_ratio, status: derived}
 
+  # Decision 2026-10-28 (user): OUT OF SCOPE for totals. These rules cut benefits for people who stay on SNAP;
+  # they are small next to coverage losses (LIHEAP/SUA ~1-3% of SNAP $ even at 20-50k households; internet $0-5).
+  # Kept for reference (LIHEAP per-household cut table) and described in methods.md.
   benefit_cuts_still_enrolled:
+    in_scope: {value: false, status: assumed, source: "user decision 2026-10-28"}
     liheap_sua:
-      effective_date: {value: 2025-09-26, status: observed, note: "new cases; existing cases at next redetermination (12-mo phase-in)"}
-      heating_cooling_sua_monthly: {value: 565, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=16169"}
+      # Affected: SNAP households with no Qualifying Member (60+ or disabled) that got the A/C-Heating standard ONLY
+      # because of a LIHEAP payment >= $21, i.e. they pay no heat/AC bill themselves (e.g. heat included in rent).
+      # They move to the standard their own bills support. Households billed for heat/AC keep the A/C-Heating standard.
+      effective_date: {value: 2025-09-26, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=16169", note: "new cases / new utility expense; existing cases at next redetermination (12-month phase-in)"}
+      heating_cooling_sua_monthly: {value: 565, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=21738"}
+      utility_standards:
+        fy2026: {ac_heat: 546, limited: 457, single: 78, telephone: 67, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=171481", note: "MR #25.33, Oct 2025 issuances"}
+        fy2027: {ac_heat: 565, limited: 472, single: 80, telephone: 69, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=21738", note: "WAG 25-03-02 (1), 10/2026"}
+      benefit_reduction_rate: {value: 0.30, status: observed, note: "SNAP benefit falls by 30% of each $1 of net income (7 U.S.C. 2017(a))"}
+      max_excess_shelter_no_qm: {value: 769, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=16164", note: "cap for households without a Qualifying Member; at the cap, a lower SUA may cut nothing"}
+      fallback_standard:
+        low:  {value: limited, status: assumed, note: "billed for 2+ non-heat utilities (e.g. electricity + phone)"}
+        mid:  {value: limited, status: assumed}
+        high: {value: telephone, status: assumed, note: "only a phone bill"}
+      # Per-household cut = benefit_reduction_rate x (ac_heat - fallback). An upper bound: the 50%-of-income rule and
+      # the $769 cap can make it smaller. Not the pasted "$100/month (FRAC/CBO)" figure, which is unverified.
       share_households_affected:
         low:  {value: null, status: assumed}
         mid:  {value: null, status: assumed}
         high: {value: null, status: assumed}
-        todo: need share of Cook SNAP households that got the SUA via LIHEAP and have no elderly/disabled member
-      monthly_benefit_cut_per_household:
-        value: null
-        status: derived
-        note: 0.30 x change in excess shelter deduction (SUA -> lower allowance), capped
+        todo: >-
+          need the number/share of Cook SNAP households with no Qualifying Member that got the A/C-Heating standard
+          only via LIHEAP (IDHS administrative data; not published). PUMS upper bound for 'no 60+/disabled member' is
+          41% of SNAP households, but most of those pay heat/AC bills and are not affected.
     internet_sua:
       monthly_benefit_cut_per_household:
         low:  {value: 0, status: assumed}
         mid:  {value: 0, status: assumed}
         high: {value: 5, status: assumed}
         note: GCFD calls it a 'small SNAP cut for thousands'; Illinois inclusion of internet in SUA not confirmed
+      applies_to: {value: all_remaining_snap_households, status: assumed, note: "upper bound; only the high scenario is non-zero"}
+      start_month: {value: "2026-01", status: assumed, note: "Illinois effective date not confirmed"}
     thrifty_food_plan_cola_restraint:
       value: 0
       status: assumed

@@ -54,10 +54,33 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   Triangulation: IDHS ~148k statewide work-requirement losses by ~Jun 2026 x Cook ~45% = ~67k vs our May-Jun
   excess 62k. "Shutdown processing errors / accelerated recert" explanations are unverified (not used).
 
-Next: Step 4 `03_pums_shares.py` + tests/test_pums_rules.py.
+- Step 4 `03_pums_shares.py` (rules in `src/lib/pums_rules.py`, 26 synthetic tests in tests/test_pums_rules.py).
+  PUMS re-cut now has 80 replicate weights, ADJINC, and the housing file (FS = SNAP receipt is household-level).
+  Anchors pass: weighted pop vs B01003, Medicaid 19-64 vs C27007, SNAP households vs B22003.
+  Decisions 2026-10-28: half-time students count as COMPLIANT (HFS), overriding PLAN item 2; headline universe
+  is BROAD (no poverty cap, caretaker child rule) = 298k weighted = 82% of HFS 364k. PUMS supplies SHARES only;
+  people counts always start from HFS 364,204. Plan's narrow universe (25% of HFS) kept as 'plan_universe'.
+  Headline: share (a) 0.481 (SE 0.007), (b) either 0.212. Exempt: disability, caregiver-of-disabled proxy,
+  SNAP/TANF. SNAP: time-limited 12.7% of PUMS SNAP persons (980k), not meeting 80 hrs 4.9%; SNAP households
+  with no 60+/disabled member 41%.
+- Step 5 `04_medicaid.py`: monthly 2026-2028 by component (noncitizen Oct 2026; work req from Apr 2027, first
+  renewals spread Mar 2027-Feb 2028; paperwork; 6-month renewals Oct 2027-Sep 2028; 2028 verification).
+  No re-enrollment except as built into Urban's renewal rate. Noncitizens ARE in our totals (they show the policy).
+  Decision 2026-10-28: 6-month renewal losses = Urban/RWJF Illinois redetermination-only rates (8/15/15%,
+  params six_month_renewal_loss), replacing the unsourced 0/2/4% placeholder; applied to people still enrolled.
+  Off coverage Dec 2028: low 62k / mid 113k / high 141k. Federal $ (CountyCare PMPM $836): 2027 mid $230M,
+  2028 mid $888M; state 10% separate. HFS PMPM still missing (dollars use CountyCare only).
+  Urban/RWJF (Mar 2026) is the source of CCH's "400k" (= Illinois low mitigation 415k; parsed in 01f). 2028 avg
+  monthly, Cook, excl. noncitizens: ours mid 93k (25%) vs Urban 95k/160k/208k (26/44/57%). Ours is lower mainly
+  because Urban also counts denied new applicants and has the full renewal effect all of 2028.
+  User rule: keep our method; use Urban to correct weak spots and as a cited comparison.
+
+Next: Step 6 `05_snap.py`.
 
 ## Open questions
+- Medicaid model has no re-enrollment (people who lose coverage stay off), so later-year counts lean high
+- Not modeled: new applicants denied by the work requirement (Urban includes them)
 - No cited source yet for the 19/30/40% loss rates
 - Share of Cook SNAP households affected by the LIHEAP/utility-allowance change
 - HFS statewide ACA cost per member
-- The extra-churn and 2028 verification parameters are placeholders
+- The 2028 verification parameter is a placeholder

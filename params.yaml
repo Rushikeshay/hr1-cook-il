@@ -71,16 +71,56 @@ medicaid:
     mid:  {value: 0.03, status: assumed}
     high: {value: 0.06, status: assumed}
     note: exempt adults disenrolled because the exemption was not documented in time
-  extra_churn_6mo_renewal_annual:
-    low:  {value: 0.00, status: assumed}
-    mid:  {value: 0.02, status: assumed}
-    high: {value: 0.04, status: assumed}
-    note: added annual procedural loss for ALL ACA adults from moving to 6-month renewals; needs source
+  # Decision 2026-10-28 (user): replaces the unsourced 0/2/4% churn placeholder.
+  six_month_renewal_loss:
+    low:  {value: from_urban_il_redet, urban_scenario: high, status: derived}
+    mid:  {value: from_urban_il_redet, urban_scenario: medium, status: derived}
+    high: {value: from_urban_il_redet, urban_scenario: low, status: derived}
+    source: "https://www.rwjf.org/content/dam/farm/reports/reports/2026/rwjf485284"
+    note: >-
+      Share of ALL ACA adults off coverage because renewals move from yearly to every 6 months, net of
+      re-enrollment. Illinois 'six-month redeterminations only' from Urban Institute/RWJF (Buettgens et al.
+      2026), Table A.2: 8% (high mitigation) / 15% (medium) / 15% (low), calibrated to 2025 state procedural
+      disenrollment. Our scenario low/mid/high = Urban high/medium/low mitigation. Applied as Cook = Illinois rate.
+      Timing: each renewal cohort's first 6-month renewal (Sept 2027-Aug 2028) adds rate/12 of the people still
+      enrolled, losses the next month; full level reached Sept 2028 and held (Urban reports a level, not a flow).
   verification_increase_2028:
     low:  {value: 0.00, status: assumed}
     mid:  {value: 0.05, status: assumed}
     high: {value: 0.10, status: assumed}
     note: added loss (share of subject adults) when data verification replaces self-attestation in 2028
+  # How the work-requirement rules are applied to ACS PUMS records (step 4, src/lib/pums_rules.py).
+  pums_rules:
+    # Decision 2026-10-28 (user): broad universe is the headline; PUMS only supplies SHARES, applied to the HFS
+    # count. The plan's narrow universe (POVPIP<=138 + no child <18 in the home) matched 25% of HFS enrollment
+    # vs 82% for the broad one; it is kept as the 'plan_universe' sensitivity.
+    poverty_limit_pct:
+      value: null
+      status: assumed
+      note: >-
+        no income filter. ACA limit is 138% FPL on monthly MAGI of the tax household; PUMS POVPIP is annual
+        family income, which screens out many enrollees (e.g. adults living with working parents)
+    child_rule:
+      value: caretaker
+      status: assumed
+      note: >-
+        HFS ACA adult = not the parent/caretaker of a child <18 in the home. 'caretaker' excludes the reference
+        person, spouse or partner when a child <18 lives there; 'household' (sensitivity) excludes everyone in the home.
+    half_time_student:
+      value: compliant
+      status: assumed
+      source: "user decision 2026-10-28: follow HFS (school is a way to comply), overrides PLAN.md item 2"
+      note: >-
+        PLAN lists half-time school as an exemption; HFS lists it as a way to comply. 'exempt' removes students from
+        share (a); 'compliant' keeps them in (a) and removes them from (b). Both are reported.
+    veteran_rating_code:
+      value: "5"
+      status: assumed
+      note: PUMS DRAT 5 = 70-100% rating; H.R. 1 exempts a total (100%) rating, which PUMS cannot isolate
+    snap_tanf_proxy:
+      value: "PAP>0 and employed, or SNAP household (FS=1) and meets 80-hour rule"
+      status: assumed
+      note: H.R. 1 exempts people meeting SNAP or TANF work rules; PUMS has no direct flag
   unmodeled_exemptions_share:
     value: 0.02
     status: assumed
@@ -220,7 +260,7 @@ verification:
     zips: ["60623", "60426"]   # Chicago (Little Village / South Lawndale); suburban (Harvey)
     month: "2026-05"           # first SNAP time-limit cutoff month
     office: "COOK COUNTY"      # IDHS reports Cook only as one subtotal row (no individual Cook offices)
-    pums_serialno: null        # set in step 4 (a household with an ACA-like adult)
+    pums_serialno: "2020HU0051747"   # step 4: first household with one subject and one exempt ACA-like adult
   anchors:
     hfs_cook_aca_fy2025: 364204
     hfs_cook_total_fy2025: 1535983
@@ -229,3 +269,4 @@ verification:
   tolerances:
     pums_pop_vs_acs_rel: 0.01
     zcta_cook_pop_vs_county_rel: 0.02
+    pums_table_vs_acs_rel: 0.03   # PUMS weighted Medicaid 19-64 and SNAP households vs published ACS tables

@@ -36,3 +36,51 @@ Each tracer unit's value at every pipeline stage.
 | 01d_geo_acs | snap_hh | 3339.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | mcd_19_64 | 5375.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | hfs_aca_cook | 3334.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
+
+## pums:2020HU0051747-01
+
+| step | stage | value | note |
+|---|---|---|---|
+| 03_pums_shares | person | age 56, HINS4 1, POVPIP 99.0, DIS 2, WKHP 40.0 | weight 5 |
+| 03_pums_shares | medicaid status | subject, compliant | headline rules |
+| 03_pums_shares | snap status | not on SNAP | nan |
+
+## pums:2020HU0051747-02
+
+| step | stage | value | note |
+|---|---|---|---|
+| 03_pums_shares | person | age 50, HINS4 1, POVPIP 99.0, DIS 2, WKHP nan | weight 7 |
+| 03_pums_shares | medicaid status | subject, not compliant | headline rules |
+| 03_pums_shares | snap status | not on SNAP | nan |
+
+## pums:2020HU0051747-03
+
+| step | stage | value | note |
+|---|---|---|---|
+| 03_pums_shares | person | age 21, HINS4 1, POVPIP 99.0, DIS 2, WKHP 25.0 | weight 7 |
+| 03_pums_shares | medicaid status | subject, compliant | headline rules |
+| 03_pums_shares | snap status | not on SNAP | nan |
+
+## medicaid_month:2026-10
+
+| step | stage | value | note |
+|---|---|---|---|
+| 04_medicaid | mid: people off coverage | 5577 | cumulative, all components |
+
+## medicaid_month:2027-04
+
+| step | stage | value | note |
+|---|---|---|---|
+| 04_medicaid | mid: people off coverage | 10350 | cumulative, all components |
+
+## medicaid_month:2027-12
+
+| step | stage | value | note |
+|---|---|---|---|
+| 04_medicaid | mid: people off coverage | 60395 | cumulative, all components |
+
+## medicaid_month:2028-12
+
+| step | stage | value | note |
+|---|---|---|---|
+| 04_medicaid | mid: people off coverage | 113416 | cumulative, all components |

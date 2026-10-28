@@ -36,6 +36,8 @@ FILES = {
     "cch/prelim_fy27_cch_budget.pdf": "https://cookcountyhealth.org/wp-content/uploads/Prelim-FY27-CCH-Budget-Presentation-Final.pdf",
     # IDHS SNAP county counts, Sept 2025
     "idhs/snap_county_2025_09.pdf": "https://www.dhs.state.il.us/OneNetLibrary/27897/documents/SNAP/SEPTEMBER%2025%20SNAP%20Individual%20Counts%20by%20Counties1.pdf",
+    # Urban Institute for RWJF (Buettgens et al., Mar 2026): state 2028 Medicaid expansion losses (triangulation)
+    "rwjf/urban_medicaid_work_req_2028.pdf": "https://www.rwjf.org/content/dam/farm/reports/reports/2026/rwjf485284",
     # Geography
     "geo/cb_2020_us_zcta520_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2020/shp/cb_2020_us_zcta520_500k.zip",
     "geo/cb_2024_us_county_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip",
@@ -48,11 +50,12 @@ FILES = {
 # IDHS "SNAP Data YYYY" index pages; monthly servicing-office pages are linked from them.
 SNAP_INDEX = {2024: 164509, 2025: 171902, 2026: 177664}
 
-PUMS_VARS = [
-    "SERIALNO", "SPORDER", "PWGTP", "AGEP", "RELSHIPP", "HINS3", "HINS4", "POVPIP",
+PUMS_VARS = [  # person file
+    "SERIALNO", "SPORDER", "PWGTP", "ADJINC", "AGEP", "RELSHIPP", "HINS3", "HINS4", "POVPIP",
     "SSIP", "PAP", "DIS", "SCH", "SCHG", "FER", "MIL", "DRAT", "RACAIAN", "WKHP", "WKL",
-    "PERNP", "ESR", "CIT", "FS", "NOC", "HUPAOC",
-]
+    "PERNP", "ESR", "CIT",
+] + [f"PWGTP{i}" for i in range(1, 81)]  # replicate weights, for standard errors
+PUMS_H_VARS = ["SERIALNO", "WGTP", "NP", "TYPEHUGQ", "FS"] + [f"WGTP{i}" for i in range(1, 81)]  # housing file
 
 
 def get(url, **kw):
@@ -167,26 +170,46 @@ def fetch_acs_tracts():
 
 
 def fetch_pums():
-    """Illinois 5-year PUMS person file (bulk CSV, no API key), cut to Cook County PUMAs."""
-    out = RAW / f"pums/pums_{PUMS_YEAR}_5yr_cook.csv"
-    SOURCES[f"pums/pums_{PUMS_YEAR}_5yr_cook.csv"] = f"subset of pums/csv_pil_{PUMS_YEAR}_5yr.zip to Cook PUMAs"
-    SOURCES[f"pums/csv_pil_{PUMS_YEAR}_5yr.zip"] = (
-        f"https://www2.census.gov/programs-surveys/acs/data/pums/{PUMS_YEAR}/5-Year/csv_pil.zip")
-    if out.exists() and not FORCE:
-        return
-    import zipfile
-    z = save(f"pums/csv_pil_{PUMS_YEAR}_5yr.zip",
-             f"https://www2.census.gov/programs-surveys/acs/data/pums/{PUMS_YEAR}/5-Year/csv_pil.zip")
+    """Illinois 5-year PUMS person + housing files (bulk CSV, no API key), cut to Cook County PUMAs.
+    Delete the *_cook.csv files to re-cut after changing PUMS_VARS / PUMS_H_VARS."""
+    base = f"https://www2.census.gov/programs-surveys/acs/data/pums/{PUMS_YEAR}/5-Year"
+    yrs = f"{PUMS_YEAR - 4}-{PUMS_YEAR}"
+    save(f"pums/PUMS_Data_Dictionary_{yrs}.csv",
+         f"https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_{yrs}.csv")
     rel = pd.read_csv(RAW / "geo/2020_Census_Tract_to_2020_PUMA.txt", dtype=str)
     rel.columns = [c.strip().lstrip("﻿") for c in rel.columns]
     cook = set(rel.loc[(rel.STATEFP == STATE) & (rel.COUNTYFP == P["geography"]["county_fips"]), "PUMA5CE"])
-    with zipfile.ZipFile(z) as zf:
-        name = next(n for n in zf.namelist() if n.lower().endswith(".csv"))
-        with zf.open(name) as f:
-            df = pd.read_csv(f, dtype=str, usecols=lambda c: c in PUMS_VARS + ["PUMA", "ST"])
-    df = df[df.PUMA.isin(cook)]
-    print(f"Cook PUMAs: {len(cook)}, persons: {len(df):,}")
-    df.to_csv(out, index=False)
+    import zipfile
+    for kind, letter, cols in (("", "p", PUMS_VARS), ("_housing", "h", PUMS_H_VARS)):
+        out_rel = f"pums/pums_{PUMS_YEAR}_5yr{kind}_cook.csv"
+        zip_rel = f"pums/csv_{letter}il_{PUMS_YEAR}_5yr.zip"
+        SOURCES[out_rel] = f"subset of {zip_rel} to Cook PUMAs"
+        SOURCES[zip_rel] = f"{base}/csv_{letter}il.zip"
+        if (RAW / out_rel).exists() and not FORCE:
+            continue
+        z = save(zip_rel, f"{base}/csv_{letter}il.zip")
+        with zipfile.ZipFile(z) as zf:
+            name = next(n for n in zf.namelist() if n.lower().endswith(".csv"))
+            with zf.open(name) as f:
+                df = pd.read_csv(f, dtype=str, usecols=lambda c: c in cols + ["PUMA", "ST"])
+        missing = set(cols) - set(df.columns)
+        if missing:
+            raise SystemExit(f"PUMS {letter} file is missing columns {sorted(missing)}")
+        df = df[df.PUMA.isin(cook)]
+        print(f"PUMS {letter}: Cook PUMAs {len(cook)}, records {len(df):,}")
+        df.to_csv(RAW / out_rel, index=False)
+
+
+def fetch_acs_cook_insurance():
+    """Published Cook County C27007 (Medicaid/means-tested coverage by age): anchor for PUMS weighted totals."""
+    rel = f"acs/acs5_{ACS_YEAR}_cook_c27007.csv"
+    SOURCES[rel] = f"https://api.census.gov/data/{ACS_YEAR}/acs/acs5 group C27007 for Cook County"
+    if (RAW / rel).exists() and not FORCE:
+        return
+    df = census(f"https://api.census.gov/data/{ACS_YEAR}/acs/acs5",
+                {"get": "NAME,group(C27007)", "for": f"county:{P['geography']['county_fips']}", "in": f"state:{STATE}"})
+    keep = [c for c in df.columns if c.startswith("C27007") and c.endswith("E")]
+    df[["NAME"] + keep].to_csv(RAW / rel, index=False)
 
 
 if __name__ == "__main__":
@@ -198,6 +221,7 @@ if __name__ == "__main__":
         fetch_acs_zcta()
         fetch_acs_county()
         fetch_acs_tracts()
+        fetch_acs_cook_insurance()
     else:
         print("!! Skipped ACS ZCTA/county tables: no Census API key "
               "(https://api.census.gov/data/key_signup.html -> CENSUS_API_KEY in .env)")

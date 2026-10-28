@@ -48,7 +48,8 @@ for rel, url in sorted(sources.items()):
     kind = sniff(p)
     rows.append(dict(path=rel, source=url, bytes=len(data), sha256=hashlib.sha256(data).hexdigest(),
                      type=kind, modified=datetime.fromtimestamp(p.stat().st_mtime).isoformat(timespec="seconds")))
-    ck.true(f"non-empty (>1 KB): {rel}", len(data) > 1024, detail=f"{len(data)} bytes")
+    min_bytes = 200 if p.suffix in (".csv", ".txt") else 1024  # small API extracts (one county row) are fine
+    ck.true(f"non-empty (>{min_bytes} B): {rel}", len(data) > min_bytes, detail=f"{len(data)} bytes")
     ck.equal(f"type matches extension: {rel}", kind, EXPECTED_TYPE.get(p.suffix, kind),
              detail="an HTML error page saved as .pdf/.zip would fail here")
 
@@ -70,6 +71,10 @@ ck.true("ACS ZCTA has Cook-area ZCTA 60623", "60623" in set(zcta.zcta))
 pums = pd.read_csv(RAW / "pums/pums_2024_5yr_cook.csv", dtype=str, usecols=["SERIALNO", "PUMA"])
 ck.between("PUMS Cook persons (5-yr sample ~190-210k)", len(pums), 150_000, 260_000)
 ck.equal("PUMS Cook PUMA count", pums.PUMA.nunique(), 36)
+pums_h = pd.read_csv(RAW / "pums/pums_2024_5yr_housing_cook.csv", dtype=str, usecols=["SERIALNO", "PUMA"])
+ck.between("PUMS Cook housing records (5-yr sample ~85-100k)", len(pums_h), 70_000, 120_000)
+ck.equal("PUMS Cook housing PUMA count", pums_h.PUMA.nunique(), 36)
+ck.true("every PUMS person has a housing record", pums.SERIALNO.isin(set(pums_h.SERIALNO)).all())
 
 # Compare with the previous manifest
 new = pd.DataFrame(rows)

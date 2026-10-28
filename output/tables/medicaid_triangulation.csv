@@ -1,0 +1,7 @@
+source,scenario,measure,redeterminations,work_requirements,noncitizen,total_excl_noncitizen,total_incl_noncitizen,pct_of_baseline_excl_noncitizen
+ours,low,"average monthly people off coverage, 2028, Cook ACA adults",19337.16746855352,31933.02629357265,4092.0,51270.193762126175,55362.193762126175,0.14077328574679623
+ours,mid,"average monthly people off coverage, 2028, Cook ACA adults",32737.722373855297,60010.52302501304,5576.992136237968,92748.24539886834,98325.23753510631,0.2546601503521882
+ours,high,"average monthly people off coverage, 2028, Cook ACA adults",30457.442864900004,86407.33416205492,5576.992136237968,116864.77702695492,122441.76916319289,0.3208772474408708
+urban_x_cook_baseline,high mitigation,"average monthly people off coverage, 2028, Cook ACA adults",29136.32,65556.72,,94693.04000000001,94693.04000000001,0.26
+urban_x_cook_baseline,medium mitigation,"average monthly people off coverage, 2028, Cook ACA adults",54630.6,105619.15999999999,,160249.75999999998,160249.75999999998,0.43999999999999995
+urban_x_cook_baseline,low mitigation,"average monthly people off coverage, 2028, Cook ACA adults",54630.6,152965.68,,207596.28,207596.28,0.57

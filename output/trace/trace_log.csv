@@ -1,19 +1,21 @@
 unit,step,stage,value,note,run_at
-month:2026-05,01a_snap_parse,Cook SNAP persons (IDHS office table),707068,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-28T10:05:25
-month:2026-05,01a_snap_parse,Cook SNAP households (IDHS office table),404720,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-28T10:05:25
-zip:60623,01b_hfs_parse,HFS ACA adults FY2025,9179,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-28T10:05:35
-zip:60623,01b_hfs_parse,HFS total comprehensive FY2025,42645,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-28T10:05:35
-zip:60426,01b_hfs_parse,HFS ACA adults FY2025,3334,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-28T10:05:35
-zip:60426,01b_hfs_parse,HFS total comprehensive FY2025,12945,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-28T10:05:35
-zip:60623,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60623,01d_geo_acs,region,Chicago,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60623,01d_geo_acs,pop,81277.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60623,01d_geo_acs,snap_hh,8113.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60623,01d_geo_acs,mcd_19_64,13315.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60623,01d_geo_acs,hfs_aca_cook,9179.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60426,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60426,01d_geo_acs,region,suburban Cook,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60426,01d_geo_acs,pop,23906.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60426,01d_geo_acs,snap_hh,3339.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60426,01d_geo_acs,mcd_19_64,5375.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
-zip:60426,01d_geo_acs,hfs_aca_cook,3334.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:05:47
+month:2026-05,01a_snap_parse,Cook SNAP persons (IDHS office table),707068,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-28T10:30:45
+month:2026-05,01a_snap_parse,Cook SNAP households (IDHS office table),404720,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-28T10:30:45
+zip:60623,01b_hfs_parse,HFS ACA adults FY2025,9179,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-28T10:30:53
+zip:60623,01b_hfs_parse,HFS total comprehensive FY2025,42645,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-28T10:30:53
+zip:60426,01b_hfs_parse,HFS ACA adults FY2025,3334,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-28T10:30:53
+zip:60426,01b_hfs_parse,HFS total comprehensive FY2025,12945,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-28T10:30:53
+zip:60623,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60623,01d_geo_acs,region,Chicago,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60623,01d_geo_acs,pop,81277.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60623,01d_geo_acs,snap_hh,8113.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60623,01d_geo_acs,mcd_19_64,13315.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60623,01d_geo_acs,hfs_aca_cook,9179.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60426,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60426,01d_geo_acs,region,suburban Cook,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60426,01d_geo_acs,pop,23906.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60426,01d_geo_acs,snap_hh,3339.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60426,01d_geo_acs,mcd_19_64,5375.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+zip:60426,01d_geo_acs,hfs_aca_cook,3334.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T10:31:03
+month:2026-05,02_snap_series,observed change vs prior month,-45429,IDHS office table,2026-10-28T10:37:24
+month:2026-05,02_snap_series,excess change beyond mid trend,-43420,observed - trend change,2026-10-28T10:37:24

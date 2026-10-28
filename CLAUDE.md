@@ -44,9 +44,17 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   HFS zip ACA Cook portion 358,698 vs county 364,204 (-1.5%); 60 Cook-area PO-box zips have no ZCTA.
   ACS: Cook holds 60% of IL noncitizens, 47% of IL SNAP households.
 
-Gate pending: user spot-check sign-off in output/checks/spot_checks.md.
-Next: Step 3 `02_snap_series.py` (counterfactual vs same months prior year / pre-Feb 2026 trend; handle Jul 2025 break),
-then Step 4 `03_pums_shares.py` + tests/test_pums_rules.py.
+- 01e: automated spot checks (user does NOT want manual sign-off): re-reads samples with a different method
+  (HTML text search; pdfium vs pdfminer), 253 checks.
+- Decisions 2026-10-28: no Chicago/suburban SNAP series (zip-level only); SNAP changes scaled to residence basis by
+  Sept 2025 county/office ratio (1.036); noncitizen Cook share mid/high = ACS 60%, low = CBS 44%.
+- Step 3 `02_snap_series.py`: pre-trend -0.24%/mo (Jan 2024-Jun 2025). H.R. 1 SNAP persons lost by Sep 2026
+  (residence basis): low 134k (beyond trend from Feb 2026, legal start), mid 188k (from Dec 2025, when IDHS first
+  applied the work requirement; IM 01/15/2026 + CN 26.01), high 218k (all, flat counterfactual). Headline = mid.
+  Triangulation: IDHS ~148k statewide work-requirement losses by ~Jun 2026 x Cook ~45% = ~67k vs our May-Jun
+  excess 62k. "Shutdown processing errors / accelerated recert" explanations are unverified (not used).
+
+Next: Step 4 `03_pums_shares.py` + tests/test_pums_rules.py.
 
 ## Open questions
 - No cited source yet for the 19/30/40% loss rates

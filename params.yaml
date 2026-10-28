@@ -93,11 +93,10 @@ medicaid:
       effective_date: 2026-10-01
       source: "https://www.illinois.gov/content/dam/soi/en/web/illinois/iisnewsattachments/33039-101426-gci-noncitizen-loss-of-medicaid-sep-pr-003.pdf.pdf"
     cook_share:
-      low:  {value: 0.44, status: observed, note: "CBS Chicago: 'about 44% are in Cook County' (wording ambiguous)"}
-      mid:  {value: 0.50, status: assumed, note: "Cook County officials' 'about half' framing; unverified"}
-      high: {value: 0.60, status: assumed}
-      source: "https://www.cbsnews.com/chicago/news/noncitizens-illinois-losing-medicaid-benefits/"
-      todo: compare with ACS Cook share of Illinois non-LPR noncitizens (derived check)
+      # Decision 2026-10-28: use the Census share (Cook / Illinois noncitizens, ACS B05001) for mid and high.
+      low:  {value: 0.44, status: observed, source: "https://www.cbsnews.com/chicago/news/noncitizens-illinois-losing-medicaid-benefits/", note: "CBS Chicago: 'about 44% are in Cook County' (wording ambiguous)"}
+      mid:  {value: from_acs_noncitizen_share, status: derived, note: "ACS 2020-24 B05001_006 Cook / Illinois (~0.60); computed in pipeline"}
+      high: {value: from_acs_noncitizen_share, status: derived}
 
   dollars:
     federal_match_aca:
@@ -139,9 +138,26 @@ snap:
       note: IDHS estimate cited by Greater Chicago Food Depository (Jul 2025); advocacy range 14,000-16,000
       source: "https://www.chicagosfoodbank.org/wp-content/uploads/2025/07/HR1-Budget-Reconciliation-Analysis-of-SNAP-Cuts-and-Illinois-Impact_7.10.25.pdf"
     cook_share:
-      low:  {value: 0.44, status: assumed, note: "reuse Medicaid noncitizen share"}
-      mid:  {value: 0.50, status: assumed}
-      high: {value: 0.60, status: assumed}
+      low:  {value: 0.44, status: observed, source: "https://www.cbsnews.com/chicago/news/noncitizens-illinois-losing-medicaid-benefits/", note: "reuse Medicaid noncitizen share"}
+      mid:  {value: from_acs_noncitizen_share, status: derived}
+      high: {value: from_acs_noncitizen_share, status: derived}
+
+  # Which months' declines count as H.R. 1 (observed SNAP drop beyond the pre-H.R. 1 trend):
+  attribution_start:
+    low:  {value: "2026-02", status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=176589", note: "legal start of time limit after court ruling (IDHS IM 01/15/2026)"}
+    mid:  {value: "2025-12", status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=176589", note: "IDHS first applied H.R. 1 work requirement Dec 2025 (countable months recorded, later removed; CN 26.01)"}
+    high: {value: "2025-10", status: assumed, source: "params.yaml decision 2026-10-28", note: "every month after the Sept 2025 baseline, flat counterfactual"}
+  triangulation:
+    statewide_work_req_losses_by_jun_2026: {value: 148000, status: observed, source: "https://chicago.suntimes.com/la-voz/2026/07/30/illinois-registra-una-caida-del-16-en-la-inscripcion-en-snap-un-ano-despues-de-los-cambios-al-programa", note: "IDHS estimate; plus 157,000 lost for other reasons"}
+    statewide_initial_projection: {value: 400000, status: observed, source: "same Sun-Times article", note: "state officials' initial estimate"}
+
+  # IDHS has two Cook counts. County PDF (by residence) 881,937 vs servicing-office table 851,244 (Sept 2025).
+  # Decision 2026-10-28: we measure Cook RESIDENTS, so office-based changes are scaled to a residence basis by the
+  # Sept 2025 ratio. Assumes the ratio is stable over time (only one month of county data is available).
+  residence_adjustment:
+    low:  {value: 1.0, status: assumed, source: "params.yaml decision 2026-10-28", note: "office basis (no adjustment)"}
+    mid:  {value: from_sept2025_county_office_ratio, status: derived}
+    high: {value: from_sept2025_county_office_ratio, status: derived}
 
   benefit_cuts_still_enrolled:
     liheap_sua:

@@ -13,7 +13,6 @@ import pdfplumber
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.checks import Checks  # noqa: E402
 from lib.common import PROC, RAW, load_params  # noqa: E402
-from lib.spotcheck import spot_check  # noqa: E402
 from lib.tracer import flush, trace, tracers  # noqa: E402
 
 STEP = "01b_hfs_parse"
@@ -94,6 +93,5 @@ for zz in tracers()["zips"]:
               int(r[["children", "adults_disabled", "aca_adults", "other_adults", "seniors"]].sum()), r.source_ref)
 flush(STEP)
 
-spot_check(STEP + " zip pdf", z, "source_ref", n=5, seed=11, cols=["zip"] + COLS)
 print(fy25.to_string())
 ck.finish()

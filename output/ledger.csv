@@ -1,0 +1,84 @@
+id,value,unit,label,formula,inputs,source,step
+snap_cook_persons_2024_01,914223.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_01.html table row 55",02_snap_series
+snap_cook_households_2024_01,522237.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_01.html table row 55",02_snap_series
+snap_cook_persons_2024_03,922666.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_03.html table row 55",02_snap_series
+snap_cook_households_2024_03,528523.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_03.html table row 55",02_snap_series
+snap_cook_persons_2024_04,921043.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_04.html table row 55",02_snap_series
+snap_cook_households_2024_04,528536.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_04.html table row 55",02_snap_series
+snap_cook_persons_2024_05,923894.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_05.html table row 55",02_snap_series
+snap_cook_households_2024_05,530898.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_05.html table row 55",02_snap_series
+snap_cook_persons_2024_06,924754.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_06.html table row 55",02_snap_series
+snap_cook_households_2024_06,531667.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_06.html table row 55",02_snap_series
+snap_cook_persons_2024_07,921889.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_07.html table row 55",02_snap_series
+snap_cook_households_2024_07,529703.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_07.html table row 55",02_snap_series
+snap_cook_persons_2024_08,918034.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_08.html table row 55",02_snap_series
+snap_cook_households_2024_08,527932.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_08.html table row 55",02_snap_series
+snap_cook_persons_2024_09,917843.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_09.html table row 55",02_snap_series
+snap_cook_households_2024_09,528185.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_09.html table row 55",02_snap_series
+snap_cook_persons_2024_10,916082.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_10.html table row 55",02_snap_series
+snap_cook_households_2024_10,527616.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_10.html table row 55",02_snap_series
+snap_cook_persons_2024_11,905781.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_11.html table row 55",02_snap_series
+snap_cook_households_2024_11,521740.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_11.html table row 55",02_snap_series
+snap_cook_persons_2024_12,900001.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_12.html table row 55",02_snap_series
+snap_cook_households_2024_12,518679.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2024_12.html table row 55",02_snap_series
+snap_cook_persons_2025_01,897831.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_01.html table row 55",02_snap_series
+snap_cook_households_2025_01,517846.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_01.html table row 55",02_snap_series
+snap_cook_persons_2025_02,899669.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_02.html table row 55",02_snap_series
+snap_cook_households_2025_02,519155.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_02.html table row 55",02_snap_series
+snap_cook_persons_2025_03,898885.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_03.html table row 55",02_snap_series
+snap_cook_households_2025_03,518970.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_03.html table row 55",02_snap_series
+snap_cook_persons_2025_04,893611.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_04.html table row 55",02_snap_series
+snap_cook_households_2025_04,515987.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_04.html table row 55",02_snap_series
+snap_cook_persons_2025_05,891647.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_05.html table row 55",02_snap_series
+snap_cook_households_2025_05,515620.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_05.html table row 55",02_snap_series
+snap_cook_persons_2025_06,889962.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_06.html table row 55",02_snap_series
+snap_cook_households_2025_06,514649.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_06.html table row 55",02_snap_series
+snap_cook_persons_2025_07,864721.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_07.html table row 55",02_snap_series
+snap_cook_households_2025_07,500867.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_07.html table row 55",02_snap_series
+snap_cook_persons_2025_08,853720.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_08.html table row 55",02_snap_series
+snap_cook_households_2025_08,495685.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_08.html table row 55",02_snap_series
+snap_cook_persons_2025_09,851244.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_09.html table row 55",02_snap_series
+snap_cook_households_2025_09,495200.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_09.html table row 55",02_snap_series
+snap_cook_persons_2025_10,841147.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_10.html table row 55",02_snap_series
+snap_cook_households_2025_10,489651.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_10.html table row 55",02_snap_series
+snap_cook_persons_2025_11,842921.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_11.html table row 55",02_snap_series
+snap_cook_households_2025_11,489526.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_11.html table row 55",02_snap_series
+snap_cook_persons_2025_12,815966.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_12.html table row 55",02_snap_series
+snap_cook_households_2025_12,475340.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2025_12.html table row 55",02_snap_series
+snap_cook_persons_2026_01,791253.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_01.html table row 55",02_snap_series
+snap_cook_households_2026_01,460750.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_01.html table row 55",02_snap_series
+snap_cook_persons_2026_02,772752.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_02.html table row 55",02_snap_series
+snap_cook_households_2026_02,450047.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_02.html table row 55",02_snap_series
+snap_cook_persons_2026_03,769004.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_03.html table row 55",02_snap_series
+snap_cook_households_2026_03,447718.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_03.html table row 55",02_snap_series
+snap_cook_persons_2026_04,752497.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_04.html table row 55",02_snap_series
+snap_cook_households_2026_04,439280.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_04.html table row 55",02_snap_series
+snap_cook_persons_2026_05,707068.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_05.html table row 55",02_snap_series
+snap_cook_households_2026_05,404720.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_05.html table row 55",02_snap_series
+snap_cook_persons_2026_06,686905.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_06.html table row 55",02_snap_series
+snap_cook_households_2026_06,393810.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_06.html table row 55",02_snap_series
+snap_cook_persons_2026_07,668982.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_07.html table row 55",02_snap_series
+snap_cook_households_2026_07,383635.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_07.html table row 55",02_snap_series
+snap_cook_persons_2026_08,646972.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_08.html table row 55",02_snap_series
+snap_cook_households_2026_08,371407.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_08.html table row 55",02_snap_series
+snap_cook_persons_2026_09,640932.0,people,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_09.html table row 55",02_snap_series
+snap_cook_households_2026_09,367737.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_09.html table row 55",02_snap_series
+snap_cook_persons_county_pdf_2025_09,881937.0,people,observed,,,"IDHS SNAP Individual Counts by Counties, Sept 2025, page 1",02_snap_series
+snap_residence_ratio,1.036056641808929,ratio,derived,snap_cook_persons_county_pdf_2025_09 / snap_cook_persons_2025_09,snap_cook_persons_county_pdf_2025_09;snap_cook_persons_2025_09,,02_snap_series
+snap_residence_adj_low,1.0,ratio,assumed,,,params.yaml decision 2026-10-28,02_snap_series
+snap_residence_adj_mid,1.036056641808929,ratio,derived,snap_residence_ratio,snap_residence_ratio,,02_snap_series
+snap_residence_adj_high,1.036056641808929,ratio,derived,snap_residence_ratio,snap_residence_ratio,,02_snap_series
+snap_observed_drop_persons,210312.0,people,derived,snap_cook_persons_2025_09 - snap_cook_persons_2026_09,snap_cook_persons_2025_09;snap_cook_persons_2026_09,,02_snap_series
+snap_observed_drop_households,127463.0,households,derived,snap_cook_households_2025_09 - snap_cook_households_2026_09,snap_cook_households_2025_09;snap_cook_households_2026_09,,02_snap_series
+snap_trend_rate,-0.0023996105375626575,monthly % change,derived,"log-linear fit of Cook persons, Jan 2024-Jun 2025",snap_cook_persons_2024_01;snap_cook_persons_2024_03;snap_cook_persons_2024_04;snap_cook_persons_2024_05;snap_cook_persons_2024_06;snap_cook_persons_2024_07;snap_cook_persons_2024_08;snap_cook_persons_2024_09;snap_cook_persons_2024_10;snap_cook_persons_2024_11;snap_cook_persons_2024_12;snap_cook_persons_2025_01;snap_cook_persons_2025_02;snap_cook_persons_2025_03;snap_cook_persons_2025_04;snap_cook_persons_2025_05;snap_cook_persons_2025_06,,02_snap_series
+snap_attribution_start_low,2026.02,year.month,observed,,,https://www.dhs.state.il.us/page.aspx?item=176589,02_snap_series
+snap_attribution_start_mid,2025.12,year.month,observed,,,https://www.dhs.state.il.us/page.aspx?item=176589,02_snap_series
+snap_counterfactual_persons_2026_09,827053.081336508,people,derived,snap_cook_persons_2025_09 * (1 + snap_trend_rate)^12,snap_cook_persons_2025_09;snap_trend_rate,,02_snap_series
+snap_beyond_trend_office_high,210312.0,people,derived,snap_cook_persons_2025_09 - snap_cook_persons_2026_09 (flat counterfactual),snap_cook_persons_2025_09;snap_cook_persons_2026_09,,02_snap_series
+snap_beyond_trend_office_low,134271.33520008798,people,derived,sum over 2026-02..2026-09 of (trend change - observed change),snap_cook_persons_2026_01;snap_cook_persons_2026_02;snap_cook_persons_2026_03;snap_cook_persons_2026_04;snap_cook_persons_2026_05;snap_cook_persons_2026_06;snap_cook_persons_2026_07;snap_cook_persons_2026_08;snap_cook_persons_2026_09;snap_trend_rate;snap_attribution_start_low,,02_snap_series
+snap_beyond_trend_office_mid,181878.48790714517,people,derived,sum over 2025-12..2026-09 of (trend change - observed change),snap_cook_persons_2025_11;snap_cook_persons_2025_12;snap_cook_persons_2026_01;snap_cook_persons_2026_02;snap_cook_persons_2026_03;snap_cook_persons_2026_04;snap_cook_persons_2026_05;snap_cook_persons_2026_06;snap_cook_persons_2026_07;snap_cook_persons_2026_08;snap_cook_persons_2026_09;snap_trend_rate;snap_attribution_start_mid,,02_snap_series
+snap_hr1_persons_lost_to_2026_09_low,134271.33520008798,people,derived,snap_beyond_trend_office_low * snap_residence_adj_low,snap_beyond_trend_office_low;snap_residence_adj_low,,02_snap_series
+snap_hr1_persons_lost_to_2026_09_mid,188436.41539836273,people,derived,snap_beyond_trend_office_mid * snap_residence_adj_mid,snap_beyond_trend_office_mid;snap_residence_adj_mid,,02_snap_series
+snap_hr1_persons_lost_to_2026_09_high,217895.14445211948,people,derived,snap_beyond_trend_office_high * snap_residence_adj_high,snap_beyond_trend_office_high;snap_residence_adj_high,,02_snap_series
+snap_excess_drop_may_to_latest_office_mid,101570.13746359991,people,derived,"sum of (trend change - observed change), May 2026 - 2026-09, mid trend",snap_cook_persons_2026_04;snap_cook_persons_2026_05;snap_cook_persons_2026_06;snap_cook_persons_2026_07;snap_cook_persons_2026_08;snap_cook_persons_2026_09;snap_trend_rate,,02_snap_series
+snap_excess_drop_may_2026_office_mid,43420.41093343741,people,derived,(snap_cook_persons_2026_04 - snap_cook_persons_2026_05) less trend change,snap_cook_persons_2026_04;snap_cook_persons_2026_05;snap_trend_rate,,02_snap_series

@@ -8,6 +8,8 @@ Each tracer unit's value at every pipeline stage.
 |---|---|---|---|
 | 01a_snap_parse | Cook SNAP persons (IDHS office table) | 707068 | idhs/offices/snap_offices_2026_05.html table row 55 |
 | 01a_snap_parse | Cook SNAP households (IDHS office table) | 404720 | idhs/offices/snap_offices_2026_05.html table row 55 |
+| 02_snap_series | observed change vs prior month | -45429 | IDHS office table |
+| 02_snap_series | excess change beyond mid trend | -43420 | observed - trend change |
 
 ## zip:60623
 

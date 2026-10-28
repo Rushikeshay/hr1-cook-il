@@ -19,7 +19,6 @@ import pdfplumber
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.checks import Checks  # noqa: E402
 from lib.common import PROC, RAW, load_params  # noqa: E402
-from lib.spotcheck import spot_check  # noqa: E402
 from lib.tracer import flush, trace, tracers  # noqa: E402
 
 STEP = "01a_snap_parse"
@@ -132,8 +131,5 @@ trace(STEP, f"month:{tm}", "Cook SNAP persons (IDHS office table)", int(r.person
 trace(STEP, f"month:{tm}", "Cook SNAP households (IDHS office table)", int(r.households), r.source_ref)
 flush(STEP)
 
-spot_check(STEP + " offices", df, "source_ref", n=5, seed=7,
-           cols=["month", "code", "office", "households", "persons"])
-spot_check(STEP + " county pdf", county, "source_ref", n=3, seed=7, cols=["county", "persons"])
 print(cook[["month", "households", "persons"]].tail(14).to_string(index=False))
 ck.finish()

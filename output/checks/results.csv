@@ -1,0 +1,498 @@
+step,check,status,expected,actual,detail,run_at
+00b_manifest,present: acs/acs5_2024_il_counties.csv,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): acs/acs5_2024_il_counties.csv,PASS,True,True,7505 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: acs/acs5_2024_il_counties.csv,PASS,text,text,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: acs/acs5_2024_il_tracts.csv,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): acs/acs5_2024_il_tracts.csv,PASS,True,True,65292 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: acs/acs5_2024_il_tracts.csv,PASS,text,text,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: acs/acs5_2024_zcta.csv,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): acs/acs5_2024_zcta.csv,PASS,True,True,4034523 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: acs/acs5_2024_zcta.csv,PASS,text,text,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: cch/prelim_fy27_cch_budget.pdf,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): cch/prelim_fy27_cch_budget.pdf,PASS,True,True,900139 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: cch/prelim_fy27_cch_budget.pdf,PASS,pdf,pdf,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: geo/2020_Census_Tract_to_2020_PUMA.txt,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): geo/2020_Census_Tract_to_2020_PUMA.txt,PASS,True,True,1709076 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: geo/2020_Census_Tract_to_2020_PUMA.txt,PASS,text,text,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: geo/cb_2020_us_zcta520_500k.zip,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): geo/cb_2020_us_zcta520_500k.zip,PASS,True,True,66655314 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: geo/cb_2020_us_zcta520_500k.zip,PASS,zip,zip,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: geo/cb_2024_17_place_500k.zip,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): geo/cb_2024_17_place_500k.zip,PASS,True,True,1152274 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: geo/cb_2024_17_place_500k.zip,PASS,zip,zip,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: geo/cb_2024_us_county_500k.zip,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): geo/cb_2024_us_county_500k.zip,PASS,True,True,11626066 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: geo/cb_2024_us_county_500k.zip,PASS,zip,zip,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: geo/tab20_zcta520_county20_natl.txt,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): geo/tab20_zcta520_county20_natl.txt,PASS,True,True,6821287 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: geo/tab20_zcta520_county20_natl.txt,PASS,text,text,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: geo/tab20_zcta520_tract20_natl.txt,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): geo/tab20_zcta520_tract20_natl.txt,PASS,True,True,24334353 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: geo/tab20_zcta520_tract20_natl.txt,PASS,text,text,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: hfs/cook_enrollment.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): hfs/cook_enrollment.html,PASS,True,True,77207 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: hfs/cook_enrollment.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: hfs/fy25_enrollment_by_zip.pdf,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): hfs/fy25_enrollment_by_zip.pdf,PASS,True,True,422715 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: hfs/fy25_enrollment_by_zip.pdf,PASS,pdf,pdf,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/index_2024.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/index_2024.html,PASS,True,True,9820 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/index_2024.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/index_2025.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/index_2025.html,PASS,True,True,9298 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/index_2025.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/index_2026.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/index_2026.html,PASS,True,True,8966 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/index_2026.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_01.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_01.html,PASS,True,True,16119 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_01.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_03.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_03.html,PASS,True,True,16115 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_03.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_04.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_04.html,PASS,True,True,16114 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_04.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_05.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_05.html,PASS,True,True,16109 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_05.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_06.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_06.html,PASS,True,True,16111 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_06.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_07.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_07.html,PASS,True,True,16122 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_07.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_08.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_08.html,PASS,True,True,16107 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_08.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_09.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_09.html,PASS,True,True,16135 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_09.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_10.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_10.html,PASS,True,True,16122 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_10.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_11.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_11.html,PASS,True,True,16126 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_11.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2024_12.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2024_12.html,PASS,True,True,16120 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2024_12.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_01.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_01.html,PASS,True,True,16102 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_01.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_02.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_02.html,PASS,True,True,16125 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_02.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_03.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_03.html,PASS,True,True,16109 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_03.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_04.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_04.html,PASS,True,True,16064 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_04.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_05.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_05.html,PASS,True,True,16114 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_05.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_06.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_06.html,PASS,True,True,16139 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_06.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_07.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_07.html,PASS,True,True,17636 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_07.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_08.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_08.html,PASS,True,True,17634 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_08.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_09.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_09.html,PASS,True,True,17643 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_09.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_10.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_10.html,PASS,True,True,17564 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_10.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_11.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_11.html,PASS,True,True,17557 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_11.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2025_12.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2025_12.html,PASS,True,True,17636 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2025_12.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_01.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_01.html,PASS,True,True,17628 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_01.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_02.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_02.html,PASS,True,True,16863 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_02.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_03.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_03.html,PASS,True,True,16853 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_03.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_04.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_04.html,PASS,True,True,16786 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_04.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_05.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_05.html,PASS,True,True,16830 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_05.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_06.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_06.html,PASS,True,True,16846 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_06.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_07.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_07.html,PASS,True,True,16842 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_07.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_08.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_08.html,PASS,True,True,16861 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_08.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/offices/snap_offices_2026_09.html,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/offices/snap_offices_2026_09.html,PASS,True,True,16864 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/offices/snap_offices_2026_09.html,PASS,html,html,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: idhs/snap_county_2025_09.pdf,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): idhs/snap_county_2025_09.pdf,PASS,True,True,113959 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: idhs/snap_county_2025_09.pdf,PASS,pdf,pdf,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: pums/csv_pil_2024_5yr.zip,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): pums/csv_pil_2024_5yr.zip,PASS,True,True,88133486 bytes,2026-10-28T10:05:19
+00b_manifest,type matches extension: pums/csv_pil_2024_5yr.zip,PASS,zip,zip,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:19
+00b_manifest,present: pums/pums_2024_5yr_cook.csv,PASS,True,True,,2026-10-28T10:05:19
+00b_manifest,non-empty (>1 KB): pums/pums_2024_5yr_cook.csv,PASS,True,True,13278072 bytes,2026-10-28T10:05:20
+00b_manifest,type matches extension: pums/pums_2024_5yr_cook.csv,PASS,text,text,an HTML error page saved as .pdf/.zip would fail here,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_01.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_01.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_03.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_03.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_04.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_04.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_05.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_05.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_06.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_06.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_07.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_07.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_08.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_08.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_09.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_09.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_10.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_10.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_11.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_11.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2024_12.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2024_12.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_01.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_01.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_02.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_02.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_03.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_03.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_04.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_04.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_05.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_05.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_06.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_06.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_07.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_07.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_08.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_08.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_09.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_09.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_10.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_10.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_11.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_11.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2025_12.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2025_12.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_01.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_01.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_02.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_02.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_03.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_03.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_04.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_04.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_05.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_05.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_06.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_06.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_07.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_07.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_08.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_08.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page title matches file month: snap_offices_2026_09.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,IDHS page has COOK COUNTY subtotal: snap_offices_2026_09.html,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,HFS Cook page mentions ACA,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,ACS ZCTA row count (~33.8k US ZCTAs),PASS,"[33,000, 34,500]","33,772",,2026-10-28T10:05:20
+00b_manifest,ACS ZCTA has Cook-area ZCTA 60623,PASS,True,True,,2026-10-28T10:05:20
+00b_manifest,PUMS Cook persons (5-yr sample ~190-210k),PASS,"[150,000, 260,000]","196,141",,2026-10-28T10:05:20
+00b_manifest,PUMS Cook PUMA count,PASS,36,36,,2026-10-28T10:05:20
+01a_snap_parse,office table: no missing values,PASS,0,0,"nulls in ['month', 'code', 'households', 'persons']",2026-10-28T10:05:24
+01a_snap_parse,office table: one row per month x code,PASS,0,0,"duplicate keys on ['month', 'code']",2026-10-28T10:05:24
+01a_snap_parse,persons >= households on every row,PASS,True,True,,2026-10-28T10:05:24
+01a_snap_parse,office months contiguous,WARN,no gaps,"missing [Period('2024-02', 'M')]",,2026-10-28T10:05:24
+01a_snap_parse,2024-01: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-01: sum of downstate offices = DOWNSTATE (households),PASS,"555,324.0 (abs_tol=0.5)","555,324.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-01: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,077,561.0 (abs_tol=0.5)","1,077,561.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-01: sum of downstate offices = DOWNSTATE (persons),PASS,"1,064,353.0 (abs_tol=0.5)","1,064,353.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-01: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,978,576.0 (abs_tol=0.5)","1,978,576.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-03: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-03: sum of downstate offices = DOWNSTATE (households),PASS,"560,769.0 (abs_tol=0.5)","560,769.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-03: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,089,292.0 (abs_tol=0.5)","1,089,292.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-03: sum of downstate offices = DOWNSTATE (persons),PASS,"1,071,926.0 (abs_tol=0.5)","1,071,926.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-03: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,994,592.0 (abs_tol=0.5)","1,994,592.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-04: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-04: sum of downstate offices = DOWNSTATE (households),PASS,"561,617.0 (abs_tol=0.5)","561,617.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-04: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,090,153.0 (abs_tol=0.5)","1,090,153.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-04: sum of downstate offices = DOWNSTATE (persons),PASS,"1,071,113.0 (abs_tol=0.5)","1,071,113.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-04: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,992,156.0 (abs_tol=0.5)","1,992,156.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-05: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-05: sum of downstate offices = DOWNSTATE (households),PASS,"563,512.0 (abs_tol=0.5)","563,512.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-05: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,094,410.0 (abs_tol=0.5)","1,094,410.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-05: sum of downstate offices = DOWNSTATE (persons),PASS,"1,073,828.0 (abs_tol=0.5)","1,073,828.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-05: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,997,722.0 (abs_tol=0.5)","1,997,722.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-06: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-06: sum of downstate offices = DOWNSTATE (households),PASS,"564,789.0 (abs_tol=0.5)","564,789.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-06: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,096,456.0 (abs_tol=0.5)","1,096,456.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-06: sum of downstate offices = DOWNSTATE (persons),PASS,"1,074,950.0 (abs_tol=0.5)","1,074,950.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-06: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,999,704.0 (abs_tol=0.5)","1,999,704.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-07: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-07: sum of downstate offices = DOWNSTATE (households),PASS,"564,488.0 (abs_tol=0.5)","564,488.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-07: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,094,191.0 (abs_tol=0.5)","1,094,191.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-07: sum of downstate offices = DOWNSTATE (persons),PASS,"1,074,310.0 (abs_tol=0.5)","1,074,310.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-07: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,996,199.0 (abs_tol=0.5)","1,996,199.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-08: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-08: sum of downstate offices = DOWNSTATE (households),PASS,"565,700.0 (abs_tol=0.5)","565,700.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-08: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,093,632.0 (abs_tol=0.5)","1,093,632.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-08: sum of downstate offices = DOWNSTATE (persons),PASS,"1,076,126.0 (abs_tol=0.5)","1,076,126.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-08: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,994,160.0 (abs_tol=0.5)","1,994,160.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-09: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-09: sum of downstate offices = DOWNSTATE (households),PASS,"565,969.0 (abs_tol=0.5)","565,969.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-09: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,094,154.0 (abs_tol=0.5)","1,094,154.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-09: sum of downstate offices = DOWNSTATE (persons),PASS,"1,076,252.0 (abs_tol=0.5)","1,076,252.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-09: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,994,095.0 (abs_tol=0.5)","1,994,095.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-10: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-10: sum of downstate offices = DOWNSTATE (households),PASS,"565,261.0 (abs_tol=0.5)","565,261.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-10: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,092,877.0 (abs_tol=0.5)","1,092,877.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-10: sum of downstate offices = DOWNSTATE (persons),PASS,"1,074,799.0 (abs_tol=0.5)","1,074,799.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-10: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,990,881.0 (abs_tol=0.5)","1,990,881.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-11: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-11: sum of downstate offices = DOWNSTATE (households),PASS,"560,827.0 (abs_tol=0.5)","560,827.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-11: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,082,567.0 (abs_tol=0.5)","1,082,567.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-11: sum of downstate offices = DOWNSTATE (persons),PASS,"1,065,844.0 (abs_tol=0.5)","1,065,844.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-11: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,971,625.0 (abs_tol=0.5)","1,971,625.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-12: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2024-12: sum of downstate offices = DOWNSTATE (households),PASS,"558,170.0 (abs_tol=0.5)","558,170.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-12: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,076,849.0 (abs_tol=0.5)","1,076,849.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-12: sum of downstate offices = DOWNSTATE (persons),PASS,"1,060,901.0 (abs_tol=0.5)","1,060,901.0",,2026-10-28T10:05:24
+01a_snap_parse,2024-12: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,960,902.0 (abs_tol=0.5)","1,960,902.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-01: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-01: sum of downstate offices = DOWNSTATE (households),PASS,"557,841.0 (abs_tol=0.5)","557,841.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-01: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,075,687.0 (abs_tol=0.5)","1,075,687.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-01: sum of downstate offices = DOWNSTATE (persons),PASS,"1,059,679.0 (abs_tol=0.5)","1,059,679.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-01: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,957,510.0 (abs_tol=0.5)","1,957,510.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-02: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-02: sum of downstate offices = DOWNSTATE (households),PASS,"556,702.0 (abs_tol=0.5)","556,702.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-02: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,075,857.0 (abs_tol=0.5)","1,075,857.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-02: sum of downstate offices = DOWNSTATE (persons),PASS,"1,057,247.0 (abs_tol=0.5)","1,057,247.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-02: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,956,916.0 (abs_tol=0.5)","1,956,916.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-03: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-03: sum of downstate offices = DOWNSTATE (households),PASS,"555,135.0 (abs_tol=0.5)","555,135.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-03: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,074,105.0 (abs_tol=0.5)","1,074,105.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-03: sum of downstate offices = DOWNSTATE (persons),PASS,"1,053,749.0 (abs_tol=0.5)","1,053,749.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-03: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,952,634.0 (abs_tol=0.5)","1,952,634.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-04: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-04: sum of downstate offices = DOWNSTATE (households),PASS,"551,665.0 (abs_tol=0.5)","551,665.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-04: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,067,652.0 (abs_tol=0.5)","1,067,652.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-04: sum of downstate offices = DOWNSTATE (persons),PASS,"1,046,218.0 (abs_tol=0.5)","1,046,218.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-04: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,939,829.0 (abs_tol=0.5)","1,939,829.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-05: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-05: sum of downstate offices = DOWNSTATE (households),PASS,"549,480.0 (abs_tol=0.5)","549,480.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-05: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,065,100.0 (abs_tol=0.5)","1,065,100.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-05: sum of downstate offices = DOWNSTATE (persons),PASS,"1,041,361.0 (abs_tol=0.5)","1,041,361.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-05: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,933,008.0 (abs_tol=0.5)","1,933,008.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-06: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-06: sum of downstate offices = DOWNSTATE (households),PASS,"547,527.0 (abs_tol=0.5)","547,527.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-06: DOWNSTATE + COOK COUNTY = TOTAL (households),PASS,"1,062,176.0 (abs_tol=0.5)","1,062,176.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-06: sum of downstate offices = DOWNSTATE (persons),PASS,"1,038,136.0 (abs_tol=0.5)","1,038,136.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-06: DOWNSTATE + COOK COUNTY = TOTAL (persons),PASS,"1,928,098.0 (abs_tol=0.5)","1,928,098.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-07: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-07: sum of downstate offices = DOWNSTATE (households),PASS,"531,032.0 (abs_tol=0.5)","531,032.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-07: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"1,040,717.0 (abs_tol=0.5)","1,040,717.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-07: sum of downstate offices = DOWNSTATE (persons),PASS,"1,005,188.0 (abs_tol=0.5)","1,005,188.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-07: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,887,917.0 (abs_tol=0.5)","1,887,917.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-08: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-08: sum of downstate offices = DOWNSTATE (households),PASS,"525,365.0 (abs_tol=0.5)","525,365.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-08: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"1,030,886.0 (abs_tol=0.5)","1,030,886.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-08: sum of downstate offices = DOWNSTATE (persons),PASS,"992,102.0 (abs_tol=0.5)","992,102.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-08: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,867,060.0 (abs_tol=0.5)","1,867,060.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-09: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-09: sum of downstate offices = DOWNSTATE (households),PASS,"525,786.0 (abs_tol=0.5)","525,786.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-09: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"1,030,306.0 (abs_tol=0.5)","1,030,306.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-09: sum of downstate offices = DOWNSTATE (persons),PASS,"992,149.0 (abs_tol=0.5)","992,149.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-09: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,864,292.0 (abs_tol=0.5)","1,864,292.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-10: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-10: sum of downstate offices = DOWNSTATE (households),PASS,"519,119.0 (abs_tol=0.5)","519,119.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-10: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"1,018,182.0 (abs_tol=0.5)","1,018,182.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-10: sum of downstate offices = DOWNSTATE (persons),PASS,"978,272.0 (abs_tol=0.5)","978,272.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-10: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,841,261.0 (abs_tol=0.5)","1,841,261.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-11: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-11: sum of downstate offices = DOWNSTATE (households),PASS,"519,209.0 (abs_tol=0.5)","519,209.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-11: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"1,018,151.0 (abs_tol=0.5)","1,018,151.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-11: sum of downstate offices = DOWNSTATE (persons),PASS,"978,573.0 (abs_tol=0.5)","978,573.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-11: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,843,515.0 (abs_tol=0.5)","1,843,515.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-12: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2025-12: sum of downstate offices = DOWNSTATE (households),PASS,"502,295.0 (abs_tol=0.5)","502,295.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-12: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"987,176.0 (abs_tol=0.5)","987,176.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-12: sum of downstate offices = DOWNSTATE (persons),PASS,"942,889.0 (abs_tol=0.5)","942,889.0",,2026-10-28T10:05:24
+01a_snap_parse,2025-12: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,781,226.0 (abs_tol=0.5)","1,781,226.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-01: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2026-01: sum of downstate offices = DOWNSTATE (households),PASS,"489,616.0 (abs_tol=0.5)","489,616.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-01: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"959,710.0 (abs_tol=0.5)","959,710.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-01: sum of downstate offices = DOWNSTATE (persons),PASS,"919,284.0 (abs_tol=0.5)","919,284.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-01: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,732,806.0 (abs_tol=0.5)","1,732,806.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-02: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2026-02: sum of downstate offices = DOWNSTATE (households),PASS,"479,373.0 (abs_tol=0.5)","479,373.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-02: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"938,338.0 (abs_tol=0.5)","938,338.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-02: sum of downstate offices = DOWNSTATE (persons),PASS,"898,699.0 (abs_tol=0.5)","898,699.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-02: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,693,396.0 (abs_tol=0.5)","1,693,396.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-03: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2026-03: sum of downstate offices = DOWNSTATE (households),PASS,"476,769.0 (abs_tol=0.5)","476,769.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-03: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"933,470.0 (abs_tol=0.5)","933,470.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-03: sum of downstate offices = DOWNSTATE (persons),PASS,"894,894.0 (abs_tol=0.5)","894,894.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-03: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,685,957.0 (abs_tol=0.5)","1,685,957.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-04: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2026-04: sum of downstate offices = DOWNSTATE (households),PASS,"470,546.0 (abs_tol=0.5)","470,546.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-04: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"918,453.0 (abs_tol=0.5)","918,453.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-04: sum of downstate offices = DOWNSTATE (persons),PASS,"880,327.0 (abs_tol=0.5)","880,327.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-04: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,653,845.0 (abs_tol=0.5)","1,653,845.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-05: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:24
+01a_snap_parse,2026-05: sum of downstate offices = DOWNSTATE (households),PASS,"439,815.0 (abs_tol=0.5)","439,815.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-05: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"852,495.0 (abs_tol=0.5)","852,495.0",,2026-10-28T10:05:24
+01a_snap_parse,2026-05: sum of downstate offices = DOWNSTATE (persons),PASS,"838,836.0 (abs_tol=0.5)","838,836.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-05: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,565,308.0 (abs_tol=0.5)","1,565,308.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-06: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:25
+01a_snap_parse,2026-06: sum of downstate offices = DOWNSTATE (households),PASS,"429,100.0 (abs_tol=0.5)","429,100.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-06: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"830,342.0 (abs_tol=0.5)","830,342.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-06: sum of downstate offices = DOWNSTATE (persons),PASS,"814,306.0 (abs_tol=0.5)","814,306.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-06: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,519,111.0 (abs_tol=0.5)","1,519,111.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-07: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:25
+01a_snap_parse,2026-07: sum of downstate offices = DOWNSTATE (households),PASS,"420,506.0 (abs_tol=0.5)","420,506.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-07: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"810,756.0 (abs_tol=0.5)","810,756.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-07: sum of downstate offices = DOWNSTATE (persons),PASS,"797,144.0 (abs_tol=0.5)","797,144.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-07: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,480,838.0 (abs_tol=0.5)","1,480,838.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-08: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:25
+01a_snap_parse,2026-08: sum of downstate offices = DOWNSTATE (households),PASS,"410,321.0 (abs_tol=0.5)","410,321.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-08: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"787,374.0 (abs_tol=0.5)","787,374.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-08: sum of downstate offices = DOWNSTATE (persons),PASS,"776,876.0 (abs_tol=0.5)","776,876.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-08: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,435,561.0 (abs_tol=0.5)","1,435,561.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-09: expected subtotal rows present,PASS,"['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']","['COOK COUNTY', 'DOWNSTATE', 'SPECIALTY OFFICES', 'TOTAL STATE']",,2026-10-28T10:05:25
+01a_snap_parse,2026-09: sum of downstate offices = DOWNSTATE (households),PASS,"409,291.0 (abs_tol=0.5)","409,291.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-09: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (households),PASS,"782,448.0 (abs_tol=0.5)","782,448.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-09: sum of downstate offices = DOWNSTATE (persons),PASS,"774,993.0 (abs_tol=0.5)","774,993.0",,2026-10-28T10:05:25
+01a_snap_parse,2026-09: DOWNSTATE + COOK COUNTY + SPECIALTY OFFICES = TOTAL (persons),PASS,"1,427,357.0 (abs_tol=0.5)","1,427,357.0",,2026-10-28T10:05:25
+01a_snap_parse,anchor: Cook households June 2026,PASS,"393,810","393,810",,2026-10-28T10:05:25
+01a_snap_parse,anchor: Cook persons June 2026,PASS,"686,905","686,905",,2026-10-28T10:05:25
+01a_snap_parse,Cook share of state persons stays 40-55% every month,PASS,"[0.4000, 0.5500]",0.4490,,2026-10-28T10:05:25
+01a_snap_parse,largest month-to-month Cook change < 10% (bigger suggests a parse error),PASS,"[0, 0.1000]",0.0604,,2026-10-28T10:05:25
+01a_snap_parse,Cook persons never rise more than 2% in a month,PASS,True,True,,2026-10-28T10:05:25
+01a_snap_parse,county PDF: 102 Illinois counties,PASS,102,102,,2026-10-28T10:05:25
+01a_snap_parse,county PDF: counties sum to printed Total,PASS,"1,855,852.0 (abs_tol=0.5)","1,855,852.0",,2026-10-28T10:05:25
+01a_snap_parse,Sept 2025 Cook: county PDF vs office table (within 1%),WARN,"851,244 (rel_tol=0.01)","881,937","county PDF 881,937 vs office 851,244 (+3.6%); state 1,855,852 vs 1,864,292 (-0.5%). Different definitions (likely county of residence vs. servicing office, or a different count date). The office series is used for the time trend; the gap is reported.",2026-10-28T10:05:25
+01b_hfs_parse,anchor: Cook ACA FY2025,PASS,"364,204","364,204",,2026-10-28T10:05:28
+01b_hfs_parse,anchor: Cook total FY2025,PASS,"1,535,983","1,535,983",,2026-10-28T10:05:28
+01b_hfs_parse,FY2021: categories sum to Total,PASS,"1,604,213.0 (abs_tol=0.5)","1,604,213.0",,2026-10-28T10:05:28
+01b_hfs_parse,FY2022: categories sum to Total,PASS,"1,719,615.0 (abs_tol=0.5)","1,719,615.0",,2026-10-28T10:05:28
+01b_hfs_parse,FY2023: categories sum to Total,PASS,"1,868,393.0 (abs_tol=0.5)","1,868,393.0",,2026-10-28T10:05:28
+01b_hfs_parse,FY2024: categories sum to Total,PASS,"1,638,367.0 (abs_tol=0.5)","1,638,367.0",,2026-10-28T10:05:28
+01b_hfs_parse,FY2025: categories sum to Total,PASS,"1,535,983.0 (abs_tol=0.5)","1,535,983.0",,2026-10-28T10:05:28
+01b_hfs_parse,zip PDF header: SFY 2025,PASS,True,True,,2026-10-28T10:05:28
+01b_hfs_parse,"zip PDF header: column order Children, disabilities, ACA, Other, Seniors, Partial",PASS,True,True,,2026-10-28T10:05:28
+01b_hfs_parse,zip PDF: no unparsed zip lines,PASS,0,0,examples: [],2026-10-28T10:05:35
+01b_hfs_parse,zip PDF: one row per zip,PASS,0,0,duplicate keys on ['zip'],2026-10-28T10:05:35
+01b_hfs_parse,"zip PDF: Illinois zip count (USPS ~1,590 incl. PO-box zips)",PASS,"[1,400, 1,700]","1,548",,2026-10-28T10:05:35
+01b_hfs_parse,zip PDF: all zips are Illinois (600xx-629xx),PASS,True,True,,2026-10-28T10:05:35
+01b_hfs_parse,suppressed ('*') ACA cells are a small share of zips,PASS,True,True,121 zips suppressed,2026-10-28T10:05:35
+01b_hfs_parse,zip PDF: statewide ACA adults (sum of zips) plausible 700k-1.1M,PASS,"[700,000, 1,100,000]","728,618.0",,2026-10-28T10:05:35
+01b_hfs_parse,tracer zip 60623 present in HFS zip file,PASS,True,True,,2026-10-28T10:05:35
+01b_hfs_parse,tracer zip 60426 present in HFS zip file,PASS,True,True,,2026-10-28T10:05:35
+01c_cch_parse,p25: 7 membership values (6 programs + total),PASS,7,7,,2026-10-28T10:05:40
+01c_cch_parse,p25: 7 capitation values,PASS,7,7,,2026-10-28T10:05:40
+01c_cch_parse,p25: program members sum to TOTAL,PASS,"328,915.0 (abs_tol=1)","328,915.0",,2026-10-28T10:05:40
+01c_cch_parse,"p25: program capitation sums to TOTAL ($M, rounded)",PASS,"3,095.0 (abs_tol=3)","3,095.0",,2026-10-28T10:05:40
+01c_cch_parse,"anchor: CountyCare ACA members 2027 = 69,768",PASS,"69,768","69,768",,2026-10-28T10:05:40
+01c_cch_parse,anchor: CountyCare ACA capitation = $700M,PASS,700.0,700.0,,2026-10-28T10:05:40
+01c_cch_parse,"ACA PMPM plausible ($500-$1,200)",PASS,"[500, 1,200]",836.1,,2026-10-28T10:05:40
+01c_cch_parse,column-order sanity: long-term care (MLTSS) has the highest PMPM,PASS,MLTSS/LTSS/IMD,MLTSS/LTSS/IMD,,2026-10-28T10:05:40
+01c_cch_parse,column-order sanity: FHP (families/children) has the lowest PMPM,PASS,FHP,FHP,,2026-10-28T10:05:40
+01c_cch_parse,"p24: avg monthly membership 328,915 stated",PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2018: $398M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2019: $372M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2020: $249M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2021: $230M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2022: $134M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2023: $156M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2024: $237M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2025: $310M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2026: $385M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 charity 2027: $485M appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2019: 50.8% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2020: 56.2% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2021: 56.5% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2022: 59.7% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2023: 61.4% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2024: 56.2% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2025: 52.8% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2026: 48.9% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicaid 2027: 43.5% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2019: 27.5% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2020: 22.6% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2021: 21.3% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2022: 16.3% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2023: 13.1% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2024: 18.3% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2025: 21.5% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2026: 24.8% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Uncompensated 2027: 30% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2019: 15.8% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2020: 15.7% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2021: 15.7% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2022: 17.3% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2023: 18.1% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2024: 17.5% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2025: 17.9% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2026: 17.3% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Medicare 2027: 17.5% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2019: 5.8% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2020: 5.6% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2021: 6.5% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2022: 6.8% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2023: 7.4% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2024: 8% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2025: 8.6% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2026: 8.9% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix Commercial 2027: 9% appears in page text,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2019 sums to ~100%,PASS,"[99.0, 101.0]",99.9,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2020 sums to ~100%,PASS,"[99.0, 101.0]",100.1,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2021 sums to ~100%,PASS,"[99.0, 101.0]",100.0,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2022 sums to ~100%,PASS,"[99.0, 101.0]",100.1,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2023 sums to ~100%,PASS,"[99.0, 101.0]",100.0,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2024 sums to ~100%,PASS,"[99.0, 101.0]",100.0,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2025 sums to ~100%,PASS,"[99.0, 101.0]",100.8,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2026 sums to ~100%,PASS,"[99.0, 101.0]",99.9,,2026-10-28T10:05:40
+01c_cch_parse,p8 payer mix 2027 sums to ~100%,PASS,"[99.0, 101.0]",100.0,,2026-10-28T10:05:40
+01c_cch_parse,"p7 statement present: 400,000",PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,"p7 statement present: 10,000",PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,"p7 statement present: 92,000",PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p7 statement present: $138M,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p7 statement present: $100M,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p26 statement present: 23%,PASS,True,True,,2026-10-28T10:05:40
+01c_cch_parse,p26 statement present: 35.3%,PASS,True,True,,2026-10-28T10:05:40
+01d_geo_acs,tract pop: no negative/missing (Census uses negatives for N/A),PASS,0,0,,2026-10-28T10:05:44
+01d_geo_acs,every 2020 IL tract in relationship file has ACS population,PASS,True,True,0 tract pieces without population,2026-10-28T10:05:44
+01d_geo_acs,every Cook ZCTA has ACS counts,PASS,0,0,"nulls in ['pop', 'hh_total', 'snap_hh', 'mcd_19_64', 'mcd_all']",2026-10-28T10:05:45
+01d_geo_acs,Chicago boundary found (GEOID 1714000),PASS,1,1,,2026-10-28T10:05:46
+01d_geo_acs,Cook County boundary found,PASS,1,1,,2026-10-28T10:05:46
+01d_geo_acs,every Cook ZCTA has a shape,PASS,177,177,,2026-10-28T10:05:46
+01d_geo_acs,Cook pop: sum of ZCTA Cook portions vs ACS county total,PASS,5182090 (rel_tol=0.02),"5,186,538.2",,2026-10-28T10:05:47
+01d_geo_acs,Cook pop: tract pieces vs ACS county total (should be ~exact),PASS,5182090 (rel_tol=0.001),"5,182,022.6",,2026-10-28T10:05:47
+01d_geo_acs,Cook SNAP households: ZCTA Cook portions vs county total,PASS,329128 (rel_tol=0.03),"329,121.9",,2026-10-28T10:05:47
+01d_geo_acs,"HFS ACA: zip file Cook portion vs HFS county page (364,204)",PASS,"364,204 (rel_tol=0.03)","358,697.8",orphan Cook-area zips (no ZCTA): 60 with 871 ACA adults,2026-10-28T10:05:47
+01d_geo_acs,HFS ACA: zip file Cook portion within 6% of county page,PASS,"364,204 (rel_tol=0.06)","358,697.8",,2026-10-28T10:05:47
+01d_geo_acs,Chicago ZCTA count plausible (~55-65),PASS,"[50, 70]",56,,2026-10-28T10:05:47
+01d_geo_acs,"cook_share within [0,1]",PASS,"[0, 1.0000]",1.0000,,2026-10-28T10:05:47
+01d_geo_acs,"chicago_share_area within [0,1]",PASS,"[0, 1.0000]",1.0000,,2026-10-28T10:05:47
+01d_geo_acs,Cook share of IL population ~40%,PASS,"[0.3800, 0.4200]",0.4082,,2026-10-28T10:05:47
+01d_geo_acs,tracer zip 60623 in Cook frame,PASS,True,True,,2026-10-28T10:05:47
+01d_geo_acs,tracer zip 60426 in Cook frame,PASS,True,True,,2026-10-28T10:05:47

@@ -98,7 +98,61 @@ As in the original prompt (charts 1–5, maps 6–8, tables), with additions:
 - Chart 4 splits dollars into the federal, state-pullback and new-state-cost buckets.
 
 ## Open questions
-1. Is the FY2026 IL SNAP error rate (released ~June 2027) unknown? If so, cost-share start stays a two-scenario parameter.
-2. Did Illinois ever include internet costs in its SUA?
-3. Exact Cook share of the 9,300 Medicaid and ~15,000 SNAP noncitizen losses (no county breakdown published).
-4. Loss-rate sources for 19/30/40%: confirm the base (subject vs. all expansion adults) of each.
+1. ~~FY2026 error rate~~: unknown until ~June 2027, so the cost-share start stays two scenarios.
+2. ~~Internet in SUA~~: not confirmed; set to $0/$0/$5.
+3. Cook share of noncitizen losses: no official split; 44/50/60%.
+4. 19/30/40% loss rates: no cited source yet; all applied to the subject base.
+
+## Execution steps
+One step per session turn. Each step ends with its checks passing and a short review by the user before the next starts.
+
+| # | Step | Script(s) | Output | Gate (must pass) |
+|---|---|---|---|---|
+| 0 | Verification scaffolding | `src/lib/checks.py`, `src/lib/ledger.py`, `src/run_all.py` | check/ledger/trace helpers | unit tests of helpers |
+| 1 | Finish download + raw manifest | `00_fetch.py`, `00b_manifest.py` | `data/raw/MANIFEST.csv` (url, date, sha256, bytes) | every file present, non-empty, right type; hash changes flagged on rerun |
+| 2 | Parse sources to tidy tables | `01a_snap_offices.py`, `01b_hfs.py`, `01c_cch_deck.py`, `01d_acs.py`, `01e_geo.py` | `data/processed/*.csv` | anchor totals match publications (below); spot-check sheet reviewed |
+| 3 | SNAP observed series + counterfactual | `02_snap_series.py` | monthly Cook / Chicago / suburban; drop vs. trend | Chicago + suburban + specialty = Cook; county-PDF reconcile |
+| 4 | PUMS shares | `03_pums_shares.py` + `tests/test_pums_rules.py` | subject shares (a)/(b), time-limited SNAP adults, with standard errors | synthetic-household tests pass; weighted totals vs. ACS published |
+| 5 | Medicaid model | `04_medicaid.py` | monthly people + $ by scenario | baseline reconciles; losses ≤ baseline; scenario order low ≤ mid ≤ high |
+| 6 | SNAP model | `05_snap.py` | 2nd wave, noncitizen, benefit cuts, cost share | calibration reproduces observed May 2026 drop |
+| 7 | Zip allocation | `06_zip_alloc.py` | zip-level results | zip totals sum to county total exactly; border zips flagged |
+| 8 | Charts, maps, tables | `07_outputs.py` | figures + CSVs | every chart reads only from the results ledger |
+| 9 | Methods + independent review | `methods.md` | review notes | fresh-context agent recomputes headline numbers from raw files; triangulation table |
+
+## Verification design
+Five layers, from cheapest to most thorough.
+
+1. **Raw file manifest.** Records URL, download time, size and SHA-256 for every file. If a rerun produces a different hash, the source changed and we look before using it. Catches HTML error pages saved as ".pdf", truncated downloads and silent republishing.
+
+2. **Anchor checks.** Published totals our parsed data must reproduce exactly (or within a stated tolerance). A failure stops the pipeline.
+   - HFS Cook FY2025: ACA 364,204; total 1,535,983
+   - IDHS June 2026 servicing offices: Cook County subtotal 393,810 households / 686,905 persons; the state TOTAL row equals the sum of office rows
+   - Sept 2025 county PDF Cook persons vs. the Sept 2025 office sum (reconcile or flag, never force)
+   - PUMS weighted Cook population vs. the ACS published county total (±1%)
+   - ACS ZCTA population, Cook portion, vs. the county total (±2%)
+   - CCH deck: ACA capitation $700M, 69,768 members (confirm the page number)
+
+3. **Invariant checks (assertions)**, in `src/lib/checks.py`:
+   - no missing months, persons ≥ households, no negative values
+   - shares between 0 and 1, losses ≤ population at risk
+   - allocations sum back to the county total
+   - scenario order low ≤ mid ≤ high
+
+4. **Results ledger (lineage).** Every derived number is written to `output/ledger.csv` with: id, value, label (observed/derived/assumed), formula, input ids, source.
+
+   Example: `mcd_loss_2027_mid = mcd_baseline (364,204, HFS) × subject_share_a (0.xx, PUMS) × loss_rate_mid (0.30, assumed)`.
+
+   `python src/trace.py mcd_loss_2027_mid` prints the full tree back to the raw files. This is the automated version of following one row. It works for every number, not just the one we picked, and charts read only from the ledger.
+
+5. **Tracers + human spot checks.**
+   - **Tracer units:** fixed units get followed through every step, and a `output/trace/` report shows their value at each stage:
+     - two zips (one Chicago, one suburban)
+     - one month (May 2026)
+     - one IDHS office
+     - one PUMS household
+   - **Spot-check sheets:** for each PDF/HTML parse, 5 random rows are shown next to the source page number. You confirm them by eye, and sign-off is recorded in `output/checks/spot_checks.md`.
+   - **Synthetic tests** for the PUMS exemption rules: hand-built households with known answers, e.g. "single 30-year-old, works 10 hrs, no disability → subject."
+   - **Independent recompute:** at the end, a fresh Claude agent with no access to our code recomputes the headline numbers from raw files. Disagreements are investigated.
+   - **Triangulation table:** our numbers next to external ones, e.g. IDHS "340k at risk" statewide, CBO national rates, KFF/Urban state estimates. Not pass/fail, but large gaps must be explained.
+
+Each run writes `output/checks/report.md` (pass/fail per check). `run_all.py` stops at the first failed gate.

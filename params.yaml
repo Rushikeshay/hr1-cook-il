@@ -197,3 +197,19 @@ geography:
   border_zip_rule: >-
     ZCTAs crossing the Cook line keep the Cook portion using 2020 Census
     ZCTA-county relationship file (land-area weights); flagged in output.
+
+# ---------------------------------------------------------------- VERIFICATION
+verification:
+  tracers:
+    zips: ["60623", "60426"]   # Chicago (Little Village / South Lawndale); suburban (Harvey)
+    month: "2026-05"           # first SNAP time-limit cutoff month
+    office: "COOK COUNTY"      # IDHS reports Cook only as one subtotal row (no individual Cook offices)
+    pums_serialno: null        # set in step 4 (a household with an ACA-like adult)
+  anchors:
+    hfs_cook_aca_fy2025: 364204
+    hfs_cook_total_fy2025: 1535983
+    idhs_cook_households_2026_06: 393810
+    idhs_cook_persons_2026_06: 686905
+  tolerances:
+    pums_pop_vs_acs_rel: 0.01
+    zcta_cook_pop_vs_county_rel: 0.02

@@ -41,6 +41,7 @@ FILES = {
     "geo/cb_2024_us_county_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip",
     "geo/cb_2024_17_place_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_17_place_500k.zip",
     "geo/tab20_zcta520_county20_natl.txt": "https://www2.census.gov/geo/docs/maps-data/data/rel2020/zcta520/tab20_zcta520_county20_natl.txt",
+    "geo/tab20_zcta520_tract20_natl.txt": "https://www2.census.gov/geo/docs/maps-data/data/rel2020/zcta520/tab20_zcta520_tract20_natl.txt",
     "geo/2020_Census_Tract_to_2020_PUMA.txt": "https://www2.census.gov/geo/docs/maps-data/data/rel2020/2020_Census_Tract_to_2020_PUMA.txt",
 }
 
@@ -67,7 +68,11 @@ def get(url, **kw):
             time.sleep(3 * (attempt + 1))
 
 
+SOURCES = {}  # relative path -> where it came from; written to data/raw/_sources.json
+
+
 def save(rel, url):
+    SOURCES[rel] = url
     out = RAW / rel
     if out.exists() and not FORCE:
         return out
@@ -117,6 +122,8 @@ def census(url, params):
 
 def fetch_acs_zcta():
     out = RAW / f"acs/acs5_{ACS_YEAR}_zcta.csv"
+    SOURCES[f"acs/acs5_{ACS_YEAR}_zcta.csv"] = (f"https://api.census.gov/data/{ACS_YEAR}/acs/acs5 "
+                                               "groups B01003,B22003,C27007 for all ZCTAs")
     if out.exists() and not FORCE:
         return
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -134,6 +141,8 @@ def fetch_acs_zcta():
 def fetch_acs_county():
     """County-level citizenship (B05001) and SNAP (B22003) for Cook vs. Illinois shares."""
     out = RAW / f"acs/acs5_{ACS_YEAR}_il_counties.csv"
+    SOURCES[f"acs/acs5_{ACS_YEAR}_il_counties.csv"] = (f"https://api.census.gov/data/{ACS_YEAR}/acs/acs5 "
+                                                      "groups B05001,B22003,B01003 for Illinois counties")
     if out.exists() and not FORCE:
         return
     frames = []
@@ -145,9 +154,24 @@ def fetch_acs_county():
     pd.concat(frames, axis=1).to_csv(out)
 
 
+def fetch_acs_tracts():
+    """Tract population (B01003) for Illinois: population weights for zips crossing the Cook line."""
+    rel = f"acs/acs5_{ACS_YEAR}_il_tracts.csv"
+    SOURCES[rel] = f"https://api.census.gov/data/{ACS_YEAR}/acs/acs5 B01003_001E for Illinois tracts"
+    out = RAW / rel
+    if out.exists() and not FORCE:
+        return
+    df = census(f"https://api.census.gov/data/{ACS_YEAR}/acs/acs5",
+                {"get": "B01003_001E", "for": "tract:*", "in": f"state:{STATE} county:*"})
+    df.to_csv(out, index=False)
+
+
 def fetch_pums():
     """Illinois 5-year PUMS person file (bulk CSV, no API key), cut to Cook County PUMAs."""
     out = RAW / f"pums/pums_{PUMS_YEAR}_5yr_cook.csv"
+    SOURCES[f"pums/pums_{PUMS_YEAR}_5yr_cook.csv"] = f"subset of pums/csv_pil_{PUMS_YEAR}_5yr.zip to Cook PUMAs"
+    SOURCES[f"pums/csv_pil_{PUMS_YEAR}_5yr.zip"] = (
+        f"https://www2.census.gov/programs-surveys/acs/data/pums/{PUMS_YEAR}/5-Year/csv_pil.zip")
     if out.exists() and not FORCE:
         return
     import zipfile
@@ -173,7 +197,12 @@ if __name__ == "__main__":
     if census_key():
         fetch_acs_zcta()
         fetch_acs_county()
+        fetch_acs_tracts()
     else:
         print("!! Skipped ACS ZCTA/county tables: no Census API key "
               "(https://api.census.gov/data/key_signup.html -> CENSUS_API_KEY in .env)")
+    import json
+    sf = RAW / "_sources.json"
+    old = json.loads(sf.read_text()) if sf.exists() else {}
+    sf.write_text(json.dumps({**old, **SOURCES}, indent=1, sort_keys=True))
     print("Done. Files in", RAW)

@@ -29,19 +29,24 @@ methods.md         plain-language method + limitations (<2 pages)
 - SNAP "observed drop" ≠ H.R. 1 effect: compare to the same months a year earlier and the pre-Feb 2026 trend.
 - Medicaid loss rates (19/30/40%) all apply to the same base: adults subject to the work requirement. Paperwork losses among exempt adults and churn from 6-month renewals are separate parameters.
 
-## Status (2026-10-27)
-Done:
-- Plan and fact check (PLAN.md)
-- params.yaml
-- `src/00_fetch.py`, which downloads HFS, CCH, IDHS SNAP monthly by office (Jan 2024–Sep 2026; Feb 2024 missing), PUMS 2020–24 for Cook (36 PUMAs, all inside Cook, 196k persons), TIGER shapes, and the ZCTA–county file
+## Status (2026-10-28)
+Run everything: `python src/run_all.py` (stops on first failed check). Tests: `python -m pytest tests -q`.
+Check results: output/checks/report.md. Tracers: output/trace/trace_report.md. Lineage: `python src/trace.py <id>`.
 
-Blocked: ACS ZCTA/county tables (B01003, B22003, C27007, B05001) need the Census API key.
+Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest, 219 checks), Step 2 (parse):
+- 01a SNAP: IDHS office pages Jan 2024-Sep 2026 (Feb 2024 not published). **Cook is only a subtotal row; no
+  Chicago/suburban split exists in IDHS data.** "SPECIALTY OFFICES" subtotal starts Jul 2025 = series break.
+  Sept 2025 county PDF (881,937) vs office table (851,244) differ +3.6%: flagged, office series used for trend.
+- 01b HFS: Cook page (anchors match) + zip PDF, which HAS an ACA-adult column (use it for zip allocation).
+- 01c CCH deck: ACA $700M / 69,768 members -> PMPM $836; charity care + payer mix hand-transcribed from p8 chart
+  labels, each verified against the PDF text layer. Column order of p25 verified from the page image.
+- 01d geo/ACS: 177 Cook ZCTAs (56 Chicago by area overlap, 21 border, tract-population-weighted Cook share);
+  HFS zip ACA Cook portion 358,698 vs county 364,204 (-1.5%); 60 Cook-area PO-box zips have no ZCTA.
+  ACS: Cook holds 60% of IL noncitizens, 47% of IL SNAP households.
 
-Next:
-1. `01_snap_series.py`: parse IDHS office HTML → monthly Cook persons/households, Chicago vs. suburban; reconcile with the Sept 2025 county PDF; counterfactual trend.
-2. `02_pums_shares.py`: ACA-like universe → exemptions → subject share (a) and (b).
-3. Parse the CCH deck (ACA capitation, members, charity care, payer mix) and the HFS zip PDF.
-4. Medicaid model, SNAP model, zip allocation, charts/maps, methods.md.
+Gate pending: user spot-check sign-off in output/checks/spot_checks.md.
+Next: Step 3 `02_snap_series.py` (counterfactual vs same months prior year / pre-Feb 2026 trend; handle Jul 2025 break),
+then Step 4 `03_pums_shares.py` + tests/test_pums_rules.py.
 
 ## Open questions
 - No cited source yet for the 19/30/40% loss rates

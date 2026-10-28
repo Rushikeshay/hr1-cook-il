@@ -8,7 +8,7 @@ Estimates how many Cook County, IL residents lose Medicaid or SNAP (or get small
 ## Environment
 - Python: conda env **BED** → `C:\Users\rushikeshjadhav\AppData\Local\miniconda3-pbe\envs\BED\python.exe` (not on PATH). On another machine, create an env with pandas, geopandas, pyogrio, matplotlib, pyyaml, requests, pdfplumber, openpyxl, truststore (conda-forge).
 - Python HTTPS fails certificate checks on the work machine (corporate TLS). Scripts call `truststore.inject_into_ssl()`. Don't disable verification.
-- Census API needs a free key in `census_api_key.txt` (project root, gitignored) or env var `CENSUS_API_KEY`.
+- Census API needs a free key: `CENSUS_API_KEY=...` in `.env` (gitignored; template in `.env.example`).
 - IDHS (dhs.state.il.us) blocks requests without a browser User-Agent; `src/00_fetch.py` sends one.
 - `data/raw/` is gitignored (~180 MB). Rebuild with `python src/00_fetch.py`.
 

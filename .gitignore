@@ -1,3 +1,4 @@
+.env
 census_api_key.txt
 data/raw/
 __pycache__/

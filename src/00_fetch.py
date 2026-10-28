@@ -93,20 +93,23 @@ def fetch_snap_offices():
 
 
 def census_key():
-    """Census API key from env var CENSUS_API_KEY or a one-line file ./census_api_key.txt."""
+    """Census API key from env var CENSUS_API_KEY, else from CENSUS_API_KEY=... in ./.env."""
     import os
     key = os.environ.get("CENSUS_API_KEY")
-    f = ROOT / "census_api_key.txt"
-    if not key and f.exists():
-        key = f.read_text().strip()
-    return key
+    env = ROOT / ".env"
+    if not key and env.exists():
+        for line in env.read_text().splitlines():
+            name, _, value = line.partition("=")
+            if name.strip() == "CENSUS_API_KEY":
+                key = value.strip().strip('"').strip("'")
+    return key or None
 
 
 def census(url, params):
     key = census_key()
     if not key:
         raise SystemExit("Census API needs a free key: https://api.census.gov/data/key_signup.html\n"
-                         "Put it in census_api_key.txt (project root) or set CENSUS_API_KEY.")
+                         "Add CENSUS_API_KEY=yourkey to .env (project root).")
     r = get(url, params={**params, "key": key})
     rows = r.json()
     return pd.DataFrame(rows[1:], columns=rows[0])
@@ -172,5 +175,5 @@ if __name__ == "__main__":
         fetch_acs_county()
     else:
         print("!! Skipped ACS ZCTA/county tables: no Census API key "
-              "(https://api.census.gov/data/key_signup.html -> census_api_key.txt)")
+              "(https://api.census.gov/data/key_signup.html -> CENSUS_API_KEY in .env)")
     print("Done. Files in", RAW)

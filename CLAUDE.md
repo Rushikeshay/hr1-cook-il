@@ -29,7 +29,7 @@ methods.md         plain-language method + limitations (<2 pages)
 - SNAP "observed drop" ≠ H.R. 1 effect: compare to the same months a year earlier and the pre-Feb 2026 trend.
 - Medicaid loss rates (19/30/40%) all apply to the same base: adults subject to the work requirement. Paperwork losses among exempt adults and churn from 6-month renewals are separate parameters.
 
-## Status (2026-10-28)
+## Status (2026-10-28, end of day: Steps 0-7 done)
 Run everything: `python src/run_all.py` (stops on first failed check). Tests: `python -m pytest tests -q`.
 Check results: output/checks/report.md. Tracers: output/trace/trace_report.md. Lineage: `python src/trace.py <id>`.
 
@@ -97,7 +97,21 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   Medicaid / 149k SNAP; suburban 43k / 78k. Outputs: output/tables/zip_results_long.csv, zip_results_2028_mid.csv,
   region_results_mid.csv. Tracers: 60623 -> 2,902 Medicaid / 5,594 SNAP; 60426 -> 1,054 / 2,302 (mid, Dec 2028).
 
-Next: Step 8 `07_outputs.py` (charts, maps, tables; read only from the ledger and step tables).
+
+## Output direction (discussed 2026-10-28, not built yet)
+Scrollytelling article ("NYT-style" look only, no NYT branding): scrollama + D3 (+ MapLibre or D3 map), mobile-first.
+Draft section order: zip hook (60623) -> SNAP observed vs trend -> Medicaid dot grid peeling off by cause -> "working
+and still lose coverage" (share a 48% vs b 21%) -> three-bucket money flow -> zip map per 1,000 residents ->
+county ripple (CCH charity care / revenue) -> low/mid/high toggle + Urban comparison -> methods + data download.
+Open decisions for the user: publisher/audience; article only vs + PDF + zip lookup; lead with mid or range;
+Svelte vs plain JS.
+
+Next (agreed order):
+1. Medicaid-SNAP overlap from PUMS -> "unique residents affected" (never add 113k + 227k people).
+2. Source for the 19/30/40% loss rates (Urban scenarios / Arkansas evidence).
+3. Step 8 `07_outputs.py`: story data bundle (JSON, every number tagged with its ledger id), simplified ZCTA
+   TopoJSON, static PNG charts.
+4. Prototype two sections (SNAP line + zip map) as a private preview, then the rest; Step 9 recompute before publishing.
 
 ## Open questions
 - Medicaid model has no re-enrollment (people who lose coverage stay off), so later-year counts lean high

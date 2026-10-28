@@ -1,0 +1,199 @@
+# Every assumption used in the analysis. Edit here, not in code.
+# status: observed = published figure | derived = computed by us | assumed = our choice (scenario)
+
+meta:
+  as_of: 2026-10-27
+  analysis_years: [2026, 2027, 2028]
+  scenarios: [low, mid, high]
+
+# ---------------------------------------------------------------- MEDICAID
+medicaid:
+  baseline_aca_adults:
+    value: 364204
+    status: observed
+    note: Cook County ACA adults enrolled June 30 2025 (FY2025)
+    source: "https://hfs.illinois.gov/info/factsfigures/program-enrollment/cook.html"
+  baseline_total_enrollees:
+    value: 1535983
+    status: observed
+    source: "https://hfs.illinois.gov/info/factsfigures/program-enrollment/cook.html"
+
+  work_requirement:
+    effective_date:
+      value: 2027-01-01
+      status: observed
+      source: "https://www.dhs.state.il.us/page.aspx?item=180030"
+    first_renewals_checked:
+      value: 2027-03
+      status: observed
+      note: existing enrollees verified at redeterminations due March 2027 onward
+      source: "https://www.dhs.state.il.us/page.aspx?item=180030"
+    response_window_days:
+      value: 30
+      status: observed
+      source: "https://hfs.illinois.gov/content/dam/soi/en/web/hfs/medicalclients/medicaidguide/ACAAdultCustomerNotice083126ToPrint.pdf"
+    first_loss_month:
+      value: 2027-04
+      status: derived
+      note: March renewals + 30-day response window
+    renewal_months_per_cycle:
+      value: 6
+      status: observed
+      source: "https://hfs.illinois.gov/info/fedresctr/faqshowwillfedchimpactmedicaid.html"
+    initial_renewals_spread_months:
+      value: 12
+      status: assumed
+      note: existing caseload's first 2027 renewals assumed spread evenly over 12 months starting March 2027
+    income_test_monthly:
+      value: 580
+      status: observed
+      note: 80 hrs x federal minimum wage $7.25
+      source: "https://hfs.illinois.gov/content/dam/soi/en/web/hfs/info/fedresctr/hr1mod3wrce.pdf"
+    hours_test_weekly:
+      value: 20
+      status: derived
+      note: 80 hrs/month ~= 18.5 hrs/week; PUMS WKHP>=20 used as proxy
+
+  # Loss rates. All three apply to the SAME base, people SUBJECT to the work
+  # requirement (not exempt), so the scenarios can be compared. Paperwork loss
+  # among exempt people and extra churn from 6-month renewals are separate
+  # parameters below, so they aren't counted twice.
+  loss_rate_subject:
+    low:  {value: 0.19, status: assumed}
+    mid:  {value: 0.30, status: assumed}
+    high: {value: 0.40, status: assumed}
+    note: >-
+      Base = adults subject to the work requirement. Reference points: Arkansas 2018
+      (~25% of those required to report lost coverage). User-supplied scenario values;
+      a cited source for each is still open.
+  loss_rate_exempt_paperwork:
+    low:  {value: 0.00, status: assumed}
+    mid:  {value: 0.03, status: assumed}
+    high: {value: 0.06, status: assumed}
+    note: exempt adults disenrolled because the exemption was not documented in time
+  extra_churn_6mo_renewal_annual:
+    low:  {value: 0.00, status: assumed}
+    mid:  {value: 0.02, status: assumed}
+    high: {value: 0.04, status: assumed}
+    note: added annual procedural loss for ALL ACA adults from moving to 6-month renewals; needs source
+  verification_increase_2028:
+    low:  {value: 0.00, status: assumed}
+    mid:  {value: 0.05, status: assumed}
+    high: {value: 0.10, status: assumed}
+    note: added loss (share of subject adults) when data verification replaces self-attestation in 2028
+  unmodeled_exemptions_share:
+    value: 0.02
+    status: assumed
+    note: SUD treatment, recently incarcerated, former foster youth <26 (no PUMS proxy)
+
+  noncitizen:
+    statewide_loss:
+      value: 9300
+      status: observed
+      effective_date: 2026-10-01
+      source: "https://www.illinois.gov/content/dam/soi/en/web/illinois/iisnewsattachments/33039-101426-gci-noncitizen-loss-of-medicaid-sep-pr-003.pdf.pdf"
+    cook_share:
+      low:  {value: 0.44, status: observed, note: "CBS Chicago: 'about 44% are in Cook County' (wording ambiguous)"}
+      mid:  {value: 0.50, status: assumed, note: "Cook County officials' 'about half' framing; unverified"}
+      high: {value: 0.60, status: assumed}
+      source: "https://www.cbsnews.com/chicago/news/noncitizens-illinois-losing-medicaid-benefits/"
+      todo: compare with ACS Cook share of Illinois non-LPR noncitizens (derived check)
+
+  dollars:
+    federal_match_aca:
+      value: 0.90
+      status: observed
+    pmpm_countycare_aca:
+      value: null   # filled by src/ from CCH deck: ACA capitation / members / 12
+      status: derived
+      inputs: {capitation_usd: 700000000, members: 69768}
+      source: "https://cookcountyhealth.org/wp-content/uploads/Prelim-FY27-CCH-Budget-Presentation-Final.pdf"
+      todo: confirm both inputs against the deck
+    pmpm_hfs_statewide_aca:
+      value: null
+      status: observed
+      todo: find HFS ACA adult per-member cost (HFS annual report / MCO rate certification)
+
+# ---------------------------------------------------------------- SNAP
+snap:
+  time_limit:
+    waiver_end: {value: 2026-01-31, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=175082"}
+    clock_start: {value: 2026-02-01, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=175082"}
+    first_cutoff: {value: 2026-05-01, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=176106"}
+    period_type: {value: fixed, status: observed, note: "Jan 1 2024 - Dec 31 2026; new period Jan 1 2027"}
+    second_wave_cutoff: {value: 2027-04-01, status: derived, note: "countable months Jan-Mar 2027"}
+    ages: {value: [18, 64], status: observed}
+    child_exempt_under: {value: 14, status: observed}
+    statewide_newly_time_limited: {value: 450000, status: observed, note: "IDHS estimate via GCFD (Jul 2025): ABAWD pool 190k -> ~450k; >340k at risk"}
+    second_wave_loss_rate:
+      low:  {value: null, status: derived, note: "calibrated to observed May 2026 drop x 0.75"}
+      mid:  {value: null, status: derived, note: "calibrated to observed May 2026 drop"}
+      high: {value: null, status: derived, note: "calibrated to observed May 2026 drop x 1.25"}
+    calibration_multipliers: {low: 0.75, mid: 1.0, high: 1.25, status: assumed}
+
+  noncitizen:
+    effective_date: {value: 2026-04-01, status: observed}
+    statewide_loss:
+      value: 20000
+      status: observed
+      note: IDHS estimate cited by Greater Chicago Food Depository (Jul 2025); advocacy range 14,000-16,000
+      source: "https://www.chicagosfoodbank.org/wp-content/uploads/2025/07/HR1-Budget-Reconciliation-Analysis-of-SNAP-Cuts-and-Illinois-Impact_7.10.25.pdf"
+    cook_share:
+      low:  {value: 0.44, status: assumed, note: "reuse Medicaid noncitizen share"}
+      mid:  {value: 0.50, status: assumed}
+      high: {value: 0.60, status: assumed}
+
+  benefit_cuts_still_enrolled:
+    liheap_sua:
+      effective_date: {value: 2025-09-26, status: observed, note: "new cases; existing cases at next redetermination (12-mo phase-in)"}
+      heating_cooling_sua_monthly: {value: 565, status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=16169"}
+      share_households_affected:
+        low:  {value: null, status: assumed}
+        mid:  {value: null, status: assumed}
+        high: {value: null, status: assumed}
+        todo: need share of Cook SNAP households that got the SUA via LIHEAP and have no elderly/disabled member
+      monthly_benefit_cut_per_household:
+        value: null
+        status: derived
+        note: 0.30 x change in excess shelter deduction (SUA -> lower allowance), capped
+    internet_sua:
+      monthly_benefit_cut_per_household:
+        low:  {value: 0, status: assumed}
+        mid:  {value: 0, status: assumed}
+        high: {value: 5, status: assumed}
+        note: GCFD calls it a 'small SNAP cut for thousands'; Illinois inclusion of internet in SUA not confirmed
+    thrifty_food_plan_cola_restraint:
+      value: 0
+      status: assumed
+      note: future benefit-level restraint; left at 0 for 2026-2028
+
+  dollars:
+    avg_benefit_person_month:
+      value: 195
+      status: observed
+      note: Illinois, May 2026; replace with IDHS issuance data if available
+      source: "https://civicfed.org/blog/illinois-fails-lower-snap-payment-error-rates-targeted-hr-1"
+
+  state_cost_share:
+    error_rate_fy2025: {value: 0.1467, status: observed, note: "13.33% over + 1.33% under; FY2024 = 11.56%"}
+    error_rate_fy2026: {value: null, status: unknown, note: "USDA release ~June 2027"}
+    benefit_share_if_error_ge_10pct: {value: 0.15, status: observed}
+    delay_threshold: {value: 0.1334, status: observed, note: "error rate x 1.5 >= 20% -> delayed start"}
+    start_scenarios:
+      early: {value: 2028-10-01, status: derived, note: "FY2029 delayed start (FY2025 rate >= 13.34%)"}
+      late:  {value: 2029-10-01, status: derived, note: "FY2030 if FY2026 rate also >= 13.34%"}
+    admin_state_share:
+      value: 0.75
+      effective_date: 2026-10-01
+      status: observed
+      statewide_annual_cost_increase: {value: 80000000, status: observed, source: "https://civicfed.org/node/5122"}
+
+# ---------------------------------------------------------------- GEOGRAPHY / DATA
+geography:
+  state_fips: "17"
+  county_fips: "031"
+  acs_year: 2024          # ACS 2020-2024 5-year
+  pums_year: 2024
+  border_zip_rule: >-
+    ZCTAs crossing the Cook line keep the Cook portion using 2020 Census
+    ZCTA-county relationship file (land-area weights); flagged in output.

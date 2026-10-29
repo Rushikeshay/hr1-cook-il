@@ -24,9 +24,9 @@ Each tracer unit's value at every pipeline stage.
 | 01d_geo_acs | snap_hh | 8113.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | mcd_19_64 | 13315.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | hfs_aca_cook | 9179.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
-| 06_zip_alloc | mid mcd_people_off_dec_2028 | 2902 | Chicago; border=False |
+| 06_zip_alloc | mid mcd_people_off_dec_2028 | 4243 | Chicago; border=False |
 | 06_zip_alloc | mid snap_people_off_dec_2028 | 5594 | Chicago; border=False |
-| 06_zip_alloc | mid mcd_federal_usd_2028 | 22720401 | Chicago; border=False |
+| 06_zip_alloc | mid mcd_federal_usd_2028 | 34653860 | Chicago; border=False |
 | 06_zip_alloc | mid snap_federal_usd_2028 | 13090763 | Chicago; border=False |
 
 ## zip:60426
@@ -41,9 +41,9 @@ Each tracer unit's value at every pipeline stage.
 | 01d_geo_acs | snap_hh | 3339.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | mcd_19_64 | 5375.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
 | 01d_geo_acs | hfs_aca_cook | 3334.0 | ACS 2020-24 / tract-weighted Cook share / HFS FY2025 |
-| 06_zip_alloc | mid mcd_people_off_dec_2028 | 1054 | suburban Cook; border=False |
+| 06_zip_alloc | mid mcd_people_off_dec_2028 | 1541 | suburban Cook; border=False |
 | 06_zip_alloc | mid snap_people_off_dec_2028 | 2302 | suburban Cook; border=False |
-| 06_zip_alloc | mid mcd_federal_usd_2028 | 8252513 | suburban Cook; border=False |
+| 06_zip_alloc | mid mcd_federal_usd_2028 | 12586989 | suburban Cook; border=False |
 | 06_zip_alloc | mid snap_federal_usd_2028 | 5387657 | suburban Cook; border=False |
 
 ## pums:2020HU0051747-01
@@ -80,19 +80,19 @@ Each tracer unit's value at every pipeline stage.
 
 | step | stage | value | note |
 |---|---|---|---|
-| 04_medicaid | mid: people off coverage | 10350 | cumulative, all components |
+| 04_medicaid | mid: people off coverage | 14379 | cumulative, all components |
 
 ## medicaid_month:2027-12
 
 | step | stage | value | note |
 |---|---|---|---|
-| 04_medicaid | mid: people off coverage | 60395 | cumulative, all components |
+| 04_medicaid | mid: people off coverage | 98449 | cumulative, all components |
 
 ## medicaid_month:2028-12
 
 | step | stage | value | note |
 |---|---|---|---|
-| 04_medicaid | mid: people off coverage | 113416 | cumulative, all components |
+| 04_medicaid | mid: people off coverage | 165827 | cumulative, all components |
 
 ## office:COOK COUNTY
 

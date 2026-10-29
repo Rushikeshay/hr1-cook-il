@@ -43,6 +43,17 @@ FILES = {
     "idhs/wag_25_03_02_snap_standards.html": "https://www.dhs.state.il.us/page.aspx?item=21738",
     "idhs/pm_13_01_08_b_utility_allowance.html": "https://www.dhs.state.il.us/page.aspx?item=16169",
     "idhs/pm_13_01_08_excess_shelter.html": "https://www.dhs.state.il.us/page.aspx?item=16164",
+    # Illinois HFS work-requirement implementation documents (for mapping to Urban scenarios)
+    "hfs/aca_adult_customer_notice_2026_08.pdf": "https://hfs.illinois.gov/content/dam/soi/en/web/hfs/medicalclients/medicaidguide/ACAAdultCustomerNotice083126ToPrint.pdf",
+    "hfs/hr1_module3_work_requirements.pdf": "https://hfs.illinois.gov/content/dam/soi/en/web/hfs/info/fedresctr/hr1mod3wrce.pdf",
+    "hfs/hr1_phase2_toolkit.pdf": "https://hfs.illinois.gov/content/dam/soi/en/web/hfs/info/fedresctr/englishhr1phase2toolkit.pdf",
+    "hfs/faq_how_will_fed_changes_impact_medicaid.html": "https://hfs.illinois.gov/info/fedresctr/faqshowwillfedchimpactmedicaid.html",
+    "kff/integration_medicaid_nonhealth_eligibility_systems.html": "https://www.kff.org/affordable-care-act/state-indicator/integration-of-medicaid-and-non-health-program-eligibility-systems/",
+    # Root sources behind Urban's work-requirement assumptions (Arkansas evidence)
+    "evidence/brookings_arkansas_style_work_requirement_2025.pdf": "https://www.brookings.edu/wp-content/uploads/2026/04/ArkansasStyleWorkRequirementEnrollmentEffects-FINAL.pdf",
+    "evidence/usda_ers_err265_snap_multiplier_2019.pdf": "https://ers.usda.gov/sites/default/files/_laserfiche/publications/93529/ERR-265.pdf?v=70863",
+    "cook/fy2027_preliminary_budget_forecast_release.html": "https://www.cookcountyil.gov/news/cook-county-board-president-toni-preckwinkle-releases-fy2027-preliminary-budget-forecast",
+    "evidence/sommers_2019_nejm_arkansas.pdf": "https://digitalgovernmenthub.org/wp-content/uploads/2024/12/NEJMsr1901772.pdf",
     # Geography
     "geo/cb_2020_us_zcta520_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2020/shp/cb_2020_us_zcta520_500k.zip",
     "geo/cb_2024_us_county_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip",
@@ -59,6 +70,7 @@ PUMS_VARS = [  # person file
     "SERIALNO", "SPORDER", "PWGTP", "ADJINC", "AGEP", "RELSHIPP", "HINS3", "HINS4", "POVPIP",
     "SSIP", "PAP", "DIS", "SCH", "SCHG", "FER", "MIL", "DRAT", "RACAIAN", "WKHP", "WKL",
     "PERNP", "ESR", "CIT",
+    "SEX", "HISP", "RAC1P", "SCHL", "ENG", "LANX",  # for the "who is at risk" profiles (step 4b)
 ] + [f"PWGTP{i}" for i in range(1, 81)]  # replicate weights, for standard errors
 PUMS_H_VARS = ["SERIALNO", "WGTP", "NP", "TYPEHUGQ", "FS"] + [f"WGTP{i}" for i in range(1, 81)]  # housing file
 

@@ -15,7 +15,7 @@ start = args[args.index("--from") + 1] if "--from" in args else "00"
 scripts = sorted(p for p in SRC.glob("[0-9][0-9]*.py"))
 if "--fetch" not in args:
     scripts = [p for p in scripts if not p.name.startswith("00_fetch")]
-scripts = [p for p in scripts if p.name[:2] >= start]
+scripts = [p for p in scripts if p.name[:len(start)] >= start]
 
 for p in scripts:
     print(f"\n=== {p.name} ===")

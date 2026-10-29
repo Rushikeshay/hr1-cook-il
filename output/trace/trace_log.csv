@@ -1,44 +1,44 @@
 unit,step,stage,value,note,run_at
-month:2026-05,01a_snap_parse,Cook SNAP persons (IDHS office table),707068,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-28T16:40:08
-month:2026-05,01a_snap_parse,Cook SNAP households (IDHS office table),404720,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-28T16:40:08
-zip:60623,01b_hfs_parse,HFS ACA adults FY2025,9179,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-28T16:40:18
-zip:60623,01b_hfs_parse,HFS total comprehensive FY2025,42645,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-28T16:40:18
-zip:60426,01b_hfs_parse,HFS ACA adults FY2025,3334,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-28T16:40:18
-zip:60426,01b_hfs_parse,HFS total comprehensive FY2025,12945,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-28T16:40:18
-zip:60623,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60623,01d_geo_acs,region,Chicago,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60623,01d_geo_acs,pop,81277.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60623,01d_geo_acs,snap_hh,8113.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60623,01d_geo_acs,mcd_19_64,13315.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60623,01d_geo_acs,hfs_aca_cook,9179.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60426,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60426,01d_geo_acs,region,suburban Cook,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60426,01d_geo_acs,pop,23906.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60426,01d_geo_acs,snap_hh,3339.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60426,01d_geo_acs,mcd_19_64,5375.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-zip:60426,01d_geo_acs,hfs_aca_cook,3334.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-28T16:40:30
-month:2026-05,02_snap_series,observed change vs prior month,-45429,IDHS office table,2026-10-28T16:40:54
-month:2026-05,02_snap_series,excess change beyond mid trend,-43420,observed - trend change,2026-10-28T16:40:54
-pums:2020HU0051747-01,03_pums_shares,person,"age 56, HINS4 1, POVPIP 99.0, DIS 2, WKHP 40.0",weight 5,2026-10-28T16:41:06
-pums:2020HU0051747-01,03_pums_shares,medicaid status,"subject, compliant",headline rules,2026-10-28T16:41:06
-pums:2020HU0051747-01,03_pums_shares,snap status,not on SNAP,,2026-10-28T16:41:06
-pums:2020HU0051747-02,03_pums_shares,person,"age 50, HINS4 1, POVPIP 99.0, DIS 2, WKHP nan",weight 7,2026-10-28T16:41:06
-pums:2020HU0051747-02,03_pums_shares,medicaid status,"subject, not compliant",headline rules,2026-10-28T16:41:06
-pums:2020HU0051747-02,03_pums_shares,snap status,not on SNAP,,2026-10-28T16:41:06
-pums:2020HU0051747-03,03_pums_shares,person,"age 21, HINS4 1, POVPIP 99.0, DIS 2, WKHP 25.0",weight 7,2026-10-28T16:41:06
-pums:2020HU0051747-03,03_pums_shares,medicaid status,"subject, compliant",headline rules,2026-10-28T16:41:06
-pums:2020HU0051747-03,03_pums_shares,snap status,not on SNAP,,2026-10-28T16:41:06
-medicaid_month:2026-10,04_medicaid,mid: people off coverage,5577,"cumulative, all components",2026-10-28T16:41:11
-medicaid_month:2027-04,04_medicaid,mid: people off coverage,10350,"cumulative, all components",2026-10-28T16:41:11
-medicaid_month:2027-12,04_medicaid,mid: people off coverage,60395,"cumulative, all components",2026-10-28T16:41:11
-medicaid_month:2028-12,04_medicaid,mid: people off coverage,113416,"cumulative, all components",2026-10-28T16:41:11
-month:2026-05,05_snap,mid: people off SNAP (residence),128190,wave 1 stock,2026-10-28T16:41:15
-office:COOK COUNTY,05_snap,mid: projected Cook SNAP persons Dec 2028,625531,residence basis,2026-10-28T16:41:15
-zip:60623,06_zip_alloc,mid mcd_people_off_dec_2028,2902,Chicago; border=False,2026-10-28T16:41:18
-zip:60623,06_zip_alloc,mid snap_people_off_dec_2028,5594,Chicago; border=False,2026-10-28T16:41:18
-zip:60623,06_zip_alloc,mid mcd_federal_usd_2028,22720401,Chicago; border=False,2026-10-28T16:41:18
-zip:60623,06_zip_alloc,mid snap_federal_usd_2028,13090763,Chicago; border=False,2026-10-28T16:41:18
-zip:60426,06_zip_alloc,mid mcd_people_off_dec_2028,1054,suburban Cook; border=False,2026-10-28T16:41:18
-zip:60426,06_zip_alloc,mid snap_people_off_dec_2028,2302,suburban Cook; border=False,2026-10-28T16:41:18
-zip:60426,06_zip_alloc,mid mcd_federal_usd_2028,8252513,suburban Cook; border=False,2026-10-28T16:41:18
-zip:60426,06_zip_alloc,mid snap_federal_usd_2028,5387657,suburban Cook; border=False,2026-10-28T16:41:18
+month:2026-05,01a_snap_parse,Cook SNAP persons (IDHS office table),707068,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-29T18:23:35
+month:2026-05,01a_snap_parse,Cook SNAP households (IDHS office table),404720,idhs/offices/snap_offices_2026_05.html table row 55,2026-10-29T18:23:35
+zip:60623,01b_hfs_parse,HFS ACA adults FY2025,9179,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-29T18:23:52
+zip:60623,01b_hfs_parse,HFS total comprehensive FY2025,42645,hfs/fy25_enrollment_by_zip.pdf page 10,2026-10-29T18:23:52
+zip:60426,01b_hfs_parse,HFS ACA adults FY2025,3334,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-29T18:23:52
+zip:60426,01b_hfs_parse,HFS total comprehensive FY2025,12945,hfs/fy25_enrollment_by_zip.pdf page 6,2026-10-29T18:23:52
+zip:60623,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60623,01d_geo_acs,region,Chicago,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60623,01d_geo_acs,pop,81277.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60623,01d_geo_acs,snap_hh,8113.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60623,01d_geo_acs,mcd_19_64,13315.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60623,01d_geo_acs,hfs_aca_cook,9179.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60426,01d_geo_acs,cook_share,1.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60426,01d_geo_acs,region,suburban Cook,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60426,01d_geo_acs,pop,23906.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60426,01d_geo_acs,snap_hh,3339.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60426,01d_geo_acs,mcd_19_64,5375.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+zip:60426,01d_geo_acs,hfs_aca_cook,3334.0,ACS 2020-24 / tract-weighted Cook share / HFS FY2025,2026-10-29T18:24:11
+month:2026-05,02_snap_series,observed change vs prior month,-45429,IDHS office table,2026-10-29T18:25:45
+month:2026-05,02_snap_series,excess change beyond mid trend,-43420,observed - trend change,2026-10-29T18:25:45
+pums:2020HU0051747-01,03_pums_shares,person,"age 56, HINS4 1, POVPIP 99.0, DIS 2, WKHP 40.0",weight 5,2026-10-29T18:26:05
+pums:2020HU0051747-01,03_pums_shares,medicaid status,"subject, compliant",headline rules,2026-10-29T18:26:05
+pums:2020HU0051747-01,03_pums_shares,snap status,not on SNAP,,2026-10-29T18:26:05
+pums:2020HU0051747-02,03_pums_shares,person,"age 50, HINS4 1, POVPIP 99.0, DIS 2, WKHP nan",weight 7,2026-10-29T18:26:05
+pums:2020HU0051747-02,03_pums_shares,medicaid status,"subject, not compliant",headline rules,2026-10-29T18:26:05
+pums:2020HU0051747-02,03_pums_shares,snap status,not on SNAP,,2026-10-29T18:26:05
+pums:2020HU0051747-03,03_pums_shares,person,"age 21, HINS4 1, POVPIP 99.0, DIS 2, WKHP 25.0",weight 7,2026-10-29T18:26:05
+pums:2020HU0051747-03,03_pums_shares,medicaid status,"subject, compliant",headline rules,2026-10-29T18:26:05
+pums:2020HU0051747-03,03_pums_shares,snap status,not on SNAP,,2026-10-29T18:26:05
+medicaid_month:2026-10,04_medicaid,mid: people off coverage,5577,"cumulative, all components",2026-10-29T18:26:44
+medicaid_month:2027-04,04_medicaid,mid: people off coverage,14379,"cumulative, all components",2026-10-29T18:26:44
+medicaid_month:2027-12,04_medicaid,mid: people off coverage,98449,"cumulative, all components",2026-10-29T18:26:44
+medicaid_month:2028-12,04_medicaid,mid: people off coverage,165827,"cumulative, all components",2026-10-29T18:26:44
+month:2026-05,05_snap,mid: people off SNAP (residence),128190,wave 1 stock,2026-10-29T18:26:50
+office:COOK COUNTY,05_snap,mid: projected Cook SNAP persons Dec 2028,625531,residence basis,2026-10-29T18:26:50
+zip:60623,06_zip_alloc,mid mcd_people_off_dec_2028,4243,Chicago; border=False,2026-10-29T18:27:03
+zip:60623,06_zip_alloc,mid snap_people_off_dec_2028,5594,Chicago; border=False,2026-10-29T18:27:03
+zip:60623,06_zip_alloc,mid mcd_federal_usd_2028,34653860,Chicago; border=False,2026-10-29T18:27:03
+zip:60623,06_zip_alloc,mid snap_federal_usd_2028,13090763,Chicago; border=False,2026-10-29T18:27:03
+zip:60426,06_zip_alloc,mid mcd_people_off_dec_2028,1541,suburban Cook; border=False,2026-10-29T18:27:03
+zip:60426,06_zip_alloc,mid snap_people_off_dec_2028,2302,suburban Cook; border=False,2026-10-29T18:27:03
+zip:60426,06_zip_alloc,mid mcd_federal_usd_2028,12586989,suburban Cook; border=False,2026-10-29T18:27:03
+zip:60426,06_zip_alloc,mid snap_federal_usd_2028,5387657,suburban Cook; border=False,2026-10-29T18:27:03

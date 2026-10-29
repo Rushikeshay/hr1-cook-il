@@ -1,13 +1,13 @@
 region,program,metric,year,value
 Chicago,medicaid,federal_usd,2026,7822741.14535778
-Chicago,medicaid,federal_usd,2027,142904138.68592665
-Chicago,medicaid,federal_usd,2028,551675786.8780564
+Chicago,medicaid,federal_usd,2027,229250007.60511088
+Chicago,medicaid,federal_usd,2028,841433026.6761891
 Chicago,medicaid,people_off_coverage_dec,2026,3465.2508205036293
-Chicago,medicaid,people_off_coverage_dec,2027,37526.46654646647
-Chicago,medicaid,people_off_coverage_dec,2028,70470.60065719215
+Chicago,medicaid,people_off_coverage_dec,2027,61171.05990990294
+Chicago,medicaid,people_off_coverage_dec,2028,103036.05866103574
 Chicago,medicaid,state_usd,2026,869193.4605953086
-Chicago,medicaid,state_usd,2027,15878237.631769624
-Chicago,medicaid,state_usd,2028,61297309.65311737
+Chicago,medicaid,state_usd,2027,25472223.06723453
+Chicago,medicaid,state_usd,2028,93492558.51957655
 Chicago,snap,federal_usd,2026,210464890.16377792
 Chicago,snap,federal_usd,2027,333896774.66779345
 Chicago,snap,federal_usd,2028,348689016.38133425
@@ -15,14 +15,14 @@ Chicago,snap,people_off_snap_dec,2026,123726.51689195348
 Chicago,snap,people_off_snap_dec,2027,149012.4001629633
 Chicago,snap,people_off_snap_dec,2028,149012.4001629633
 suburban Cook,medicaid,federal_usd,2026,4767217.882527209
-suburban Cook,medicaid,federal_usd,2027,87086502.3873342
-suburban Cook,medicaid,federal_usd,2028,336194005.10561776
+suburban Cook,medicaid,federal_usd,2027,139706110.11117628
+suburban Cook,medicaid,federal_usd,2028,512773527.4866061
 suburban Cook,medicaid,people_off_coverage_dec,2026,2111.7413157343385
-suburban Cook,medicaid,people_off_coverage_dec,2027,22868.817856070327
-suburban Cook,medicaid,people_off_coverage_dec,2028,42945.13922971372
+suburban Cook,medicaid,people_off_coverage_dec,2027,37277.95222633501
+suburban Cook,medicaid,people_off_coverage_dec,2028,62790.69347520214
 suburban Cook,medicaid,state_usd,2026,529690.8758363563
-suburban Cook,medicaid,state_usd,2027,9676278.043037131
-suburban Cook,medicaid,state_usd,2028,37354889.456179745
+suburban Cook,medicaid,state_usd,2027,15522901.123464024
+suburban Cook,medicaid,state_usd,2028,56974836.38740067
 suburban Cook,snap,federal_usd,2026,110074719.82383403
 suburban Cook,snap,federal_usd,2027,174630523.37631506
 suburban Cook,snap,federal_usd,2028,182366977.00008756

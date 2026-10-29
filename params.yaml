@@ -58,14 +58,19 @@ medicaid:
   # requirement (not exempt), so the scenarios can be compared. Paperwork loss
   # among exempt people and extra churn from 6-month renewals are separate
   # parameters below, so they aren't counted twice.
+  # Decision 2026-10-29 (user): replaces the unsourced 19/30/40% (came with the original prompt as "user-supplied").
+  # Work-requirement losses (subject adults + exempt paperwork losses) = Urban/RWJF Illinois "work requirements
+  # after six-month redetermination" share of ALL ACA adults (Table A.2): 18% / 29% / 42%. The subject loss rate is
+  # derived in 04_medicaid: (Urban share x baseline - paperwork losses) / subject people (~38% / ~58% / ~82%).
+  # Scenario map: our low/mid/high = Urban high/medium/low mitigation. Illinois's announced choices match Urban's
+  # high-mitigation settings on all 5 decided dimensions (output/tables/illinois_vs_urban_scenarios.csv); mid/high
+  # reflect poorer response by enrollees (Urban: 65/75/87% of manual verifiers don't respond; Arkansas/NH evidence).
   loss_rate_subject:
-    low:  {value: 0.19, status: assumed}
-    mid:  {value: 0.30, status: assumed}
-    high: {value: 0.40, status: assumed}
-    note: >-
-      Base = adults subject to the work requirement. Reference points: Arkansas 2018
-      (~25% of those required to report lost coverage). User-supplied scenario values;
-      a cited source for each is still open.
+    low:  {value: from_urban_il_work_req, urban_scenario: high, status: derived}
+    mid:  {value: from_urban_il_work_req, urban_scenario: medium, status: derived}
+    high: {value: from_urban_il_work_req, urban_scenario: low, status: derived}
+    source: "https://www.rwjf.org/content/dam/farm/reports/reports/2026/rwjf485284"
+    note: Base = adults subject to the work requirement (derived). Old unsourced values were 0.19 / 0.30 / 0.40.
   loss_rate_exempt_paperwork:
     low:  {value: 0.00, status: assumed}
     mid:  {value: 0.03, status: assumed}
@@ -85,10 +90,18 @@ medicaid:
       Timing: each renewal cohort's first 6-month renewal (Sept 2027-Aug 2028) adds rate/12 of the people still
       enrolled, losses the next month; full level reached Sept 2028 and held (Urban reports a level, not a flow).
   verification_increase_2028:
-    low:  {value: 0.00, status: assumed}
-    mid:  {value: 0.05, status: assumed}
-    high: {value: 0.10, status: assumed}
-    note: added loss (share of subject adults) when data verification replaces self-attestation in 2028
+    low:  {value: 0.0, status: assumed}
+    mid:  {value: 0.0, status: assumed}
+    high: {value: 0.0, status: assumed}
+    note: >-
+      Set to 0 on 2026-10-29: Urban's 2028 work-requirement estimate already includes ongoing verification, so a
+      separate 2028 add-on would double count (was an unsourced 0/5/10% placeholder).
+  hfs_internal_estimate:
+    low:  {value: 165000, status: observed}
+    high: {value: 330000, status: observed}
+    aca_adults_subject: {value: 700000, status: observed}
+    source: "https://hfs.illinois.gov/content/dam/soi/en/web/hfs/info/fedresctr/hr1mod3wrce.pdf"
+    note: "HFS draft webinar Module 3 (Jul 14 2026) p8: 'Internal estimates show that between 165,000 and 330,000 Illinoisans will lose Medicaid coverage due to the new federal work requirements'. Method not published; triangulation only."
   # How the work-requirement rules are applied to ACS PUMS records (step 4, src/lib/pums_rules.py).
   pums_rules:
     # Decision 2026-10-28 (user): broad universe is the headline; PUMS only supplies SHARES, applied to the HFS
@@ -277,6 +290,32 @@ snap:
       effective_date: 2026-10-01
       status: observed
       statewide_annual_cost_increase: {value: 80000000, status: observed, source: "https://civicfed.org/node/5122"}
+
+# ---------------------------------------------------------------- COUNTY PRESSURE (step 6c)
+county:
+  fiscal_year_start_month:
+    value: 12
+    status: observed
+    source: "https://civicfed.org/node/1842"
+    note: Cook County fiscal year runs Dec 1 - Nov 30 (FY2027 = Dec 2026 - Nov 2027)
+  countycare_same_loss_rate:
+    value: true
+    status: assumed
+    note: >-
+      CountyCare ACA members lose coverage at the same rate as all Cook ACA adults. CountyCare members could differ
+      (e.g. more likely exempt or more likely to lose coverage); no public data to tell.
+  fy2027_forecast:
+    source: "https://www.cookcountyil.gov/news/cook-county-board-president-toni-preckwinkle-releases-fy2027-preliminary-budget-forecast"
+    health_fund_gap: {value: 214700000, status: observed, quote: "In FY2027, the Health Enterprise Fund is expected to have a budget gap of $214.7 million."}
+    health_revenue_decline: {value: 486500000, status: observed, quote: "Revenues are expected to decline by $486.5 million due to a significant expected decrease in CountyCare membership"}
+    obbba_hospital_fallout: {value: 138000000, status: observed, quote: "an expected $138.0 million fallout of federal changes in the One Big Beautiful Bill Act (OBBBA) impacting the hospital system"}
+  snap_multiplier:
+    source: "https://ers.usda.gov/sites/default/files/_laserfiche/publications/93529/ERR-265.pdf?v=70863"
+    gdp_per_dollar: {value: 1.54, status: observed, quote: "collectively increases GDP by $1.54 billion, supports 13,560 jobs"}
+    jobs_per_billion: {value: 13560, status: observed}
+    note: >-
+      Canning & Stacy (USDA ERS ERR-265, 2019): national, short-run, slowing-economy multiplier for $1B of new SNAP.
+      Applied in reverse to SNAP dollars lost; an illustrative national-scale figure (some spending leaks outside Cook).
 
 # ---------------------------------------------------------------- GEOGRAPHY / DATA
 geography:

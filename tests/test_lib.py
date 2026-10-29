@@ -62,5 +62,5 @@ def test_ledger_from_params_keeps_status_and_scenario_source():
     led = ledger.Ledger("t")
     v = led.from_params("base", "medicaid.baseline_aca_adults", "people")
     assert v == 364204 and led.rows["base"]["label"] == "observed"
-    r = led.from_params("rate_mid", "medicaid.loss_rate_subject", "share", scenario="mid")
-    assert r == 0.30 and led.rows["rate_mid"]["label"] == "assumed"
+    r = led.from_params("rate_mid", "medicaid.loss_rate_exempt_paperwork", "share", scenario="mid")
+    assert r == 0.03 and led.rows["rate_mid"]["label"] == "assumed"

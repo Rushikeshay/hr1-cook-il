@@ -29,7 +29,7 @@ methods.md         plain-language method + limitations (<2 pages)
 - SNAP "observed drop" ≠ H.R. 1 effect: compare to the same months a year earlier and the pre-Feb 2026 trend.
 - Medicaid loss rates (19/30/40%) all apply to the same base: adults subject to the work requirement. Paperwork losses among exempt adults and churn from 6-month renewals are separate parameters.
 
-## Status (2026-10-28, end of day: Steps 0-7 done)
+## Status (2026-10-29: Steps 0-7 + overlap done)
 Run everything: `python src/run_all.py` (stops on first failed check). Tests: `python -m pytest tests -q`.
 Check results: output/checks/report.md. Tracers: output/trace/trace_report.md. Lineage: `python src/trace.py <id>`.
 
@@ -67,12 +67,10 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   renewals spread Mar 2027-Feb 2028; paperwork; 6-month renewals Oct 2027-Sep 2028; 2028 verification).
   No re-enrollment except as built into Urban's renewal rate. Noncitizens ARE in our totals (they show the policy).
   Decision 2026-10-28: 6-month renewal losses = Urban/RWJF Illinois redetermination-only rates (8/15/15%,
-  params six_month_renewal_loss), replacing the unsourced 0/2/4% placeholder; applied to people still enrolled.
-  Off coverage Dec 2028: low 62k / mid 113k / high 141k. Federal $ (CountyCare PMPM $836): 2027 mid $230M,
-  2028 mid $888M; state 10% separate. HFS PMPM still missing (dollars use CountyCare only).
-  Urban/RWJF (Mar 2026) is the source of CCH's "400k" (= Illinois low mitigation 415k; parsed in 01f). 2028 avg
-  monthly, Cook, excl. noncitizens: ours mid 93k (25%) vs Urban 95k/160k/208k (26/44/57%). Ours is lower mainly
-  because Urban also counts denied new applicants and has the full renewal effect all of 2028.
+  params six_month_renewal_loss), replacing the unsourced 0/2/4% placeholder; x baseline (additive with Urban's
+  work-requirement piece, which is measured after renewals). Work-req rates: see "Medicaid loss rates" below.
+  HFS PMPM still missing (dollars use CountyCare $836 only).
+  Urban/RWJF (Mar 2026) is the source of CCH's "400k" (= Illinois low mitigation 415k; parsed in 01f).
   User rule: keep our method; use Urban to correct weak spots and as a cited comparison.
 
 - Step 6 `05_snap.py`: wave 1 = step 3 observed beyond-trend loss, held flat after Sept 2026 (noncitizen cut is
@@ -93,29 +91,73 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   described in methods.md (started; scope notes only). LIHEAP per-household cut table kept for reference.
 - Step 7 `06_zip_alloc.py`: 177 ZCTAs (Cook portion). Medicaid key = HFS ACA adults by zip (alt: ACS C27007 19-64;
   correlation 0.98); SNAP key = ACS B22003 SNAP households. Zip totals = county totals exactly. 21 border ZCTAs
-  flagged; 7 ZCTAs < 1,000 residents get blank per-resident rates (e.g. 60141 Hines VA). Mid 2028: Chicago 70k
-  Medicaid / 149k SNAP; suburban 43k / 78k. Outputs: output/tables/zip_results_long.csv, zip_results_2028_mid.csv,
-  region_results_mid.csv. Tracers: 60623 -> 2,902 Medicaid / 5,594 SNAP; 60426 -> 1,054 / 2,302 (mid, Dec 2028).
+  flagged; 7 ZCTAs < 1,000 residents get blank per-resident rates (e.g. 60141 Hines VA). Mid 2028: Chicago 103k
+  Medicaid / 149k SNAP; suburban 63k / 78k. Outputs: output/tables/zip_results_long.csv, zip_results_2028_mid.csv,
+  region_results_mid.csv. Tracers: 60623 -> 4,243 Medicaid / 5,594 SNAP; 60426 -> 1,541 / 2,302 (mid, Dec 2028).
+- Step 6b `05b_overlap.py`: people losing BOTH programs (never add Medicaid + SNAP people). PUMS joint
+  probabilities by group, scaled to county totals; range = independent (low) to fully correlated (high), central =
+  midpoint. 44% of ACA-like adults live in SNAP households (HFS: "about half of Medicaid customers are SNAP
+  recipients"). Output: output/tables/medicaid_snap_overlap.csv; ledger ids ovl_*.
 
+## Audience and output (decided 2026-10-29)
+- Author/publisher: the user, Applied Data Fellow with the Cook County Bureau of Economic Development. Audience:
+  Bureau staff, internal and external. Question it answers: "With H.R. 1, how many more residents will rely on the
+  county, and can we handle it?" Helps staff imagine the future; not the final answer.
+- Scrollytelling article, PLAIN JS (scrollama + D3), "NYT-style" look only (no NYT branding). Desktop/laptop
+  first; must still work on mobile.
+- LEAD WITH THE RANGE: show low/mid/high and how each was built; don't push one number.
+- No human-voice reporting or agency comments; the user edits the prose and sends the finished piece to county
+  officials for review/fact-check.
+- Draft section order: zip hook (60623) -> SNAP observed vs trend -> Medicaid dot grid peeling off by cause ->
+  "working and still lose coverage" (share a 48% vs b 21%) -> three-bucket money flow -> zip map per 1,000
+  residents -> county ripple (CCH charity care / revenue) -> scenarios + Urban comparison -> methods + data download.
 
-## Output direction (discussed 2026-10-28, not built yet)
-Scrollytelling article ("NYT-style" look only, no NYT branding): scrollama + D3 (+ MapLibre or D3 map), mobile-first.
-Draft section order: zip hook (60623) -> SNAP observed vs trend -> Medicaid dot grid peeling off by cause -> "working
-and still lose coverage" (share a 48% vs b 21%) -> three-bucket money flow -> zip map per 1,000 residents ->
-county ripple (CCH charity care / revenue) -> low/mid/high toggle + Urban comparison -> methods + data download.
-Open decisions for the user: publisher/audience; article only vs + PDF + zip lookup; lead with mid or range;
-Svelte vs plain JS.
+## Medicaid loss rates (decided 2026-10-29)
+- The old 19/30/40% came with the original prompt ("user-supplied", never sourced). REPLACED.
+- Now: work-req + exempt-paperwork losses = Urban/RWJF Illinois work-requirement share of ALL ACA adults, 18/29/42%
+  (low/mid/high = Urban high/medium/low mitigation); renewals 8/15/15% x baseline (additive in Urban).
+  Derived subject loss rates 38/58/82%. 2028 verification add-on set to 0 (inside Urban's figure).
+- `01g_il_vs_urban.py`: Illinois's announced choices match Urban's HIGH-mitigation setting on all 5 decided
+  dimensions (1-month compliance, self-attestation, NSC student data, shared HFS-DHS system, broad frailty); every
+  quote auto-checked against raw docs. Enrollee response (65/75/87% non-response; Arkansas/NH roots) drives the range.
+- Root sources downloaded: Urban report, Sommers 2019 NEJM, Brookings Arkansas paper (likely Urban's "Fiedler 2025"),
+  KFF integration table (lists IL as not integrated for SNAP, contradicting HFS FAQ), HFS Module 3/FAQ/notice.
+  Full citation chain in methods.md. HFS internal estimate 165-330k of 700k (24-47%): triangulation only.
+
+## Headline results (2026-10-29, Dec 2028, low / mid / high)
+- Off Medicaid: 99k / 166k / 213k (Chicago 103k, suburban 63k in mid). Federal Medicaid $ 2028 mid $1.35B
+  (state 10% separate: $150M).
+- Off SNAP: 156k / 227k / 272k. Federal SNAP $ 2028 mid $531M.
+- Both programs: 19k / 34k / 44k. Different residents affected: 236k / 358k / 441k.
+
+## Who is at risk (step 4b `03b_profiles.py`, 2026-10-29)
+- ACS PUMS 2020-24 Cook adults in each at-risk group (same rules as step 4), replicate-weight SEs. PUMS re-cut adds
+  SEX, HISP, RAC1P, SCHL, ENG, LANX. Chicago vs suburban by PUMA (tract share in Chicago); PUMAs 03109 (13%) and
+  03164 (84%) are mixed (soft WARN). Describes people AT RISK (pre-H.R. 1 survey), not people who actually lost coverage.
+- Subject to Medicaid work req: 49% didn't work in past 12 months, 42% worked 20+ hrs/wk; 37% Black (vs 21% of all
+  Cook adults 19-64); 62% Chicago. Subject and not working enough: 49% Black, 39% aged 50-64. SNAP time-limited:
+  53% Black; time-limited and not working: 49% aged 50-64. Output: output/tables/pums_profiles(_wide).csv.
+
+## County pressure (step 6c `05c_county_pressure.py`, 2026-10-29)
+- Public figures only (no internal decisions). CountyCare share of Cook ACA adults 19.2% (CCH FY27 69,768 / HFS
+  364,204; assumed same loss rate). CountyCare ACA capitation lost, Cook FY (Dec-Nov): FY2027 $40M / $64M / $86M;
+  FY2028 $167M / $277M / $365M (low/mid/high). Members off end FY2028: 19k / 32k / 41k.
+- County's own FY2027 forecast (press release, downloaded + quotes auto-checked): Health Fund revenue -$486.5M "due
+  to a significant expected decrease in CountyCare membership" (all programs, federal cuts + Medicare eligibility);
+  $138.0M OBBBA fallout for the hospital system; $214.7M Health Fund gap. Our FY2027 H.R. 1 ACA piece is far
+  smaller than -$486.5M: ask county officials what drives it (all programs, reprocurement?, timing).
+- SNAP local economy (USDA ERS ERR-265: $1.54 GDP per $1, 13,560 jobs per $1B; national, illustrative): mid
+  2028 $818M activity, ~7,200 jobs.
+- Not usable: IDPH hospital-level charity care (raw questionnaire not public; profiles not found); HFS monthly MCO
+  reports (nothing after June 2024 found). CCH charity care history from the CCH deck is in
+  output/tables/cch_charity_care_history.csv.
 
 Next (agreed order):
-1. Medicaid-SNAP overlap from PUMS -> "unique residents affected" (never add 113k + 227k people).
-2. Source for the 19/30/40% loss rates (Urban scenarios / Arkansas evidence).
-3. Step 8 `07_outputs.py`: story data bundle (JSON, every number tagged with its ledger id), simplified ZCTA
+1. Step 8 `07_outputs.py`: story data bundle (JSON, every number tagged with its ledger id), simplified ZCTA
    TopoJSON, static PNG charts.
-4. Prototype two sections (SNAP line + zip map) as a private preview, then the rest; Step 9 recompute before publishing.
+2. Prototype two sections (SNAP line + zip map) as a private preview, then the rest. Step 9 recompute later.
 
 ## Open questions
-- Medicaid model has no re-enrollment (people who lose coverage stay off), so later-year counts lean high
-- Not modeled: new applicants denied by the work requirement (Urban includes them)
-- No cited source yet for the 19/30/40% loss rates
-- HFS statewide ACA cost per member
-- The 2028 verification parameter is a placeholder
+- Urban's shares are 2028 levels net of re-enrollment; we hold them flat through Dec 2028 (no further dynamics)
+- Not modeled separately: new applicants denied by the work requirement (Urban includes them in its shares)
+- HFS statewide ACA cost per member (second dollar estimate)

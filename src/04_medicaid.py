@@ -2,12 +2,13 @@
 
 Components (new losses per month; a person lost stays off: no re-enrollment is modeled):
   noncitizen      statewide loss x Cook share, all on Oct 1 2026
-  work_req        baseline x subject share (a) x loss rate. First renewals spread evenly over 12 months from
+  work_req        baseline x subject share (a) x loss rate, where the rate is set so work-req + paperwork losses
+                  = Urban/RWJF Illinois work-requirement share of ALL ACA adults (18/29/42%). First renewals spread evenly over 12 months from
                   March 2027; each month's losses take effect the next month (30-day response window)
   paperwork       baseline x exempt share x paperwork-loss rate, same timing (exempt adults who fail to document)
-  renewal_6mo     paperwork losses from renewing every 6 months instead of yearly (Urban/RWJF Illinois rate, applied
-                  to enrollees still covered): each cohort's first 6-month renewal, Sept 2027-Aug 2028, losses the
-                  next month; the level is then held (Urban's rate is a level net of re-enrollment)
+  renewal_6mo     paperwork losses from renewing every 6 months instead of yearly (Urban/RWJF Illinois rate x
+                  baseline; Urban's renewal and work-requirement shares are additive): each cohort's first 6-month
+                  renewal, Sept 2027-Aug 2028, losses the next month; level then held (net of re-enrollment)
   verification    2028: baseline x subject share x added rate, spread over 2028 renewals
 subject share (a) is reduced by the unmodeled-exemption share (SUD treatment, recent incarceration, former foster
 youth): subject = share_a x (1 - unmodeled); exempt = 1 - subject.
@@ -86,6 +87,13 @@ urban_redet = {s: led.observed(f"urban_il_2028_redet_pct_{s}", -r.redet_pct / 10
                                f"Urban/RWJF 2026, {r.source_ref} (six-month redeterminations only)")
                for s, r in urb_in.iterrows()}
 
+urban_wr = {s: led.observed(f"urban_il_2028_work_req_pct_{s}", -r.work_req_pct / 100, "share",
+                            f"Urban/RWJF 2026, {r.source_ref} (work requirements after six-month redeterminations)")
+            for s, r in urb_in.iterrows()}
+hfs_lo = led.from_params("hfs_internal_wr_loss_low", "medicaid.hfs_internal_estimate.low", "people")
+hfs_hi = led.from_params("hfs_internal_wr_loss_high", "medicaid.hfs_internal_estimate.high", "people")
+hfs_den = led.from_params("hfs_aca_adults_subject_statewide", "medicaid.hfs_internal_estimate.aca_adults_subject", "people")
+
 # timing
 first_renew = pd.Period(WR["first_renewals_checked"]["value"], "M")
 spread = int(WR["initial_renewals_spread_months"]["value"])
@@ -101,8 +109,17 @@ ck.equal("first work-requirement losses = params first_loss_month", str(renew1[0
 # ---- model ----------------------------------------------------------------------------------------------------
 monthly, annual = [], []
 for sc in SC:
-    rate = led.from_params(f"mcd_loss_rate_subject_{sc}", "medicaid.loss_rate_subject", "share", scenario=sc)
     paper = led.from_params(f"mcd_loss_rate_exempt_paperwork_{sc}", "medicaid.loss_rate_exempt_paperwork", "share", scenario=sc)
+    lr = MP["loss_rate_subject"][sc]
+    assert lr["value"] == "from_urban_il_work_req", "loss_rate_subject: only the Urban source is wired up"
+    us = lr["urban_scenario"]
+    # Urban: work-requirement losses (after renewals) as a share of ALL ACA adults; we split it into exempt paperwork
+    # losses (our parameter) and subject-adult losses (the rest), so the total matches Urban.
+    rate = led.derived(f"mcd_loss_rate_subject_{sc}", (urban_wr[us] * base - base * exempt * paper) / n_subj, "share",
+                       f"(urban_il_2028_work_req_pct_{us} * mcd_baseline_aca_adults - paperwork losses) / mcd_subject_people",
+                       [f"urban_il_2028_work_req_pct_{us}", "mcd_baseline_aca_adults", "mcd_exempt_share_eff",
+                        f"mcd_loss_rate_exempt_paperwork_{sc}", "mcd_subject_people"])
+    ck.between(f"[{sc}] derived subject loss rate is a valid share", rate, 0, 1)
     rn = MP["six_month_renewal_loss"][sc]
     assert rn["value"] == "from_urban_il_redet", "six_month_renewal_loss: only the Urban source is wired up"
     renew_rate = led.derived(f"mcd_renewal_6mo_loss_rate_{sc}", urban_redet[rn["urban_scenario"]], "share",
@@ -139,10 +156,9 @@ for sc in SC:
             new.loc[r + lag, "verification"] += vf_total / len(renew_2028)
     stock = 0.0
     stocks = []
-    for m in MONTHS:  # applies to people still enrolled that month, so nobody is counted twice
-        if m in renew_6mo_loss_months:
-            still = base - stock - new.loc[m, [c for c in COMPONENTS if c != "renewal_6mo"]].sum()
-            new.loc[m, "renewal_6mo"] = still * renew_rate / spread
+    for m in MONTHS:  # Urban's renewal and work-requirement shares are additive (work req is measured AFTER
+        if m in renew_6mo_loss_months:  # renewals), so both apply to the baseline without double counting
+            new.loc[m, "renewal_6mo"] = base * renew_rate / spread
         stock += new.loc[m].sum()
         stocks.append(stock)
     df = new.add_prefix("new_")
@@ -206,9 +222,13 @@ for y in YEARS:
 pre = mo[(mo.month < str(nc_month))]
 ck.equal("no losses before the noncitizen cut (Oct 2026)", float(pre.off_coverage.abs().sum()), 0.0)
 mid = an[an.scenario == "mid"].set_index("year")
-ck.true("mid: work-req losses <= subject and not compliant + paperwork (sanity, soft)",
-        mid.loc[YEARS[-1], "off_work_req_dec"] <= float(led.rows["mcd_subject_noncompliant_people"]["value"]), soft=True,
-        detail="loss rate applied to all subject adults can exceed those not already working; paperwork losses among workers")
+for sc in SC:  # how many work-requirement losses are people already working/earning enough (Urban: workers lose too)
+    a = an[(an.scenario == sc) & (an.year == YEARS[-1])].iloc[0]
+    ck.true(f"[{sc}] work-req losses <= subject people", a.off_work_req_dec <= n_subj)
+    led.derived(f"mcd_work_req_losses_already_compliant_{sc}",
+                max(0.0, a.off_work_req_dec - float(led.rows["mcd_subject_noncompliant_people"]["value"])), "people",
+                "work-req losses above the number of subject adults not already working/earning enough (lower bound)",
+                [f"mcd_work_req_loss_total_{sc}", "mcd_subject_noncompliant_people"])
 
 # triangulation (informational, not pass/fail): Urban Institute for RWJF (Mar 2026), Illinois, 2028.
 # Urban reports the decline in AVERAGE MONTHLY 2028 expansion enrollment as % of enrollees; we apply its Illinois %
@@ -228,8 +248,12 @@ for sc, r in urb.iterrows():
     tri_rows.append(dict(source="urban_x_cook_baseline", scenario=f"{sc} mitigation",
                          redeterminations=-r.redet_pct / 100 * base, work_requirements=-r.work_req_pct / 100 * base,
                          noncitizen=float("nan")))
+# HFS's own (internal, draft) work-requirement estimate, as a share of HFS's 700k ACA adults, applied to Cook
+for lab, val in (("HFS internal estimate, low end", hfs_lo), ("HFS internal estimate, high end", hfs_hi)):
+    tri_rows.append(dict(source="hfs_internal_x_cook_baseline", scenario=lab, redeterminations=float("nan"),
+                         work_requirements=val / hfs_den * base, noncitizen=float("nan")))
 tri = pd.DataFrame(tri_rows)
-tri["total_excl_noncitizen"] = tri.redeterminations + tri.work_requirements
+tri["total_excl_noncitizen"] = tri.redeterminations.fillna(0) + tri.work_requirements
 tri["total_incl_noncitizen"] = tri.total_excl_noncitizen + tri.noncitizen.fillna(0)
 tri["pct_of_baseline_excl_noncitizen"] = tri.total_excl_noncitizen / base
 tri.insert(2, "measure", f"average monthly people off coverage, {y}, Cook ACA adults")

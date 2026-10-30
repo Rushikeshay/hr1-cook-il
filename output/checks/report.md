@@ -1,6 +1,6 @@
 # Check report
 
-Generated 2026-10-29 18:27
+Generated 2026-10-29 18:40
 
 | step | PASS | WARN |
 |---|---|---|
@@ -20,6 +20,8 @@ Generated 2026-10-29 18:27
 | 05b_overlap | 14 | 0 |
 | 05c_county_pressure | 8 | 0 |
 | 06_zip_alloc | 15 | 0 |
+| 07_outputs | 16 | 0 |
+| 07b_story_preview | 4 | 0 |
 
 ## Not passing
 

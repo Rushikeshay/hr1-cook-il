@@ -1026,3 +1026,23 @@ step,check,status,expected,actual,detail,run_at
 06_zip_alloc,medicaid: high-scenario people lost never exceed zip Cook population,PASS,True,True,,2026-10-29T18:27:03
 06_zip_alloc,snap: high-scenario people lost never exceed zip Cook population,PASS,True,True,,2026-10-29T18:27:03
 06_zip_alloc,Medicaid keys agree (HFS ACA vs ACS 19-64 correlation >= 0.8),PASS,"[0.8000, 1.0000]",0.9813,,2026-10-29T18:27:03
+07_outputs,[low 2026] bundle unique residents = overlap table,PASS,"137,083.6 (abs_tol=0.5)","137,083.6",,2026-10-29T18:40:36
+07_outputs,[low 2027] bundle unique residents = overlap table,PASS,"204,273.2 (abs_tol=0.5)","204,273.2",,2026-10-29T18:40:36
+07_outputs,[low 2028] bundle unique residents = overlap table,PASS,"235,848.9 (abs_tol=0.5)","235,848.9",,2026-10-29T18:40:36
+07_outputs,[mid 2026] bundle unique residents = overlap table,PASS,"192,269.2 (abs_tol=0.5)","192,269.2",,2026-10-29T18:40:36
+07_outputs,[mid 2027] bundle unique residents = overlap table,PASS,"302,575.8 (abs_tol=0.5)","302,575.8",,2026-10-29T18:40:36
+07_outputs,[mid 2028] bundle unique residents = overlap table,PASS,"358,378.9 (abs_tol=0.5)","358,378.9",,2026-10-29T18:40:36
+07_outputs,[high 2026] bundle unique residents = overlap table,PASS,"221,727.9 (abs_tol=0.5)","221,727.9",,2026-10-29T18:40:36
+07_outputs,[high 2027] bundle unique residents = overlap table,PASS,"375,863.9 (abs_tol=0.5)","375,863.9",,2026-10-29T18:40:36
+07_outputs,[high 2028] bundle unique residents = overlap table,PASS,"441,079.8 (abs_tol=0.5)","441,079.8",,2026-10-29T18:40:36
+07_outputs,[low] zip Medicaid totals = county,PASS,"98,785.0 (rel_tol=0.0001)","98,784.4",,2026-10-29T18:40:38
+07_outputs,[mid] zip Medicaid totals = county,PASS,"165,826.8 (rel_tol=0.0001)","165,826.2",,2026-10-29T18:40:38
+07_outputs,[high] zip Medicaid totals = county,PASS,"213,173.3 (rel_tol=0.0001)","213,173.3",,2026-10-29T18:40:38
+07_outputs,story_data.json size reasonable (< 1.5 MB),PASS,"[10, 1,536]",215.5,215 KB,2026-10-29T18:40:38
+07_outputs,map has all 177 Cook ZCTAs,PASS,177,177,,2026-10-29T18:40:38
+07_outputs,map file size reasonable (< 2 MB),PASS,"[50, 2,048]",176.7,177 KB,2026-10-29T18:40:38
+07_outputs,five static charts written,PASS,5,5,,2026-10-29T18:40:40
+07b_story_preview,every number id in the template exists in the ledger,PASS,[],[],11 ids used,2026-10-29T18:40:42
+07b_story_preview,every zip named in the text exists in the zip results,PASS,[],[],,2026-10-29T18:40:42
+07b_story_preview,map shapes and zip results cover the same 177 zips,PASS,[],[],,2026-10-29T18:40:42
+07b_story_preview,preview size reasonable (< 2 MB),PASS,"[50, 2,048]",267.6,268 KB,2026-10-29T18:40:42

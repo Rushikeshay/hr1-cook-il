@@ -152,10 +152,22 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   reports (nothing after June 2024 found). CCH charity care history from the CCH deck is in
   output/tables/cch_charity_care_history.csv.
 
-Next (agreed order):
-1. Step 8 `07_outputs.py`: story data bundle (JSON, every number tagged with its ledger id), simplified ZCTA
-   TopoJSON, static PNG charts.
-2. Prototype two sections (SNAP line + zip map) as a private preview, then the rest. Step 9 recompute later.
+## Step 8 outputs (2026-10-29)
+- `07_outputs.py`: output/story/story_data.json (headline numbers keep ledger ids; full ledger included),
+  output/story/cook_zcta.geojson (Cook-clipped, simplified, GeoJSON not TopoJSON: no topojson lib in env),
+  output/figures/fig1-5 PNG + CSV (SNAP vs trend, Medicaid scenarios, residents affected, 3 dollar buckets as
+  separate panels, Medicaid/SNAP zip maps). Colors: Medicaid blue / SNAP orange / both aqua; scenarios blue ramp.
+- `07b_story_preview.py`: story/template.html (EDIT THIS) -> output/story/preview.html (generated, single file,
+  data inlined). Text numbers are [data-id] spans filled from the ledger; build fails on unknown ids.
+  Plain JS: d3 7.9.0 (cdnjs) + scrollama 3.2.0 (jsdelivr). Fonts: Newsreader (serif) + Libre Franklin (sans).
+- Private preview (2 of 9 sections: SNAP line + zip map): https://claude.ai/artifact/SFEYHaPxUA2wF4DA51NR6Y
+  Republish = rebuild preview.html, then publish the same file path.
+
+Next:
+1. User reviews the preview; then build the remaining sections (who is at risk, Medicaid timeline/dot grid,
+   "working and still lose coverage", money in three buckets, county pressure, scenarios + Urban comparison,
+   methods + data download).
+2. Step 9 independent recompute before publishing.
 
 ## Open questions
 - Urban's shares are 2028 levels net of re-enrollment; we hold them flat through Dec 2028 (no further dynamics)

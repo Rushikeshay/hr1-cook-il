@@ -1,0 +1,435 @@
+<title>H.R. 1 in Cook County</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,650;1,6..72,400&family=Libre+Franklin:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a newspaper-width article column; scrolly sections put a sticky chart beside narrow step cards. */
+:root {
+  --paper: #fcfcfb;
+  --ink: #141413;
+  --ink-2: #52514e;
+  --muted: #7d7b75;
+  --rule: #e1e0d9;
+  --axis: #c3c2b7;
+  --card: rgba(252, 252, 251, 0.96);
+  --medicaid: #2a78d6;
+  --snap: #eb6834;
+  --both: #1baf7a;
+  --trend: #9a988f;
+  --snap-wash: rgba(235, 104, 52, 0.12);
+  --focus: #2a78d6;
+  --nodata: #ecebe6;
+  --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "Libre Franklin", "Franklin Gothic Medium", "Segoe UI", system-ui, sans-serif;
+  --step-1: 0.8125rem;   /* labels, captions */
+  --step0: 1.1875rem;    /* body */
+  --step1: 1.5rem;       /* section heads */
+  --step2: 2.75rem;      /* headline */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #151514; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a988f; --rule: #2c2c2a; --axis: #45443f;
+    --card: rgba(21, 21, 20, 0.95); --medicaid: #3987e5; --snap: #d95926; --both: #199e70; --trend: #8a887f;
+    --snap-wash: rgba(217, 89, 38, 0.18); --focus: #6da7ec; --nodata: #2a2a28; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #151514; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a988f; --rule: #2c2c2a; --axis: #45443f;
+  --card: rgba(21, 21, 20, 0.95); --medicaid: #3987e5; --snap: #d95926; --both: #199e70; --trend: #8a887f;
+  --snap-wash: rgba(217, 89, 38, 0.18); --focus: #6da7ec; --nodata: #2a2a28; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: var(--step0); line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration-color: var(--axis); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.col { max-width: 40rem; margin-inline: auto; }
+.wide { max-width: 72rem; margin-inline: auto; }
+
+header.hero { padding-block: 3.5rem 2rem; display: grid; gap: 1rem; }
+.kicker { font-family: var(--sans); font-size: var(--step-1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.kicker .draft { color: var(--snap); }
+h1 { font-family: var(--serif); font-weight: 650; font-size: clamp(2rem, 4.2vw, var(--step2)); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.dek { font-size: 1.375rem; line-height: 1.4; color: var(--ink-2); margin: 0; text-wrap: pretty; }
+.byline { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.range { margin-block: 1.5rem 0.5rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+.range > div { padding: 0.9rem 0.75rem 0.25rem 0; display: grid; gap: 0.15rem; }
+.range > div + div { padding-left: 0.9rem; border-left: 1px solid var(--rule); }
+.range .lab { font-family: var(--sans); font-size: var(--step-1); font-weight: 600; color: var(--ink-2); }
+.range .val { font-family: var(--sans); font-size: 2rem; font-weight: 600; line-height: 1.1; }
+.range .note { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); }
+.range-cap { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); margin: 0.25rem 0 0; }
+
+.prose p { margin: 0 0 1.1rem; text-wrap: pretty; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--step1); line-height: 1.2; margin: 3rem 0 1rem; text-wrap: balance; }
+
+/* scrolly */
+.scrolly { position: relative; display: grid; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); gap: 2.5rem; margin-block: 2rem 4rem; }
+.graphic { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 6vh); height: 88vh; min-height: 30rem; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.5rem; order: 2; }
+.steps { order: 1; padding-block: 30vh 40vh; display: grid; gap: 70vh; }
+.step { background: var(--card); border-top: 2px solid var(--ink); padding: 1rem 1.1rem 1.1rem; font-size: 1.0625rem; line-height: 1.5; box-shadow: 0 1px 0 var(--rule); }
+.step p { margin: 0; }
+.step .tag { display: block; font-family: var(--sans); font-size: var(--step-1); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+.g-title { font-family: var(--sans); font-weight: 600; font-size: 1rem; margin: 0; }
+.g-sub { font-family: var(--sans); font-size: var(--step-1); color: var(--ink-2); margin: 0; }
+.g-box { position: relative; min-height: 0; }
+.g-box svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.g-foot { font-family: var(--sans); font-size: 0.75rem; color: var(--muted); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+/* chart text uses ink tokens, never series colors */
+.axis text, .lbl { font-family: var(--sans); font-size: 12px; fill: var(--muted); }
+.axis line, .axis path { stroke: var(--axis); }
+.grid line { stroke: var(--rule); }
+.lbl-strong { font-family: var(--sans); font-size: 13px; font-weight: 600; fill: var(--ink); }
+.lbl-mid { font-family: var(--sans); font-size: 12.5px; fill: var(--ink-2); }
+.event line { stroke: var(--axis); }
+.event text { font-family: var(--sans); font-size: 11.5px; fill: var(--ink-2); }
+
+/* controls: one row above the map */
+.controls { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; font-family: var(--sans); font-size: var(--step-1); }
+.seg { display: inline-flex; border: 1px solid var(--axis); border-radius: 6px; overflow: hidden; }
+.seg button { font: inherit; font-weight: 500; background: transparent; color: var(--ink-2); border: 0; padding: 0.35rem 0.75rem; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--axis); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.legend { display: flex; align-items: center; gap: 0.5rem; color: var(--ink-2); }
+.legend svg { width: 13rem; height: 2rem; }
+
+.tip { position: absolute; pointer-events: none; background: var(--paper); color: var(--ink); border: 1px solid var(--axis); border-radius: 6px; padding: 0.55rem 0.7rem; font-family: var(--sans); font-size: 12.5px; line-height: 1.45; box-shadow: 0 4px 14px rgba(0,0,0,0.12); min-width: 12rem; z-index: 5; }
+.tip b { font-weight: 600; }
+.tip .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+
+details.table { font-family: var(--sans); font-size: 0.875rem; margin-block: 0.5rem 0; }
+details.table summary { cursor: pointer; color: var(--ink-2); font-weight: 500; }
+.tbl-wrap { overflow-x: auto; max-height: 22rem; margin-top: 0.5rem; border-top: 1px solid var(--rule); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 0.3rem 0.6rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-weight: 600; color: var(--ink-2); position: sticky; top: 0; background: var(--paper); }
+
+footer { padding-block: 3rem 4rem; font-family: var(--sans); font-size: 0.875rem; color: var(--ink-2); display: grid; gap: 0.75rem; border-top: 1px solid var(--rule); margin-top: 3rem; }
+footer p { margin: 0; }
+.num { font-variant-numeric: lining-nums; }
+
+@media (max-width: 900px) {
+  .scrolly { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .graphic { order: 0; height: 70vh; top: calc(env(safe-area-inset-top, 0px) + 1rem); z-index: 0; }
+  .steps { order: 1; position: relative; z-index: 2; padding-block: 10vh 30vh; margin-top: -40vh; gap: 80vh; }
+  .step { max-width: 30rem; margin-inline: auto; }
+  .range .val { font-size: 1.5rem; }
+}
+@media (max-width: 520px) {
+  .range { grid-template-columns: minmax(0, 1fr); }
+  .range > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<header class="hero col">
+  <div class="kicker"><span class="draft">Draft for review</span> · Cook County, Illinois · H.R. 1 (2025)</div>
+  <h1>H.R. 1 could push <span class="num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span> to <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents off Medicaid or SNAP by the end of 2028</h1>
+  <p class="dek">SNAP cuts have already started. Medicaid's work requirement begins in 2027. This draft follows both, shows where the losses land, and shows how each estimate was built.</p>
+  <div class="byline"><span>Prepared by an Applied Data Fellow for the Bureau of Economic Development</span><span>Data through September 2026</span></div>
+
+  <div class="range" role="group" aria-label="Residents losing Medicaid or SNAP by December 2028, three scenarios">
+    <div><span class="lab">Low scenario</span><span class="val num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span><span class="note">Illinois as announced; people respond well</span></div>
+    <div><span class="lab">Middle scenario</span><span class="val num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span><span class="note">Response like past programs, partly</span></div>
+    <div><span class="lab">High scenario</span><span class="val num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span><span class="note">Response as poor as Arkansas</span></div>
+  </div>
+  <p class="range-cap">Different residents losing either program by December 2028; people losing both are counted once.</p>
+</header>
+
+<section class="col prose">
+  <p>Two programs reach more Cook County residents than any others that H.R. 1 changes: Medicaid, which covers <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults through the Affordable Care Act expansion, and SNAP, which helped about <span class="num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span> residents buy groceries in September 2025. When people lose either one, many turn to the county: its hospitals, its clinics, and its health plan.</p>
+  <p>The range above is wide on purpose. The middle of it depends on how people respond to new paperwork, and that is not known yet. The sections below show what has already happened and what each scenario assumes.</p>
+</section>
+
+<h2 class="col">SNAP: the cuts already happened</h2>
+<section class="scrolly wide" id="snap-scrolly">
+  <figure class="graphic" aria-describedby="snap-desc">
+    <p class="g-title">People on SNAP, Cook County offices</p>
+    <p class="g-sub" id="snap-desc">Monthly count from IDHS, January 2024 to September 2026, with the trend before H.R. 1.</p>
+    <div class="g-box" id="snap-chart"></div>
+    <div class="g-foot"><span>Source: IDHS SNAP Data by Servicing Office. Office basis (residence-basis totals are about 3.6% higher).</span></div>
+  </figure>
+  <div class="steps">
+    <div class="step" data-step="0"><span class="tag">Before H.R. 1</span><p>In January 2024, about <span class="num" data-snap="first" data-fmt="k"></span> people got SNAP through Cook County's IDHS offices. The number drifted down slowly, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month.</p></div>
+    <div class="step" data-step="1"><span class="tag">The trend</span><p>Had that drift continued, about <span class="num" data-id="snap_counterfactual_persons_2026_09" data-fmt="k"></span> people would still be getting SNAP by September 2026.</p></div>
+    <div class="step" data-step="2"><span class="tag">December 2025</span><p>IDHS first applied H.R. 1's work requirement in December 2025. The caseload began falling faster than the trend.</p></div>
+    <div class="step" data-step="3"><span class="tag">May 1, 2026</span><p>The first adults hit the new three-month time limit on May 1. Cook's caseload fell by <span class="num" data-snap="may_drop" data-fmt="k"></span> people in that one month.</p></div>
+    <div class="step" data-step="4"><span class="tag">September 2026</span><p>By September, <span class="num" data-snap="last" data-fmt="k"></span> people remained, <span class="num" data-snap="gap" data-fmt="k"></span> below the old trend. Depending on when you start counting, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> Cook residents lost SNAP because of H.R. 1.</p></div>
+  </div>
+</section>
+<div class="col"><details class="table"><summary>See the SNAP data as a table</summary><div class="tbl-wrap"><table id="snap-table"></table></div></details></div>
+
+<h2 class="col">Where the losses land</h2>
+<section class="col prose"><p>Losses follow the map of need. The zip areas where the most people rely on Medicaid and SNAP stand to lose the most, and most of them are on Chicago's West and South Sides and in the south suburbs.</p></section>
+<section class="scrolly wide" id="map-scrolly">
+  <figure class="graphic" aria-describedby="map-desc">
+    <p class="g-title" id="map-title">People off Medicaid per 1,000 residents, December 2028</p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Scenario">
+        <button type="button" id="sc-low" data-sc="low" aria-pressed="false">Low</button>
+        <button type="button" id="sc-mid" data-sc="mid" aria-pressed="true">Middle</button>
+        <button type="button" id="sc-high" data-sc="high" aria-pressed="false">High</button>
+      </div>
+      <div class="seg" role="group" aria-label="Program">
+        <button type="button" id="pg-medicaid" data-pg="medicaid" aria-pressed="true">Medicaid</button>
+        <button type="button" id="pg-snap" data-pg="snap" aria-pressed="false">SNAP</button>
+      </div>
+      <div class="legend" id="map-legend" aria-hidden="true"></div>
+    </div>
+    <div class="g-box" id="map"></div>
+    <div class="g-foot"><span id="map-desc">Cook County portion of each zip area. Outline: City of Chicago. Gray: under 1,000 residents.</span><span>Sources: HFS, IDHS, ACS, Urban Institute/RWJF</span></div>
+  </figure>
+  <div class="steps">
+    <div class="step" data-step="0"><span class="tag">Medicaid, middle scenario</span><p>By December 2028, about <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> Cook adults would be off Medicaid in the middle scenario. The losses are not spread evenly.</p></div>
+    <div class="step" data-step="1"><span class="tag">West and South Sides</span><p>In Englewood (60621), West Garfield Park (60624), West Englewood (60636) and Austin (60644), between <span class="num" data-zips="60621,60624,60636,60644" data-metric="medicaid" data-agg="min"></span> and <span class="num" data-zips="60621,60624,60636,60644" data-metric="medicaid" data-agg="max"></span> of every 1,000 residents would lose Medicaid. Countywide it is <span class="num" data-county="medicaid"></span>.</p></div>
+    <div class="step" data-step="2"><span class="tag">SNAP</span><p>SNAP losses follow the same map and run deeper: about <span class="num" data-id="snap_persons_off_dec_2028_mid" data-fmt="k"></span> residents in the middle scenario, or <span class="num" data-county="snap"></span> of every 1,000 countywide.</p></div>
+    <div class="step" data-step="3"><span class="tag">South suburbs</span><p>Outside Chicago, the losses concentrate in the south suburbs. In Riverdale (60827) and Harvey (60426), about <span class="num" data-zips="60827" data-metric="snap" data-agg="max"></span> and <span class="num" data-zips="60426" data-metric="snap" data-agg="max"></span> of every 1,000 residents would lose SNAP.</p></div>
+    <div class="step" data-step="4"><span class="tag">Your turn</span><p>Switch scenarios and programs with the buttons above the map, and point at any zip area for its numbers. The table below lists every zip.</p></div>
+  </div>
+</section>
+<div class="col"><details class="table"><summary>See every zip area as a table</summary><div class="tbl-wrap"><table id="zip-table"></table></div></details></div>
+
+<footer class="col">
+  <p><b>Prototype.</b> Two of the nine planned sections. Coming next: who is at risk, the Medicaid timeline, the money in three buckets, and pressure on county resources.</p>
+  <p>Every number on this page is filled in from the analysis ledger by its id, so the text and the analysis cannot drift apart. Method, sources and limitations: <code>methods.md</code> in the project repository.</p>
+  <p id="built"></p>
+</footer>
+
+<script id="story-data" type="application/json">/*__DATA__*/</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById("story-data").textContent);
+  const V = D.values;                 // ledger id -> value
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DUR = reduce ? 0 : 650;
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+  const fmt = {
+    k: (v) => (Math.round(v / 1000) * 1000).toLocaleString("en-US"),
+    int: (v) => Math.round(v).toLocaleString("en-US"),
+    pctmo: (v) => (Math.abs(v) * 100).toFixed(2) + "%",
+    rate: (v) => Math.round(v).toLocaleString("en-US"),
+  };
+
+  // ---- SNAP numbers derived from the series
+  const rows = D.snap.rows.map((r) => ({ ...r, date: d3.timeParse("%Y-%m")(r.month) }));
+  const byM = Object.fromEntries(rows.map((r) => [r.month, r]));
+  const last = rows[rows.length - 1];
+  const snapNums = {
+    first: rows[0].observed, last: last.observed, gap: last.trend - last.observed,
+    may_drop: byM["2026-04"].observed - byM["2026-05"].observed,
+  };
+
+  // ---- zip rates
+  const zips = D.zips;
+  const zipBy = Object.fromEntries(zips.map((z) => [z.zcta, z]));
+  const rate = (z, sc, pg) => (z.small_pop ? null : (z[sc][pg + "_off"] / z.pop) * 1000);
+  const countyRate = (sc, pg) => {
+    const t = d3.sum(zips, (z) => z[sc][pg + "_off"]), p = d3.sum(zips, (z) => z.pop);
+    return (t / p) * 1000;
+  };
+
+  // ---- fill every number in the text
+  document.querySelectorAll("[data-id]").forEach((el) => {
+    const v = V[el.dataset.id];
+    el.textContent = v == null ? "[missing " + el.dataset.id + "]" : fmt[el.dataset.fmt || "int"](v);
+    el.title = "ledger id: " + el.dataset.id;
+  });
+  document.querySelectorAll("[data-snap]").forEach((el) => { el.textContent = fmt[el.dataset.fmt || "k"](snapNums[el.dataset.snap]); });
+  document.querySelectorAll("[data-zips]").forEach((el) => {
+    const vals = el.dataset.zips.split(",").map((z) => rate(zipBy[z], "mid", el.dataset.metric)).filter((x) => x != null);
+    el.textContent = fmt.rate(d3[el.dataset.agg](vals));
+  });
+  document.querySelectorAll("[data-county]").forEach((el) => { el.textContent = fmt.rate(countyRate("mid", el.dataset.county)); });
+  document.getElementById("built").textContent = "Built " + D.meta.built.replace("T", " ") + " from story_data.json.";
+
+  // =================================================================== SNAP chart
+  const snapBox = document.getElementById("snap-chart");
+  const snapSvg = d3.select(snapBox).append("svg").attr("role", "img")
+    .attr("aria-label", "Line chart of Cook County SNAP caseload, falling from about 915,000 in early 2024 to about 641,000 in September 2026, below its earlier trend.");
+  let snapStep = 0;
+  function drawSnap() {
+    const W = snapBox.clientWidth, H = snapBox.clientHeight;
+    if (!W || !H) return;
+    const m = { t: 18, r: 132, b: 30, l: 52 };
+    snapSvg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
+    const x = d3.scaleTime().domain([rows[0].date, last.date]).range([m.l, W - m.r]);
+    const y = d3.scaleLinear().domain([550000, 950000]).range([H - m.b, m.t]);
+    const g = snapSvg.append("g");
+    g.append("g").attr("class", "grid").selectAll("line").data(y.ticks(5)).join("line")
+      .attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y);
+    g.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`)
+      .call(d3.axisBottom(x).ticks(W < 560 ? 4 : 7).tickFormat(d3.timeFormat("%b %Y")).tickSizeOuter(0));
+    g.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`)
+      .call(d3.axisLeft(y).ticks(5).tickFormat((d) => d / 1000 + "K").tickSize(0)).call((a) => a.select(".domain").remove());
+
+    const after = rows.filter((r) => r.month >= "2025-09");
+    const line = d3.line().x((d) => x(d.date)).curve(d3.curveMonotoneX);
+    // gap shading (step 4)
+    g.append("path").datum(after).attr("fill", css("--snap-wash"))
+      .attr("d", d3.area().x((d) => x(d.date)).y0((d) => y(d.trend)).y1((d) => y(d.observed)).curve(d3.curveMonotoneX))
+      .attr("opacity", snapStep >= 4 ? 1 : 0);
+    // trend (from step 1)
+    g.append("path").datum(after).attr("fill", "none").attr("stroke", css("--trend")).attr("stroke-width", 2)
+      .attr("stroke-linecap", "round").attr("d", line.y((d) => y(d.trend))).attr("opacity", snapStep >= 1 ? 1 : 0);
+    if (snapStep >= 1) {
+      const tl = after[after.length - 1];
+      g.append("text").attr("class", "lbl-mid").attr("x", x(tl.date) + 8).attr("y", y(tl.trend)).attr("dy", "0.35em")
+        .text("Pre-H.R. 1 trend");
+    }
+    // observed: show up to the step's month
+    const upTo = ["2025-06", "2025-09", "2026-01", "2026-05", "2026-09"][snapStep];
+    const shown = rows.filter((r) => r.month <= upTo);
+    g.append("path").datum(rows).attr("fill", "none").attr("stroke", css("--axis")).attr("stroke-width", 2)
+      .attr("stroke-linecap", "round").attr("d", line.y((d) => y(d.observed))).attr("opacity", 0.35);
+    g.append("path").datum(shown).attr("fill", "none").attr("stroke", css("--snap")).attr("stroke-width", 2.5)
+      .attr("stroke-linecap", "round").attr("stroke-linejoin", "round").attr("d", line.y((d) => y(d.observed)));
+    const e = shown[shown.length - 1];
+    g.append("circle").attr("cx", x(e.date)).attr("cy", y(e.observed)).attr("r", 5).attr("fill", css("--snap"))
+      .attr("stroke", css("--paper")).attr("stroke-width", 2);
+    g.append("text").attr("class", "lbl-strong").attr("x", x(e.date) + 10).attr("y", y(e.observed)).attr("dy", "0.35em")
+      .text(fmt.k(e.observed));
+    // event markers
+    const ev = { 2: ["2025-12", "Work requirement first applied"], 3: ["2026-05", "First time-limit cutoffs"] };
+    Object.entries(ev).forEach(([s, [mo, txt]]) => {
+      if (snapStep < +s) return;
+      const xx = x(d3.timeParse("%Y-%m")(mo));
+      const eg = g.append("g").attr("class", "event");
+      eg.append("line").attr("x1", xx).attr("x2", xx).attr("y1", m.t + (+s === 2 ? 0 : 28)).attr("y2", H - m.b);
+      eg.append("text").attr("x", xx - 6).attr("y", m.t + (+s === 2 ? 10 : 38)).attr("text-anchor", "end").text(txt);
+    });
+    if (snapStep >= 4) {
+      const mid = (last.trend + last.observed) / 2;
+      g.append("text").attr("class", "lbl-mid").attr("x", x(last.date) + 10).attr("y", y(mid)).attr("dy", "0.35em")
+        .text(fmt.k(snapNums.gap) + " below");
+    }
+    // hover: crosshair + tooltip
+    const tip = d3.select(snapBox).selectAll(".tip").data([0]).join("div").attr("class", "tip").attr("hidden", true);
+    const cross = g.append("line").attr("stroke", css("--axis")).attr("y1", m.t).attr("y2", H - m.b).attr("opacity", 0);
+    g.append("rect").attr("x", m.l).attr("y", m.t).attr("width", W - m.l - m.r).attr("height", H - m.t - m.b)
+      .attr("fill", "transparent")
+      .on("mousemove", (ev2) => {
+        const [mx] = d3.pointer(ev2);
+        const d = rows[d3.bisector((r) => r.date).center(rows, x.invert(mx))];
+        cross.attr("x1", x(d.date)).attr("x2", x(d.date)).attr("opacity", 1);
+        const trendTxt = d.month >= "2025-09" ? `<br>Trend: ${fmt.int(d.trend)}` : "";
+        tip.attr("hidden", null).html(`<b>${d3.timeFormat("%B %Y")(d.date)}</b><br><span class="sw" style="background:${css("--snap")}"></span>On SNAP: ${fmt.int(d.observed)}${trendTxt}`)
+          .style("left", Math.min(x(d.date) + 12, W - 200) + "px").style("top", y(d.observed) - 10 + "px");
+      })
+      .on("mouseleave", () => { tip.attr("hidden", true); cross.attr("opacity", 0); });
+  }
+  // table
+  d3.select("#snap-table").html("<thead><tr><th>Month</th><th>On SNAP (IDHS)</th><th>Pre-H.R. 1 trend</th></tr></thead>")
+    .append("tbody").selectAll("tr").data(rows.slice().reverse()).join("tr")
+    .html((d) => `<td>${d3.timeFormat("%b %Y")(d.date)}</td><td>${fmt.int(d.observed)}</td><td>${d.month >= "2025-09" ? fmt.int(d.trend) : "-"}</td>`);
+
+  // =================================================================== map
+  const mapBox = document.getElementById("map");
+  const mapSvg = d3.select(mapBox).append("svg").attr("role", "img")
+    .attr("aria-label", "Map of Cook County zip areas shaded by people losing benefits per 1,000 residents; highest on Chicago's West and South Sides and in the south suburbs.");
+  const geo = D.geo;
+  const state = { sc: "mid", pg: "medicaid", focus: null };
+  const FOCUS = { west_south: ["60621", "60624", "60636", "60644", "60623", "60609", "60620", "60628"],
+                  south_sub: ["60827", "60426", "60409", "60419", "60411", "60473", "60429", "60428"] };
+  const RAMPS = {
+    medicaid: ["#e3eefc", "#b7d3f6", "#86b6ef", "#5598e7", "#2a78d6", "#1c5cab", "#104281"],
+    snap: ["#fde9df", "#f8c7ae", "#f3a47e", "#eb6834", "#c94f1f", "#9c3c16", "#6e2a0f"],
+  };
+  let mapScale;
+  function scaleFor(pg) {
+    const vals = zips.map((z) => ["low", "mid", "high"].map((s) => rate(z, s, pg))).flat().filter((v) => v != null).sort(d3.ascending);
+    const top = d3.quantile(vals, 0.98);
+    const nice = d3.scaleLinear().domain([0, top]).nice().domain()[1];
+    return d3.scaleQuantize().domain([0, nice]).range(RAMPS[pg]);
+  }
+  function drawLegend() {
+    const s = mapScale, n = s.range().length, w = 208;
+    const L = d3.select("#map-legend").html("").append("svg").attr("viewBox", `0 0 ${w} 32`);
+    s.range().forEach((c, i) => L.append("rect").attr("x", (i * w) / n).attr("y", 2).attr("width", w / n - 2).attr("height", 10).attr("rx", 2).attr("fill", c));
+    const ticks = [0, s.domain()[1] / 2, s.domain()[1]];
+    ticks.forEach((t, i) => L.append("text").attr("class", "lbl").attr("x", (i * (w - 2)) / 2).attr("y", 26)
+      .attr("text-anchor", i === 0 ? "start" : i === 2 ? "end" : "middle").text(Math.round(t) + (i === 2 ? "+ per 1,000" : "")));
+  }
+  function drawMap() {
+    const W = mapBox.clientWidth, H = mapBox.clientHeight;
+    if (!W || !H) return;
+    mapScale = scaleFor(state.pg);
+    mapSvg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
+    const proj = d3.geoMercator().fitExtent([[8, 8], [W - 8, H - 8]], geo);
+    const path = d3.geoPath(proj);
+    const root = mapSvg.append("g");
+    const zipsG = root.append("g");
+    zipsG.selectAll("path").data(geo.features).join("path")
+      .attr("d", path).attr("vector-effect", "non-scaling-stroke")
+      .attr("fill", (f) => { const r = rate(zipBy[f.properties.zcta], state.sc, state.pg); return r == null ? css("--nodata") : mapScale(r); })
+      .attr("stroke", css("--paper")).attr("stroke-width", 0.6)
+      .on("mousemove", (ev, f) => showTip(ev, f)).on("mouseleave", hideTip);
+    root.append("g").selectAll("path").data(geo.outlines.features.filter((f) => f.properties.name === "Chicago")).join("path")
+      .attr("d", path).attr("fill", "none").attr("stroke", css("--ink")).attr("stroke-width", 1.1).attr("vector-effect", "non-scaling-stroke")
+      .attr("pointer-events", "none");
+    if (state.focus) {
+      const fs = geo.features.filter((f) => FOCUS[state.focus].includes(f.properties.zcta));
+      const [[x0, y0], [x1, y1]] = path.bounds({ type: "FeatureCollection", features: fs });
+      const k = Math.min(3.2, 0.82 / Math.max((x1 - x0) / W, (y1 - y0) / H));
+      const tx = W / 2 - k * (x0 + x1) / 2, ty = H / 2 - k * (y0 + y1) / 2;
+      root.transition().duration(DUR).attr("transform", `translate(${tx},${ty}) scale(${k})`);
+      zipsG.selectAll("path").attr("opacity", (f) => (FOCUS[state.focus].includes(f.properties.zcta) ? 1 : 0.55));
+    }
+    drawLegend();
+    document.getElementById("map-title").textContent =
+      `People off ${state.pg === "medicaid" ? "Medicaid" : "SNAP"} per 1,000 residents, December 2028`;
+  }
+  const mtip = d3.select(mapBox).append("div").attr("class", "tip").attr("hidden", true);
+  function showTip(ev, f) {
+    const z = zipBy[f.properties.zcta]; const [mx, my] = d3.pointer(ev, mapBox);
+    const r = rate(z, state.sc, state.pg);
+    const name = state.pg === "medicaid" ? "Off Medicaid" : "Off SNAP";
+    const sw = state.pg === "medicaid" ? css("--medicaid") : css("--snap");
+    mtip.attr("hidden", null).html(`<b>${z.zcta}</b> · ${z.region}${z.border ? " (Cook part)" : ""}<br>` +
+      `<span class="sw" style="background:${sw}"></span>${name}: ${fmt.int(z[state.sc][state.pg + "_off"])}` +
+      `<br>Per 1,000 residents: ${r == null ? "not shown (under 1,000 residents)" : fmt.rate(r)}` +
+      `<br>Residents: ${fmt.int(z.pop)} · ${{ low: "Low", mid: "Middle", high: "High" }[state.sc]} scenario`)
+      .style("left", Math.min(mx + 14, mapBox.clientWidth - 210) + "px").style("top", Math.max(0, my - 20) + "px");
+  }
+  function hideTip() { mtip.attr("hidden", true); }
+  function setButtons() {
+    document.querySelectorAll("[data-sc]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.sc === state.sc));
+    document.querySelectorAll("[data-pg]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.pg === state.pg));
+  }
+  document.querySelectorAll("[data-sc]").forEach((b) => b.addEventListener("click", () => { state.sc = b.dataset.sc; setButtons(); drawMap(); drawZipTable(); }));
+  document.querySelectorAll("[data-pg]").forEach((b) => b.addEventListener("click", () => { state.pg = b.dataset.pg; setButtons(); drawMap(); drawZipTable(); }));
+  function drawZipTable() {
+    const sorted = zips.slice().sort((a, b) => (rate(b, state.sc, state.pg) ?? -1) - (rate(a, state.sc, state.pg) ?? -1));
+    const sc = { low: "low", mid: "middle", high: "high" }[state.sc];
+    d3.select("#zip-table").html(`<thead><tr><th>Zip</th><th>Area</th><th>Residents</th><th>Off Medicaid</th><th>Off SNAP</th><th>Per 1,000 (${state.pg === "medicaid" ? "Medicaid" : "SNAP"})</th></tr></thead>`)
+      .append("tbody").selectAll("tr").data(sorted).join("tr")
+      .html((z) => `<td>${z.zcta}</td><td>${z.region}</td><td>${fmt.int(z.pop)}</td><td>${fmt.int(z[state.sc].medicaid_off)}</td><td>${fmt.int(z[state.sc].snap_off)}</td><td>${rate(z, state.sc, state.pg) == null ? "-" : fmt.rate(rate(z, state.sc, state.pg))}</td>`);
+    d3.select("#zip-table").attr("aria-label", `Zip areas, ${sc} scenario, December 2028`);
+  }
+
+  // =================================================================== scroll
+  const MAP_STEPS = [
+    { pg: "medicaid", focus: null }, { pg: "medicaid", focus: "west_south" }, { pg: "snap", focus: null },
+    { pg: "snap", focus: "south_sub" }, { pg: null, focus: null },
+  ];
+  const sc1 = scrollama(), sc2 = scrollama();
+  sc1.setup({ step: "#snap-scrolly .step", offset: 0.6 }).onStepEnter((r) => { snapStep = r.index; drawSnap(); });
+  sc2.setup({ step: "#map-scrolly .step", offset: 0.6 }).onStepEnter((r) => {
+    const s = MAP_STEPS[r.index];
+    if (s.pg) state.pg = s.pg;
+    state.focus = s.focus; setButtons(); drawMap(); drawZipTable();
+  });
+  const ro = new ResizeObserver(() => { drawSnap(); drawMap(); sc1.resize(); sc2.resize(); });
+  ro.observe(snapBox); ro.observe(mapBox);
+  drawSnap(); drawMap(); drawZipTable();
+})();
+</script>

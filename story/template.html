@@ -79,6 +79,7 @@ h2 { font-family: var(--serif); font-weight: 650; font-size: var(--step1); line-
 .g-sub { font-family: var(--sans); font-size: var(--step-1); color: var(--ink-2); margin: 0; }
 .g-box { position: relative; min-height: 0; }
 .g-box svg { display: block; width: 100%; height: 100%; overflow: visible; }
+#map svg { overflow: hidden; } /* zoom steps must stay inside the frame */
 .g-foot { font-family: var(--sans); font-size: 0.75rem; color: var(--muted); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 
 /* chart text uses ink tokens, never series colors */
@@ -88,7 +89,7 @@ h2 { font-family: var(--serif); font-weight: 650; font-size: var(--step1); line-
 .lbl-strong { font-family: var(--sans); font-size: 13px; font-weight: 600; fill: var(--ink); }
 .lbl-mid { font-family: var(--sans); font-size: 12.5px; fill: var(--ink-2); }
 .event line { stroke: var(--axis); }
-.event text { font-family: var(--sans); font-size: 11.5px; fill: var(--ink-2); }
+.event text { font-family: var(--sans); font-size: 13.5px; font-weight: 500; fill: var(--ink-2); }
 
 /* controls: one row above the map */
 .controls { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; font-family: var(--sans); font-size: var(--step-1); }
@@ -126,48 +127,130 @@ footer p { margin: 0; }
   .range { grid-template-columns: minmax(0, 1fr); }
   .range > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
 }
+/* Medicaid causes: validated set (light + dark), direct-labeled because two sit below 3:1 on light */
+:root { --c-noncit: #e87ba4; --c-work: #2a78d6; --c-renew: #eda100; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c-noncit: #d55181; --c-work: #3987e5; --c-renew: #c98500; } }
+:root[data-theme="dark"] { --c-noncit: #d55181; --c-work: #3987e5; --c-renew: #c98500; }
+h2.section-break { border-top: 3px solid var(--ink); padding-top: 1.25rem; margin-top: 4.5rem; }
+ul.rules { margin: 0 0 1.1rem; padding-left: 1.2rem; }
+ul.rules li { margin-bottom: 0.6rem; }
+.ppl-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-family: var(--sans); font-size: var(--step-1); color: var(--ink-2); min-height: 2.6rem; align-content: flex-start; }
+.ppl-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.ppl-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.ppl-legend b { font-weight: 600; color: var(--ink); }
+.fade-in { animation: fadeIn 1.2s ease-out both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
 <header class="hero col">
   <div class="kicker"><span class="draft">Draft for review</span> · Cook County, Illinois · H.R. 1 (2025)</div>
-  <h1>H.R. 1 could push <span class="num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span> to <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents off Medicaid or SNAP by the end of 2028</h1>
-  <p class="dek">SNAP cuts have already started. Medicaid's work requirement begins in 2027. This draft follows both, shows where the losses land, and shows how each estimate was built.</p>
-  <div class="byline"><span>Prepared by an Applied Data Fellow for the Bureau of Economic Development</span><span>Data through September 2026</span></div>
+  <h1>H.R. 1 could cost up to <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents their Medicaid, SNAP, or both by the end of 2028</h1>
+  <p class="dek">This study estimates H.R. 1's effect by comparing Cook County's SNAP caseload with its pre-law trend and projecting Medicaid losses under three scenarios based on past work requirements, then mapping where the losses fall by zip code.</p>
+  <div class="byline"><span>Rushikesh Jadhav</span><span>Data through September 30, 2026 (retrieved October 27, 2026)</span><span>Final draft: November 4, 2026</span></div>
 
+  <p class="range-cap">Some of what drives the number is not known yet, so the estimate is a range:</p>
   <div class="range" role="group" aria-label="Residents losing Medicaid or SNAP by December 2028, three scenarios">
-    <div><span class="lab">Low scenario</span><span class="val num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span><span class="note">Illinois as announced; people respond well</span></div>
-    <div><span class="lab">Middle scenario</span><span class="val num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span><span class="note">Response like past programs, partly</span></div>
-    <div><span class="lab">High scenario</span><span class="val num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span><span class="note">Response as poor as Arkansas</span></div>
+    <div><span class="lab">Low scenario</span><span class="val num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span><span class="note">Fewest people lose benefits</span></div>
+    <div><span class="lab">Middle scenario</span><span class="val num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span><span class="note">Our central estimate</span></div>
+    <div><span class="lab">High scenario</span><span class="val num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span><span class="note">Most people lose benefits</span></div>
   </div>
   <p class="range-cap">Different residents losing either program by December 2028; people losing both are counted once.</p>
 </header>
 
 <section class="col prose">
-  <p>Two programs reach more Cook County residents than any others that H.R. 1 changes: Medicaid, which covers <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults through the Affordable Care Act expansion, and SNAP, which helped about <span class="num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span> residents buy groceries in September 2025. When people lose either one, many turn to the county: its hospitals, its clinics, and its health plan.</p>
-  <p>The range above is wide on purpose. The middle of it depends on how people respond to new paperwork, and that is not known yet. The sections below show what has already happened and what each scenario assumes.</p>
+  <p>On July 4, 2025, President Trump signed H.R. 1, officially the One Big Beautiful Bill Act, the large tax and spending law Congress passed that summer. Alongside its tax changes, the law cuts federal spending on two programs that millions of low-income Americans rely on: Medicaid, which pays for health care, and the Supplemental Nutrition Assistance Program (SNAP), which helps families buy groceries.</p>
+  <p>The biggest change is who gets to keep these benefits. Many adults now have to show, again and again, that they work, train or volunteer about 80 hours a month, or that they qualify for an exemption. SNAP's new rules took effect in Illinois in late 2025. Medicaid's begin in 2027, along with eligibility checks every six months instead of once a year.</p>
+  <p>In Cook County, these two programs reach more residents than anything else H.R. 1 changes. Medicaid covers <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults through the Affordable Care Act expansion, and SNAP helped about <span class="num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span> residents buy groceries in September 2025. When people lose either one, many turn to the county: its hospitals, its clinics, and its health plan.</p>
+  <p>So the county needs answers to three questions: how many residents will lose benefits, where they live, and when. This study answers them with the data available so far.</p>
+  <p>Why a range? H.R. 1 requires many adults to show they work, or that they qualify for an exemption, to keep Medicaid and SNAP. In past programs, many people who still qualified lost benefits because they missed that paperwork. How many will miss it in Cook County is not known yet. The low scenario assumes Illinois applies the rules as announced and most people keep up. The high scenario assumes losses as large as Arkansas saw in 2018, when it became the first state to add a Medicaid work requirement. The middle scenario falls between the two. The sections below show what has already happened and what each scenario assumes.</p>
 </section>
 
-<h2 class="col">SNAP: the cuts already happened</h2>
+<h2 class="col section-break">SNAP: the cuts already happened</h2>
+<section class="col prose">
+  <p><strong>What changed.</strong> SNAP already had a work rule for some adults. Before H.R. 1, adults aged 18 to 54 without children at home could get SNAP for only three months in any three years unless they worked or trained at least 20 hours a week. Veterans, people experiencing homelessness and young adults who had aged out of foster care were exempt, and states could waive the rule in areas with few jobs.</p>
+  <p>H.R. 1 raised the age limit to 64 and applied the rule to parents whose youngest child is 14 or older. It removed the exemptions for veterans, homeless people and former foster youth, and made waivers much harder to get. It also ended SNAP for many lawfully present noncitizens, such as refugees and asylees. So the newly affected groups are adults aged 55 to 64, parents of teenagers, veterans, residents without stable housing, and many noncitizens.</p>
+</section>
 <section class="scrolly wide" id="snap-scrolly">
   <figure class="graphic" aria-describedby="snap-desc">
-    <p class="g-title">People on SNAP, Cook County offices</p>
-    <p class="g-sub" id="snap-desc">Monthly count from IDHS, January 2024 to September 2026, with the trend before H.R. 1.</p>
+    <p class="g-title">People on SNAP in Cook County, before and after H.R. 1</p>
+    <p class="g-sub" id="snap-desc">Monthly count from the Illinois Department of Human Services (IDHS), January 2024 to September 2026, with the trend before H.R. 1.</p>
     <div class="g-box" id="snap-chart"></div>
     <div class="g-foot"><span>Source: IDHS SNAP Data by Servicing Office. Office basis (residence-basis totals are about 3.6% higher).</span></div>
   </figure>
   <div class="steps">
-    <div class="step" data-step="0"><span class="tag">Before H.R. 1</span><p>In January 2024, about <span class="num" data-snap="first" data-fmt="k"></span> people got SNAP through Cook County's IDHS offices. The number drifted down slowly, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month.</p></div>
-    <div class="step" data-step="1"><span class="tag">The trend</span><p>Had that drift continued, about <span class="num" data-id="snap_counterfactual_persons_2026_09" data-fmt="k"></span> people would still be getting SNAP by September 2026.</p></div>
-    <div class="step" data-step="2"><span class="tag">December 2025</span><p>IDHS first applied H.R. 1's work requirement in December 2025. The caseload began falling faster than the trend.</p></div>
-    <div class="step" data-step="3"><span class="tag">May 1, 2026</span><p>The first adults hit the new three-month time limit on May 1. Cook's caseload fell by <span class="num" data-snap="may_drop" data-fmt="k"></span> people in that one month.</p></div>
-    <div class="step" data-step="4"><span class="tag">September 2026</span><p>By September, <span class="num" data-snap="last" data-fmt="k"></span> people remained, <span class="num" data-snap="gap" data-fmt="k"></span> below the old trend. Depending on when you start counting, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> Cook residents lost SNAP because of H.R. 1.</p></div>
+    <div class="step" data-step="0"><span class="tag">SNAP before H.R. 1</span><p>In January 2024, about <span class="num" data-snap="first" data-fmt="k"></span> people got SNAP through Cook County's IDHS offices. The number drifted down slowly, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month.</p></div>
+    <div class="step" data-step="1"><span class="tag">The SNAP trend</span><p>Had that drift continued, about <span class="num" data-id="snap_counterfactual_persons_2026_09" data-fmt="k"></span> people would still be getting SNAP by September 2026.</p></div>
+    <div class="step" data-step="2"><span class="tag">December 2025: SNAP work requirement</span><p>IDHS first applied H.R. 1's work requirement in December 2025. The caseload began falling faster than the trend.</p></div>
+    <div class="step" data-step="3"><span class="tag">May 1, 2026: SNAP time limit</span><p>The first adults hit the new three-month time limit on May 1. Cook's caseload fell by <span class="num" data-snap="may_drop" data-fmt="k"></span> people in that one month.</p></div>
+    <div class="step" data-step="4"><span class="tag">September 2026: SNAP losses so far</span><p>By September, <span class="num" data-snap="last" data-fmt="k"></span> beneficiaries remained, <span class="num" data-snap="gap" data-fmt="k"></span> below the old trend. Depending on when you start counting, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> Cook residents lost SNAP because of H.R. 1.</p></div>
   </div>
 </section>
 <div class="col"><details class="table"><summary>See the SNAP data as a table</summary><div class="tbl-wrap"><table id="snap-table"></table></div></details></div>
 
-<h2 class="col">Where the losses land</h2>
-<section class="col prose"><p>Losses follow the map of need. The zip areas where the most people rely on Medicaid and SNAP stand to lose the most, and most of them are on Chicago's West and South Sides and in the south suburbs.</p></section>
+<section class="col prose">
+  <p><strong>What this means.</strong> H.R. 1's SNAP losses are not a forecast. They have already happened. From December 2025 on, Cook County's SNAP caseload fell much faster than it had been falling, and the steepest drop came when the first time limits hit in May 2026. By September 2026, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> fewer residents were getting help with groceries because of the law. In the middle scenario, about <span class="num" data-id="snap_persons_off_dec_2028_mid" data-fmt="k"></span> will be off SNAP by December 2028.</p>
+  <p><strong>How we got these numbers.</strong> We start with IDHS's own monthly count of people on SNAP in Cook County, January 2024 to September 2026. Before H.R. 1, that count fell slowly and steadily, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month. We extend that pre-law decline forward from September 2025 to estimate how many people would be on SNAP without the law. The gap between that line and the actual count is our estimate of H.R. 1's effect. We give a range because the result depends on which month we treat as the start of the law's effect.</p>
+</section>
+
+<h2 class="col section-break">Medicaid: the losses are still ahead</h2>
+<section class="col prose">
+  <p>Medicaid is public health insurance for people with low incomes. Under the Affordable Care Act expansion, Illinois covers adults aged 19 to 64 with incomes up to 138% of the federal poverty level. In Cook County, <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults are covered this way, according to the Illinois Department of Healthcare and Family Services (HFS).</p>
+  <p><strong>What changed.</strong> Until now, Illinois Medicaid had no work requirement, and adults renewed their coverage once a year. H.R. 1 changes three things for expansion adults:</p>
+  <ul class="rules">
+    <li><b>Noncitizens.</b> From October 1, 2026, many lawfully present immigrants, such as refugees and asylees, are no longer eligible.</li>
+    <li><b>Work requirement.</b> From January 1, 2027, adults must show 80 hours a month of work, job training, school or community service, or qualify for an exemption. Parents of children 13 and under, pregnant women, and people with disabilities or serious medical conditions are among those exempt. HFS first checks at renewals due in March 2027, so the first coverage losses come in about April 2027.</li>
+    <li><b>Renewals every six months.</b> After their first 2027 renewal, expansion adults must renew every six months instead of once a year.</li>
+  </ul>
+  <p>The people most at risk are adults without young children who work irregular hours or informal jobs, and people who qualify for an exemption but miss the paperwork to prove it. Unlike SNAP, none of this shows up in the data yet, so every Medicaid number below is a projection, not a count.</p>
+</section>
+
+<section class="scrolly wide" id="mcd-scrolly">
+  <figure class="graphic" aria-describedby="mcd-desc">
+    <p class="g-title">Cook County adults projected to lose Medicaid because of H.R. 1</p>
+    <p class="g-sub" id="mcd-desc">Adults off Medicaid at the end of each month, by cause, middle scenario, through December 2028.</p>
+    <div class="g-box" id="mcd-chart"></div>
+    <div class="g-foot"><span>Source: this analysis, from HFS enrollment and Urban Institute and Robert Wood Johnson Foundation (RWJF) Illinois loss rates. "Work requirement" includes exempt adults who miss the paperwork.</span></div>
+  </figure>
+  <div class="steps">
+    <div class="step" data-step="0"><span class="tag">Medicaid today</span><p>As of September 2026, H.R. 1 has not yet taken Medicaid from any Cook adult. All <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="k"></span> expansion adults are still covered.</p></div>
+    <div class="step" data-step="1"><span class="tag">October 2026: Medicaid noncitizen cut</span><p>The first cut is the smallest. About <span class="num" data-mcd="noncit" data-sc="mid" data-fmt="k"></span> lawfully present noncitizens in Cook lose Medicaid on October 1.</p></div>
+    <div class="step" data-step="2"><span class="tag">April 2027: Medicaid work requirement</span><p>The first work-requirement losses come in April 2027. Renewals are spread across the year, so losses keep building. By September 2027, about <span class="num" data-mcd="total" data-sc="mid" data-month="2027-09" data-fmt="k"></span> Cook adults are off Medicaid.</p></div>
+    <div class="step" data-step="3"><span class="tag">October 2027: Medicaid six-month renewals</span><p>Six-month renewals start in October 2027. Each extra renewal drops some people who still qualify. By September 2028, renewals alone account for about <span class="num" data-mcd="renew" data-sc="mid" data-fmt="k"></span> lost enrollees.</p></div>
+    <div class="step" data-step="4"><span class="tag">December 2028: Medicaid, three scenarios</span><p>By December 2028, about <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> Cook adults would be off Medicaid in the middle scenario. The low and high scenarios give <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> and <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span>.</p></div>
+  </div>
+</section>
+<div class="col"><details class="table"><summary>See the Medicaid projection as a table</summary><div class="tbl-wrap"><table id="mcd-table"></table></div></details></div>
+
+<h2 class="col">Who loses Medicaid</h2>
+<section class="col prose"><p>Not every expansion adult faces the work requirement, and not everyone who loses coverage is out of work. Each figure below stands for 1,000 of Cook's Medicaid expansion adults.</p></section>
+<section class="scrolly wide" id="ppl-scrolly">
+  <figure class="graphic" aria-describedby="ppl-desc">
+    <p class="g-title">Cook County's Medicaid expansion adults, one figure per 1,000</p>
+    <div class="ppl-legend" id="ppl-legend" aria-live="polite"></div>
+    <div class="g-box" id="ppl-chart"></div>
+    <div class="g-foot"><span id="ppl-desc">Figures are rounded to the nearest 1,000. Their place in the grid is for illustration: renewal and noncitizen losses can fall on anyone. Sources: HFS; U.S. Census Bureau American Community Survey (ACS) 2020-24 microdata; Urban Institute and RWJF.</span></div>
+  </figure>
+  <div class="steps">
+    <div class="step" data-step="0"><span class="tag">Medicaid expansion adults</span><p>These are Cook's <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> Medicaid expansion adults. Each figure is 1,000 people.</p></div>
+    <div class="step" data-step="1"><span class="tag">Medicaid: who must report work</span><p>About <span class="num" data-id="mcd_subject_people" data-fmt="k"></span> of them do not qualify for an exemption, so they must show 80 hours a month to keep coverage. The rest are exempt, mostly because of a disability, caring for someone, or meeting SNAP's work rules.</p></div>
+    <div class="step" data-step="2"><span class="tag">Medicaid: not yet logging 80 hours</span><p>Census survey answers suggest about <span class="num" data-id="mcd_subject_noncompliant_people" data-fmt="k"></span> of those adults do not currently work enough hours. The rest already do.</p></div>
+    <div class="step" data-step="3"><span class="tag">Medicaid, middle scenario: who loses coverage</span><p>In the middle scenario, <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> lose Medicaid by December 2028. More people lose coverage to the work requirement than are out of work: about <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> work enough hours and still lose it because of paperwork.</p></div>
+    <div class="step" data-step="4"><span class="tag">Medicaid, low scenario</span><p>If most people keep up with the paperwork, as Illinois's announced choices suggest, about <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> lose coverage.</p></div>
+    <div class="step" data-step="5"><span class="tag">Medicaid, high scenario</span><p>If paperwork losses look like Arkansas's in 2018, about <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span> lose coverage, more than half of all expansion adults.</p></div>
+  </div>
+</section>
+
+<section class="col prose">
+  <p><strong>What this means.</strong> Medicaid losses start small in October 2026 and grow fast once the work requirement reaches renewals in 2027. By December 2028, between <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> and <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span> Cook adults could be off Medicaid. Many of them will still be working. They lose coverage because they could not prove it in time, not because they stopped qualifying.</p>
+  <p><strong>How we got these numbers.</strong> We start with HFS's count of <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> expansion adults in Cook County. The ACS, a Census Bureau survey of individual households, tells us what share of adults like them must report work (about <span class="num" data-id="mcd_subject_share_a" data-fmt="pct"></span>) and what share already work enough. For how many will lose coverage, we use the Urban Institute and RWJF's Illinois estimates. The work requirement removes <span class="num" data-id="urban_il_2028_work_req_pct_high" data-fmt="pct"></span>, <span class="num" data-id="urban_il_2028_work_req_pct_medium" data-fmt="pct"></span> or <span class="num" data-id="urban_il_2028_work_req_pct_low" data-fmt="pct"></span> of expansion adults (low, middle and high scenarios), and six-month renewals remove up to another <span class="num" data-id="urban_il_2028_redet_pct_medium" data-fmt="pct"></span>. The noncitizen cut is HFS's statewide estimate of <span class="num" data-id="mcd_noncitizen_statewide_loss" data-fmt="int"></span> people, times Cook's share of Illinois noncitizens.</p>
+</section>
+
+<h2 class="col section-break">Both programs, and where the losses land</h2>
+<section class="col prose">
+  <p>Many residents rely on both programs: about <span class="num" data-id="ovl_share_aca_adults_in_snap_households" data-fmt="pct"></span> of Cook's Medicaid expansion adults live in a household that gets SNAP. In the middle scenario, about <span class="num" data-id="ovl_both_central_2028_mid" data-fmt="k"></span> residents would lose both by December 2028. Counting each person once, <span class="num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span> different Cook residents would lose Medicaid, SNAP or both.</p>
+  <p>Losses for both programs follow the map of need. The zip areas where the most people rely on Medicaid and SNAP stand to lose the most, and most of them are on Chicago's West and South Sides and in the south suburbs.</p>
+</section>
 <section class="scrolly wide" id="map-scrolly">
   <figure class="graphic" aria-describedby="map-desc">
     <p class="g-title" id="map-title">People off Medicaid per 1,000 residents, December 2028</p>
@@ -184,20 +267,20 @@ footer p { margin: 0; }
       <div class="legend" id="map-legend" aria-hidden="true"></div>
     </div>
     <div class="g-box" id="map"></div>
-    <div class="g-foot"><span id="map-desc">Cook County portion of each zip area. Outline: City of Chicago. Gray: under 1,000 residents.</span><span>Sources: HFS, IDHS, ACS, Urban Institute/RWJF</span></div>
+    <div class="g-foot"><span id="map-desc">Cook County portion of each zip area. Outline: City of Chicago. Gray: under 1,000 residents.</span><span>Sources: Illinois Department of Healthcare and Family Services (HFS), IDHS, U.S. Census Bureau American Community Survey (ACS), Urban Institute and Robert Wood Johnson Foundation (RWJF)</span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">Medicaid, middle scenario</span><p>By December 2028, about <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> Cook adults would be off Medicaid in the middle scenario. The losses are not spread evenly.</p></div>
-    <div class="step" data-step="1"><span class="tag">West and South Sides</span><p>In Englewood (60621), West Garfield Park (60624), West Englewood (60636) and Austin (60644), between <span class="num" data-zips="60621,60624,60636,60644" data-metric="medicaid" data-agg="min"></span> and <span class="num" data-zips="60621,60624,60636,60644" data-metric="medicaid" data-agg="max"></span> of every 1,000 residents would lose Medicaid. Countywide it is <span class="num" data-county="medicaid"></span>.</p></div>
+    <div class="step" data-step="1"><span class="tag">Medicaid, West and South Sides</span><p>In Englewood (60621), West Garfield Park (60624), West Englewood (60636) and Austin (60644), between <span class="num" data-zips="60621,60624,60636,60644" data-metric="medicaid" data-agg="min"></span> and <span class="num" data-zips="60621,60624,60636,60644" data-metric="medicaid" data-agg="max"></span> of every 1,000 residents would lose Medicaid. Countywide it is <span class="num" data-county="medicaid"></span>.</p></div>
     <div class="step" data-step="2"><span class="tag">SNAP</span><p>SNAP losses follow the same map and run deeper: about <span class="num" data-id="snap_persons_off_dec_2028_mid" data-fmt="k"></span> residents in the middle scenario, or <span class="num" data-county="snap"></span> of every 1,000 countywide.</p></div>
-    <div class="step" data-step="3"><span class="tag">South suburbs</span><p>Outside Chicago, the losses concentrate in the south suburbs. In Riverdale (60827) and Harvey (60426), about <span class="num" data-zips="60827" data-metric="snap" data-agg="max"></span> and <span class="num" data-zips="60426" data-metric="snap" data-agg="max"></span> of every 1,000 residents would lose SNAP.</p></div>
+    <div class="step" data-step="3"><span class="tag">SNAP, south suburbs</span><p>Outside Chicago, the losses concentrate in the south suburbs. In Riverdale (60827) and Harvey (60426), about <span class="num" data-zips="60827" data-metric="snap" data-agg="max"></span> and <span class="num" data-zips="60426" data-metric="snap" data-agg="max"></span> of every 1,000 residents would lose SNAP.</p></div>
     <div class="step" data-step="4"><span class="tag">Your turn</span><p>Switch scenarios and programs with the buttons above the map, and point at any zip area for its numbers. The table below lists every zip.</p></div>
   </div>
 </section>
 <div class="col"><details class="table"><summary>See every zip area as a table</summary><div class="tbl-wrap"><table id="zip-table"></table></div></details></div>
 
 <footer class="col">
-  <p><b>Prototype.</b> Two of the nine planned sections. Coming next: who is at risk, the Medicaid timeline, the money in three buckets, and pressure on county resources.</p>
+  <p><b>Prototype.</b> Four of the nine planned sections: SNAP, the Medicaid timeline, who loses Medicaid, and the zip map. Coming next: the money in three buckets, pressure on county resources, and the scenarios compared with other estimates.</p>
   <p>Every number on this page is filled in from the analysis ledger by its id, so the text and the analysis cannot drift apart. Method, sources and limitations: <code>methods.md</code> in the project repository.</p>
   <p id="built"></p>
 </footer>
@@ -218,7 +301,27 @@ footer p { margin: 0; }
     int: (v) => Math.round(v).toLocaleString("en-US"),
     pctmo: (v) => (Math.abs(v) * 100).toFixed(2) + "%",
     rate: (v) => Math.round(v).toLocaleString("en-US"),
+    pct: (v) => Math.round(v * 100) + "%",
   };
+
+  // ---- Medicaid monthly projection (step 5 model output), by cause
+  const MCD_KEYS = [
+    { key: "noncit", label: "Noncitizen cut", color: "--c-noncit" },
+    { key: "work", label: "Work requirement", color: "--c-work" },
+    { key: "renew", label: "Six-month renewals", color: "--c-renew" },
+  ];
+  const mcdRows = {};
+  ["low", "mid", "high"].forEach((sc) => {
+    mcdRows[sc] = D.monthly.filter((r) => r.scenario === sc).map((r) => ({
+      month: r.month, date: d3.timeParse("%Y-%m")(r.month), total: r.medicaid_off,
+      noncit: r.medicaid_noncitizen, work: r.medicaid_work_req + r.medicaid_paperwork, renew: r.medicaid_renewal_6mo,
+    })).sort((a, b) => d3.ascending(a.month, b.month));
+  });
+  const mcdAt = (sc, month) => mcdRows[sc].find((r) => r.month === month) || mcdRows[sc][mcdRows[sc].length - 1];
+  document.querySelectorAll("[data-mcd]").forEach((el) => {
+    const r = mcdAt(el.dataset.sc || "mid", el.dataset.month || "2028-12");
+    el.textContent = fmt[el.dataset.fmt || "k"](r[el.dataset.mcd]);
+  });
 
   // ---- SNAP numbers derived from the series
   const rows = D.snap.rows.map((r) => ({ ...r, date: d3.timeParse("%Y-%m")(r.month) }));
@@ -256,7 +359,9 @@ footer p { margin: 0; }
   const snapBox = document.getElementById("snap-chart");
   const snapSvg = d3.select(snapBox).append("svg").attr("role", "img")
     .attr("aria-label", "Line chart of Cook County SNAP caseload, falling from about 915,000 in early 2024 to about 641,000 in September 2026, below its earlier trend.");
-  let snapStep = 0;
+  let snapStep = 0, snapPrev = 0;
+  const fresh = (s) => snapStep >= s && snapPrev < s;
+  const moved = () => snapStep !== snapPrev;
   function drawSnap() {
     const W = snapBox.clientWidth, H = snapBox.clientHeight;
     if (!W || !H) return;
@@ -268,7 +373,7 @@ footer p { margin: 0; }
     g.append("g").attr("class", "grid").selectAll("line").data(y.ticks(5)).join("line")
       .attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y);
     g.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`)
-      .call(d3.axisBottom(x).ticks(W < 560 ? 4 : 7).tickFormat(d3.timeFormat("%b %Y")).tickSizeOuter(0));
+      .call(d3.axisBottom(x).ticks(d3.timeMonth.every(W < 640 ? 12 : 6)).tickFormat(d3.timeFormat("%b ’%y")).tickSizeOuter(0));
     g.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`)
       .call(d3.axisLeft(y).ticks(5).tickFormat((d) => d / 1000 + "K").tickSize(0)).call((a) => a.select(".domain").remove());
 
@@ -277,14 +382,14 @@ footer p { margin: 0; }
     // gap shading (step 4)
     g.append("path").datum(after).attr("fill", css("--snap-wash"))
       .attr("d", d3.area().x((d) => x(d.date)).y0((d) => y(d.trend)).y1((d) => y(d.observed)).curve(d3.curveMonotoneX))
-      .attr("opacity", snapStep >= 4 ? 1 : 0);
+      .attr("opacity", snapStep >= 4 ? 1 : 0).classed("fade-in", fresh(4));
     // trend (from step 1)
     g.append("path").datum(after).attr("fill", "none").attr("stroke", css("--trend")).attr("stroke-width", 2)
-      .attr("stroke-linecap", "round").attr("d", line.y((d) => y(d.trend))).attr("opacity", snapStep >= 1 ? 1 : 0);
+      .attr("stroke-linecap", "round").attr("d", line.y((d) => y(d.trend))).attr("opacity", snapStep >= 1 ? 1 : 0).classed("fade-in", fresh(1));
     if (snapStep >= 1) {
       const tl = after[after.length - 1];
       g.append("text").attr("class", "lbl-mid").attr("x", x(tl.date) + 8).attr("y", y(tl.trend)).attr("dy", "0.35em")
-        .text("Pre-H.R. 1 trend");
+        .classed("fade-in", fresh(1)).text("Pre-H.R. 1 trend");
     }
     // observed: show up to the step's month
     const upTo = ["2025-06", "2025-09", "2026-01", "2026-05", "2026-09"][snapStep];
@@ -297,20 +402,20 @@ footer p { margin: 0; }
     g.append("circle").attr("cx", x(e.date)).attr("cy", y(e.observed)).attr("r", 5).attr("fill", css("--snap"))
       .attr("stroke", css("--paper")).attr("stroke-width", 2);
     g.append("text").attr("class", "lbl-strong").attr("x", x(e.date) + 10).attr("y", y(e.observed)).attr("dy", "0.35em")
-      .text(fmt.k(e.observed));
+      .classed("fade-in", moved()).text(fmt.k(e.observed));
     // event markers
     const ev = { 2: ["2025-12", "Work requirement first applied"], 3: ["2026-05", "First time-limit cutoffs"] };
     Object.entries(ev).forEach(([s, [mo, txt]]) => {
       if (snapStep < +s) return;
       const xx = x(d3.timeParse("%Y-%m")(mo));
-      const eg = g.append("g").attr("class", "event");
+      const eg = g.append("g").attr("class", fresh(+s) ? "event fade-in" : "event");
       eg.append("line").attr("x1", xx).attr("x2", xx).attr("y1", m.t + (+s === 2 ? 0 : 28)).attr("y2", H - m.b);
       eg.append("text").attr("x", xx - 6).attr("y", m.t + (+s === 2 ? 10 : 38)).attr("text-anchor", "end").text(txt);
     });
     if (snapStep >= 4) {
       const mid = (last.trend + last.observed) / 2;
       g.append("text").attr("class", "lbl-mid").attr("x", x(last.date) + 10).attr("y", y(mid)).attr("dy", "0.35em")
-        .text(fmt.k(snapNums.gap) + " below");
+        .classed("fade-in", fresh(4)).text(fmt.k(snapNums.gap) + " below");
     }
     // hover: crosshair + tooltip
     const tip = d3.select(snapBox).selectAll(".tip").data([0]).join("div").attr("class", "tip").attr("hidden", true);
@@ -332,11 +437,206 @@ footer p { margin: 0; }
     .append("tbody").selectAll("tr").data(rows.slice().reverse()).join("tr")
     .html((d) => `<td>${d3.timeFormat("%b %Y")(d.date)}</td><td>${fmt.int(d.observed)}</td><td>${d.month >= "2025-09" ? fmt.int(d.trend) : "-"}</td>`);
 
+  // =================================================================== Medicaid timeline
+  const mcdBox = document.getElementById("mcd-chart");
+  const mcdSvg = d3.select(mcdBox).append("svg").attr("role", "img")
+    .attr("aria-label", "Stacked area chart of Cook County adults projected to lose Medicaid by cause: a small noncitizen cut in October 2026, work-requirement losses building from April 2027, and six-month renewal losses from October 2027.");
+  let mcdStep = 0, mcdPrev = 0;
+  const mFresh = (s) => mcdStep >= s && mcdPrev < s;
+  const MCD_UPTO = ["2026-09", "2027-03", "2027-09", "2028-09", "2028-12"];
+  const MCD_EV_SHORT = { 1: "Noncitizens", 2: "Work requirement", 3: "Renewals" };
+  const MCD_EV = { 1: ["2026-10", "Noncitizen cut"], 2: ["2027-04", "First work-requirement losses"], 3: ["2027-10", "Six-month renewals begin"] };
+  function drawMcd() {
+    const W = mcdBox.clientWidth, H = mcdBox.clientHeight;
+    if (!W || !H) return;
+    const narrow = W < 640;
+    const m = { t: 18, r: narrow ? 96 : 150, b: 30, l: 52 };
+    mcdSvg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
+    const start = narrow ? "2026-07" : "2026-01";
+    const mid = mcdRows.mid.filter((r) => r.month >= start), first = mid[0], lastM = mid[mid.length - 1];
+    const x = d3.scaleTime().domain([first.date, lastM.date]).range([m.l, W - m.r]);
+    const top = d3.max(mcdRows.high, (d) => d.total);
+    const y = d3.scaleLinear().domain([0, top]).nice().range([H - m.b, m.t]);
+    const g = mcdSvg.append("g");
+    g.append("g").attr("class", "grid").selectAll("line").data(y.ticks(5)).join("line")
+      .attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y);
+    g.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`)
+      .call(d3.axisBottom(x).ticks(d3.timeMonth.filter((d) => narrow ? d.getMonth() === 0 : d.getMonth() % 6 === 0)).tickFormat(d3.timeFormat("%b ’%y")).tickSizeOuter(0));
+    g.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`)
+      .call(d3.axisLeft(y).ticks(5).tickFormat((d) => d / 1000 + "K").tickSize(0)).call((a) => a.select(".domain").remove());
+
+    // "today": data end; everything to the right is projected
+    const today = x(d3.timeParse("%Y-%m")("2026-10"));
+    g.append("rect").attr("x", today).attr("y", m.t).attr("width", W - m.r - today).attr("height", H - m.t - m.b)
+      .attr("fill", css("--ink")).attr("opacity", 0.03);
+    g.append("text").attr("class", "lbl").attr("x", today + 6).attr("y", y(0) - 28).text(narrow ? "Projected" : "Projected →");
+
+    const upTo = MCD_UPTO[mcdStep];
+    const shown = mid.filter((r) => r.month <= upTo);
+    const stack = d3.stack().keys(MCD_KEYS.map((k) => k.key))(shown);
+    const area = d3.area().x((d) => x(d.data.date)).y0((d) => y(d[0])).y1((d) => y(d[1])).curve(d3.curveStepAfter);
+    g.append("g").selectAll("path").data(stack).join("path")
+      .attr("fill", (s, i) => css(MCD_KEYS[i].color)).attr("stroke", css("--paper")).attr("stroke-width", 1).attr("d", area);
+    // total line on top of the stack
+    g.append("path").datum(shown).attr("fill", "none").attr("stroke", css("--ink")).attr("stroke-width", 1.5)
+      .attr("d", d3.line().x((d) => x(d.date)).y((d) => y(d.total)).curve(d3.curveStepAfter));
+
+    // event markers
+    Object.entries(MCD_EV).forEach(([s, [mo, txt]], i) => {
+      if (mcdStep < +s) return;
+      const xx = x(d3.timeParse("%Y-%m")(mo));
+      const label = narrow ? MCD_EV_SHORT[s] : txt;
+      const eg = g.append("g").attr("class", mFresh(+s) ? "event fade-in" : "event");
+      eg.append("line").attr("x1", xx).attr("x2", xx).attr("y1", m.t + i * 22).attr("y2", H - m.b);
+      if (narrow && mcdStep >= 4) return; // phones: keep the lines, drop labels that collide with scenario totals
+      const tx = eg.append("text").attr("x", xx + 6).attr("y", m.t + 10 + i * 22).text(label);
+      if (xx + 6 + tx.node().getComputedTextLength() > W - 4) tx.attr("x", xx - 6).attr("text-anchor", "end");
+    });
+
+    const ex = x(shown[shown.length - 1].date) + 8;
+    if (mcdStep < 4) {
+      // direct labels at the right edge of each band (skip empty bands), nudged apart
+      const e = stack.map((s, i) => ({ i, v: s[s.length - 1][1] - s[s.length - 1][0], y: y((s[s.length - 1][0] + s[s.length - 1][1]) / 2) }))
+        .filter((d) => d.v > 500);
+      e.sort((a, b) => b.y - a.y);
+      for (let k = 1; k < e.length; k++) if (e[k - 1].y - e[k].y < 30) e[k].y = e[k - 1].y - 30;
+      const lg = g.append("g").attr("class", moved2() ? "fade-in" : "");
+      e.forEach((d) => {
+        const t = lg.append("text").attr("x", ex).attr("y", d.y).attr("dy", "-0.15em");
+        t.append("tspan").attr("class", "lbl-mid").text(narrow ? MCD_KEYS[d.i].label.split(" ")[0] : MCD_KEYS[d.i].label);
+        t.append("tspan").attr("class", "lbl-strong").attr("x", ex).attr("dy", "1.15em").text(fmt.k(d.v));
+      });
+    } else {
+      // final step: the three scenario totals
+      ["low", "high"].forEach((sc) => {
+        g.append("path").datum(mcdRows[sc].filter((r) => r.month >= start)).attr("fill", "none").attr("stroke", css("--ink-2")).attr("stroke-width", 1.5)
+          .attr("stroke-dasharray", "4 3").classed("fade-in", mFresh(4))
+          .attr("d", d3.line().x((d) => x(d.date)).y((d) => y(d.total)).curve(d3.curveStepAfter));
+      });
+      const L = ["high", "mid", "low"].map((sc) => ({ sc, v: mcdAt(sc, "2028-12").total }));
+      const ys = L.map((d) => y(d.v));
+      for (let k = 1; k < ys.length; k++) if (ys[k] - ys[k - 1] < 30) ys[k] = ys[k - 1] + 30;
+      L.forEach((d, k) => {
+        const t = g.append("text").attr("x", ex).attr("y", ys[k]).attr("dy", "-0.15em").classed("fade-in", mFresh(4));
+        t.append("tspan").attr("class", "lbl-mid").text({ low: "Low", mid: "Middle", high: "High" }[d.sc]);
+        t.append("tspan").attr("class", "lbl-strong").attr("x", ex).attr("dy", "1.15em").text(fmt.k(d.v));
+      });
+    }
+    // hover
+    const tip = d3.select(mcdBox).selectAll(".tip").data([0]).join("div").attr("class", "tip").attr("hidden", true);
+    const cross = g.append("line").attr("stroke", css("--axis")).attr("y1", m.t).attr("y2", H - m.b).attr("opacity", 0);
+    g.append("rect").attr("x", m.l).attr("y", m.t).attr("width", W - m.l - m.r).attr("height", H - m.t - m.b).attr("fill", "transparent")
+      .on("mousemove", (ev2) => {
+        const [mx] = d3.pointer(ev2);
+        const i = d3.bisector((r) => r.date).center(shown, x.invert(mx));
+        const d = shown[i]; if (!d) return;
+        cross.attr("x1", x(d.date)).attr("x2", x(d.date)).attr("opacity", 1);
+        const lines = MCD_KEYS.slice().reverse().map((k) => `<span class="sw" style="background:${css(k.color)}"></span>${k.label}: ${fmt.int(d[k.key])}`).join("<br>");
+        const sc = mcdStep >= 4 ? `<br>Low / high scenario: ${fmt.int(mcdAt("low", d.month).total)} / ${fmt.int(mcdAt("high", d.month).total)}` : "";
+        tip.attr("hidden", null).html(`<b>${d3.timeFormat("%B %Y")(d.date)}</b> · middle scenario<br>${lines}<br><b>Total: ${fmt.int(d.total)}</b>${sc}`)
+          .style("left", Math.min(x(d.date) + 12, W - 220) + "px").style("top", m.t + 20 + "px");
+      })
+      .on("mouseleave", () => { tip.attr("hidden", true); cross.attr("opacity", 0); });
+  }
+  const moved2 = () => mcdStep !== mcdPrev;
+  d3.select("#mcd-table").html("<thead><tr><th>Month</th><th>Noncitizen cut</th><th>Work requirement</th><th>Six-month renewals</th><th>Total (middle)</th><th>Low</th><th>High</th></tr></thead>")
+    .append("tbody").selectAll("tr").data(mcdRows.mid.slice().reverse()).join("tr")
+    .html((d) => `<td>${d3.timeFormat("%b %Y")(d.date)}</td><td>${fmt.int(d.noncit)}</td><td>${fmt.int(d.work)}</td><td>${fmt.int(d.renew)}</td><td>${fmt.int(d.total)}</td><td>${fmt.int(mcdAt("low", d.month).total)}</td><td>${fmt.int(mcdAt("high", d.month).total)}</td>`);
+
+  // =================================================================== people grid
+  const pplBox = document.getElementById("ppl-chart");
+  const pplSvg = d3.select(pplBox).append("svg").attr("role", "img")
+    .attr("aria-label", "Grid of 364 human figures, one per 1,000 Cook County Medicaid expansion adults, highlighting who must report work and who loses coverage.");
+  const per = 1000;
+  const N = Math.round(V.mcd_baseline_aca_adults / per);
+  const nSubject = Math.round(V.mcd_subject_people / per);
+  const nNoncomp = Math.round(V.mcd_subject_noncompliant_people / per);
+  // lost figures per scenario, Dec 2028; work-requirement losses fall on subject adults (not working enough first),
+  // paperwork losses on exempt adults; renewal and noncitizen losses placed among the exempt block for illustration
+  const lostCounts = (sc) => {
+    const r = D.monthly.find((d) => d.scenario === sc && d.month === "2028-12");
+    return { wr: Math.round(r.medicaid_work_req / per), pp: Math.round(r.medicaid_paperwork / per),
+             rn: Math.round(r.medicaid_renewal_6mo / per), nc: Math.round(r.medicaid_noncitizen / per) };
+  };
+  function figState(i, step) {
+    const subj = i < nSubject, nonc = i < nNoncomp;
+    if (step === 0) return "all";
+    if (step === 1) return subj ? "subject" : "exempt";
+    if (step === 2) return nonc ? "noncomp" : subj ? "subject_ok" : "exempt";
+    const c = lostCounts(["mid", "mid", "mid", "mid", "low", "high"][step]);
+    if (subj) return i < c.wr ? "work" : "keep";
+    const j = i - nSubject;
+    if (j < c.pp) return "work";
+    if (j < c.pp + c.rn) return "renew";
+    if (j < c.pp + c.rn + c.nc) return "noncit";
+    return "keep";
+  }
+  const FILL = {
+    all: () => css("--trend"), subject: () => css("--ink"), exempt: () => css("--axis"), noncomp: () => css("--ink"),
+    subject_ok: () => css("--trend"), keep: () => css("--axis"),
+    work: () => css("--c-work"), renew: () => css("--c-renew"), noncit: () => css("--c-noncit"),
+  };
+  const STATE_LABEL = {
+    all: "Expansion adult", subject: "Must report work", exempt: "Exempt", noncomp: "Must report, not working 80 hours",
+    subject_ok: "Must report, already working 80 hours", keep: "Keeps Medicaid", work: "Loses Medicaid: work requirement",
+    renew: "Loses Medicaid: six-month renewals", noncit: "Loses Medicaid: noncitizen cut",
+  };
+  let pplStep = 0, pplPrev = -1;
+  function pplLegend() {
+    const counts = d3.rollup(d3.range(N), (v) => v.length, (i) => figState(i, pplStep));
+    const order = pplStep === 0 ? ["all"] : pplStep === 1 ? ["subject", "exempt"] : pplStep === 2 ? ["noncomp", "subject_ok", "exempt"] : ["work", "renew", "noncit", "keep"];
+    const sc = ["", "", "", "Middle scenario, Dec 2028: ", "Low scenario, Dec 2028: ", "High scenario, Dec 2028: "][pplStep];
+    const scKey = ["", "", "", "mid", "low", "high"][pplStep];
+    const lost = scKey ? fmt.k(mcdAt(scKey, "2028-12").total) : null;
+    d3.select("#ppl-legend").html((sc ? `<span><b>${sc}about ${lost} lose Medicaid</b></span>` : "") +
+      order.filter((k) => counts.get(k)).map((k) => `<span><i style="background:${FILL[k]()}"></i>${STATE_LABEL[k].replace("Loses Medicaid: ", "")} <b>${counts.get(k)}</b></span>`).join(""));
+  }
+  function drawPpl() {
+    const W = pplBox.clientWidth, H = pplBox.clientHeight;
+    if (!W || !H) return;
+    // choose columns so the grid fills the box with roughly square-ish cells (figures are 1:1.6)
+    let best = null;
+    for (let cols = 10; cols <= 40; cols++) {
+      const rows = Math.ceil(N / cols), cw = W / cols, ch = H / rows, s = Math.min(cw, ch / 1.6);
+      if (!best || s > best.s) best = { cols, rows, s };
+    }
+    const { cols, rows, s } = best;
+    const ox = (W - cols * s) / 2, oy = (H - rows * s * 1.6) / 2;
+    pplSvg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
+    const tip = d3.select(pplBox).selectAll(".tip").data([0]).join("div").attr("class", "tip").attr("hidden", true);
+    const figs = pplSvg.append("g").selectAll("g").data(d3.range(N)).join("g")
+      .attr("transform", (i) => `translate(${ox + (i % cols) * s},${oy + Math.floor(i / cols) * s * 1.6})`)
+      .on("mousemove", (ev, i) => {
+        const [mx, my] = d3.pointer(ev, pplBox);
+        tip.attr("hidden", null).html(`<b>1,000 adults</b><br>${STATE_LABEL[figState(i, pplStep)]}`)
+          .style("left", Math.min(mx + 12, W - 210) + "px").style("top", Math.max(0, my - 30) + "px");
+      })
+      .on("mouseleave", () => tip.attr("hidden", true));
+    const r = s * 0.17;
+    figs.append("rect").attr("width", s).attr("height", s * 1.6).attr("fill", "transparent"); // hit target
+    figs.append("circle").attr("class", "fig").attr("cx", s / 2).attr("cy", s * 0.32).attr("r", r);
+    figs.append("path").attr("class", "fig")
+      .attr("d", `M${s * 0.22},${s * 1.42} L${s * 0.22},${s * 0.86} Q${s * 0.22},${s * 0.58} ${s * 0.5},${s * 0.58} Q${s * 0.78},${s * 0.58} ${s * 0.78},${s * 0.86} L${s * 0.78},${s * 1.42} Z`);
+    const paint = (sel) => sel.attr("fill", function () { return FILL[figState(d3.select(this.parentNode).datum(), pplStep)](); });
+    const all = figs.selectAll(".fig");
+    if (pplPrev >= 0 && pplPrev !== pplStep && !reduce) {
+      // repaint from the previous step's colors, staggered, so the change reads as people peeling off
+      const prev = pplStep; pplStep = pplPrev; paint(all); pplStep = prev;
+      all.transition().duration(500).delay(function () { return d3.select(this.parentNode).datum() * 3; })
+        .attr("fill", function () { return FILL[figState(d3.select(this.parentNode).datum(), pplStep)](); });
+    } else paint(all);
+    pplLegend();
+  }
+
   // =================================================================== map
   const mapBox = document.getElementById("map");
   const mapSvg = d3.select(mapBox).append("svg").attr("role", "img")
     .attr("aria-label", "Map of Cook County zip areas shaded by people losing benefits per 1,000 residents; highest on Chicago's West and South Sides and in the south suburbs.");
   const geo = D.geo;
+  // d3-geo needs clockwise rings; a counter-clockwise ring is read as "the whole globe minus this shape" and floods the map
+  const fixPoly = (poly) => { if (d3.geoArea({ type: "Polygon", coordinates: poly }) > 2 * Math.PI) poly.forEach((ring) => ring.reverse()); };
+  const fixGeom = (g) => { if (!g) return; if (g.type === "Polygon") fixPoly(g.coordinates); else if (g.type === "MultiPolygon") g.coordinates.forEach(fixPoly); else if (g.type === "GeometryCollection") g.geometries.forEach(fixGeom); };
+  geo.features.forEach((f) => fixGeom(f.geometry)); if (geo.outlines) geo.outlines.features.forEach((f) => fixGeom(f.geometry));
   const state = { sc: "mid", pg: "medicaid", focus: null };
   const FOCUS = { west_south: ["60621", "60624", "60636", "60644", "60623", "60609", "60620", "60628"],
                   south_sub: ["60827", "60426", "60409", "60419", "60411", "60473", "60429", "60428"] };
@@ -382,7 +682,7 @@ footer p { margin: 0; }
       const k = Math.min(3.2, 0.82 / Math.max((x1 - x0) / W, (y1 - y0) / H));
       const tx = W / 2 - k * (x0 + x1) / 2, ty = H / 2 - k * (y0 + y1) / 2;
       root.transition().duration(DUR).attr("transform", `translate(${tx},${ty}) scale(${k})`);
-      zipsG.selectAll("path").attr("opacity", (f) => (FOCUS[state.focus].includes(f.properties.zcta) ? 1 : 0.55));
+      zipsG.selectAll("path").transition().duration(DUR).attr("opacity", (f) => (FOCUS[state.focus].includes(f.properties.zcta) ? 1 : 0.55));
     }
     drawLegend();
     document.getElementById("map-title").textContent =
@@ -421,15 +721,22 @@ footer p { margin: 0; }
     { pg: "medicaid", focus: null }, { pg: "medicaid", focus: "west_south" }, { pg: "snap", focus: null },
     { pg: "snap", focus: "south_sub" }, { pg: null, focus: null },
   ];
-  const sc1 = scrollama(), sc2 = scrollama();
-  sc1.setup({ step: "#snap-scrolly .step", offset: 0.6 }).onStepEnter((r) => { snapStep = r.index; drawSnap(); });
+  const sc1 = scrollama(), sc2 = scrollama(), sc3 = scrollama(), sc4 = scrollama();
+  sc3.setup({ step: "#mcd-scrolly .step", offset: 0.6 }).onStepEnter((r) => { mcdStep = r.index; drawMcd(); mcdPrev = mcdStep; });
+  sc4.setup({ step: "#ppl-scrolly .step", offset: 0.6 }).onStepEnter((r) => { pplStep = r.index; drawPpl(); pplPrev = pplStep; });
+  sc1.setup({ step: "#snap-scrolly .step", offset: 0.6 }).onStepEnter((r) => { snapStep = r.index; drawSnap(); snapPrev = snapStep; });
   sc2.setup({ step: "#map-scrolly .step", offset: 0.6 }).onStepEnter((r) => {
     const s = MAP_STEPS[r.index];
     if (s.pg) state.pg = s.pg;
     state.focus = s.focus; setButtons(); drawMap(); drawZipTable();
   });
-  const ro = new ResizeObserver(() => { drawSnap(); drawMap(); sc1.resize(); sc2.resize(); });
-  ro.observe(snapBox); ro.observe(mapBox);
-  drawSnap(); drawMap(); drawZipTable();
+  const ro = new ResizeObserver(() => {
+    const pp = pplPrev; pplPrev = -1; // redraw without replaying the transition
+    drawSnap(); drawMcd(); drawPpl(); drawMap(); pplPrev = pp;
+    [sc1, sc2, sc3, sc4].forEach((s) => s.resize());
+  });
+  [snapBox, mcdBox, pplBox, mapBox].forEach((b) => ro.observe(b));
+  drawSnap(); drawMcd(); drawPpl(); drawMap(); drawZipTable(); pplPrev = 0;
 })();
 </script>
+

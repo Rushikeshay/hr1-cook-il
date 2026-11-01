@@ -29,8 +29,13 @@ ck.equal("every zip named in the text exists in the zip results", sorted(zips_us
 geo_ids = {f["properties"]["zcta"] for f in geo["features"]}
 ck.equal("map shapes and zip results cover the same 177 zips", sorted(geo_ids ^ zip_ids), [])
 
-data = {"meta": B["meta"], "values": {i: values[i] for i in ids} | {k: values[k] for k in values if k.startswith(("ovl_", "mcd_off", "snap_persons_off"))},
-        "snap": B["snap_series"], "zips": B["zips"], "geo": geo}
+# the page also reads these ids in its scripts (scenario totals, people grid), not only in [data-id] spans
+script_ids = {k: values[k] for k in values if k.startswith(("ovl_", "mcd_off", "snap_persons_off"))}
+for k in ["mcd_subject_people", "mcd_subject_noncompliant_people"]:
+    script_ids[k] = values[k]
+data = {"meta": B["meta"], "values": {i: values[i] for i in ids} | script_ids,
+        "snap": B["snap_series"], "monthly": B["monthly"], "zips": B["zips"], "geo": geo}
+ck.equal("Medicaid monthly series covers Oct 2025-Dec 2028 for 3 scenarios", len(B["monthly"]), 117)
 payload = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
 assert "/*__DATA__*/" in tpl
 html = tpl.replace("/*__DATA__*/", payload)

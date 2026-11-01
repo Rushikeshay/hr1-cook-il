@@ -1,6 +1,6 @@
 # Check report
 
-Generated 2026-10-29 18:40
+Generated 2026-10-31 20:15
 
 | step | PASS | WARN |
 |---|---|---|
@@ -21,7 +21,7 @@ Generated 2026-10-29 18:40
 | 05c_county_pressure | 8 | 0 |
 | 06_zip_alloc | 15 | 0 |
 | 07_outputs | 16 | 0 |
-| 07b_story_preview | 4 | 0 |
+| 07b_story_preview | 5 | 0 |
 
 ## Not passing
 

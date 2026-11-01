@@ -6,7 +6,8 @@ Estimates how many Cook County, IL residents lose Medicaid or SNAP (or get small
 - **[params.yaml](params.yaml)**: every number and assumption, each labeled `observed` / `derived` / `assumed` with a source. Change scenarios here, never in code.
 
 ## Environment
-- Python: conda env **BED** → `C:\Users\rushikeshjadhav\AppData\Local\miniconda3-pbe\envs\BED\python.exe` (not on PATH). On another machine, create an env with pandas, geopandas, pyogrio, matplotlib, pyyaml, requests, pdfplumber, openpyxl, truststore (conda-forge).
+- Python (Mac, 2026-10-31): conda env **hr1** → `/opt/miniconda3/envs/hr1/bin/python`.
+- Python (Windows work machine): conda env **BED** → `C:\Users\rushikeshjadhav\AppData\Local\miniconda3-pbe\envs\BED\python.exe` (not on PATH). On another machine, create an env with pandas, geopandas, pyogrio, matplotlib, pyyaml, requests, pdfplumber, openpyxl, truststore (conda-forge).
 - Python HTTPS fails certificate checks on the work machine (corporate TLS). Scripts call `truststore.inject_into_ssl()`. Don't disable verification.
 - Census API needs a free key: `CENSUS_API_KEY=...` in `.env` (gitignored; template in `.env.example`).
 - IDHS (dhs.state.il.us) blocks requests without a browser User-Agent; `src/00_fetch.py` sends one.
@@ -160,7 +161,12 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
 - `07b_story_preview.py`: story/template.html (EDIT THIS) -> output/story/preview.html (generated, single file,
   data inlined). Text numbers are [data-id] spans filled from the ledger; build fails on unknown ids.
   Plain JS: d3 7.9.0 (cdnjs) + scrollama 3.2.0 (jsdelivr). Fonts: Newsreader (serif) + Libre Franklin (sans).
-- Private preview (2 of 9 sections: SNAP line + zip map): https://claude.ai/artifact/SFEYHaPxUA2wF4DA51NR6Y
+- Comments on the artifact get fixed on the published page only: pull the live page back into story/template.html
+  (replace the inlined data line with /*__DATA__*/) before rebuilding, or the fixes are lost.
+- 2026-10-31: preview now 4 of 9 sections: SNAP -> Medicaid timeline (stacked by cause, low/high at end) -> people
+  grid (1 figure = 1,000 ACA adults; subject / not 80 hrs / lost by cause, mid -> low -> high) -> both programs + map.
+  Medicaid cause colors: noncitizen magenta, work req blue (incl. exempt paperwork), renewals yellow (validated).
+- Private preview: https://claude.ai/artifact/SFEYHaPxUA2wF4DA51NR6Y
   Republish = rebuild preview.html, then publish the same file path.
 
 Next:

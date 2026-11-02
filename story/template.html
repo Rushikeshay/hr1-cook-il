@@ -1,5 +1,6 @@
 <title>H.R. 1 in Cook County</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,650;1,6..72,400&family=Libre+Franklin:wght@400;500;600;700&display=swap">
@@ -26,18 +27,7 @@
   --step0: 1.1875rem;    /* body */
   --step1: 1.5rem;       /* section heads */
   --step2: 2.75rem;      /* headline */
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #151514; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a988f; --rule: #2c2c2a; --axis: #45443f;
-    --card: rgba(21, 21, 20, 0.95); --medicaid: #3987e5; --snap: #d95926; --both: #199e70; --trend: #8a887f;
-    --snap-wash: rgba(217, 89, 38, 0.18); --focus: #6da7ec; --nodata: #2a2a28; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #151514; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a988f; --rule: #2c2c2a; --axis: #45443f;
-  --card: rgba(21, 21, 20, 0.95); --medicaid: #3987e5; --snap: #d95926; --both: #199e70; --trend: #8a887f;
-  --snap-wash: rgba(217, 89, 38, 0.18); --focus: #6da7ec; --nodata: #2a2a28; color-scheme: dark;
+  color-scheme: light;   /* light mode only, even when the reader's system is set to dark */
 }
 * { box-sizing: border-box; }
 body {
@@ -58,7 +48,7 @@ h1 { font-family: var(--serif); font-weight: 650; font-size: clamp(2rem, 4.2vw, 
 .byline { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 .range { margin-block: 1.5rem 0.5rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
-.range > div { padding: 0.9rem 0.75rem 0.25rem 0; display: grid; gap: 0.15rem; }
+.range > div { padding: 0.9rem 0.75rem 0.25rem 0; display: grid; gap: 0.15rem; align-content: start; }
 .range > div + div { padding-left: 0.9rem; border-left: 1px solid var(--rule); }
 .range .lab { font-family: var(--sans); font-size: var(--step-1); font-weight: 600; color: var(--ink-2); }
 .range .val { font-family: var(--sans); font-size: 2rem; font-weight: 600; line-height: 1.1; }
@@ -70,7 +60,8 @@ h2 { font-family: var(--serif); font-weight: 650; font-size: var(--step1); line-
 
 /* scrolly */
 .scrolly { position: relative; display: grid; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); gap: 2.5rem; margin-block: 2rem 4rem; }
-.graphic { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 6vh); height: 88vh; min-height: 30rem; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.5rem; order: 2; }
+.graphic { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 6vh); height: 88vh; min-height: 30rem; display: flex; flex-direction: column; gap: 0.5rem; order: 2; margin: 0; }
+.graphic > .g-box { flex: 1 1 auto; }
 .steps { order: 1; padding-block: 30vh 40vh; display: grid; gap: 70vh; }
 .step { background: var(--card); border-top: 2px solid var(--ink); padding: 1rem 1.1rem 1.1rem; font-size: 1.0625rem; line-height: 1.5; box-shadow: 0 1px 0 var(--rule); }
 .step p { margin: 0; }
@@ -127,10 +118,32 @@ footer p { margin: 0; }
   .range { grid-template-columns: minmax(0, 1fr); }
   .range > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
 }
-/* Medicaid causes: validated set (light + dark), direct-labeled because two sit below 3:1 on light */
+/* Medicaid causes: validated set, direct-labeled because two sit below 3:1 on light */
 :root { --c-noncit: #e87ba4; --c-work: #2a78d6; --c-renew: #eda100; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c-noncit: #d55181; --c-work: #3987e5; --c-renew: #c98500; } }
-:root[data-theme="dark"] { --c-noncit: #d55181; --c-work: #3987e5; --c-renew: #c98500; }
+/* the headline range, placed at the end of the intro */
+.range-box { margin-block: 1.75rem 2.25rem; }
+.range-title { font-family: var(--sans); font-weight: 600; font-size: 1rem; margin: 0; }
+/* hover hint above each chart; touch screens get "tap" */
+.g-hint { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); font-style: italic; margin: 0; }
+.g-hint .touch { display: none; }
+@media (hover: none) { .g-hint .mouse { display: none; } .g-hint .touch { display: inline; } }
+/* two big numbers closing each program section */
+.bignums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--ink); margin-block: 1.5rem 0.5rem; }
+.bignums > div { padding: 0.9rem 0.9rem 0.4rem 0; display: grid; gap: 0.2rem; align-content: start; }
+.bignums > div + div { padding-left: 0.9rem; border-left: 1px solid var(--rule); }
+.bignums .lab { min-height: 2.6em; font-family: var(--sans); font-size: var(--step-1); font-weight: 600; color: var(--ink-2); }
+.bignums .val { font-family: var(--sans); font-size: 2.6rem; font-weight: 600; line-height: 1.05; }
+.bignums .note { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); }
+.bignums.snap .after .val { color: var(--snap); }
+.bignums.medicaid .after .val { color: var(--medicaid); }
+@media (max-width: 520px) { .bignums .val { font-size: 1.9rem; } }
+/* references */
+sup.ref { font-family: var(--sans); font-size: 0.68em; line-height: 0; margin-left: 1px; }
+sup.ref a { text-decoration: none; color: var(--focus); }
+ol.refs { font-family: var(--sans); font-size: 0.875rem; line-height: 1.5; color: var(--ink-2); padding-left: 1.6rem; }
+ol.refs li { margin-bottom: 0.55rem; overflow-wrap: anywhere; }
+ol.refs li:target { background: var(--snap-wash); }
+.brace path { fill: none; stroke: var(--ink-2); stroke-width: 1.3; }
 h2.section-break { border-top: 3px solid var(--ink); padding-top: 1.25rem; margin-top: 4.5rem; }
 ul.rules { margin: 0 0 1.1rem; padding-left: 1.2rem; }
 ul.rules li { margin-bottom: 0.6rem; }
@@ -148,40 +161,43 @@ ul.rules li { margin-bottom: 0.6rem; }
   <h1>H.R. 1 could cost up to <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents their Medicaid, SNAP, or both by the end of 2028</h1>
   <p class="dek">This study estimates H.R. 1's effect by comparing Cook County's SNAP caseload with its pre-law trend and projecting Medicaid losses under three scenarios based on past work requirements, then mapping where the losses fall by zip code.</p>
   <div class="byline"><span>Rushikesh Jadhav</span><span>Data through September 30, 2026 (retrieved October 27, 2026)</span><span>Final draft: November 4, 2026</span></div>
-
-  <p class="range-cap">Some of what drives the number is not known yet, so the estimate is a range:</p>
-  <div class="range" role="group" aria-label="Residents losing Medicaid or SNAP by December 2028, three scenarios">
-    <div><span class="lab">Low scenario</span><span class="val num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span><span class="note">Fewest people lose benefits</span></div>
-    <div><span class="lab">Middle scenario</span><span class="val num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span><span class="note">Our central estimate</span></div>
-    <div><span class="lab">High scenario</span><span class="val num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span><span class="note">Most people lose benefits</span></div>
-  </div>
-  <p class="range-cap">Different residents losing either program by December 2028; people losing both are counted once.</p>
 </header>
 
 <section class="col prose">
-  <p>On July 4, 2025, President Trump signed H.R. 1, officially the One Big Beautiful Bill Act, the large tax and spending law Congress passed that summer. Alongside its tax changes, the law cuts federal spending on two programs that millions of low-income Americans rely on: Medicaid, which pays for health care, and the Supplemental Nutrition Assistance Program (SNAP), which helps families buy groceries.</p>
+  <p>On July 4, 2025, President Trump signed H.R. 1, officially the One Big Beautiful Bill Act, the large tax and spending law Congress passed that summer.<sup class="ref"><a href="#r1">1</a></sup> Alongside its tax changes, the law cuts federal spending on two programs that millions of low-income Americans rely on: Medicaid, which pays for health care, and the Supplemental Nutrition Assistance Program (SNAP), which helps families buy groceries.</p>
   <p>The biggest change is who gets to keep these benefits. Many adults now have to show, again and again, that they work, train or volunteer about 80 hours a month, or that they qualify for an exemption. SNAP's new rules took effect in Illinois in late 2025. Medicaid's begin in 2027, along with eligibility checks every six months instead of once a year.</p>
-  <p>In Cook County, these two programs reach more residents than anything else H.R. 1 changes. Medicaid covers <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults through the Affordable Care Act expansion, and SNAP helped about <span class="num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span> residents buy groceries in September 2025. When people lose either one, many turn to the county: its hospitals, its clinics, and its health plan.</p>
+  <p>In Cook County, these two programs reach more residents than anything else H.R. 1 changes. Medicaid covers <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults through the Affordable Care Act expansion,<sup class="ref"><a href="#r5">5</a></sup> and SNAP helped about <span class="num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span> residents buy groceries in September 2025.<sup class="ref"><a href="#r3">3</a></sup> When people lose either one, many turn to the county: its hospitals, its clinics, and its health plan.</p>
   <p>So the county needs answers to three questions: how many residents will lose benefits, where they live, and when. This study answers them with the data available so far.</p>
-  <p>Why a range? H.R. 1 requires many adults to show they work, or that they qualify for an exemption, to keep Medicaid and SNAP. In past programs, many people who still qualified lost benefits because they missed that paperwork. How many will miss it in Cook County is not known yet. The low scenario assumes Illinois applies the rules as announced and most people keep up. The high scenario assumes losses as large as Arkansas saw in 2018, when it became the first state to add a Medicaid work requirement. The middle scenario falls between the two. The sections below show what has already happened and what each scenario assumes.</p>
+  <p><strong>Why a range?</strong> Some of what drives these numbers is not known yet. H.R. 1 requires many adults to show they work, or that they qualify for an exemption, to keep Medicaid and SNAP. In past programs, many people who still qualified lost benefits because they missed that paperwork. How many will miss it in Cook County is not known yet. The low scenario assumes Illinois applies the rules as announced and most people keep up.<sup class="ref"><a href="#r7">7</a></sup> The high scenario assumes losses as large as Arkansas saw in 2018, when it became the first state to add a Medicaid work requirement.<sup class="ref"><a href="#r11">11</a></sup> The middle scenario falls between the two. Together, the three scenarios give this range:</p>
+
+  <div class="range-box">
+    <p class="range-title">Cook County residents who lose Medicaid, SNAP or both because of H.R. 1, by December 2028</p>
+    <div class="range" role="group" aria-label="Residents losing Medicaid or SNAP by December 2028, three scenarios">
+      <div><span class="lab">Low scenario</span><span class="val num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span><span class="note">Illinois's rules as announced; most people keep up</span></div>
+      <div><span class="lab">Middle scenario</span><span class="val num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span><span class="note">Between the two; our central estimate</span></div>
+      <div><span class="lab">High scenario</span><span class="val num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span><span class="note">Paperwork losses as large as Arkansas's in 2018</span></div>
+    </div>
+    <p class="range-cap">People who lose both programs are counted once. The sections below show what has already happened and how each scenario is built.</p>
+  </div>
 </section>
 
 <h2 class="col section-break">SNAP: the cuts already happened</h2>
 <section class="col prose">
-  <p><strong>What changed.</strong> SNAP already had a work rule for some adults. Before H.R. 1, adults aged 18 to 54 without children at home could get SNAP for only three months in any three years unless they worked or trained at least 20 hours a week. Veterans, people experiencing homelessness and young adults who had aged out of foster care were exempt, and states could waive the rule in areas with few jobs.</p>
-  <p>H.R. 1 raised the age limit to 64 and applied the rule to parents whose youngest child is 14 or older. It removed the exemptions for veterans, homeless people and former foster youth, and made waivers much harder to get. It also ended SNAP for many lawfully present noncitizens, such as refugees and asylees. So the newly affected groups are adults aged 55 to 64, parents of teenagers, veterans, residents without stable housing, and many noncitizens.</p>
+  <p><strong>What changed.</strong> SNAP already had a work rule for some adults. Before H.R. 1, adults aged 18 to 54 without children at home could get SNAP for only three months in any three years unless they worked or trained at least 20 hours a week. Veterans, people experiencing homelessness and young adults who had aged out of foster care were exempt, and states could waive the rule in areas with few jobs.<sup class="ref"><a href="#r1">1</a></sup></p>
+  <p>H.R. 1 raised the age limit to 64 and applied the rule to parents whose youngest child is 14 or older. It removed the exemptions for veterans, homeless people and former foster youth, and made waivers much harder to get. It also ended SNAP for many lawfully present noncitizens, such as refugees and asylees. So the newly affected groups are adults aged 55 to 64, parents of teenagers, veterans, residents without stable housing, and many noncitizens.<sup class="ref"><a href="#r1">1</a>,<a href="#r4">4</a></sup></p>
 </section>
 <section class="scrolly wide" id="snap-scrolly">
   <figure class="graphic" aria-describedby="snap-desc">
     <p class="g-title">People on SNAP in Cook County, before and after H.R. 1</p>
     <p class="g-sub" id="snap-desc">Monthly count from the Illinois Department of Human Services (IDHS), January 2024 to September 2026, with the trend before H.R. 1.</p>
+    <p class="g-hint"><span class="mouse">Hover over the chart to see each month's numbers.</span><span class="touch">Tap the chart to see each month's numbers.</span></p>
     <div class="g-box" id="snap-chart"></div>
-    <div class="g-foot"><span>Source: IDHS SNAP Data by Servicing Office. Office basis (residence-basis totals are about 3.6% higher).</span></div>
+    <div class="g-foot"><span>People on SNAP: IDHS SNAP Data by Servicing Office<sup class="ref"><a href="#r2">2</a></sup> (counted by office; counted by where people live, totals are about 3.6% higher<sup class="ref"><a href="#r3">3</a></sup>). Pre-H.R. 1 trend: this analysis, fitted to January 2024 to June 2025. Event dates: IDHS.<sup class="ref"><a href="#r4">4</a></sup></span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">SNAP before H.R. 1</span><p>In January 2024, about <span class="num" data-snap="first" data-fmt="k"></span> people got SNAP through Cook County's IDHS offices. The number drifted down slowly, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month.</p></div>
     <div class="step" data-step="1"><span class="tag">The SNAP trend</span><p>Had that drift continued, about <span class="num" data-id="snap_counterfactual_persons_2026_09" data-fmt="k"></span> people would still be getting SNAP by September 2026.</p></div>
-    <div class="step" data-step="2"><span class="tag">December 2025: SNAP work requirement</span><p>IDHS first applied H.R. 1's work requirement in December 2025. The caseload began falling faster than the trend.</p></div>
+    <div class="step" data-step="2"><span class="tag">December 2025: SNAP work requirement</span><p>IDHS first applied H.R. 1's work requirement in December 2025.<sup class="ref"><a href="#r4">4</a></sup> The caseload began falling faster than the trend.</p></div>
     <div class="step" data-step="3"><span class="tag">May 1, 2026: SNAP time limit</span><p>The first adults hit the new three-month time limit on May 1. Cook's caseload fell by <span class="num" data-snap="may_drop" data-fmt="k"></span> people in that one month.</p></div>
     <div class="step" data-step="4"><span class="tag">September 2026: SNAP losses so far</span><p>By September, <span class="num" data-snap="last" data-fmt="k"></span> beneficiaries remained, <span class="num" data-snap="gap" data-fmt="k"></span> below the old trend. Depending on when you start counting, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> Cook residents lost SNAP because of H.R. 1.</p></div>
   </div>
@@ -190,17 +206,21 @@ ul.rules li { margin-bottom: 0.6rem; }
 
 <section class="col prose">
   <p><strong>What this means.</strong> H.R. 1's SNAP losses are not a forecast. They have already happened. From December 2025 on, Cook County's SNAP caseload fell much faster than it had been falling, and the steepest drop came when the first time limits hit in May 2026. By September 2026, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> fewer residents were getting help with groceries because of the law. In the middle scenario, about <span class="num" data-id="snap_persons_off_dec_2028_mid" data-fmt="k"></span> will be off SNAP by December 2028.</p>
-  <p><strong>How we got these numbers.</strong> We start with IDHS's own monthly count of people on SNAP in Cook County, January 2024 to September 2026. Before H.R. 1, that count fell slowly and steadily, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month. We extend that pre-law decline forward from September 2025 to estimate how many people would be on SNAP without the law. The gap between that line and the actual count is our estimate of H.R. 1's effect. We give a range because the result depends on which month we treat as the start of the law's effect.</p>
+  <p><strong>How we got these numbers.</strong> We start with IDHS's own monthly count of people on SNAP in Cook County, January 2024 to September 2026. Before H.R. 1, that count fell slowly and steadily, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month. We extend that pre-law decline forward from September 2025 to estimate how many people would be on SNAP without the law. The gap between that line and the actual count is our estimate of H.R. 1's effect. We give a range because the result depends on which month we treat as the start of the law's effect. After September 2026, we project a second round of time-limit cutoffs in April 2027, when the three-year clock resets.</p>
+  <div class="bignums snap" role="group" aria-label="SNAP in Cook County: before H.R. 1 and losses by December 2028">
+    <div><span class="lab">On SNAP in Cook County, Sept. 2025</span><span class="val num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span><span class="note">Before the new work rules. IDHS count<sup class="ref"><a href="#r3">3</a></sup></span></div>
+    <div class="after"><span class="lab">Lose SNAP because of H.R. 1, by Dec. 2028</span><span class="val num" data-id="snap_persons_off_dec_2028_mid" data-fmt="k"></span><span class="note">Middle scenario. Range <span class="num" data-id="snap_persons_off_dec_2028_low" data-fmt="k"></span> to <span class="num" data-id="snap_persons_off_dec_2028_high" data-fmt="k"></span></span></div>
+  </div>
 </section>
 
 <h2 class="col section-break">Medicaid: the losses are still ahead</h2>
 <section class="col prose">
-  <p>Medicaid is public health insurance for people with low incomes. Under the Affordable Care Act expansion, Illinois covers adults aged 19 to 64 with incomes up to 138% of the federal poverty level. In Cook County, <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults are covered this way, according to the Illinois Department of Healthcare and Family Services (HFS).</p>
+  <p>Medicaid is public health insurance for people with low incomes. Under the Affordable Care Act expansion, Illinois covers adults aged 19 to 64 with incomes up to 138% of the federal poverty level. In Cook County, <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults are covered this way, according to the Illinois Department of Healthcare and Family Services (HFS).<sup class="ref"><a href="#r5">5</a></sup></p>
   <p><strong>What changed.</strong> Until now, Illinois Medicaid had no work requirement, and adults renewed their coverage once a year. H.R. 1 changes three things for expansion adults:</p>
   <ul class="rules">
-    <li><b>Noncitizens.</b> From October 1, 2026, many lawfully present immigrants, such as refugees and asylees, are no longer eligible.</li>
-    <li><b>Work requirement.</b> From January 1, 2027, adults must show 80 hours a month of work, job training, school or community service, or qualify for an exemption. Parents of children 13 and under, pregnant women, and people with disabilities or serious medical conditions are among those exempt. HFS first checks at renewals due in March 2027, so the first coverage losses come in about April 2027.</li>
-    <li><b>Renewals every six months.</b> After their first 2027 renewal, expansion adults must renew every six months instead of once a year.</li>
+    <li><b>Noncitizens.</b> From October 1, 2026, many lawfully present immigrants, such as refugees and asylees, are no longer eligible.<sup class="ref"><a href="#r1">1</a>,<a href="#r9">9</a></sup></li>
+    <li><b>Work requirement.</b> From January 1, 2027, adults must show 80 hours a month of work, job training, school or community service, or qualify for an exemption. Parents of children 13 and under, pregnant women, and people with disabilities or serious medical conditions are among those exempt.<sup class="ref"><a href="#r1">1</a>,<a href="#r7">7</a></sup> HFS first checks at renewals due in March 2027, so the first coverage losses come in about April 2027.<sup class="ref"><a href="#r8">8</a></sup></li>
+    <li><b>Renewals every six months.</b> After their first 2027 renewal, expansion adults must renew every six months instead of once a year.<sup class="ref"><a href="#r1">1</a></sup></li>
   </ul>
   <p>The people most at risk are adults without young children who work irregular hours or informal jobs, and people who qualify for an exemption but miss the paperwork to prove it. Unlike SNAP, none of this shows up in the data yet, so every Medicaid number below is a projection, not a count.</p>
 </section>
@@ -209,8 +229,9 @@ ul.rules li { margin-bottom: 0.6rem; }
   <figure class="graphic" aria-describedby="mcd-desc">
     <p class="g-title">Cook County adults projected to lose Medicaid because of H.R. 1</p>
     <p class="g-sub" id="mcd-desc">Adults off Medicaid at the end of each month, by cause, middle scenario, through December 2028.</p>
+    <p class="g-hint"><span class="mouse">Hover over the chart to see each month's numbers by cause.</span><span class="touch">Tap the chart to see each month's numbers by cause.</span></p>
     <div class="g-box" id="mcd-chart"></div>
-    <div class="g-foot"><span>Source: this analysis, from HFS enrollment and Urban Institute and Robert Wood Johnson Foundation (RWJF) Illinois loss rates. "Work requirement" includes exempt adults who miss the paperwork.</span></div>
+    <div class="g-foot"><span>Starting count: HFS Cook County enrollment.<sup class="ref"><a href="#r5">5</a></sup> Noncitizen cut: Illinois's statewide estimate<sup class="ref"><a href="#r9">9</a></sup> times Cook's share of Illinois noncitizens (Census ACS<sup class="ref"><a href="#r12">12</a></sup>). Work-requirement and renewal loss rates: Urban Institute and Robert Wood Johnson Foundation (RWJF) estimates for Illinois.<sup class="ref"><a href="#r10">10</a></sup> Start dates and renewal schedule: H.R. 1, HFS and IDHS.<sup class="ref"><a href="#r1">1</a>,<a href="#r7">7</a>,<a href="#r8">8</a></sup> Month-by-month timing and Cook totals: this analysis. "Work requirement" includes exempt adults who miss the paperwork.</span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">Medicaid today</span><p>As of September 2026, H.R. 1 has not yet taken Medicaid from any Cook adult. All <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="k"></span> expansion adults are still covered.</p></div>
@@ -227,15 +248,16 @@ ul.rules li { margin-bottom: 0.6rem; }
 <section class="scrolly wide" id="ppl-scrolly">
   <figure class="graphic" aria-describedby="ppl-desc">
     <p class="g-title">Cook County's Medicaid expansion adults, one figure per 1,000</p>
+    <p class="g-hint"><span class="mouse">Hover over a figure to see which group it stands for.</span><span class="touch">Tap a figure to see which group it stands for.</span></p>
     <div class="ppl-legend" id="ppl-legend" aria-live="polite"></div>
     <div class="g-box" id="ppl-chart"></div>
-    <div class="g-foot"><span id="ppl-desc">Figures are rounded to the nearest 1,000. Their place in the grid is for illustration: renewal and noncitizen losses can fall on anyone. Sources: HFS; U.S. Census Bureau American Community Survey (ACS) 2020-24 microdata; Urban Institute and RWJF.</span></div>
+    <div class="g-foot"><span id="ppl-desc">Figures are rounded to the nearest 1,000. Their place in each group is for illustration: renewal and noncitizen losses can fall on anyone. All adults: HFS.<sup class="ref"><a href="#r5">5</a></sup> Who must report work, and who already works enough: this analysis of Census ACS 2020-24 microdata,<sup class="ref"><a href="#r12">12</a></sup> applying H.R. 1's exemptions as Illinois describes them.<sup class="ref"><a href="#r1">1</a>,<a href="#r7">7</a></sup> Losses: same sources as the chart above.</span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">Medicaid expansion adults</span><p>These are Cook's <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> Medicaid expansion adults. Each figure is 1,000 people.</p></div>
-    <div class="step" data-step="1"><span class="tag">Medicaid: who must report work</span><p>About <span class="num" data-id="mcd_subject_people" data-fmt="k"></span> of them do not qualify for an exemption, so they must show 80 hours a month to keep coverage. The rest are exempt, mostly because of a disability, caring for someone, or meeting SNAP's work rules.</p></div>
+    <div class="step" data-step="1"><span class="tag">Medicaid: who must report work</span><p>About <span class="num" data-id="mcd_subject_people" data-fmt="k"></span> of them do not qualify for an exemption, so they must show 80 hours a month to keep coverage. They move to the top group. The rest, in the bottom group, are exempt, mostly because of a disability, caring for someone, or meeting SNAP's work rules.</p></div>
     <div class="step" data-step="2"><span class="tag">Medicaid: not yet logging 80 hours</span><p>Census survey answers suggest about <span class="num" data-id="mcd_subject_noncompliant_people" data-fmt="k"></span> of those adults do not currently work enough hours. The rest already do.</p></div>
-    <div class="step" data-step="3"><span class="tag">Medicaid, middle scenario: who loses coverage</span><p>In the middle scenario, <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> lose Medicaid by December 2028. More people lose coverage to the work requirement than are out of work: about <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> work enough hours and still lose it because of paperwork.</p></div>
+    <div class="step" data-step="3"><span class="tag">Medicaid, middle scenario: who loses coverage</span><p>In the middle scenario, <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> lose Medicaid by December 2028. More people lose coverage to the work requirement than are out of work: about <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> work enough hours and still lose it because of paperwork. Exempt adults in the bottom group can lose coverage too, if they cannot prove their exemption in time or miss a renewal.</p></div>
     <div class="step" data-step="4"><span class="tag">Medicaid, low scenario</span><p>If most people keep up with the paperwork, as Illinois's announced choices suggest, about <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> lose coverage.</p></div>
     <div class="step" data-step="5"><span class="tag">Medicaid, high scenario</span><p>If paperwork losses look like Arkansas's in 2018, about <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span> lose coverage, more than half of all expansion adults.</p></div>
   </div>
@@ -243,12 +265,16 @@ ul.rules li { margin-bottom: 0.6rem; }
 
 <section class="col prose">
   <p><strong>What this means.</strong> Medicaid losses start small in October 2026 and grow fast once the work requirement reaches renewals in 2027. By December 2028, between <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> and <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span> Cook adults could be off Medicaid. Many of them will still be working. They lose coverage because they could not prove it in time, not because they stopped qualifying.</p>
-  <p><strong>How we got these numbers.</strong> We start with HFS's count of <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> expansion adults in Cook County. The ACS, a Census Bureau survey of individual households, tells us what share of adults like them must report work (about <span class="num" data-id="mcd_subject_share_a" data-fmt="pct"></span>) and what share already work enough. For how many will lose coverage, we use the Urban Institute and RWJF's Illinois estimates. The work requirement removes <span class="num" data-id="urban_il_2028_work_req_pct_high" data-fmt="pct"></span>, <span class="num" data-id="urban_il_2028_work_req_pct_medium" data-fmt="pct"></span> or <span class="num" data-id="urban_il_2028_work_req_pct_low" data-fmt="pct"></span> of expansion adults (low, middle and high scenarios), and six-month renewals remove up to another <span class="num" data-id="urban_il_2028_redet_pct_medium" data-fmt="pct"></span>. The noncitizen cut is HFS's statewide estimate of <span class="num" data-id="mcd_noncitizen_statewide_loss" data-fmt="int"></span> people, times Cook's share of Illinois noncitizens.</p>
+  <p><strong>How we got these numbers.</strong> We start with HFS's count of <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> expansion adults in Cook County.<sup class="ref"><a href="#r5">5</a></sup> The American Community Survey (ACS), a Census Bureau survey of individual households, tells us what share of adults like them must report work (about <span class="num" data-id="mcd_subject_share_a" data-fmt="pct"></span>) and what share already work enough.<sup class="ref"><a href="#r12">12</a></sup> For how many will lose coverage, we use the Urban Institute and RWJF's Illinois estimates.<sup class="ref"><a href="#r10">10</a></sup> The work requirement removes <span class="num" data-id="urban_il_2028_work_req_pct_high" data-fmt="pct"></span>, <span class="num" data-id="urban_il_2028_work_req_pct_medium" data-fmt="pct"></span> or <span class="num" data-id="urban_il_2028_work_req_pct_low" data-fmt="pct"></span> of expansion adults (low, middle and high scenarios), and six-month renewals remove up to another <span class="num" data-id="urban_il_2028_redet_pct_medium" data-fmt="pct"></span>. Urban's range rests on how people responded to work requirements in Arkansas and New Hampshire.<sup class="ref"><a href="#r11">11</a></sup> The noncitizen cut is the state's estimate of <span class="num" data-id="mcd_noncitizen_statewide_loss" data-fmt="int"></span> people statewide,<sup class="ref"><a href="#r9">9</a></sup> times Cook's share of Illinois noncitizens.<sup class="ref"><a href="#r12">12</a></sup></p>
+  <div class="bignums medicaid" role="group" aria-label="Medicaid in Cook County: expansion adults now and losses by December 2028">
+    <div><span class="lab">Expansion adults on Medicaid now</span><span class="val num" data-id="mcd_baseline_aca_adults" data-fmt="k"></span><span class="note">Before any H.R. 1 Medicaid cut. HFS count<sup class="ref"><a href="#r5">5</a></sup></span></div>
+    <div class="after"><span class="lab">Lose Medicaid because of H.R. 1, by Dec. 2028</span><span class="val num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span><span class="note">Middle scenario. Range <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> to <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span></span></div>
+  </div>
 </section>
 
 <h2 class="col section-break">Both programs, and where the losses land</h2>
 <section class="col prose">
-  <p>Many residents rely on both programs: about <span class="num" data-id="ovl_share_aca_adults_in_snap_households" data-fmt="pct"></span> of Cook's Medicaid expansion adults live in a household that gets SNAP. In the middle scenario, about <span class="num" data-id="ovl_both_central_2028_mid" data-fmt="k"></span> residents would lose both by December 2028. Counting each person once, <span class="num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span> different Cook residents would lose Medicaid, SNAP or both.</p>
+  <p>Many residents rely on both programs: about <span class="num" data-id="ovl_share_aca_adults_in_snap_households" data-fmt="pct"></span> of Cook's Medicaid expansion adults live in a household that gets SNAP.<sup class="ref"><a href="#r12">12</a></sup> In the middle scenario, about <span class="num" data-id="ovl_both_central_2028_mid" data-fmt="k"></span> residents would lose both by December 2028. Counting each person once, <span class="num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span> different Cook residents would lose Medicaid, SNAP or both.</p>
   <p>Losses for both programs follow the map of need. The zip areas where the most people rely on Medicaid and SNAP stand to lose the most, and most of them are on Chicago's West and South Sides and in the south suburbs.</p>
 </section>
 <section class="scrolly wide" id="map-scrolly">
@@ -266,8 +292,9 @@ ul.rules li { margin-bottom: 0.6rem; }
       </div>
       <div class="legend" id="map-legend" aria-hidden="true"></div>
     </div>
+    <p class="g-hint"><span class="mouse">Hover over a zip area to see its numbers.</span><span class="touch">Tap a zip area to see its numbers.</span></p>
     <div class="g-box" id="map"></div>
-    <div class="g-foot"><span id="map-desc">Cook County portion of each zip area. Outline: City of Chicago. Gray: under 1,000 residents.</span><span>Sources: Illinois Department of Healthcare and Family Services (HFS), IDHS, U.S. Census Bureau American Community Survey (ACS), Urban Institute and Robert Wood Johnson Foundation (RWJF)</span></div>
+    <div class="g-foot"><span id="map-desc">Cook County portion of each zip area. Outline: City of Chicago. Gray: under 1,000 residents.</span><span>County totals: the Medicaid and SNAP sections above. Split by zip: Medicaid by HFS expansion-adult enrollment per zip;<sup class="ref"><a href="#r6">6</a></sup> SNAP by Census ACS households getting SNAP per zip.<sup class="ref"><a href="#r12">12</a></sup> Residents and zip shapes: Census.<sup class="ref"><a href="#r12">12</a>,<a href="#r13">13</a></sup> Rates per 1,000: this analysis.</span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">Medicaid, middle scenario</span><p>By December 2028, about <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> Cook adults would be off Medicaid in the middle scenario. The losses are not spread evenly.</p></div>
@@ -279,8 +306,34 @@ ul.rules li { margin-bottom: 0.6rem; }
 </section>
 <div class="col"><details class="table"><summary>See every zip area as a table</summary><div class="tbl-wrap"><table id="zip-table"></table></div></details></div>
 
+<h2 class="col section-break">What this means for Cook County</h2>
+<section class="col prose">
+  <p>By the end of 2028, H.R. 1 could take Medicaid, SNAP or both from between <span class="num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span> and <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents, about <span class="num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span> in the middle scenario. The two programs are at different stages. SNAP's losses have already happened: by September 2026, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> fewer residents were getting help with groceries because of the law. Medicaid's losses are still ahead. Apart from a small noncitizen cut in October 2026, they begin in April 2027 and build through 2028.</p>
+  <p>The losses fall hardest where need is already greatest: Chicago's West and South Sides and the south suburbs. And many of the people who lose Medicaid will still be working. In the middle scenario, at least <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> of them work enough hours and lose coverage only because they could not prove it in time.</p>
+  <p>Which end of the range Cook County lands on depends mostly on one thing: how many eligible people keep up with the new paperwork. On all five choices Illinois has announced, it picked the most protective option in the Urban Institute's study,<sup class="ref"><a href="#r7">7</a>,<a href="#r10">10</a></sup> which points toward the low scenario. How people responded to past work requirements points toward the middle and high scenarios.<sup class="ref"><a href="#r11">11</a></sup> These numbers are estimates built from the data available in fall 2026, and they will change as Illinois reports what actually happens.</p>
+</section>
+
+<h2 class="col section-break" id="sources">Sources</h2>
+<section class="col">
+  <ol class="refs">
+    <li id="r1">H.R. 1, One Big Beautiful Bill Act, Public Law 119-21, signed July 4, 2025. SNAP work requirements: Sec. 10102; Medicaid work ("community engagement") requirement: Sec. 71119; also the six-month renewal and noncitizen eligibility provisions. <a href="https://www.congress.gov/bill/119th-congress/house-bill/1">congress.gov/bill/119th-congress/house-bill/1</a></li>
+    <li id="r2">Illinois Department of Human Services (IDHS), "SNAP Data by Servicing Office," monthly, January 2024 to September 2026 (Cook County subtotal; February 2024 not published). <a href="https://www.dhs.state.il.us/page.aspx?item=164509">2024</a>, <a href="https://www.dhs.state.il.us/page.aspx?item=171902">2025</a>, <a href="https://www.dhs.state.il.us/page.aspx?item=177664">2026</a></li>
+    <li id="r3">IDHS, "SNAP Individual Counts by Counties," September 2025. <a href="https://www.dhs.state.il.us/OneNetLibrary/27897/documents/SNAP/SEPTEMBER%2025%20SNAP%20Individual%20Counts%20by%20Counties1.pdf">dhs.state.il.us (PDF)</a></li>
+    <li id="r4">IDHS, "Notice of SNAP Work Requirement Changes" (Information Memo, January 15, 2026) and SNAP work requirement FAQ. <a href="https://www.dhs.state.il.us/page.aspx?item=176589">Notice</a>, <a href="https://www.dhs.state.il.us/page.aspx?item=176106">FAQ</a></li>
+    <li id="r5">Illinois Department of Healthcare and Family Services (HFS), Cook County program enrollment (ACA adults). <a href="https://hfs.illinois.gov/info/factsfigures/program-enrollment/cook.html">hfs.illinois.gov</a></li>
+    <li id="r6">HFS, FY2025 enrollment by zip code. <a href="https://hfs.illinois.gov/content/dam/soi/en/web/hfs/sitecollectiondocuments/fy25enrollmentbyzipcode.pdf">hfs.illinois.gov (PDF)</a></li>
+    <li id="r7">HFS, <i>HR1 Webinar Series Module 3: Work Requirements</i> (draft, July 14, 2026); FAQ, "How will federal changes impact Medicaid"; ACA Adult customer notice (August 31, 2026). <a href="https://hfs.illinois.gov/content/dam/soi/en/web/hfs/info/fedresctr/hr1mod3wrce.pdf">Module 3</a>, <a href="https://hfs.illinois.gov/info/fedresctr/faqshowwillfedchimpactmedicaid.html">FAQ</a>, <a href="https://hfs.illinois.gov/content/dam/soi/en/web/hfs/medicalclients/medicaidguide/ACAAdultCustomerNotice083126ToPrint.pdf">notice</a></li>
+    <li id="r8">IDHS, "Medicaid Work Requirements" (start date and first renewals checked). <a href="https://www.dhs.state.il.us/page.aspx?item=180030">dhs.state.il.us</a></li>
+    <li id="r9">State of Illinois, news release on noncitizens' loss of Medicaid (statewide estimate of people affected). <a href="https://www.illinois.gov/content/dam/soi/en/web/illinois/iisnewsattachments/33039-101426-gci-noncitizen-loss-of-medicaid-sep-pr-003.pdf.pdf">illinois.gov (PDF)</a></li>
+    <li id="r10">Buettgens M, Karpman M, Haley JM, Carter J, Kenney GM. <i>Medicaid Expansion Enrollment Under OBBBA's Work Requirements and Redeterminations.</i> Urban Institute for the Robert Wood Johnson Foundation, March 2026. Illinois figures: Table 3 (p. 40), Table A.2 (p. 57). <a href="https://www.rwjf.org/content/dam/farm/reports/reports/2026/rwjf485284">rwjf.org</a></li>
+    <li id="r11">Sommers BD, Goldman AL, Blendon RJ, Orav EJ, Epstein AM. "Medicaid Work Requirements: Results from the First Year in Arkansas." <i>New England Journal of Medicine</i> 381:1073-82 (2019). <a href="https://doi.org/10.1056/NEJMsr1901772">doi:10.1056/NEJMsr1901772</a></li>
+    <li id="r12">U.S. Census Bureau, American Community Survey 2020-2024 5-year estimates: tables B01003 (population), B05001 (citizenship), B22003 (SNAP households), C27007 (Medicaid coverage), and Public Use Microdata Sample (PUMS). <a href="https://www.census.gov/programs-surveys/acs">census.gov/acs</a></li>
+    <li id="r13">U.S. Census Bureau, 2020 ZIP Code Tabulation Area boundaries and ZCTA-to-county and ZCTA-to-tract relationship files. <a href="https://www.census.gov/geographies/reference-files/time-series/geo/relationship-files.html">census.gov</a></li>
+  </ol>
+</section>
+
 <footer class="col">
-  <p><b>Prototype.</b> Four of the nine planned sections: SNAP, the Medicaid timeline, who loses Medicaid, and the zip map. Coming next: the money in three buckets, pressure on county resources, and the scenarios compared with other estimates.</p>
+  <p><b>Prototype.</b> Four of the nine planned sections, plus a draft conclusion: SNAP, the Medicaid timeline, who loses Medicaid, and the zip map. Coming next: the money in three buckets, pressure on county resources, and the scenarios compared with other estimates.</p>
   <p>Every number on this page is filled in from the analysis ledger by its id, so the text and the analysis cannot drift apart. Method, sources and limitations: <code>methods.md</code> in the project repository.</p>
   <p id="built"></p>
 </footer>
@@ -581,6 +634,16 @@ ul.rules li { margin-bottom: 0.6rem; }
     subject_ok: "Must report, already working 80 hours", keep: "Keeps Medicaid", work: "Loses Medicaid: work requirement",
     renew: "Loses Medicaid: six-month renewals", noncit: "Loses Medicaid: noncitizen cut",
   };
+  // hover text names the group too, so a blue figure in the exempt group reads as "exempt, lost to paperwork"
+  const tipLabel = (i, step) => {
+    const st = figState(i, step);
+    if (step === 0) return STATE_LABEL[st];
+    const grp = i < nSubject ? "Must report work" : "Exempt";
+    if (st === "subject" || st === "exempt") return grp;
+    if (st === "noncomp" || st === "subject_ok") return STATE_LABEL[st];
+    if (st === "work" && i >= nSubject) return "Exempt<br>Loses Medicaid: could not prove the exemption in time (counted under work requirement)";
+    return grp + "<br>" + STATE_LABEL[st];
+  };
   let pplStep = 0, pplPrev = -1;
   function pplLegend() {
     const counts = d3.rollup(d3.range(N), (v) => v.length, (i) => figState(i, pplStep));
@@ -594,24 +657,57 @@ ul.rules li { margin-bottom: 0.6rem; }
   function drawPpl() {
     const W = pplBox.clientWidth, H = pplBox.clientHeight;
     if (!W || !H) return;
-    // choose columns so the grid fills the box with roughly square-ish cells (figures are 1:1.6)
+    // From step 1 on, "must report work" and "exempt" are two separate blocks, each with a bracket label on the
+    // right, so later steps visibly break down each group. Step 0 is one block in the same cell size.
+    const narrow = W < 560, labW = narrow ? 96 : 150, nE = N - nSubject;
     let best = null;
     for (let cols = 10; cols <= 40; cols++) {
-      const rows = Math.ceil(N / cols), cw = W / cols, ch = H / rows, s = Math.min(cw, ch / 1.6);
-      if (!best || s > best.s) best = { cols, rows, s };
+      const rS = Math.ceil(nSubject / cols), rE = Math.ceil(nE / cols);
+      const s = Math.min((W - labW) / cols, H / ((rS + rE + 0.7) * 1.6));
+      if (!best || s > best.s) best = { cols, rS, rE, s };
     }
-    const { cols, rows, s } = best;
-    const ox = (W - cols * s) / 2, oy = (H - rows * s * 1.6) / 2;
+    const { cols, rS, rE, s } = best;
+    const rh = s * 1.6, gap = rh * 0.7;
+    const ox = Math.max(0, (W - labW - cols * s) / 2), oy = Math.max(0, (H - (rS + rE) * rh - gap) / 2);
+    const pos = (i, step) => {
+      if (step === 0 || i < nSubject) return [ox + (i % cols) * s, oy + Math.floor(i / cols) * rh];
+      const j = i - nSubject;
+      return [ox + (j % cols) * s, oy + rS * rh + gap + Math.floor(j / cols) * rh];
+    };
+    const tr = (i, step) => { const [x, y] = pos(i, step); return `translate(${x},${y})`; };
+    const animate = pplPrev >= 0 && pplPrev !== pplStep && !reduce;
     pplSvg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
     const tip = d3.select(pplBox).selectAll(".tip").data([0]).join("div").attr("class", "tip").attr("hidden", true);
     const figs = pplSvg.append("g").selectAll("g").data(d3.range(N)).join("g")
-      .attr("transform", (i) => `translate(${ox + (i % cols) * s},${oy + Math.floor(i / cols) * s * 1.6})`)
+      .attr("transform", (i) => tr(i, animate ? pplPrev : pplStep))
       .on("mousemove", (ev, i) => {
         const [mx, my] = d3.pointer(ev, pplBox);
-        tip.attr("hidden", null).html(`<b>1,000 adults</b><br>${STATE_LABEL[figState(i, pplStep)]}`)
-          .style("left", Math.min(mx + 12, W - 210) + "px").style("top", Math.max(0, my - 30) + "px");
+        tip.attr("hidden", null).html(`<b>1,000 adults</b><br>${tipLabel(i, pplStep)}`)
+          .style("left", Math.min(mx + 12, W - 230) + "px").style("top", Math.max(0, my - 30) + "px");
       })
       .on("mouseleave", () => tip.attr("hidden", true));
+    if (animate && (pplPrev === 0) !== (pplStep === 0)) figs.transition().duration(700).attr("transform", (i) => tr(i, pplStep));
+    else figs.attr("transform", (i) => tr(i, pplStep));
+    // brackets: one per group, from step 1 on
+    if (pplStep >= 1) {
+      const bx = ox + cols * s + 6, w = Math.min(6, s * 0.4);
+      const brace = (y0, y1) => { const ym = (y0 + y1) / 2;
+        return `M${bx},${y0} q${w},0 ${w},${w} L${bx + w},${ym - w} q0,${w} ${w},${w} q-${w},0 -${w},${w} L${bx + w},${y1 - w} q0,${w} -${w},${w}`; };
+      const groups = [
+        { y0: oy + 2, y1: oy + rS * rh - 4, lines: narrow ? ["Must report", "work"] : ["Must report work"], n: V.mcd_subject_people,
+          sub: pplStep === 2 ? (narrow ? ["split by hours", "worked now"] : ["split by hours worked now"]) : [] },
+        { y0: oy + rS * rh + gap + 2, y1: oy + (rS + rE) * rh + gap - 4, lines: ["Exempt"], n: nE * per, // figure count, so the label matches the grid
+          sub: pplStep >= 3 ? (narrow ? ["can still lose", "it: paperwork,", "renewals"] : ["can still lose coverage:", "paperwork, renewals"]) : [] },
+      ];
+      const bg = pplSvg.append("g").attr("class", "brace" + (animate && pplPrev === 0 ? " fade-in" : ""));
+      groups.forEach((gr) => {
+        bg.append("path").attr("d", brace(gr.y0, gr.y1));
+        const tx = bx + 2 * w + 6, lh = 15;
+        const all = [...gr.lines.map((t) => ["lbl-strong", t]), ["lbl-mid", "about " + fmt.k(gr.n)], ...gr.sub.map((t) => ["lbl", t])];
+        const t = bg.append("text").attr("y", (gr.y0 + gr.y1) / 2 - ((all.length - 1) * lh) / 2).attr("dy", "0.35em");
+        all.forEach(([cls, txt], k) => t.append("tspan").attr("class", cls).attr("x", tx).attr("dy", k ? lh : 0).text(txt));
+      });
+    }
     const r = s * 0.17;
     figs.append("rect").attr("width", s).attr("height", s * 1.6).attr("fill", "transparent"); // hit target
     figs.append("circle").attr("class", "fig").attr("cx", s / 2).attr("cy", s * 0.32).attr("r", r);

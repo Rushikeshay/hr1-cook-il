@@ -166,6 +166,11 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
 - 2026-10-31: preview now 4 of 9 sections: SNAP -> Medicaid timeline (stacked by cause, low/high at end) -> people
   grid (1 figure = 1,000 ACA adults; subject / not 80 hrs / lost by cause, mid -> low -> high) -> both programs + map.
   Medicaid cause colors: noncitizen magenta, work req blue (incl. exempt paperwork), renewals yellow (validated).
+- 2026-11-02 (user notes): light mode only (dark CSS removed); headline range box moved to end of intro with
+  how-each-scenario-is-built notes; "hover/tap" hint above every chart; chart source notes say which piece comes
+  from which source; numbered Sources list (13 refs, <sup class="ref">) + in-text citations; two big numbers
+  closing SNAP and Medicaid (before count vs lost by Dec 2028; no "future caseload", which is not modeled);
+  people grid splits into "must report work" / "exempt" blocks with brackets from step 1; draft conclusion.
 - Private preview: https://claude.ai/artifact/SFEYHaPxUA2wF4DA51NR6Y
   Republish = rebuild preview.html, then publish the same file path.
 

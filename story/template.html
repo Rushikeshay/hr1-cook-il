@@ -42,7 +42,6 @@ a { color: inherit; text-decoration-color: var(--axis); text-underline-offset: 2
 
 header.hero { padding-block: 3.5rem 2rem; display: grid; gap: 1rem; }
 .kicker { font-family: var(--sans); font-size: var(--step-1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
-.kicker .draft { color: var(--snap); }
 h1 { font-family: var(--serif); font-weight: 650; font-size: clamp(2rem, 4.2vw, var(--step2)); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
 .dek { font-size: 1.375rem; line-height: 1.4; color: var(--ink-2); margin: 0; text-wrap: pretty; }
 .byline { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); display: flex; gap: 0.75rem; flex-wrap: wrap; }
@@ -120,6 +119,7 @@ footer p { margin: 0; }
   .range > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
 }
 /* Medicaid causes: validated set, direct-labeled because two sit below 3:1 on light */
+:root { --snap-light: #f3a47e; }
 :root { --c-noncit: #e87ba4; --c-work: #2a78d6; --c-renew: #eda100; }
 /* the headline range, placed at the end of the intro */
 .range-box { margin-block: 1.75rem 2.25rem; }
@@ -152,8 +152,18 @@ ul.rules li { margin-bottom: 0.6rem; }
 .ppl-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
 .ppl-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
 .ppl-legend b { font-weight: 600; color: var(--ink); }
+/* money: three panels, each on its own scale */
+.money-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; }
+.money-grid .panel-title { font-family: var(--sans); font-weight: 600; font-size: var(--step-1); margin: 0 0 0.25rem; color: var(--ink); }
+.money-box { height: 17rem; }
+@media (max-width: 760px) { .money-grid { grid-template-columns: minmax(0, 1fr); } }
+.tbl-open { max-height: none; }
+.tri { font-family: var(--sans); font-size: 0.875rem; }
+.tri th, .tri td { white-space: normal; vertical-align: top; text-align: left; }
+.tri td:first-child { width: 40%; }
+.tbl-note { font-family: var(--sans); font-size: 0.75rem; color: var(--muted); margin: 0.5rem 0 0; }
 /* static (non-scrolly) figure */
-.static-fig { margin-block: 1.5rem 0.75rem; display: grid; gap: 0.4rem; }
+.static-fig { position: relative; margin-block: 1.5rem 0.75rem; display: grid; gap: 0.4rem; } /* anchors the tooltip */
 .static-fig .g-box { height: 20rem; }
 .fade-in { animation: fadeIn 1.2s ease-out both; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -161,10 +171,10 @@ ul.rules li { margin-bottom: 0.6rem; }
 </style>
 
 <header class="hero col">
-  <div class="kicker"><span class="draft">Draft for review</span> · Cook County, Illinois · H.R. 1 (2025)</div>
+  <div class="kicker">Cook County, Illinois · H.R. 1 (2025)</div>
   <h1>H.R. 1 could cost up to <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents their Medicaid, SNAP, or both by the end of 2028</h1>
   <p class="dek">This study estimates H.R. 1's effect by comparing Cook County's SNAP caseload with its pre-law trend and projecting Medicaid losses under three scenarios based on past work requirements, then mapping where the losses fall by zip code.</p>
-  <div class="byline"><span>Rushikesh Jadhav</span><span>Data through September 30, 2026 (retrieved October 27, 2026)</span><span>Final draft: November 4, 2026</span></div>
+  <div class="byline"><span>Rushikesh Jadhav</span><span>Data through September 30, 2026 (retrieved October 27, 2026)</span><span>November 2026</span></div>
 </header>
 
 <section class="col prose">
@@ -323,6 +333,32 @@ ul.rules li { margin-bottom: 0.6rem; }
 </figure>
 <div class="col"><details class="table"><summary>See the profile as a table</summary><div class="tbl-wrap"><table id="both-table"></table></div></details></div>
 
+<h2 class="col section-break">The money that leaves the county</h2>
+<section class="col prose">
+  <p>When residents lose Medicaid or SNAP, the money that paid for their care and groceries stops coming to Cook County. We count it in three separate kinds and never add them together: federal dollars lost, state Medicaid dollars that stop with them, and new costs H.R. 1 shifts onto the state.</p>
+  <p><strong>Federal dollars.</strong> In the middle scenario, Cook County loses about <span class="num" data-sum="mcd_usd_federal_countycare_2028_mid,snap_usd_federal_benefits_2028_mid" data-fmt="usdb"></span> in federal money in 2028 alone: <span class="num" data-id="mcd_usd_federal_countycare_2028_mid" data-fmt="usdb"></span> in Medicaid payments for expansion adults' care and <span class="num" data-id="snap_usd_federal_benefits_2028_mid" data-fmt="usdm0"></span> in SNAP benefits that would have been spent at local stores. The range runs from <span class="num" data-sum="mcd_usd_federal_countycare_2028_low,snap_usd_federal_benefits_2028_low" data-fmt="usdb"></span> to <span class="num" data-sum="mcd_usd_federal_countycare_2028_high,snap_usd_federal_benefits_2028_high" data-fmt="usdb"></span>. From 2026 through 2028, the middle scenario adds up to about <span class="num" data-sum="mcd_usd_federal_countycare_2026_mid,mcd_usd_federal_countycare_2027_mid,mcd_usd_federal_countycare_2028_mid,snap_usd_federal_benefits_2026_mid,snap_usd_federal_benefits_2027_mid,snap_usd_federal_benefits_2028_mid" data-fmt="usdb"></span>. The federal government pays 90% of expansion adults' Medicaid costs,<sup class="ref"><a href="#r1">1</a></sup> and all SNAP benefits.</p>
+  <p><strong>State Medicaid dollars.</strong> Illinois pays the other 10% of expansion adults' Medicaid costs. When they lose coverage, that state money stops too: about <span class="num" data-id="mcd_usd_state_countycare_2028_mid" data-fmt="usdm0"></span> in 2028 in the middle scenario.</p>
+  <p><strong>New costs for the state.</strong> H.R. 1 also moves SNAP costs from Washington to Illinois. Since October 2026, the state pays 75% of the cost of running SNAP instead of 50%; Cook County's share of that increase is about <span class="num" data-id="snap_usd_state_admin_2028_mid" data-fmt="usdm0"></span> a year.<sup class="ref"><a href="#r20">20</a></sup> Because Illinois's SNAP payment error rate is high, the state must also pay 15% of SNAP benefits, starting as early as October 2028. If it starts then, Cook's share is about <span class="num" data-id="snap_usd_state_benefit_share_early_2028_mid" data-fmt="usdm0"></span> in the last three months of 2028 alone; if Illinois's error rate stays high again, the start moves to October 2029.<sup class="ref"><a href="#r20">20</a></sup> These are costs to the state budget, not the county's.</p>
+</section>
+<figure class="wide static-fig" id="money-fig">
+  <p class="g-title">Money tied to H.R. 1 in Cook County, by year</p>
+  <p class="g-sub">Bars: middle scenario. Thin lines: low to high scenario. Three separate kinds of money, each on its own scale; they are not added together.</p>
+  <p class="g-hint"><span class="mouse">Hover</span><span class="touch">Tap</span> a bar for all three scenarios.</p>
+  <div class="money-grid">
+    <div><p class="panel-title">1. Federal dollars lost</p><div class="g-box money-box" id="money-b1"></div></div>
+    <div><p class="panel-title">2. State Medicaid dollars that stop</p><div class="g-box money-box" id="money-b2"></div></div>
+    <div><p class="panel-title">3. New state SNAP costs, Cook's share</p><div class="g-box money-box" id="money-b3"></div></div>
+  </div>
+  <div class="g-foot"><span>People losing coverage: this analysis (sections above). Medicaid dollars: months of coverage lost times CountyCare's average payment for an expansion adult, <span class="num" data-id="mcd_pmpm_countycare" data-fmt="usd"></span> a month (Cook County Health budget<sup class="ref"><a href="#r16">16</a></sup>), split 90% federal and 10% state.<sup class="ref"><a href="#r1">1</a></sup> SNAP dollars: months of benefits lost times Illinois's average benefit, <span class="num" data-id="snap_avg_benefit_person_month" data-fmt="usd"></span> per person a month. State SNAP costs: Illinois's estimated added administrative cost and the 15% benefit share, times Cook's share of Illinois SNAP recipients.<sup class="ref"><a href="#r3">3</a>,<a href="#r20">20</a></sup> Panel 3, 2028: the benefit share is shown only if it starts in October 2028.</span></div>
+</figure>
+<div class="col"><details class="table"><summary>See the money as a table</summary><div class="tbl-wrap"><table id="money-table"></table></div></details></div>
+
+<section class="col prose">
+  <p><strong>What it means for county health services.</strong> Medicaid pays hospitals and clinics across the county, including the county's own. About <span class="num" data-id="countycare_share_of_cook_aca" data-fmt="pct"></span> of Cook's expansion adults are CountyCare members.<sup class="ref"><a href="#r16">16</a></sup> If they lose coverage at the same rate as everyone else, CountyCare loses about <span class="num" data-id="countycare_capitation_lost_fy2027_mid" data-fmt="usdm0"></span> in payments in the county's FY2027 and <span class="num" data-id="countycare_capitation_lost_fy2028_mid" data-fmt="usdm0"></span> in FY2028 (middle scenario). The county's own budget already shows the strain: it expects <span class="num" data-id="county_fy2027_obbba_hospital_fallout" data-fmt="usdm"></span> in H.R. 1 fallout for its hospital system in FY2027, charity care rising by <span class="num" data-id="county_resp_cch_charity_care_increase" data-fmt="usdm"></span>, and it has added <span class="num" data-id="county_resp_cch_added_county_support" data-fmt="usdm"></span> in local tax support for health care.<sup class="ref"><a href="#r15">15</a></sup></p>
+  <p>We do not estimate how much more care the county will be asked to provide. The county's budget documents do not separate H.R. 1's share of new costs, and no public data shows where people who lose coverage go for care. What the numbers do show is the gap between the two. A person who loses Medicaid loses a health plan that pays for care anywhere, from a checkup to a prescription. The county can offer care at its own hospitals and clinics, paid from local taxes, once people come in. That is catching up, not replacing what was lost.</p>
+  <p><strong>What it means for local spending.</strong> SNAP benefits are spent at grocery stores in the neighborhoods where people live. Using the U.S. Department of Agriculture's estimate that each $1 of SNAP generates <span class="num" data-id="ers_snap_gdp_multiplier" data-fmt="usd2"></span> in economic activity,<sup class="ref"><a href="#r21">21</a></sup> the middle scenario's 2028 SNAP losses mean about <span class="num" data-id="snap_local_activity_lost_2028_mid" data-fmt="usdm0"></span> less local activity and roughly <span class="num" data-id="snap_local_jobs_lost_2028_mid" data-fmt="h"></span> fewer jobs supported. This is a national rule of thumb, so treat it as a sense of scale, not a forecast for Cook County.</p>
+</section>
+
 <h2 class="col section-break">What the county is doing</h2>
 <section class="col prose">
   <p>Cook County is the second most populous county in the country,<sup class="ref"><a href="#r14">14</a></sup> and it meets H.R. 1 with a budget that is already stretched. Its proposed FY2027 budget, <span class="num" data-id="county_resp_total_budget_fy2027" data-fmt="usdb"></span>, had to close a projected gap of <span class="num" data-id="county_resp_gap_fy2027" data-fmt="usdm"></span>. About <span class="num" data-id="county_fy2027_obbba_hospital_fallout" data-fmt="usdm"></span> of that gap is the expected fallout of H.R. 1 for the county's hospital system.<sup class="ref"><a href="#r15">15</a></sup> The county closed it without new taxes, in part by drawing on reserves (<span class="num" data-id="county_resp_gap_reserves" data-fmt="usdm"></span>), investment income (<span class="num" data-id="county_resp_gap_investing" data-fmt="usdm"></span>), spending cuts (<span class="num" data-id="county_resp_gap_spending_cuts" data-fmt="usdm"></span>) and leaving jobs unfilled (<span class="num" data-id="county_resp_gap_vacancies" data-fmt="usdm"></span>). Hiring stays almost flat.<sup class="ref"><a href="#r15">15</a></sup></p>
@@ -337,6 +373,30 @@ ul.rules li { margin-bottom: 0.6rem; }
   <p>The losses fall hardest where need is already greatest: Chicago's West and South Sides and the south suburbs. And many of the people who lose Medicaid will still be working. In the middle scenario, at least <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> of them work enough hours and lose coverage only because they could not prove it in time.</p>
   <p>Which end of the range Cook County lands on depends mostly on one thing: how many eligible people keep up with the new paperwork. On all five choices Illinois has announced, it picked the most protective option in the Urban Institute's study,<sup class="ref"><a href="#r7">7</a>,<a href="#r10">10</a></sup> which points toward the low scenario. How people responded to past work requirements points toward the middle and high scenarios.<sup class="ref"><a href="#r11">11</a></sup> These numbers are estimates built from the data available in fall 2026, and they will change as Illinois reports what actually happens.</p>
 </section>
+
+<h2 class="col section-break" id="limits">What these numbers can't tell you</h2>
+<section class="col prose">
+  <ul class="rules">
+    <li><strong>Medicaid losses are projections.</strong> None of the work-requirement or renewal losses has happened yet. The first real counts will come from HFS after April 2027.</li>
+    <li><strong>The April 2027 SNAP cutoffs are the least certain SNAP number.</strong> They are scaled from the 2026 cutoffs, and survey data can only roughly count the adults who face the time limit. Treat that piece as an order of magnitude.</li>
+    <li><strong>We don't follow people after they lose benefits.</strong> Some will re-enroll, find job-based coverage or go without. The loss rates already account for people who re-enroll by 2028, but we can't say how many end up uninsured, or for how long.</li>
+    <li><strong>We don't estimate new demand on county services.</strong> No public data shows where people who lose coverage go for care, and the county's budget does not separate H.R. 1's share of its new costs.</li>
+    <li><strong>The dollar figures use one average payment.</strong> Medicaid dollars use CountyCare's average payment per expansion adult. People who lose coverage may cost more or less than average.</li>
+    <li><strong>Zip numbers are an allocation.</strong> County totals are spread across zip areas by where enrollees live today. No agency publishes losses by zip.</li>
+    <li><strong>The SNAP losses are measured against a trend.</strong> Other things changed in the same months, including the late-2025 federal shutdown. That is why the low scenario counts only from February 2026, when the time limit legally began.</li>
+    <li><strong>Who loses benefits comes from a survey taken before H.R. 1.</strong> It describes people likely to lose benefits, not people counted after losing them.</li>
+    <li><strong>Not included:</strong> new applicants turned away by the work requirement; smaller SNAP benefit cuts for people who stay enrolled (utility allowance and internet costs); and H.R. 1's changes to how states finance Medicaid (provider taxes and state-directed payments), which affect hospital revenue directly.</li>
+  </ul>
+  <p>The full method, with every source and assumption, is in <a href="https://github.com/Rushikeshay/hr1-cook-il/blob/main/methods.md">methods.md</a> in the <a href="https://github.com/Rushikeshay/hr1-cook-il">project repository</a>; anyone can rerun the analysis from it.</p>
+</section>
+
+<h2 class="col section-break" id="appendix">Appendix: how our estimates compare with others</h2>
+<section class="col prose">
+  <p>For readers curious how this study's results line up with other estimates, the table puts them side by side. Outside estimates for Illinois are scaled to Cook County using the same Cook baseline or share we use. Small differences are expected: each study measures a slightly different thing.</p>
+</section>
+<div class="col"><div class="tbl-wrap tbl-open tri"><table id="tri-table"></table></div>
+  <p class="tbl-note">Medicaid: average number of Cook expansion adults off coverage in 2028. Urban Institute: its Illinois shares for 2028 times the HFS Cook count;<sup class="ref"><a href="#r10">10</a></sup> its three settings line up with our three scenarios. HFS internal estimate: 165,000 to 330,000 of about 700,000 Illinois expansion adults, as a share of Cook's count; method not published.<sup class="ref"><a href="#r7">7</a></sup> SNAP: IDHS statewide figures reported in the press, times Cook's share of Illinois SNAP recipients. Our count of adults under the time limit is smaller because survey answers can only approximate the exemptions; the April 2027 losses are calibrated to the losses actually observed in 2026, so this matters little for the totals.<sup class="ref"><a href="#r3">3</a></sup></p>
+</div>
 
 <h2 class="col section-break" id="sources">Sources</h2>
 <section class="col">
@@ -360,12 +420,13 @@ ul.rules li { margin-bottom: 0.6rem; }
     <li id="r17">Cook County, "Cook County Invests Nearly $20 Million in Funding to Protect Food and Housing Stability," March 11, 2026. <a href="https://www.cookcountyil.gov/news/cook-county-invests-nearly-20-million-funding-protect-food-and-housing-stability-trump">cookcountyil.gov</a></li>
     <li id="r18">Cook County Health, "Cook County Health Earns 27 National Association of Counties Achievement Awards" (Medicaid Impact Working Group; GetMedicaidFacts.com), September 1, 2026. <a href="https://cookcountyhealth.org/?p=21747">cookcountyhealth.org</a></li>
     <li id="r19">Cook County Health, "State, Cook County Leaders and Greater Chicago Food Depository Address Federal SNAP Cuts and Launch CCH Food as Medicine Initiatives," January 23, 2026. <a href="https://cookcountyhealth.org/press-release/state-cook-county-leaders-and-greater-chicago-food-depository-address-federal-snap-cuts-and-launch-cch-food-as-medicine-initiatives/">cookcountyhealth.org</a></li>
+    <li id="r20">Civic Federation, on Illinois's SNAP payment error rate, H.R. 1's state cost share and the average SNAP benefit (May 2026); and on the state's added SNAP administrative cost (about $80 million a year). <a href="https://civicfed.org/blog/illinois-fails-lower-snap-payment-error-rates-targeted-hr-1">civicfed.org (error rate)</a>, <a href="https://civicfed.org/node/5122">civicfed.org (administrative cost)</a></li>
+    <li id="r21">Canning P, Stacy B. <i>The Supplemental Nutrition Assistance Program (SNAP) and the Economy: New Estimates of the SNAP Multiplier.</i> USDA Economic Research Service, ERR-265, July 2019. <a href="https://ers.usda.gov/sites/default/files/_laserfiche/publications/93529/ERR-265.pdf?v=70863">ers.usda.gov (PDF)</a></li>
   </ol>
 </section>
 
 <footer class="col">
-  <p><b>Prototype.</b> Four of the nine planned sections, plus a draft conclusion: SNAP, the Medicaid timeline, who loses Medicaid, and the zip map. Coming next: the money in three buckets, pressure on county resources, and the scenarios compared with other estimates.</p>
-  <p>Every number on this page is filled in from the analysis ledger by its id, so the text and the analysis cannot drift apart. Method, sources and limitations: <code>methods.md</code> in the project repository.</p>
+  <p>Every number on this page is filled in from the analysis ledger by its id, so the text and the analysis cannot drift apart. Method, sources, limitations, code and data: <a href="https://github.com/Rushikeshay/hr1-cook-il">github.com/Rushikeshay/hr1-cook-il</a>.</p>
   <p id="built"></p>
 </footer>
 
@@ -388,6 +449,9 @@ ul.rules li { margin-bottom: 0.6rem; }
     pct: (v) => Math.round(v * 100) + "%",
     usdm: (v) => "$" + (Math.round(v / 1e5) / 10).toLocaleString("en-US") + " million",
     usdm0: (v) => "$" + Math.round(v / 1e6).toLocaleString("en-US") + " million",
+    usd: (v) => "$" + Math.round(v).toLocaleString("en-US"),
+    usd2: (v) => "$" + v.toFixed(2),
+    h: (v) => (Math.round(v / 100) * 100).toLocaleString("en-US"),
     usdb: (v) => "$" + (Math.round(v / 1e7) / 100).toLocaleString("en-US") + " billion",
   };
 
@@ -433,6 +497,11 @@ ul.rules li { margin-bottom: 0.6rem; }
     const v = V[el.dataset.id];
     el.textContent = v == null ? "[missing " + el.dataset.id + "]" : fmt[el.dataset.fmt || "int"](v);
     el.title = "ledger id: " + el.dataset.id;
+  });
+  document.querySelectorAll("[data-sum]").forEach((el) => {
+    const ids = el.dataset.sum.split(","), miss = ids.filter((i) => V[i] == null);
+    el.textContent = miss.length ? "[missing " + miss.join(",") + "]" : fmt[el.dataset.fmt || "int"](d3.sum(ids, (i) => V[i]));
+    el.title = "sum of ledger ids: " + ids.join(" + ");
   });
   document.querySelectorAll("[data-snap]").forEach((el) => { el.textContent = fmt[el.dataset.fmt || "k"](snapNums[el.dataset.snap]); });
   document.querySelectorAll("[data-zips]").forEach((el) => {
@@ -920,6 +989,90 @@ ul.rules li { margin-bottom: 0.6rem; }
     .append("tbody").selectAll("tr").data(D.profile_both).join("tr")
     .html((d) => `<td>${d.level}</td><td>${(d.lose_both_mid * 100).toFixed(0)}%</td><td>${(1.645 * d.lose_both_mid_se * 100).toFixed(0)} pts</td><td>${(d.medicaid_aca_like * 100).toFixed(0)}%</td><td>${(d.snap_adults_18_64 * 100).toFixed(0)}%</td><td>${(d.all_adults_19_64 * 100).toFixed(0)}%</td>`);
 
+  // =================================================================== money: three separate panels
+  const YRS = [2026, 2027, 2028], SCS = ["low", "mid", "high"];
+  const val = (id) => V[id] || 0;
+  const MONEY = {
+    b1: { parts: [["Medicaid", "--medicaid", (y, s) => val(`mcd_usd_federal_countycare_${y}_${s}`)],
+                  ["SNAP", "--snap", (y, s) => val(`snap_usd_federal_benefits_${y}_${s}`)]] },
+    b2: { parts: [["State Medicaid share", "--medicaid", (y, s) => val(`mcd_usd_state_countycare_${y}_${s}`)]] },
+    b3: { parts: [["SNAP administration", "--snap", (y, s) => val(`snap_usd_state_admin_${y}_${s}`)],
+                  ["15% benefit share (if it starts Oct. 2028)", "--snap-light", (y, s) => val(`snap_usd_state_benefit_share_early_${y}_${s}`)]] },
+  };
+  const moneyFmt = (v) => (v >= 1e9 ? "$" + (v / 1e9).toFixed(2) + "B" : "$" + Math.round(v / 1e6) + "M");
+  const moneyTip = d3.select("#money-fig").append("div").attr("class", "tip").attr("hidden", true);
+  function drawMoneyPanel(key) {
+    const box = document.getElementById("money-" + key), cfg = MONEY[key];
+    const W = box.clientWidth, H = box.clientHeight;
+    if (!W || !H) return;
+    const svg = d3.select(box).selectAll("svg").data([0]).join("svg").attr("role", "img");
+    svg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
+    const m = { t: 22, r: 8, b: 26 + 18 * 2, l: 8 }; // same baseline in every panel
+    const tot = (y, s) => d3.sum(cfg.parts, (p) => p[2](y, s));
+    const top = d3.max(YRS, (y) => tot(y, "high")) || 1;
+    const x = d3.scaleBand().domain(YRS).range([m.l, W - m.r]).padding(0.35);
+    const y = d3.scaleLinear().domain([0, top]).nice().range([H - m.b, m.t]);
+    const g = svg.append("g");
+    g.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(0)).attr("y2", y(0)).attr("stroke", css("--axis"));
+    g.append("g").attr("class", "axis").attr("transform", `translate(0,${y(0)})`).call(d3.axisBottom(x).tickSize(0))
+      .call((a) => a.select(".domain").remove()).selectAll("text").attr("dy", "1em");
+    YRS.forEach((yr) => {
+      let acc = 0;
+      cfg.parts.forEach(([, c, f]) => {
+        const v = f(yr, "mid");
+        if (v > 0) g.append("rect").attr("x", x(yr)).attr("width", x.bandwidth()).attr("y", y(acc + v)).attr("height", y(acc) - y(acc + v)).attr("fill", css(c));
+        acc += v;
+      });
+      const lo = tot(yr, "low"), hi = tot(yr, "high"), cx = x(yr) + x.bandwidth() / 2;
+      if (hi - lo > top * 0.01) {
+        g.append("line").attr("x1", cx).attr("x2", cx).attr("y1", y(lo)).attr("y2", y(hi)).attr("stroke", css("--ink")).attr("stroke-width", 1.2);
+        [lo, hi].forEach((v) => g.append("line").attr("x1", cx - 5).attr("x2", cx + 5).attr("y1", y(v)).attr("y2", y(v)).attr("stroke", css("--ink")).attr("stroke-width", 1.2));
+      }
+      g.append("text").attr("class", "lbl-strong").attr("x", cx + (hi - lo > top * 0.01 ? 8 : 0)).attr("y", y(Math.max(acc, hi)) - 6)
+        .attr("text-anchor", hi - lo > top * 0.01 ? "start" : "middle").text(acc > 0 ? moneyFmt(acc) : "$0");
+      g.append("rect").attr("x", x(yr) - 6).attr("width", x.bandwidth() + 12).attr("y", m.t).attr("height", y(0) - m.t).attr("fill", "transparent")
+        .on("mousemove", (ev) => {
+          const [mx, my] = d3.pointer(ev, document.getElementById("money-fig"));
+          const rows = cfg.parts.map(([n, c, f]) => `<span class="sw" style="background:${css(c)}"></span>${n}: ${moneyFmt(f(yr, "mid"))}`).join("<br>");
+          moneyTip.attr("hidden", null).html(`<b>${yr}, middle scenario</b><br>${rows}<br>Total: low ${moneyFmt(lo)} · mid ${moneyFmt(acc)} · high ${moneyFmt(hi)}`)
+            .style("left", Math.min(mx + 14, document.getElementById("money-fig").clientWidth - 230) + "px").style("top", Math.max(0, my - 20) + "px");
+        })
+        .on("mouseleave", () => moneyTip.attr("hidden", true));
+    });
+    // legend under the axis
+    cfg.parts.forEach(([n, c], i) => {
+      const ly = H - m.b + 30 + 18 * i;
+      g.append("rect").attr("x", m.l).attr("y", ly - 5).attr("width", 10).attr("height", 10).attr("rx", 2).attr("fill", css(c));
+      g.append("text").attr("class", "lbl-mid").attr("x", m.l + 16).attr("y", ly).attr("dy", "0.35em").text(n);
+    });
+  }
+  const drawMoney = () => ["b1", "b2", "b3"].forEach(drawMoneyPanel);
+  d3.select("#money-table").html("<thead><tr><th>Kind of money</th><th>Year</th><th>Low</th><th>Middle</th><th>High</th></tr></thead>")
+    .append("tbody").selectAll("tr").data([
+      ["Federal Medicaid", "mcd_usd_federal_countycare"], ["Federal SNAP benefits", "snap_usd_federal_benefits"],
+      ["State Medicaid share", "mcd_usd_state_countycare"], ["New state cost: SNAP administration (Cook share)", "snap_usd_state_admin"],
+      ["New state cost: 15% SNAP benefit share if it starts Oct. 2028 (Cook share)", "snap_usd_state_benefit_share_early"],
+    ].flatMap(([n, id]) => YRS.map((yr) => [n, yr, ...SCS.map((s) => val(`${id}_${yr}_${s}`))]))).join("tr")
+    .html((r) => `<td>${r[0]}</td><td>${r[1]}</td>${r.slice(2).map((v) => `<td>${fmt.usd(v)}</td>`).join("")}`);
+
+  // =================================================================== appendix: comparison table
+  (function () {
+    const T = D.triangulation, k = (v) => (v == null || v === "" ? "-" : fmt.k(v));
+    const ours = Object.fromEntries(T.medicaid.filter((r) => r.source === "ours").map((r) => [r.scenario, r.total_incl_noncitizen]));
+    const urb = Object.fromEntries(T.medicaid.filter((r) => r.source === "urban_x_cook_baseline").map((r) => [r.scenario, r.total_incl_noncitizen]));
+    const hfs = T.medicaid.filter((r) => r.source === "hfs_internal_x_cook_baseline").map((r) => r.total_incl_noncitizen);
+    const rows = [
+      ["Medicaid: Cook adults off coverage, 2028 average", `${k(ours.low)} / ${k(ours.mid)} / ${k(ours.high)}`,
+        `Urban Institute: ${k(urb["high mitigation"])} / ${k(urb["medium mitigation"])} / ${k(urb["low mitigation"])}`],
+      ["Medicaid: work requirement only, 2028 average", (() => { const w = Object.fromEntries(T.medicaid.filter((r) => r.source === "ours").map((r) => [r.scenario, r.work_requirements])); return `${k(w.low)} / ${k(w.mid)} / ${k(w.high)}`; })(),
+        `HFS internal estimate: ${k(hfs[0])} to ${k(hfs[1])}`],
+      ...T.snap.slice().reverse().map((r) => [r.measure.startsWith("Cook first-wave") ? "SNAP: first time-limit losses, May-June 2026" : "SNAP: adults under the time limit, April 2026",
+        k(r.ours), (r.measure.startsWith("Cook first-wave") ? "IDHS (about 148,000 statewide by June 2026): " : "IDHS (about 450,000 newly time-limited statewide): ") + k(r.external)]),
+    ];
+    d3.select("#tri-table").html("<thead><tr><th>Measure</th><th>This study (low / mid / high)</th><th>Other estimate, scaled to Cook</th></tr></thead>")
+      .append("tbody").selectAll("tr").data(rows).join("tr").html((r) => r.map((c) => `<td>${c}</td>`).join(""));
+  })();
+
   // =================================================================== scroll
   const MAP_STEPS = [
     { pg: "medicaid", focus: null }, { pg: "medicaid", focus: "west_south" }, { pg: "snap", focus: null },
@@ -936,11 +1089,11 @@ ul.rules li { margin-bottom: 0.6rem; }
   });
   const ro = new ResizeObserver(() => {
     const pp = pplPrev; pplPrev = -1; // redraw without replaying the transition
-    drawSnap(); drawMcd(); drawPpl(); drawMap(); drawBoth(); pplPrev = pp;
+    drawSnap(); drawMcd(); drawPpl(); drawMap(); drawBoth(); drawMoney(); pplPrev = pp;
     [sc1, sc2, sc3, sc4].forEach((s) => s.resize());
   });
-  [snapBox, mcdBox, pplBox, mapBox, bothBox].forEach((b) => ro.observe(b));
-  drawSnap(); drawMcd(); drawPpl(); drawMap(); drawZipTable(); drawBoth(); pplPrev = 0;
+  [snapBox, mcdBox, pplBox, mapBox, bothBox, document.getElementById("money-b1")].forEach((b) => ro.observe(b));
+  drawSnap(); drawMcd(); drawPpl(); drawMap(); drawZipTable(); drawBoth(); drawMoney(); pplPrev = 0;
 })();
 </script>
 

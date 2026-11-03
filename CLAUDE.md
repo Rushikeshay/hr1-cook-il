@@ -20,7 +20,7 @@ data/raw/          downloads, untouched
 data/processed/    cleaned intermediate tables
 output/figures/    PNG + the CSV behind each chart
 output/tables/
-methods.md         plain-language method + limitations (<2 pages)
+methods.md         full, replicable method + limitations (no project history; decided 2026-11-03)
 ```
 
 ## Rules
@@ -163,6 +163,19 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   executive budget release (Oct 8, 2026), $19.9M food/housing release (Mar 2026), CCH Food as Medicine (Jan 2026),
   CCH NACo awards (Sept 2026, Medicaid Impact Working Group). Facts + quotes in params county.response; 05c checks
   every quote; ledger ids county_resp_*. Refs r14-r19.
+
+## Round 3 (2026-11-03): article complete for official review
+- Draft labels removed (byline "November 2026"). Data frozen at Sept 2026; no live updating.
+- New sections: "The money that leaves the county" (3 separate panels: federal / state Medicaid 10% / new state SNAP
+  costs, Cook share = IDHS Cook share of IL SNAP recipients 47.5%; health-services commentary uses county's published
+  figures only, no demand model; SNAP local-economy multiplier as scale only), "What these numbers can't tell you"
+  (staff-relevant limits), "Appendix: how our estimates compare with others" (from triangulation tables).
+- [data-sum] spans add ledger ids in the page; 07b checks those ids too. story_data.json written with allow_nan=False.
+- methods.md rewritten as a full, replicable method (no history). Refs r20 Civic Federation, r21 USDA ERS.
+- Step 9 done: independent recompute (output/checks/independent/independent_review.md): Medicaid exact, SNAP mid/high
+  within ~1%, no code errors; caveats added (second-wave SNAP pool fragile; Medicaid totals don't depend on PUMS).
+- User decisions: no "value of keeping people enrolled" estimate (too speculative); no county demand model; no zip
+  hook; others' estimates only in the appendix.
 
 ## Step 8 outputs (2026-10-29)
 - `07_outputs.py`: output/story/story_data.json (headline numbers keep ledger ids; full ledger included),

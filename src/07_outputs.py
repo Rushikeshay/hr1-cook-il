@@ -141,6 +141,8 @@ bundle = {
     "zips": zips,
     "profiles": prof[["group", "characteristic", "level", "share", "se"]].to_dict("records"),
     "profile_both": pd.read_csv(T / "pums_profiles_both_wide.csv").to_dict("records"),
+    "triangulation": {k: (lambda d: d.astype(object).where(d.notna(), None))(pd.read_csv(T / f"{k}_triangulation.csv"))
+                      .to_dict("records") for k in ("medicaid", "snap")},
     "countycare": pd.read_csv(T / "countycare_pressure.csv").to_dict("records"),
     "county_forecast": pd.read_csv(T / "county_forecast_comparison.csv").to_dict("records"),
     "charity_care": pd.read_csv(T / "cch_charity_care_history.csv").to_dict("records"),
@@ -148,7 +150,7 @@ bundle = {
     "il_vs_urban": pd.read_csv(T / "illinois_vs_urban_scenarios.csv").fillna("").to_dict("records"),
     "ledger": L.reset_index()[["id", "value", "unit", "label", "formula", "source"]].to_dict("records"),
 }
-(STORY / "story_data.json").write_text(json.dumps(bundle, separators=(",", ":"), default=str), encoding="utf-8")
+(STORY / "story_data.json").write_text(json.dumps(bundle, separators=(",", ":"), default=str, allow_nan=False), encoding="utf-8")
 size_kb = (STORY / "story_data.json").stat().st_size / 1024
 ck.between("story_data.json size reasonable (< 1.5 MB)", size_kb, 10, 1536, detail=f"{size_kb:.0f} KB")
 

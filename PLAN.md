@@ -1,5 +1,9 @@
 # H.R. 1 impact on Cook County, IL — Medicaid and SNAP (2026–2028)
 
+> **Archived planning document (October 27, 2026).** Kept for the record; several items below were later changed
+> (for example, the 19/30/40% Medicaid loss rates were replaced by Urban Institute estimates). The current method is
+> [methods.md](methods.md); current parameters are in [params.yaml](params.yaml).
+
 Revised plan, 2026-10-27. Supersedes `hr1_cook_claude_code_prompt.md` where they differ.
 Every number in the analysis is labeled **observed** (published count), **derived** (computed from observed data), or **assumed** (parameter we chose).
 

@@ -177,6 +177,13 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
 - User decisions: no "value of keeping people enrolled" estimate (too speculative); no county demand model; no zip
   hook; others' estimates only in the appendix.
 
+## Cleanup (2026-11-03): repo public at https://github.com/Rushikeshay/hr1-cook-il
+- README.md added; PLAN.md marked archived (methods.md is current); params.yaml stripped of decision-history notes
+  (values unchanged, checked); data.py removed; old nested copy hr1-cook-il/ untracked and gitignored (delete by hand).
+- Keep public files free of internal history; record decisions here instead.
+- Article published on GitHub Pages: https://rushikeshay.github.io/hr1-cook-il/ (docs/index.html, written by 07b on
+  every build; commit + push to update). The claude.ai artifact is now only a private preview.
+
 ## Step 8 outputs (2026-10-29)
 - `07_outputs.py`: output/story/story_data.json (headline numbers keep ledger ids; full ledger included),
   output/story/cook_zcta.geojson (Cook-clipped, simplified, GeoJSON not TopoJSON: no topojson lib in env),

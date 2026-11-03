@@ -58,7 +58,6 @@ medicaid:
   # requirement (not exempt), so the scenarios can be compared. Paperwork loss
   # among exempt people and extra churn from 6-month renewals are separate
   # parameters below, so they aren't counted twice.
-  # Decision 2026-10-29 (user): replaces the unsourced 19/30/40% (came with the original prompt as "user-supplied").
   # Work-requirement losses (subject adults + exempt paperwork losses) = Urban/RWJF Illinois "work requirements
   # after six-month redetermination" share of ALL ACA adults (Table A.2): 18% / 29% / 42%. The subject loss rate is
   # derived in 04_medicaid: (Urban share x baseline - paperwork losses) / subject people (~38% / ~58% / ~82%).
@@ -70,13 +69,12 @@ medicaid:
     mid:  {value: from_urban_il_work_req, urban_scenario: medium, status: derived}
     high: {value: from_urban_il_work_req, urban_scenario: low, status: derived}
     source: "https://www.rwjf.org/content/dam/farm/reports/reports/2026/rwjf485284"
-    note: Base = adults subject to the work requirement (derived). Old unsourced values were 0.19 / 0.30 / 0.40.
+    note: Base = adults subject to the work requirement (derived).
   loss_rate_exempt_paperwork:
     low:  {value: 0.00, status: assumed}
     mid:  {value: 0.03, status: assumed}
     high: {value: 0.06, status: assumed}
     note: exempt adults disenrolled because the exemption was not documented in time
-  # Decision 2026-10-28 (user): replaces the unsourced 0/2/4% churn placeholder.
   six_month_renewal_loss:
     low:  {value: from_urban_il_redet, urban_scenario: high, status: derived}
     mid:  {value: from_urban_il_redet, urban_scenario: medium, status: derived}
@@ -94,8 +92,8 @@ medicaid:
     mid:  {value: 0.0, status: assumed}
     high: {value: 0.0, status: assumed}
     note: >-
-      Set to 0 on 2026-10-29: Urban's 2028 work-requirement estimate already includes ongoing verification, so a
-      separate 2028 add-on would double count (was an unsourced 0/5/10% placeholder).
+      Set to 0: Urban's 2028 work-requirement estimate already includes ongoing verification, so a separate 2028
+      add-on would double count.
   hfs_internal_estimate:
     low:  {value: 165000, status: observed}
     high: {value: 330000, status: observed}
@@ -104,9 +102,9 @@ medicaid:
     note: "HFS draft webinar Module 3 (Jul 14 2026) p8: 'Internal estimates show that between 165,000 and 330,000 Illinoisans will lose Medicaid coverage due to the new federal work requirements'. Method not published; triangulation only."
   # How the work-requirement rules are applied to ACS PUMS records (step 4, src/lib/pums_rules.py).
   pums_rules:
-    # Decision 2026-10-28 (user): broad universe is the headline; PUMS only supplies SHARES, applied to the HFS
-    # count. The plan's narrow universe (POVPIP<=138 + no child <18 in the home) matched 25% of HFS enrollment
-    # vs 82% for the broad one; it is kept as the 'plan_universe' sensitivity.
+    # Broad universe (no income filter, caretaker child rule): PUMS supplies SHARES only, applied to the HFS count.
+    # It holds 82% of HFS enrollment; a narrow version (POVPIP<=138, no child <18 in the home, 25%) is kept as the
+    # 'plan_universe' sensitivity.
     poverty_limit_pct:
       value: null
       status: assumed
@@ -122,9 +120,9 @@ medicaid:
     half_time_student:
       value: compliant
       status: assumed
-      source: "user decision 2026-10-28: follow HFS (school is a way to comply), overrides PLAN.md item 2"
+      source: "https://hfs.illinois.gov/content/dam/soi/en/web/hfs/info/fedresctr/hr1mod3wrce.pdf"
       note: >-
-        PLAN lists half-time school as an exemption; HFS lists it as a way to comply. 'exempt' removes students from
+        HFS lists half-time school as a way to comply. 'exempt' removes students from
         share (a); 'compliant' keeps them in (a) and removes them from (b). Both are reported.
     veteran_rating_code:
       value: "5"
@@ -146,7 +144,7 @@ medicaid:
       effective_date: 2026-10-01
       source: "https://www.illinois.gov/content/dam/soi/en/web/illinois/iisnewsattachments/33039-101426-gci-noncitizen-loss-of-medicaid-sep-pr-003.pdf.pdf"
     cook_share:
-      # Decision 2026-10-28: use the Census share (Cook / Illinois noncitizens, ACS B05001) for mid and high.
+      # mid and high: Census share (Cook / Illinois noncitizens, ACS B05001).
       low:  {value: 0.44, status: observed, source: "https://www.cbsnews.com/chicago/news/noncitizens-illinois-losing-medicaid-benefits/", note: "CBS Chicago: 'about 44% are in Cook County' (wording ambiguous)"}
       mid:  {value: from_acs_noncitizen_share, status: derived, note: "ACS 2020-24 B05001_006 Cook / Illinois (~0.60); computed in pipeline"}
       high: {value: from_acs_noncitizen_share, status: derived}
@@ -160,11 +158,10 @@ medicaid:
       status: derived
       inputs: {capitation_usd: 700000000, members: 69768}
       source: "https://cookcountyhealth.org/wp-content/uploads/Prelim-FY27-CCH-Budget-Presentation-Final.pdf"
-      todo: confirm both inputs against the deck
     pmpm_hfs_statewide_aca:
       value: null
       status: observed
-      todo: find HFS ACA adult per-member cost (HFS annual report / MCO rate certification)
+      note: not published; not used (dollars use the CountyCare rate)
 
 # ---------------------------------------------------------------- SNAP
 snap:
@@ -182,7 +179,6 @@ snap:
     calibration_window:
       value: ["2026-05", "2026-06"]
       status: assumed
-      source: "params.yaml decision 2026-10-28"
       note: >-
         Excess drop beyond the mid trend, May-June 2026 (62k office basis). Matches IDHS's ~148k statewide
         work-requirement losses by ~June 2026 x Cook ~45% = ~67k. May only (43k) and May-Sept (102k) are sensitivities.
@@ -190,12 +186,12 @@ snap:
       value: flat_from_latest
       status: assumed
       note: Cook SNAP persons held at the latest IDHS month (Sept 2026) until the second wave; no further trend
-    calibration_multipliers: {low: 1.0, mid: 1.0, high: 1.0, status: assumed, note: "set to 1.0 on 2026-10-28; scenarios now differ by pool (second_wave_pool)"}
-    # Decision 2026-10-28 (user): who can be cut in April 2027.
+    calibration_multipliers: {low: 1.0, mid: 1.0, high: 1.0, status: assumed, note: "scenarios differ by pool (second_wave_pool), not by multiplier"}
+    # Who can be cut in April 2027.
     second_wave_pool:
       low:  {value: survivors, status: assumed, note: "only time-limited adults who survived wave 1 (pool 2026 - wave-1 losses); no new entrants"}
-      mid:  {value: midpoint, status: assumed, note: "average of low and high pools (user: 35-40k expected; CBPP Oct 2026: caseloads still falling)"}
-      high: {value: refilled, status: assumed, note: "PLAN: PUMS time-limited share x projected caseload (pool fully refilled by new entrants/returners)"}
+      mid:  {value: midpoint, status: assumed, note: "average of low and high pools (CBPP Oct 2026: caseloads still falling)"}
+      high: {value: refilled, status: assumed, note: "PUMS time-limited share x projected caseload (pool fully refilled by new entrants/returners)"}
       source: "https://www.cbpp.org/blog/snap-participation-has-dropped-to-its-lowest-point-in-17-years-even-though-economic-conditions"
 
   noncitizen:
@@ -214,24 +210,24 @@ snap:
   attribution_start:
     low:  {value: "2026-02", status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=176589", note: "legal start of time limit after court ruling (IDHS IM 01/15/2026)"}
     mid:  {value: "2025-12", status: observed, source: "https://www.dhs.state.il.us/page.aspx?item=176589", note: "IDHS first applied H.R. 1 work requirement Dec 2025 (countable months recorded, later removed; CN 26.01)"}
-    high: {value: "2025-10", status: assumed, source: "params.yaml decision 2026-10-28", note: "every month after the Sept 2025 baseline, flat counterfactual"}
+    high: {value: "2025-10", status: assumed, note: "every month after the Sept 2025 baseline, flat counterfactual"}
   triangulation:
     statewide_work_req_losses_by_jun_2026: {value: 148000, status: observed, source: "https://chicago.suntimes.com/la-voz/2026/07/30/illinois-registra-una-caida-del-16-en-la-inscripcion-en-snap-un-ano-despues-de-los-cambios-al-programa", note: "IDHS estimate; plus 157,000 lost for other reasons"}
     statewide_initial_projection: {value: 400000, status: observed, source: "same Sun-Times article", note: "state officials' initial estimate"}
 
   # IDHS has two Cook counts. County PDF (by residence) 881,937 vs servicing-office table 851,244 (Sept 2025).
-  # Decision 2026-10-28: we measure Cook RESIDENTS, so office-based changes are scaled to a residence basis by the
+  # We measure Cook RESIDENTS, so office-based changes are scaled to a residence basis by the
   # Sept 2025 ratio. Assumes the ratio is stable over time (only one month of county data is available).
   residence_adjustment:
-    low:  {value: 1.0, status: assumed, source: "params.yaml decision 2026-10-28", note: "office basis (no adjustment)"}
+    low:  {value: 1.0, status: assumed, note: "office basis (no adjustment)"}
     mid:  {value: from_sept2025_county_office_ratio, status: derived}
     high: {value: from_sept2025_county_office_ratio, status: derived}
 
-  # Decision 2026-10-28 (user): OUT OF SCOPE for totals. These rules cut benefits for people who stay on SNAP;
+  # OUT OF SCOPE for totals. These rules cut benefits for people who stay on SNAP;
   # they are small next to coverage losses (LIHEAP/SUA ~1-3% of SNAP $ even at 20-50k households; internet $0-5).
   # Kept for reference (LIHEAP per-household cut table) and described in methods.md.
   benefit_cuts_still_enrolled:
-    in_scope: {value: false, status: assumed, source: "user decision 2026-10-28"}
+    in_scope: {value: false, status: assumed}
     liheap_sua:
       # Affected: SNAP households with no Qualifying Member (60+ or disabled) that got the A/C-Heating standard ONLY
       # because of a LIHEAP payment >= $21, i.e. they pay no heat/AC bill themselves (e.g. heat included in rent).
@@ -248,13 +244,13 @@ snap:
         mid:  {value: limited, status: assumed}
         high: {value: telephone, status: assumed, note: "only a phone bill"}
       # Per-household cut = benefit_reduction_rate x (ac_heat - fallback). An upper bound: the 50%-of-income rule and
-      # the $769 cap can make it smaller. Not the pasted "$100/month (FRAC/CBO)" figure, which is unverified.
+      # the $769 cap can make it smaller.
       share_households_affected:
         low:  {value: null, status: assumed}
         mid:  {value: null, status: assumed}
         high: {value: null, status: assumed}
-        todo: >-
-          need the number/share of Cook SNAP households with no Qualifying Member that got the A/C-Heating standard
+        note: >-
+          needs the number/share of Cook SNAP households with no Qualifying Member that got the A/C-Heating standard
           only via LIHEAP (IDHS administrative data; not published). PUMS upper bound for 'no 60+/disabled member' is
           41% of SNAP households, but most of those pay heat/AC bills and are not affected.
     internet_sua:

@@ -1087,11 +1087,13 @@ ul.rules li { margin-bottom: 0.6rem; }
     if (s.pg) state.pg = s.pg;
     state.focus = s.focus; setButtons(); drawMap(); drawZipTable();
   });
-  const ro = new ResizeObserver(() => {
+  let roFrame = 0;
+  const ro = new ResizeObserver(() => { cancelAnimationFrame(roFrame); roFrame = requestAnimationFrame(redrawAll); });
+  function redrawAll() {
     const pp = pplPrev; pplPrev = -1; // redraw without replaying the transition
     drawSnap(); drawMcd(); drawPpl(); drawMap(); drawBoth(); drawMoney(); pplPrev = pp;
     [sc1, sc2, sc3, sc4].forEach((s) => s.resize());
-  });
+  }
   [snapBox, mcdBox, pplBox, mapBox, bothBox, document.getElementById("money-b1")].forEach((b) => ro.observe(b));
   drawSnap(); drawMcd(); drawPpl(); drawMap(); drawZipTable(); drawBoth(); drawMoney(); pplPrev = 0;
 })();

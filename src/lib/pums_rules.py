@@ -6,7 +6,9 @@ for most exemptions. Codes checked against PUMS_Data_Dictionary_2020-2024.csv. T
     s = snap_flags(df)                # SNAP time-limited adults
 
 Medicaid universe (HFS "ACA adult"): age 19-64, Medicaid/means-tested coverage (HINS4), no Medicare (HINS3),
-no SSI, income <= 138% of poverty (POVPIP), no child <18 in the home.
+no SSI. The analysis uses params.yaml settings (no income filter; not the parent/caretaker of a child <18 in the
+home). DEFAULT_RULES below are the narrower variant (income <= 138% of poverty, no child <18 in the home), used by
+the unit tests and the 'plan_universe' sensitivity.
 Shares:  (a) subject = in universe and not exempt
          (b) subject and not already compliant (hours, earnings, or either)
 """

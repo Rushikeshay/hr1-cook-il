@@ -65,7 +65,7 @@ snap_cook_persons_2026_09,640932.0,people,observed,,,"IDHS SNAP Data by Servicin
 snap_cook_households_2026_09,367737.0,households,observed,,,"IDHS SNAP Data by Servicing Office, idhs/offices/snap_offices_2026_09.html table row 55",02_snap_series
 snap_cook_persons_county_pdf_2025_09,881937.0,people,observed,,,"IDHS SNAP Individual Counts by Counties, Sept 2025, page 1",02_snap_series
 snap_residence_ratio,1.036056641808929,ratio,derived,snap_cook_persons_county_pdf_2025_09 / snap_cook_persons_2025_09,snap_cook_persons_county_pdf_2025_09;snap_cook_persons_2025_09,,02_snap_series
-snap_residence_adj_low,1.0,ratio,assumed,,,params.yaml decision 2026-10-28,02_snap_series
+snap_residence_adj_low,1.0,ratio,assumed,,,params.yaml:snap.residence_adjustment.low,02_snap_series
 snap_residence_adj_mid,1.036056641808929,ratio,derived,snap_residence_ratio,snap_residence_ratio,,02_snap_series
 snap_residence_adj_high,1.036056641808929,ratio,derived,snap_residence_ratio,snap_residence_ratio,,02_snap_series
 snap_observed_drop_persons,210312.0,people,derived,snap_cook_persons_2025_09 - snap_cook_persons_2026_09,snap_cook_persons_2025_09;snap_cook_persons_2026_09,,02_snap_series

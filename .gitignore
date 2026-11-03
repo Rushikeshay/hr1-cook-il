@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 data/processed/
+
+# old nested copy of this repo (safe to delete by hand)
+hr1-cook-il/

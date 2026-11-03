@@ -43,6 +43,10 @@ assert "/*__DATA__*/" in tpl
 html = tpl.replace("/*__DATA__*/", payload)
 out = OUT / "story" / "preview.html"
 out.write_text(html, encoding="utf-8")
+# GitHub Pages copy (repo Settings > Pages > Deploy from branch: main, folder /docs)
+(ROOT / "docs").mkdir(exist_ok=True)
+(ROOT / "docs" / "index.html").write_text(html, encoding="utf-8")
+(ROOT / "docs" / ".nojekyll").write_text("", encoding="utf-8")
 kb = out.stat().st_size / 1024
 ck.between("preview size reasonable (< 2 MB)", kb, 50, 2048, detail=f"{kb:.0f} KB")
 print(f"preview: {out} ({kb:.0f} KB, {len(ids)} ledger ids in text)")

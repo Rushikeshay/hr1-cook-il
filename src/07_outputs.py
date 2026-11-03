@@ -140,6 +140,7 @@ bundle = {
     "monthly": monthly,
     "zips": zips,
     "profiles": prof[["group", "characteristic", "level", "share", "se"]].to_dict("records"),
+    "profile_both": pd.read_csv(T / "pums_profiles_both_wide.csv").to_dict("records"),
     "countycare": pd.read_csv(T / "countycare_pressure.csv").to_dict("records"),
     "county_forecast": pd.read_csv(T / "county_forecast_comparison.csv").to_dict("records"),
     "charity_care": pd.read_csv(T / "cch_charity_care_history.csv").to_dict("records"),

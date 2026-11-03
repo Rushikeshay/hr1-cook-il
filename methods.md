@@ -90,3 +90,21 @@ people respond as poorly as in past programs.
   - \* FAQ "How will federal changes impact Medicaid". https://hfs.illinois.gov/info/fedresctr/faqshowwillfedchimpactmedicaid.html
   - \* ACA Adult customer notice (Aug 31 2026).
     https://hfs.illinois.gov/content/dam/soi/en/web/hfs/medicalclients/medicaidguide/ACAAdultCustomerNotice083126ToPrint.pdf
+
+## Who is likely to lose both programs (step 6d)
+
+Census ACS 2020-24 microdata (PUMS) for Cook adults in the Medicaid expansion group. Each person is weighted by their
+survey weight times their estimated chance of losing both Medicaid and SNAP by December 2028 (from the overlap step:
+midpoint of "independent" and "fully correlated" losses). Margins of error use the 80 replicate weights, holding the
+chances fixed, so they understate total uncertainty. Excludes the noncitizen cut (about 2,000 people, added separately
+in the counts). The survey predates H.R. 1: this describes who is likely to lose both, not people observed losing them.
+Output: output/tables/pums_profiles_both.csv (all scenarios, both overlap ends) and pums_profiles_both_wide.csv.
+
+## What the county is doing (step 6c)
+
+Public releases only: Cook County FY2027 budget recommendation (Oct 8, 2026) and preliminary forecast (June 17, 2026),
+CCH FY2027 budget presentation (July 31, 2026), the county's $19.9M food and housing investment (Mar 11, 2026), CCH's
+Food as Medicine release (Jan 23, 2026) and NACo awards release (Sept 1, 2026). Every number and statement used is
+stored with its exact quote in params.yaml (county.response) and checked against the downloaded file on each run.
+Comparisons in the article (e.g. $10M to the Food Depository vs. federal SNAP dollars lost) set one-time county money
+against our annual estimates; they are scale comparisons, not a forecast of county decisions.

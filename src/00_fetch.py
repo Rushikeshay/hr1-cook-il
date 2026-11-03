@@ -53,6 +53,11 @@ FILES = {
     "evidence/brookings_arkansas_style_work_requirement_2025.pdf": "https://www.brookings.edu/wp-content/uploads/2026/04/ArkansasStyleWorkRequirementEnrollmentEffects-FINAL.pdf",
     "evidence/usda_ers_err265_snap_multiplier_2019.pdf": "https://ers.usda.gov/sites/default/files/_laserfiche/publications/93529/ERR-265.pdf?v=70863",
     "cook/fy2027_preliminary_budget_forecast_release.html": "https://www.cookcountyil.gov/news/cook-county-board-president-toni-preckwinkle-releases-fy2027-preliminary-budget-forecast",
+    # What the county is doing (public releases; quotes auto-checked in 05c)
+    "cook/fy2027_executive_budget_release.html": "https://www.cookcountyil.gov/news/years-fiscal-discipline-allow-cook-county-absorb-550-million-gap-without-new-taxes",
+    "cook/food_housing_investment_2026_03.html": "https://www.cookcountyil.gov/news/cook-county-invests-nearly-20-million-funding-protect-food-and-housing-stability-trump",
+    "cch/food_as_medicine_release_2026_01.html": "https://cookcountyhealth.org/press-release/state-cook-county-leaders-and-greater-chicago-food-depository-address-federal-snap-cuts-and-launch-cch-food-as-medicine-initiatives/",
+    "cch/naco_awards_release_2026_09.html": "https://cookcountyhealth.org/?p=21747",
     "evidence/sommers_2019_nejm_arkansas.pdf": "https://digitalgovernmenthub.org/wp-content/uploads/2024/12/NEJMsr1901772.pdf",
     # Geography
     "geo/cb_2020_us_zcta520_500k.zip": "https://www2.census.gov/geo/tiger/GENZ2020/shp/cb_2020_us_zcta520_500k.zip",

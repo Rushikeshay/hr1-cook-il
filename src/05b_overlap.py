@@ -55,7 +55,7 @@ target_office = v("snap_wave1_calibration_target_office")
 pool_office = v("snap_time_limited_pool_2026_office")
 snap_base = v("snap_cook_persons_county_pdf_2025_09")
 
-rows = []
+rows, pp = [], []
 for sc in SC:
     adj = v(f"snap_residence_adj_{sc}")
     r_wr, r_ver = v(f"mcd_loss_rate_subject_{sc}"), v(f"mcd_verification_increase_2028_{sc}")
@@ -85,6 +85,10 @@ for sc in SC:
         both_nc = nc_m * nc_on_snap
         lo, hi = f_lo * (M - nc_m) + both_nc, f_hi * (M - nc_m) + both_nc
         mid = (lo + hi) / 2
+        if y == YEARS[-1]:  # per-person chances, for the "who loses both" profile (step 05d)
+            pp.append(pd.DataFrame({"SERIALNO": u.SERIALNO, "SPORDER": u.SPORDER, "scenario": sc, "p_medicaid": p_m,
+                                    "p_snap": p_s, "p_both_low": p_m * p_s,
+                                    "p_both_high": pd.concat([p_m, p_s], axis=1).min(axis=1)}))
         rows.append(dict(scenario=sc, year=y, medicaid_lost=M, snap_lost=S, share_mcd_losers_also_snap_low=f_lo,
                          share_mcd_losers_also_snap_high=f_hi, both_low=lo, both_central=mid, both_high=hi,
                          only_medicaid=M - mid, only_snap=S - mid, unique_residents=M + S - mid,
@@ -100,6 +104,7 @@ for sc in SC:
                         [f"ovl_both_central_{y}_{sc}", f"mcd_off_coverage_dec_{y}_{sc}", f"snap_persons_off_dec_{y}_{sc}"])
 
 res = pd.DataFrame(rows)
+pd.concat(pp).to_csv(PROC / f"ovl_person_probs_{YEARS[-1]}.csv", index=False)
 for y in YEARS:
     a = res[res.year == y].set_index("scenario")
     ck.ordered(f"{y} unique residents: low <= mid <= high", *(a.loc[s, "unique_residents"] for s in SC))

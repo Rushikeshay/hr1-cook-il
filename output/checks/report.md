@@ -1,10 +1,10 @@
 # Check report
 
-Generated 2026-11-02 16:35
+Generated 2026-11-03 10:33
 
 | step | PASS | WARN |
 |---|---|---|
-| 00b_manifest | 276 | 0 |
+| 00b_manifest | 288 | 0 |
 | 01a_snap_parse | 170 | 2 |
 | 01b_hfs_parse | 17 | 0 |
 | 01c_cch_parse | 72 | 0 |
@@ -18,7 +18,8 @@ Generated 2026-11-02 16:35
 | 04_medicaid | 45 | 0 |
 | 05_snap | 51 | 0 |
 | 05b_overlap | 14 | 0 |
-| 05c_county_pressure | 8 | 0 |
+| 05c_county_pressure | 37 | 0 |
+| 05d_both_profile | 10 | 0 |
 | 06_zip_alloc | 15 | 0 |
 | 07_outputs | 16 | 0 |
 | 07b_story_preview | 5 | 0 |

@@ -123,6 +123,9 @@ for g, c, l, lid in [("medicaid_subject", "work_past_12_months", "Worked 20-34 h
     r = get(g, c, l)
     led.derived(lid, r.share, "share", f"weighted share '{l}' among PUMS {g} (SE {r.se:.3f})", ["pums_cook_person_records"])
 prof.to_csv(OUT / "tables" / "pums_profiles.csv", index=False)
+# characteristics per person, reused by 05d (profile of people likely to lose both programs)
+pd.DataFrame({"SERIALNO": df.SERIALNO, "SPORDER": df.SPORDER, **{c: s for c, s in CHAR.items()}}).to_csv(
+    PROC / "pums_profile_chars.csv", index=False)
 wide = prof.pivot_table(index=["characteristic", "level"], columns="group", values="share", sort=False)[list(GROUPS)]
 wide.to_csv(OUT / "tables" / "pums_profiles_wide.csv")
 pd.set_option("display.width", 250)

@@ -309,6 +309,50 @@ county:
     health_fund_gap: {value: 214700000, status: observed, quote: "In FY2027, the Health Enterprise Fund is expected to have a budget gap of $214.7 million."}
     health_revenue_decline: {value: 486500000, status: observed, quote: "Revenues are expected to decline by $486.5 million due to a significant expected decrease in CountyCare membership"}
     obbba_hospital_fallout: {value: 138000000, status: observed, quote: "an expected $138.0 million fallout of federal changes in the One Big Beautiful Bill Act (OBBBA) impacting the hospital system"}
+  # What the county is doing (story section "What the county is doing"). Public releases only; every quote is
+  # checked against the downloaded file in 05c. Ledger id = county_resp_<key>. status: observed for all.
+  response:
+    sources:
+      exec_budget: {file: cook/fy2027_executive_budget_release.html, date: 2026-10-08, title: "Years of Fiscal Discipline Allow Cook County to Absorb $550 Million Gap Without New Taxes", url: "https://www.cookcountyil.gov/news/years-fiscal-discipline-allow-cook-county-absorb-550-million-gap-without-new-taxes"}
+      food_housing: {file: cook/food_housing_investment_2026_03.html, date: 2026-03-11, title: "Cook County Invests Nearly $20 Million in Funding to Protect Food and Housing Stability", url: "https://www.cookcountyil.gov/news/cook-county-invests-nearly-20-million-funding-protect-food-and-housing-stability-trump"}
+      food_medicine: {file: cch/food_as_medicine_release_2026_01.html, date: 2026-01-23, title: "State, Cook County Leaders and Greater Chicago Food Depository Address Federal SNAP Cuts and Launch CCH Food as Medicine Initiatives", url: "https://cookcountyhealth.org/press-release/state-cook-county-leaders-and-greater-chicago-food-depository-address-federal-snap-cuts-and-launch-cch-food-as-medicine-initiatives/"}
+      naco: {file: cch/naco_awards_release_2026_09.html, date: 2026-09-01, title: "Cook County Health Earns 27 National Association of Counties Achievement Awards", url: "https://cookcountyhealth.org/?p=21747"}
+      cch_deck: {file: cch/prelim_fy27_cch_budget.pdf, date: 2026-07-31, title: "Cook County Health FY2027 Budget (preliminary)", url: "https://cookcountyhealth.org/wp-content/uploads/Prelim-FY27-CCH-Budget-Presentation-Final.pdf"}
+    facts:
+      total_budget_fy2027: {value: 9690000000, unit: USD, src: exec_budget, quote: "This $9.69 billion budget is balanced without raising taxes on residents"}
+      gap_fy2027: {value: 550700000, unit: USD, src: exec_budget, quote: "projected a budget gap of $550.7 million across the County's General and Health Funds in FY2027"}
+      gap_reserves: {value: 18000000, unit: USD, src: exec_budget, quote: "using reserves ($18 million)"}
+      gap_investing: {value: 88000000, unit: USD, src: exec_budget, quote: "smart investing ($88 million)"}
+      gap_spending_cuts: {value: 35000000, unit: USD, src: exec_budget, quote: "($35 million in spending cuts)"}
+      gap_vacancies: {value: 46000000, unit: USD, src: exec_budget, quote: "taking a stricter approach to vacancies ($46 million)"}
+      arpa_to_operations: {value: 61200000, unit: USD, src: exec_budget, quote: "$61.2 million will support General Fund operations"}
+      cch_gap_closed_by_cch: {value: 174000000, unit: USD, src: exec_budget, quote: "closed $174 million of a $214 million hospital system gap through a combination of revenue optimization and cost reductions"}
+      cch_added_county_support: {value: 40000000, unit: USD, src: exec_budget, quote: "included an additional $40 million in County support to help offset the impact of federal funding cuts"}
+      cch_total_county_support: {value: 208000000, unit: USD, src: exec_budget, quote: "bringing total County support to $208 million"}
+      cch_budget_cut_fy2027: {value: 439000000, unit: USD, src: exec_budget, quote: "CCH's proposed $4.7 billion FY2027 budget is $439 million less than the FY2026 budget"}
+      cch_charity_care_fy2027: {value: 485000000, unit: USD, src: exec_budget, quote: "Charity care costs are projected to increase by $100 million, reaching an estimated $485 million in FY2027"}
+      cch_charity_care_increase: {value: 100000000, unit: USD, src: exec_budget, quote: "Charity care costs are projected to increase by $100 million"}
+      cch_expenses_eliminated_since_2024: {value: 314000000, unit: USD, src: exec_budget, quote: "Since 2024, CCH has eliminated approximately $314 million in expenses"}
+      cch_alt_layoffs_fte: {value: 154, unit: FTE, src: cch_deck, quote: "Total $40M 154"}
+      food_housing_total: {value: 19900000, unit: USD, src: food_housing, quote: "invest $19.9 million to strengthen food access and housing stability across the County"}
+      food_depository: {value: 10000000, unit: USD, src: food_housing, quote: "$10 million to the Food Depository"}
+      rental_assistance: {value: 5800000, unit: USD, src: food_housing, quote: "$5.8 million to IHDA, to support its Court-Based Rental Assistance program"}
+      homeless_services: {value: 4100000, unit: USD, src: food_housing, quote: "$4.1 million to support homeless services"}
+      extra_food_seekers_low: {value: 100000, unit: people, src: food_housing, quote: "between 100,000 and 200,000 additional Cook County residents may seek food access assistance from the Food Depository and its partner network in 2026"}
+      extra_food_seekers_high: {value: 200000, unit: people, src: food_housing, quote: "between 100,000 and 200,000 additional Cook County residents"}
+    statements:  # no number; quote checks only
+      tif_funding: {src: food_housing, quote: "The investments are funded by a portion of the Tax Increment Financing (TIF) surplus declared by the City of Chicago in December 2025"}
+      food_pantries: {src: food_medicine, quote: "Foods pantries have been opened at Provident Hospital and Belmont Cragin Health Center"}
+      food_screening: {src: food_medicine, quote: "All CCH primary care sites now screen patients for food insecurity, providing immediate referrals to the GCFD SNAP Outreach Hotline"}
+      medicaid_facts: {src: naco, quote: "The group also led to the development of GetMedicaidFacts.com, a low-barrier resource that helps Medicaid enrollees and the organizations that support them stay informed about changes to Medicaid"}
+      hiring_flat: {src: exec_budget, quote: "Hiring will also remain almost entirely flat in the proposed budget from the FY2026 adopted budget"}
+      alt_layoffs: {src: cch_deck, quote: "Without additional County funding, cuts to patient care services and layoffs would be necessary"}
+      efficiencies_not_enough: {src: cch_deck, quote: "Operational efficiencies alone cannot offset federal cuts"}
+  second_most_populous_county:
+    value: 2
+    status: observed
+    source: "https://www.census.gov/programs-surveys/popest.html"
+    note: Cook County is the second most populous U.S. county, after Los Angeles County (Census population estimates).
   snap_multiplier:
     source: "https://ers.usda.gov/sites/default/files/_laserfiche/publications/93529/ERR-265.pdf?v=70863"
     gdp_per_dollar: {value: 1.54, status: observed, quote: "collectively increases GDP by $1.54 billion, supports 13,560 jobs"}

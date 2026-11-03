@@ -46,6 +46,26 @@ F = C["fy2027_forecast"]
 for k in ("health_fund_gap", "health_revenue_decline", "obbba_hospital_fallout"):
     ck.true(f"County FY2027 forecast quote found: {k}", norm(F[k]["quote"]) in rel_txt)
     led.observed(f"county_fy2027_{k}", F[k]["value"], "USD", f"Cook County FY2027 preliminary forecast release: \"{F[k]['quote']}\"")
+# ---- what the county is doing: every quote must appear in the downloaded file -----------------------------------
+def page_text(rel):
+    if rel.endswith(".pdf"):
+        with pdfplumber.open(RAW / rel) as pdf:
+            return norm(" ".join((pg.extract_text() or "") for pg in pdf.pages))
+    t = (RAW / rel).read_text(encoding="utf-8", errors="replace")
+    return norm(html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)\b[^>]*>.*?</\1>", "", t, flags=re.S | re.I))))
+
+
+R = C["response"]
+TXT = {k: page_text(s["file"]) for k, s in R["sources"].items()}
+for k, f in R["facts"].items():
+    s = R["sources"][f["src"]]
+    ck.true(f"county response quote found: {k}", norm(f["quote"]) in TXT[f["src"]], detail=s["file"])
+    led.observed(f"county_resp_{k}", f["value"], f["unit"], f"{s['title']} ({s['date']}): \"{f['quote']}\"")
+for k, f in R["statements"].items():
+    ck.true(f"county response statement found: {k}", norm(f["quote"]) in TXT[f["src"]], detail=R["sources"][f["src"]]["file"])
+F_ = R["facts"]
+ck.close("CCH gap: $174M closed by CCH + $40M County = $214M (forecast $214.7M)",
+         F_["cch_gap_closed_by_cch"]["value"] + F_["cch_added_county_support"]["value"], F["health_fund_gap"]["value"], rel_tol=0.01)
 ck.true("ERS multiplier quote found in ERR-265", norm(C["snap_multiplier"]["gdp_per_dollar"]["quote"]) in ers_txt)
 mult = led.observed("ers_snap_gdp_multiplier", C["snap_multiplier"]["gdp_per_dollar"]["value"], "USD GDP per USD SNAP",
                     "USDA ERS ERR-265 (Canning & Stacy 2019)")

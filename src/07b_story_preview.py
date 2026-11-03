@@ -34,7 +34,8 @@ script_ids = {k: values[k] for k in values if k.startswith(("ovl_", "mcd_off", "
 for k in ["mcd_subject_people", "mcd_subject_noncompliant_people"]:
     script_ids[k] = values[k]
 data = {"meta": B["meta"], "values": {i: values[i] for i in ids} | script_ids,
-        "snap": B["snap_series"], "monthly": B["monthly"], "zips": B["zips"], "geo": geo}
+        "snap": B["snap_series"], "monthly": B["monthly"], "zips": B["zips"], "geo": geo,
+        "profile_both": B["profile_both"]}
 ck.equal("Medicaid monthly series covers Oct 2025-Dec 2028 for 3 scenarios", len(B["monthly"]), 117)
 payload = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
 assert "/*__DATA__*/" in tpl

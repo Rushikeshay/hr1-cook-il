@@ -81,6 +81,7 @@ h2 { font-family: var(--serif); font-weight: 650; font-size: var(--step1); line-
 .lbl-mid { font-family: var(--sans); font-size: 12.5px; fill: var(--ink-2); }
 .event line { stroke: var(--axis); }
 .event text { font-family: var(--sans); font-size: 13.5px; font-weight: 500; fill: var(--ink-2); }
+.event .ev-date { font-weight: 700; fill: var(--ink); }
 
 /* controls: one row above the map */
 .controls { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; font-family: var(--sans); font-size: var(--step-1); }
@@ -151,6 +152,9 @@ ul.rules li { margin-bottom: 0.6rem; }
 .ppl-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
 .ppl-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
 .ppl-legend b { font-weight: 600; color: var(--ink); }
+/* static (non-scrolly) figure */
+.static-fig { margin-block: 1.5rem 0.75rem; display: grid; gap: 0.4rem; }
+.static-fig .g-box { height: 20rem; }
 .fade-in { animation: fadeIn 1.2s ease-out both; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
@@ -306,6 +310,27 @@ ul.rules li { margin-bottom: 0.6rem; }
 </section>
 <div class="col"><details class="table"><summary>See every zip area as a table</summary><div class="tbl-wrap"><table id="zip-table"></table></div></details></div>
 
+<h2 class="col">Who is likely to lose both</h2>
+<section class="col prose">
+  <p>The residents most likely to lose both Medicaid and SNAP are not a cross-section of the county. In the middle scenario, about <span class="num" data-id="prof_both_black_2028_mid" data-fmt="pct"></span> of them are Black, compared with <span class="num" data-id="prof_all_adults_black" data-fmt="pct"></span> of all Cook adults aged 19 to 64. About <span class="num" data-id="prof_both_did_not_work_2028_mid" data-fmt="pct"></span> did not work at all in the past year, and <span class="num" data-id="prof_both_age_50_64_2028_mid" data-fmt="pct"></span> are aged 50 to 64, an age group H.R. 1 newly brought under SNAP's time limit, which used to stop at 54.<sup class="ref"><a href="#r1">1</a></sup> Most, <span class="num" data-id="prof_both_chicago_2028_mid" data-fmt="pct"></span>, live in Chicago.</p>
+</section>
+<figure class="col static-fig" id="both-fig">
+  <p class="g-title">People likely to lose both programs are more often Black, older and out of work than Cook adults overall</p>
+  <p class="g-sub">Green dots show the share of people likely to lose both Medicaid and SNAP by December 2028 (middle scenario) who are in each category. Gray dots show the share of all Cook adults aged 19 to 64 in that category, for comparison. First row: <span class="num" data-id="prof_all_adults_black" data-fmt="pct"></span> of all Cook adults aged 19 to 64 are Black, but <span class="num" data-id="prof_both_black_2028_mid" data-fmt="pct"></span> of the people likely to lose both benefits are Black. (Margin of error: about 2 to 3 points either way.)</p>
+  <p class="g-hint"><span class="mouse">Hover</span><span class="touch">Tap</span> a row for the exact shares.</p>
+  <div class="g-box" id="both-chart"></div>
+  <div class="g-foot"><span>Census ACS 2020-24 microdata<sup class="ref"><a href="#r12">12</a></sup> for Cook adults covered by, or likely to qualify for, the Medicaid expansion. Each person counts by their estimated chance of losing both programs, from this analysis. Survey taken before H.R. 1: it describes who is likely to lose both, not people counted after losing them. Leaves out the noncitizen cut (about <span class="num" data-id="ovl_both_central_2026_mid" data-fmt="k"></span> people).</span></div>
+</figure>
+<div class="col"><details class="table"><summary>See the profile as a table</summary><div class="tbl-wrap"><table id="both-table"></table></div></details></div>
+
+<h2 class="col section-break">What the county is doing</h2>
+<section class="col prose">
+  <p>Cook County is the second most populous county in the country,<sup class="ref"><a href="#r14">14</a></sup> and it meets H.R. 1 with a budget that is already stretched. Its proposed FY2027 budget, <span class="num" data-id="county_resp_total_budget_fy2027" data-fmt="usdb"></span>, had to close a projected gap of <span class="num" data-id="county_resp_gap_fy2027" data-fmt="usdm"></span>. About <span class="num" data-id="county_fy2027_obbba_hospital_fallout" data-fmt="usdm"></span> of that gap is the expected fallout of H.R. 1 for the county's hospital system.<sup class="ref"><a href="#r15">15</a></sup> The county closed it without new taxes, in part by drawing on reserves (<span class="num" data-id="county_resp_gap_reserves" data-fmt="usdm"></span>), investment income (<span class="num" data-id="county_resp_gap_investing" data-fmt="usdm"></span>), spending cuts (<span class="num" data-id="county_resp_gap_spending_cuts" data-fmt="usdm"></span>) and leaving jobs unfilled (<span class="num" data-id="county_resp_gap_vacancies" data-fmt="usdm"></span>). Hiring stays almost flat.<sup class="ref"><a href="#r15">15</a></sup></p>
+  <p><strong>Health care.</strong> Cook County Health, the county's hospital system and the parent of its CountyCare Medicaid plan, carries most of the strain. Its proposed FY2027 budget is <span class="num" data-id="county_resp_cch_budget_cut_fy2027" data-fmt="usdm"></span> smaller than this year's, mostly because CountyCare expects fewer members. Since 2024 it has cut about <span class="num" data-id="county_resp_cch_expenses_eliminated_since_2024" data-fmt="usdm"></span> in expenses, and it closed <span class="num" data-id="county_resp_cch_gap_closed_by_cch" data-fmt="usdm"></span> of its own <span class="num" data-id="county_fy2027_health_fund_gap" data-fmt="usdm"></span> gap. The county is covering the last <span class="num" data-id="county_resp_cch_added_county_support" data-fmt="usdm"></span> with more tax support, bringing its total to <span class="num" data-id="county_resp_cch_total_county_support" data-fmt="usdm"></span>.<sup class="ref"><a href="#r15">15</a></sup> Without that money, the health system said it would have had to cut services and about <span class="num" data-id="county_resp_cch_alt_layoffs_fte" data-fmt="int"></span> positions.<sup class="ref"><a href="#r16">16</a></sup> Meanwhile, charity care, the free or reduced-cost care it gives patients who cannot pay, is projected to rise by <span class="num" data-id="county_resp_cch_charity_care_increase" data-fmt="usdm"></span> to <span class="num" data-id="county_resp_cch_charity_care_fy2027" data-fmt="usdm"></span> in FY2027.<sup class="ref"><a href="#r15">15</a></sup> To help eligible residents keep Medicaid, Cook County Health leads a Medicaid Impact Working Group, which created GetMedicaidFacts.com, a low-barrier guide to the changes for enrollees and the groups that help them.<sup class="ref"><a href="#r18">18</a></sup></p>
+  <p><strong>Food.</strong> The county expected <span class="num" data-id="county_resp_extra_food_seekers_low" data-fmt="int"></span> to <span class="num" data-id="county_resp_extra_food_seekers_high" data-fmt="int"></span> more residents to seek food help in 2026 because of SNAP's new work rules. Its FY2026 budget set aside <span class="num" data-id="county_resp_food_housing_total" data-fmt="usdm"></span> from a one-time Chicago tax-increment financing (TIF) surplus: <span class="num" data-id="county_resp_food_depository" data-fmt="usdm"></span> to the Greater Chicago Food Depository, <span class="num" data-id="county_resp_rental_assistance" data-fmt="usdm"></span> for court-based rental assistance and <span class="num" data-id="county_resp_homeless_services" data-fmt="usdm"></span> for homeless services.<sup class="ref"><a href="#r17">17</a></sup> Cook County Health opened food pantries at Provident Hospital and Belmont Cragin Health Center, and its primary care sites now screen every patient for food insecurity and refer them to the Food Depository's SNAP outreach hotline.<sup class="ref"><a href="#r19">19</a></sup></p>
+  <p><strong>Set against the losses.</strong> These steps help, but they are small next to what leaves the county. The <span class="num" data-id="county_resp_food_depository" data-fmt="usdm"></span> for the Food Depository is one-time money; in the middle scenario, Cook residents lose about <span class="num" data-id="snap_usd_federal_benefits_2028_mid" data-fmt="usdm0"></span> in federal SNAP benefits in 2028 alone. The added <span class="num" data-id="county_resp_cch_added_county_support" data-fmt="usdm"></span> for the health system covers one year; by our estimate, CountyCare loses about <span class="num" data-id="countycare_capitation_lost_fy2028_mid" data-fmt="usdm0"></span> in Medicaid payments in FY2028 for expansion adults alone, as the work requirement takes full effect. Much of the cushion the county used this year, reserves and one-time funds, cannot be used twice.</p>
+</section>
+
 <h2 class="col section-break">What this means for Cook County</h2>
 <section class="col prose">
   <p>By the end of 2028, H.R. 1 could take Medicaid, SNAP or both from between <span class="num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span> and <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents, about <span class="num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span> in the middle scenario. The two programs are at different stages. SNAP's losses have already happened: by September 2026, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> fewer residents were getting help with groceries because of the law. Medicaid's losses are still ahead. Apart from a small noncitizen cut in October 2026, they begin in April 2027 and build through 2028.</p>
@@ -329,6 +354,12 @@ ul.rules li { margin-bottom: 0.6rem; }
     <li id="r11">Sommers BD, Goldman AL, Blendon RJ, Orav EJ, Epstein AM. "Medicaid Work Requirements: Results from the First Year in Arkansas." <i>New England Journal of Medicine</i> 381:1073-82 (2019). <a href="https://doi.org/10.1056/NEJMsr1901772">doi:10.1056/NEJMsr1901772</a></li>
     <li id="r12">U.S. Census Bureau, American Community Survey 2020-2024 5-year estimates: tables B01003 (population), B05001 (citizenship), B22003 (SNAP households), C27007 (Medicaid coverage), and Public Use Microdata Sample (PUMS). <a href="https://www.census.gov/programs-surveys/acs">census.gov/acs</a></li>
     <li id="r13">U.S. Census Bureau, 2020 ZIP Code Tabulation Area boundaries and ZCTA-to-county and ZCTA-to-tract relationship files. <a href="https://www.census.gov/geographies/reference-files/time-series/geo/relationship-files.html">census.gov</a></li>
+    <li id="r14">U.S. Census Bureau, Population Estimates Program, county population totals (Cook County ranks second, after Los Angeles County). <a href="https://www.census.gov/programs-surveys/popest.html">census.gov/popest</a></li>
+    <li id="r15">Cook County, "Years of Fiscal Discipline Allow Cook County to Absorb $550 Million Gap Without New Taxes" (FY2027 Executive Budget Recommendation), October 8, 2026; and FY2027 Preliminary Budget Forecast release, June 17, 2026. <a href="https://www.cookcountyil.gov/news/years-fiscal-discipline-allow-cook-county-absorb-550-million-gap-without-new-taxes">Budget recommendation</a>, <a href="https://www.cookcountyil.gov/news/cook-county-board-president-toni-preckwinkle-releases-fy2027-preliminary-budget-forecast">forecast</a></li>
+    <li id="r16">Cook County Health, <i>Fiscal Year 2027 Budget</i> (preliminary budget presentation), July 31, 2026, pp. 12, 16, 27. <a href="https://cookcountyhealth.org/wp-content/uploads/Prelim-FY27-CCH-Budget-Presentation-Final.pdf">cookcountyhealth.org (PDF)</a></li>
+    <li id="r17">Cook County, "Cook County Invests Nearly $20 Million in Funding to Protect Food and Housing Stability," March 11, 2026. <a href="https://www.cookcountyil.gov/news/cook-county-invests-nearly-20-million-funding-protect-food-and-housing-stability-trump">cookcountyil.gov</a></li>
+    <li id="r18">Cook County Health, "Cook County Health Earns 27 National Association of Counties Achievement Awards" (Medicaid Impact Working Group; GetMedicaidFacts.com), September 1, 2026. <a href="https://cookcountyhealth.org/?p=21747">cookcountyhealth.org</a></li>
+    <li id="r19">Cook County Health, "State, Cook County Leaders and Greater Chicago Food Depository Address Federal SNAP Cuts and Launch CCH Food as Medicine Initiatives," January 23, 2026. <a href="https://cookcountyhealth.org/press-release/state-cook-county-leaders-and-greater-chicago-food-depository-address-federal-snap-cuts-and-launch-cch-food-as-medicine-initiatives/">cookcountyhealth.org</a></li>
   </ol>
 </section>
 
@@ -355,6 +386,9 @@ ul.rules li { margin-bottom: 0.6rem; }
     pctmo: (v) => (Math.abs(v) * 100).toFixed(2) + "%",
     rate: (v) => Math.round(v).toLocaleString("en-US"),
     pct: (v) => Math.round(v * 100) + "%",
+    usdm: (v) => "$" + (Math.round(v / 1e5) / 10).toLocaleString("en-US") + " million",
+    usdm0: (v) => "$" + Math.round(v / 1e6).toLocaleString("en-US") + " million",
+    usdb: (v) => "$" + (Math.round(v / 1e7) / 100).toLocaleString("en-US") + " billion",
   };
 
   // ---- Medicaid monthly projection (step 5 model output), by cause
@@ -418,7 +452,7 @@ ul.rules li { margin-bottom: 0.6rem; }
   function drawSnap() {
     const W = snapBox.clientWidth, H = snapBox.clientHeight;
     if (!W || !H) return;
-    const m = { t: 18, r: 132, b: 30, l: 52 };
+    const m = { t: 74, r: 132, b: 30, l: 52 }; // tall top: room for the dated policy markers above the data
     snapSvg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
     const x = d3.scaleTime().domain([rows[0].date, last.date]).range([m.l, W - m.r]);
     const y = d3.scaleLinear().domain([550000, 950000]).range([H - m.b, m.t]);
@@ -457,13 +491,16 @@ ul.rules li { margin-bottom: 0.6rem; }
     g.append("text").attr("class", "lbl-strong").attr("x", x(e.date) + 10).attr("y", y(e.observed)).attr("dy", "0.35em")
       .classed("fade-in", moved()).text(fmt.k(e.observed));
     // event markers
-    const ev = { 2: ["2025-12", "Work requirement first applied"], 3: ["2026-05", "First time-limit cutoffs"] };
-    Object.entries(ev).forEach(([s, [mo, txt]]) => {
+    // each marker: date on top, what changed below; both stay up through the last step
+    const ev = { 2: ["2025-12", "Dec. 2025", "Work requirement first applied"], 3: ["2026-05", "May 1, 2026", "First time-limit cutoffs"] };
+    Object.entries(ev).forEach(([s, [mo, date, txt]]) => {
       if (snapStep < +s) return;
-      const xx = x(d3.timeParse("%Y-%m")(mo));
+      const xx = x(d3.timeParse("%Y-%m")(mo)), y0 = +s === 2 ? 2 : 36;
       const eg = g.append("g").attr("class", fresh(+s) ? "event fade-in" : "event");
-      eg.append("line").attr("x1", xx).attr("x2", xx).attr("y1", m.t + (+s === 2 ? 0 : 28)).attr("y2", H - m.b);
-      eg.append("text").attr("x", xx - 6).attr("y", m.t + (+s === 2 ? 10 : 38)).attr("text-anchor", "end").text(txt);
+      eg.append("line").attr("x1", xx).attr("x2", xx).attr("y1", y0).attr("y2", H - m.b);
+      const t = eg.append("text").attr("y", y0 + 10).attr("text-anchor", "end");
+      t.append("tspan").attr("class", "ev-date").attr("x", xx - 6).text(date);
+      t.append("tspan").attr("x", xx - 6).attr("dy", "1.2em").text(txt);
     });
     if (snapStep >= 4) {
       const mid = (last.trend + last.observed) / 2;
@@ -812,6 +849,77 @@ ul.rules li { margin-bottom: 0.6rem; }
     d3.select("#zip-table").attr("aria-label", `Zip areas, ${sc} scenario, December 2028`);
   }
 
+  // =================================================================== who loses both (static dot chart)
+  const BOTH_ROWS = [
+    ["race_ethnicity", "Black, non-Hispanic", "Are Black", "Black"],
+    ["race_ethnicity", "Hispanic/Latino (any race)", "Are Hispanic or Latino", "Hispanic/Latino"],
+    ["race_ethnicity", "White, non-Hispanic", "Are white", "White"], ["sex", "Female", "Are women", "Women"],
+    ["age", "50-64", "Are aged 50 to 64", "Aged 50-64"],
+    ["work_past_12_months", "Did not work", "Did not work in the past year", "No work past yr"],
+    ["region", "Chicago", "Live in Chicago", "Live in Chicago"],
+  ];
+  const bothData = BOTH_ROWS.map(([c, l, label, short]) => {
+    const r = D.profile_both.find((d) => d.characteristic === c && d.level === l);
+    return { label, short, all: r.all_adults_19_64, aca: r.medicaid_aca_like, both: r.lose_both_mid, se: r.lose_both_mid_se };
+  });
+  const bothBox = document.getElementById("both-chart");
+  const bothSvg = d3.select(bothBox).append("svg").attr("role", "img")
+    .attr("aria-label", "Dot chart comparing people likely to lose both Medicaid and SNAP with all Cook adults: far more are Black, did not work in the past year, are aged 50 to 64, or live in Chicago.");
+  const btip = d3.select(bothBox).append("div").attr("class", "tip").attr("hidden", true);
+  function drawBoth() {
+    const W = bothBox.clientWidth;
+    if (!W) return;
+    const narrow = W < 520, rowH = 40;
+    const m = { t: narrow ? 52 : 34, r: 16, b: 26, l: narrow ? 112 : 210 };
+    const H = m.t + m.b + rowH * bothData.length;
+    bothBox.style.height = H + "px";
+    bothSvg.attr("viewBox", `0 0 ${W} ${H}`).selectAll("*").remove();
+    const x = d3.scaleLinear().domain([0, 1]).range([m.l, W - m.r]);
+    const y = (i) => m.t + rowH * i + rowH / 2;
+    const g = bothSvg.append("g");
+    g.append("g").attr("class", "grid").selectAll("line").data(x.ticks(narrow ? 4 : 5)).join("line")
+      .attr("x1", x).attr("x2", x).attr("y1", m.t).attr("y2", H - m.b);
+    g.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`)
+      .call(d3.axisBottom(x).ticks(narrow ? 4 : 5).tickFormat(d3.format(".0%")).tickSize(0)).call((a) => a.select(".domain").remove());
+    // key
+    const key = g.append("g").attr("transform", `translate(${narrow ? 4 : m.l},12)`);
+    [["--both", "Of people likely to lose both"], ["--trend", "Of all Cook adults 19-64"]].forEach(([c, t], i) => {
+      const kx = narrow ? 0 : i * 230, ky = narrow ? i * 18 : 0;
+      key.append("circle").attr("cx", kx + 5).attr("cy", ky).attr("r", 5).attr("fill", css(c));
+      key.append("text").attr("class", "lbl-mid").attr("x", kx + 14).attr("y", ky).attr("dy", "0.35em").text(t);
+    });
+    const rowsG = g.selectAll(".brow").data(bothData).join("g").attr("class", "brow");
+    rowsG.append("text").attr("class", "lbl-mid").attr("x", m.l - 12).attr("y", (d, i) => y(i)).attr("dy", "0.35em")
+      .attr("text-anchor", "end").text((d) => (narrow ? d.short : d.label));
+    rowsG.append("line").attr("x1", (d) => x(Math.min(d.all, d.both))).attr("x2", (d) => x(Math.max(d.all, d.both)))
+      .attr("y1", (d, i) => y(i)).attr("y2", (d, i) => y(i)).attr("stroke", css("--axis")).attr("stroke-width", 2);
+    rowsG.append("line").attr("x1", (d) => x(d.both - 1.645 * d.se)).attr("x2", (d) => x(d.both + 1.645 * d.se))
+      .attr("y1", (d, i) => y(i)).attr("y2", (d, i) => y(i)).attr("stroke", css("--both")).attr("stroke-width", 4).attr("stroke-linecap", "round").attr("opacity", 0.45);
+    rowsG.append("circle").attr("cx", (d) => x(d.all)).attr("cy", (d, i) => y(i)).attr("r", 6).attr("fill", css("--trend"))
+      .attr("stroke", css("--paper")).attr("stroke-width", 1.5);
+    rowsG.append("circle").attr("cx", (d) => x(d.both)).attr("cy", (d, i) => y(i)).attr("r", 7).attr("fill", css("--both"))
+      .attr("stroke", css("--paper")).attr("stroke-width", 1.5);
+    // direct label on the "lose both" dot, on the side away from the gray dot
+    rowsG.append("text").attr("class", "lbl-strong").attr("y", (d, i) => y(i)).attr("dy", "0.35em")
+      .attr("x", (d) => x(d.both) + (d.both >= d.all ? 12 : -12)).attr("text-anchor", (d) => (d.both >= d.all ? "start" : "end"))
+      .text((d) => fmt.pct(d.both));
+    // gray value on the other side of the gray dot
+    rowsG.append("text").attr("class", "lbl").attr("y", (d, i) => y(i)).attr("dy", "0.35em")
+      .attr("x", (d) => x(d.all) + (d.both >= d.all ? -10 : 10)).attr("text-anchor", (d) => (d.both >= d.all ? "end" : "start"))
+      .text((d) => fmt.pct(d.all));
+    rowsG.append("rect").attr("x", 0).attr("width", W).attr("y", (d, i) => y(i) - rowH / 2).attr("height", rowH).attr("fill", "transparent")
+      .on("mousemove", (ev, d) => {
+        const [mx, my] = d3.pointer(ev, bothBox);
+        btip.attr("hidden", null).html(`<b>${d.label}</b><br><span class="sw" style="background:${css("--both")}"></span>${fmt.pct(d.both)} of people likely to lose both (±${Math.round(1.645 * d.se * 100)} pts)` +
+          `<br><span class="sw" style="background:${css("--trend")}"></span>${fmt.pct(d.all)} of all Cook adults 19-64<br>${fmt.pct(d.aca)} of Medicaid expansion adults`)
+          .style("left", Math.min(mx + 14, W - 220) + "px").style("top", Math.max(0, my - 20) + "px");
+      })
+      .on("mouseleave", () => btip.attr("hidden", true));
+  }
+  d3.select("#both-table").html("<thead><tr><th>Share who are / who</th><th>Of people likely to lose both</th><th>± (90%)</th><th>Of Medicaid expansion adults</th><th>Of SNAP adults 18-64</th><th>Of all Cook adults 19-64</th></tr></thead>")
+    .append("tbody").selectAll("tr").data(D.profile_both).join("tr")
+    .html((d) => `<td>${d.level}</td><td>${(d.lose_both_mid * 100).toFixed(0)}%</td><td>${(1.645 * d.lose_both_mid_se * 100).toFixed(0)} pts</td><td>${(d.medicaid_aca_like * 100).toFixed(0)}%</td><td>${(d.snap_adults_18_64 * 100).toFixed(0)}%</td><td>${(d.all_adults_19_64 * 100).toFixed(0)}%</td>`);
+
   // =================================================================== scroll
   const MAP_STEPS = [
     { pg: "medicaid", focus: null }, { pg: "medicaid", focus: "west_south" }, { pg: "snap", focus: null },
@@ -828,11 +936,11 @@ ul.rules li { margin-bottom: 0.6rem; }
   });
   const ro = new ResizeObserver(() => {
     const pp = pplPrev; pplPrev = -1; // redraw without replaying the transition
-    drawSnap(); drawMcd(); drawPpl(); drawMap(); pplPrev = pp;
+    drawSnap(); drawMcd(); drawPpl(); drawMap(); drawBoth(); pplPrev = pp;
     [sc1, sc2, sc3, sc4].forEach((s) => s.resize());
   });
-  [snapBox, mcdBox, pplBox, mapBox].forEach((b) => ro.observe(b));
-  drawSnap(); drawMcd(); drawPpl(); drawMap(); drawZipTable(); pplPrev = 0;
+  [snapBox, mcdBox, pplBox, mapBox, bothBox].forEach((b) => ro.observe(b));
+  drawSnap(); drawMcd(); drawPpl(); drawMap(); drawZipTable(); drawBoth(); pplPrev = 0;
 })();
 </script>
 

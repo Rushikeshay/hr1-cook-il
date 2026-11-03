@@ -153,6 +153,17 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
   reports (nothing after June 2024 found). CCH charity care history from the CCH deck is in
   output/tables/cch_charity_care_history.csv.
 
+## Article notes round 2 (2026-11-03)
+- SNAP chart policy markers now carry dates ("Dec. 2025", "May 1, 2026") and stay up at the last step.
+- New step `05d_both_profile.py`: profile of people likely to lose BOTH programs (PUMS weight x chance of losing both,
+  from 05b, which now saves per-person chances to data/processed/ovl_person_probs_2028.csv; 03b saves
+  pums_profile_chars.csv). Mid 2028: 58% Black (vs 21% all adults 19-64), 63% did not work past year, 38% aged 50-64,
+  68% Chicago. Article: dot chart after the zip map.
+- New article section "What the county is doing" (before "What this means"). Sources added to 00_fetch: FY2027
+  executive budget release (Oct 8, 2026), $19.9M food/housing release (Mar 2026), CCH Food as Medicine (Jan 2026),
+  CCH NACo awards (Sept 2026, Medicaid Impact Working Group). Facts + quotes in params county.response; 05c checks
+  every quote; ledger ids county_resp_*. Refs r14-r19.
+
 ## Step 8 outputs (2026-10-29)
 - `07_outputs.py`: output/story/story_data.json (headline numbers keep ledger ids; full ledger included),
   output/story/cook_zcta.geojson (Cook-clipped, simplified, GeoJSON not TopoJSON: no topojson lib in env),

@@ -55,6 +55,7 @@ h1 { font-family: var(--serif); font-weight: 650; font-size: clamp(2rem, 4.2vw, 
 .range-cap { font-family: var(--sans); font-size: var(--step-1); color: var(--muted); margin: 0.25rem 0 0; }
 
 .prose p { margin: 0 0 1.1rem; text-wrap: pretty; }
+.prose p.callout { margin: 1.6rem 0; padding: 0.2rem 0 0.2rem 1.1rem; border-left: 4px solid var(--medicaid); font-size: 1.12em; line-height: 1.5; }
 h2 { font-family: var(--serif); font-weight: 650; font-size: var(--step1); line-height: 1.2; margin: 3rem 0 1rem; text-wrap: balance; }
 
 /* scrolly */
@@ -167,10 +168,52 @@ ul.rules li { margin-bottom: 0.6rem; }
 .static-fig .g-box { height: 20rem; }
 .fade-in { animation: fadeIn 1.2s ease-out both; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* Contents pane: fixed on the left on wide screens; a button + pop-up list below 1200px. */
+.toc { font-family: var(--sans); font-size: var(--step-1); line-height: 1.35; }
+.toc-title { font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 0.6rem; }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0; }
+.toc a { display: block; padding: 0.3rem 0 0.3rem 0.7rem; border-left: 2px solid var(--rule); color: var(--muted); text-decoration: none; }
+.toc li.sub a { padding-left: 1.5rem; }
+.toc a:hover { color: var(--ink); }
+.toc a.active { color: var(--ink); font-weight: 600; border-left-color: var(--ink); }
+.toc-btn { display: none; }
+@media (min-width: 1200px) {
+  body { padding-left: 15rem; }
+  .toc { position: fixed; top: 0; left: 0; width: 14rem; height: 100vh; overflow-y: auto; padding: 2rem 0.5rem 2rem 1.5rem; box-sizing: border-box; }
+}
+@media (max-width: 1199.98px) {
+  .toc { display: none; position: fixed; left: 0.75rem; bottom: 4rem; z-index: 50; width: min(18rem, calc(100vw - 1.5rem)); max-height: 70vh; overflow-y: auto;
+         background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.12); padding: 1rem 1rem 0.75rem; box-sizing: border-box; }
+  .toc.open { display: block; }
+  .toc-btn { display: block; position: fixed; left: 0.75rem; bottom: 0.75rem; z-index: 51; font-family: var(--sans); font-size: var(--step-1); font-weight: 600;
+             color: var(--paper); background: var(--ink); border: 0; border-radius: 999px; padding: 0.55rem 1rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+}
+h2[id], header[id] { scroll-margin-top: 1rem; }
+@media print { .toc, .toc-btn { display: none !important; } body { padding-left: 0 !important; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
-<header class="hero col">
+<nav class="toc" id="toc" aria-label="Contents">
+  <p class="toc-title">Contents</p>
+  <ol>
+    <li><a href="#top">Overview</a></li>
+    <li><a href="#snap">SNAP: cuts already happened</a></li>
+    <li><a href="#medicaid">Medicaid: losses ahead</a></li>
+    <li class="sub"><a href="#medicaid-who">Who loses Medicaid</a></li>
+    <li><a href="#both">Both programs, by zip</a></li>
+    <li class="sub"><a href="#both-who">Who is likely to lose both</a></li>
+    <li><a href="#money">The money that leaves</a></li>
+    <li><a href="#county">What the county is doing</a></li>
+    <li><a href="#means">What this means</a></li>
+    <li><a href="#limits">What the numbers can't tell you</a></li>
+    <li><a href="#appendix">Appendix: other estimates</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ol>
+</nav>
+<button class="toc-btn" id="toc-btn" type="button" aria-controls="toc" aria-expanded="false">Contents</button>
+
+<header class="hero col" id="top">
   <div class="kicker">Cook County, Illinois · H.R. 1 (2025)</div>
   <h1>H.R. 1 could cost up to <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents their Medicaid, SNAP, or both by the end of 2028</h1>
   <p class="dek">This study estimates H.R. 1's effect by comparing Cook County's SNAP caseload with its pre-law trend and projecting Medicaid losses under three scenarios based on past work requirements, then mapping where the losses fall by zip code.</p>
@@ -182,7 +225,7 @@ ul.rules li { margin-bottom: 0.6rem; }
   <p>The biggest change is who gets to keep these benefits. Many adults now have to show, again and again, that they work, train or volunteer about 80 hours a month, or that they qualify for an exemption. SNAP's new rules took effect in Illinois in late 2025. Medicaid's begin in 2027, along with eligibility checks every six months instead of once a year.</p>
   <p>In Cook County, these two programs reach more residents than anything else H.R. 1 changes. Medicaid covers <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults through the Affordable Care Act expansion,<sup class="ref"><a href="#r5">5</a></sup> and SNAP helped about <span class="num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span> residents buy groceries in September 2025.<sup class="ref"><a href="#r3">3</a></sup> When people lose either one, many turn to the county: its hospitals, its clinics, and its health plan.</p>
   <p>So the county needs answers to three questions: how many residents will lose benefits, where they live, and when. This study answers them with the data available so far.</p>
-  <p><strong>Why a range?</strong> Some of what drives these numbers is not known yet. H.R. 1 requires many adults to show they work, or that they qualify for an exemption, to keep Medicaid and SNAP. In past programs, many people who still qualified lost benefits because they missed that paperwork. How many will miss it in Cook County is not known yet. The low scenario assumes Illinois applies the rules as announced and most people keep up.<sup class="ref"><a href="#r7">7</a></sup> The high scenario assumes losses as large as Arkansas saw in 2018, when it became the first state to add a Medicaid work requirement.<sup class="ref"><a href="#r11">11</a></sup> The middle scenario falls between the two. Together, the three scenarios give this range:</p>
+  <p><strong>Why a range?</strong> In past programs, many people who still qualified lost benefits because they missed the paperwork. How many will miss it in Cook County is not known yet. The low scenario assumes Illinois applies the rules as announced and most people keep up.<sup class="ref"><a href="#r7">7</a></sup> The high scenario assumes losses as large as Arkansas saw in 2018, when it became the first state to add a Medicaid work requirement.<sup class="ref"><a href="#r11">11</a></sup> The middle scenario falls between the two. Together, the three scenarios give this range:</p>
 
   <div class="range-box">
     <p class="range-title">Cook County residents who lose Medicaid, SNAP or both because of H.R. 1, by December 2028</p>
@@ -195,10 +238,10 @@ ul.rules li { margin-bottom: 0.6rem; }
   </div>
 </section>
 
-<h2 class="col section-break">SNAP: the cuts already happened</h2>
+<h2 class="col section-break" id="snap">SNAP: the cuts already happened</h2>
 <section class="col prose">
   <p><strong>What changed.</strong> SNAP already had a work rule for some adults. Before H.R. 1, adults aged 18 to 54 without children at home could get SNAP for only three months in any three years unless they worked or trained at least 20 hours a week. Veterans, people experiencing homelessness and young adults who had aged out of foster care were exempt, and states could waive the rule in areas with few jobs.<sup class="ref"><a href="#r1">1</a></sup></p>
-  <p>H.R. 1 raised the age limit to 64 and applied the rule to parents whose youngest child is 14 or older. It removed the exemptions for veterans, homeless people and former foster youth, and made waivers much harder to get. It also ended SNAP for many lawfully present noncitizens, such as refugees and asylees. So the newly affected groups are adults aged 55 to 64, parents of teenagers, veterans, residents without stable housing, and many noncitizens.<sup class="ref"><a href="#r1">1</a>,<a href="#r4">4</a></sup></p>
+  <p>H.R. 1 raised the age limit to 64 and applied the rule to parents whose youngest child is 14 or older. It removed the exemptions for veterans, homeless people and former foster youth, and made waivers much harder to get. It also ended SNAP for many lawfully present noncitizens, such as refugees and asylees.<sup class="ref"><a href="#r1">1</a>,<a href="#r4">4</a></sup></p>
 </section>
 <section class="scrolly wide" id="snap-scrolly">
   <figure class="graphic" aria-describedby="snap-desc">
@@ -206,7 +249,7 @@ ul.rules li { margin-bottom: 0.6rem; }
     <p class="g-sub" id="snap-desc">Monthly count from the Illinois Department of Human Services (IDHS), January 2024 to September 2026, with the trend before H.R. 1.</p>
     <p class="g-hint"><span class="mouse">Hover over the chart to see each month's numbers.</span><span class="touch">Tap the chart to see each month's numbers.</span></p>
     <div class="g-box" id="snap-chart"></div>
-    <div class="g-foot"><span>People on SNAP: IDHS SNAP Data by Servicing Office<sup class="ref"><a href="#r2">2</a></sup> (counted by office; counted by where people live, totals are about 3.6% higher<sup class="ref"><a href="#r3">3</a></sup>). Pre-H.R. 1 trend: this analysis, fitted to January 2024 to June 2025. Event dates: IDHS.<sup class="ref"><a href="#r4">4</a></sup></span></div>
+    <div class="g-foot"><span>People on SNAP: IDHS SNAP Data by Servicing Office<sup class="ref"><a href="#r2">2</a></sup> (IDHS counts people by the office that serves them; counts by where people live, used for the <span class="num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span> figure, run about 3.6% higher<sup class="ref"><a href="#r3">3</a></sup>). Pre-H.R. 1 trend: this analysis, fitted to January 2024 to June 2025. Event dates: IDHS.<sup class="ref"><a href="#r4">4</a></sup></span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">SNAP before H.R. 1</span><p>In January 2024, about <span class="num" data-snap="first" data-fmt="k"></span> people got SNAP through Cook County's IDHS offices. The number drifted down slowly, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month.</p></div>
@@ -219,15 +262,15 @@ ul.rules li { margin-bottom: 0.6rem; }
 <div class="col"><details class="table"><summary>See the SNAP data as a table</summary><div class="tbl-wrap"><table id="snap-table"></table></div></details></div>
 
 <section class="col prose">
-  <p><strong>What this means.</strong> H.R. 1's SNAP losses are not a forecast. They have already happened. From December 2025 on, Cook County's SNAP caseload fell much faster than it had been falling, and the steepest drop came when the first time limits hit in May 2026. By September 2026, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> fewer residents were getting help with groceries because of the law. In the middle scenario, about <span class="num" data-id="snap_persons_off_dec_2028_mid" data-fmt="k"></span> will be off SNAP by December 2028.</p>
-  <p><strong>How we got these numbers.</strong> We start with IDHS's own monthly count of people on SNAP in Cook County, January 2024 to September 2026. Before H.R. 1, that count fell slowly and steadily, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month. We extend that pre-law decline forward from September 2025 to estimate how many people would be on SNAP without the law. The gap between that line and the actual count is our estimate of H.R. 1's effect. We give a range because the result depends on which month we treat as the start of the law's effect. After September 2026, we project a second round of time-limit cutoffs in April 2027, when the three-year clock resets.</p>
+  <p><strong>What this means.</strong> H.R. 1's SNAP losses are not a forecast. They have already happened, and a second round of time-limit cutoffs is due in April 2027, when the three-year clock resets.</p>
+  <p><strong>How we got these numbers.</strong> We start with IDHS's own monthly count of people on SNAP in Cook County, January 2024 to September 2026. Before H.R. 1, that count fell slowly and steadily, about <span class="num" data-id="snap_trend_rate" data-fmt="pctmo"></span> a month. We fit that pre-law decline to January 2024 through June 2025 and extend it forward to estimate how many people would be on SNAP without the law. The gap between that line and the actual count is our estimate of H.R. 1's effect. We give a range because the result depends on which month we treat as the start of the law's effect.</p>
   <div class="bignums snap" role="group" aria-label="SNAP in Cook County: before H.R. 1 and losses by December 2028">
     <div><span class="lab">On SNAP in Cook County, Sept. 2025</span><span class="val num" data-id="snap_cook_persons_county_pdf_2025_09" data-fmt="k"></span><span class="note">Before the new work rules. IDHS count<sup class="ref"><a href="#r3">3</a></sup></span></div>
     <div class="after"><span class="lab">Lose SNAP because of H.R. 1, by Dec. 2028</span><span class="val num" data-id="snap_persons_off_dec_2028_mid" data-fmt="k"></span><span class="note">Middle scenario. Range <span class="num" data-id="snap_persons_off_dec_2028_low" data-fmt="k"></span> to <span class="num" data-id="snap_persons_off_dec_2028_high" data-fmt="k"></span></span></div>
   </div>
 </section>
 
-<h2 class="col section-break">Medicaid: the losses are still ahead</h2>
+<h2 class="col section-break" id="medicaid">Medicaid: the losses are still ahead</h2>
 <section class="col prose">
   <p>Medicaid is public health insurance for people with low incomes. Under the Affordable Care Act expansion, Illinois covers adults aged 19 to 64 with incomes up to 138% of the federal poverty level. In Cook County, <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> adults are covered this way, according to the Illinois Department of Healthcare and Family Services (HFS).<sup class="ref"><a href="#r5">5</a></sup></p>
   <p><strong>What changed.</strong> Until now, Illinois Medicaid had no work requirement, and adults renewed their coverage once a year. H.R. 1 changes three things for expansion adults:</p>
@@ -242,10 +285,10 @@ ul.rules li { margin-bottom: 0.6rem; }
 <section class="scrolly wide" id="mcd-scrolly">
   <figure class="graphic" aria-describedby="mcd-desc">
     <p class="g-title">Cook County adults projected to lose Medicaid because of H.R. 1</p>
-    <p class="g-sub" id="mcd-desc">Adults off Medicaid at the end of each month, by cause, middle scenario, through December 2028.</p>
+    <p class="g-sub" id="mcd-desc">Adults off Medicaid at the end of each month, by cause, middle scenario, through December 2028. &ldquo;Work requirement&rdquo; includes exempt adults who miss the paperwork.</p>
     <p class="g-hint"><span class="mouse">Hover over the chart to see each month's numbers by cause.</span><span class="touch">Tap the chart to see each month's numbers by cause.</span></p>
     <div class="g-box" id="mcd-chart"></div>
-    <div class="g-foot"><span>Starting count: HFS Cook County enrollment.<sup class="ref"><a href="#r5">5</a></sup> Noncitizen cut: Illinois's statewide estimate<sup class="ref"><a href="#r9">9</a></sup> times Cook's share of Illinois noncitizens (Census ACS<sup class="ref"><a href="#r12">12</a></sup>). Work-requirement and renewal loss rates: Urban Institute and Robert Wood Johnson Foundation (RWJF) estimates for Illinois.<sup class="ref"><a href="#r10">10</a></sup> Start dates and renewal schedule: H.R. 1, HFS and IDHS.<sup class="ref"><a href="#r1">1</a>,<a href="#r7">7</a>,<a href="#r8">8</a></sup> Month-by-month timing and Cook totals: this analysis. "Work requirement" includes exempt adults who miss the paperwork.</span></div>
+    <div class="g-foot"><span>Starting count: HFS Cook County enrollment.<sup class="ref"><a href="#r5">5</a></sup> Noncitizen cut: Illinois's statewide estimate<sup class="ref"><a href="#r9">9</a></sup> times Cook's share of Illinois noncitizens (Census ACS<sup class="ref"><a href="#r12">12</a></sup>). Work-requirement and renewal loss rates: Urban Institute and RWJF estimates for Illinois.<sup class="ref"><a href="#r10">10</a></sup> Start dates and renewal schedule: H.R. 1, HFS and IDHS.<sup class="ref"><a href="#r1">1</a>,<a href="#r7">7</a>,<a href="#r8">8</a></sup> Month-by-month timing and Cook totals: this analysis.</span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">Medicaid today</span><p>As of September 2026, H.R. 1 has not yet taken Medicaid from any Cook adult. All <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="k"></span> expansion adults are still covered.</p></div>
@@ -257,8 +300,8 @@ ul.rules li { margin-bottom: 0.6rem; }
 </section>
 <div class="col"><details class="table"><summary>See the Medicaid projection as a table</summary><div class="tbl-wrap"><table id="mcd-table"></table></div></details></div>
 
-<h2 class="col">Who loses Medicaid</h2>
-<section class="col prose"><p>Not every expansion adult faces the work requirement, and not everyone who loses coverage is out of work. Each figure below stands for 1,000 of Cook's Medicaid expansion adults.</p></section>
+<h2 class="col" id="medicaid-who">Who loses Medicaid</h2>
+<section class="col prose"><p>Not every expansion adult faces the work requirement, and not everyone who loses coverage is out of work.</p></section>
 <section class="scrolly wide" id="ppl-scrolly">
   <figure class="graphic" aria-describedby="ppl-desc">
     <p class="g-title">Cook County's Medicaid expansion adults, one figure per 1,000</p>
@@ -268,25 +311,25 @@ ul.rules li { margin-bottom: 0.6rem; }
     <div class="g-foot"><span id="ppl-desc">Figures are rounded to the nearest 1,000. Their place in each group is for illustration: renewal and noncitizen losses can fall on anyone. All adults: HFS.<sup class="ref"><a href="#r5">5</a></sup> Who must report work, and who already works enough: this analysis of Census ACS 2020-24 microdata,<sup class="ref"><a href="#r12">12</a></sup> applying H.R. 1's exemptions as Illinois describes them.<sup class="ref"><a href="#r1">1</a>,<a href="#r7">7</a></sup> Losses: same sources as the chart above.</span></div>
   </figure>
   <div class="steps">
-    <div class="step" data-step="0"><span class="tag">Medicaid expansion adults</span><p>These are Cook's <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> Medicaid expansion adults. Each figure is 1,000 people.</p></div>
+    <div class="step" data-step="0"><span class="tag">Medicaid expansion adults</span><p>These are Cook's <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> Medicaid expansion adults.</p></div>
     <div class="step" data-step="1"><span class="tag">Medicaid: who must report work</span><p>About <span class="num" data-id="mcd_subject_people" data-fmt="k"></span> of them do not qualify for an exemption, so they must show 80 hours a month to keep coverage. They move to the top group. The rest, in the bottom group, are exempt, mostly because of a disability, caring for someone, or meeting SNAP's work rules.</p></div>
     <div class="step" data-step="2"><span class="tag">Medicaid: not yet logging 80 hours</span><p>Census survey answers suggest about <span class="num" data-id="mcd_subject_noncompliant_people" data-fmt="k"></span> of those adults do not currently work enough hours. The rest already do.</p></div>
-    <div class="step" data-step="3"><span class="tag">Medicaid, middle scenario: who loses coverage</span><p>In the middle scenario, <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> lose Medicaid by December 2028. More people lose coverage to the work requirement than are out of work: about <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> work enough hours and still lose it because of paperwork. Exempt adults in the bottom group can lose coverage too, if they cannot prove their exemption in time or miss a renewal.</p></div>
+    <div class="step" data-step="3"><span class="tag">Medicaid, middle scenario: who loses coverage</span><p>In the middle scenario, <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> lose Medicaid by December 2028. Not everyone who loses coverage is out of work: about <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> work enough hours and still lose it over paperwork. Exempt adults in the bottom group can lose coverage too, if they cannot prove their exemption in time or miss a renewal.</p></div>
     <div class="step" data-step="4"><span class="tag">Medicaid, low scenario</span><p>If most people keep up with the paperwork, as Illinois's announced choices suggest, about <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> lose coverage.</p></div>
     <div class="step" data-step="5"><span class="tag">Medicaid, high scenario</span><p>If paperwork losses look like Arkansas's in 2018, about <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span> lose coverage, more than half of all expansion adults.</p></div>
   </div>
 </section>
 
 <section class="col prose">
-  <p><strong>What this means.</strong> Medicaid losses start small in October 2026 and grow fast once the work requirement reaches renewals in 2027. By December 2028, between <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> and <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span> Cook adults could be off Medicaid. Many of them will still be working. They lose coverage because they could not prove it in time, not because they stopped qualifying.</p>
-  <p><strong>How we got these numbers.</strong> We start with HFS's count of <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> expansion adults in Cook County.<sup class="ref"><a href="#r5">5</a></sup> The American Community Survey (ACS), a Census Bureau survey of individual households, tells us what share of adults like them must report work (about <span class="num" data-id="mcd_subject_share_a" data-fmt="pct"></span>) and what share already work enough.<sup class="ref"><a href="#r12">12</a></sup> For how many will lose coverage, we use the Urban Institute and RWJF's Illinois estimates.<sup class="ref"><a href="#r10">10</a></sup> The work requirement removes <span class="num" data-id="urban_il_2028_work_req_pct_high" data-fmt="pct"></span>, <span class="num" data-id="urban_il_2028_work_req_pct_medium" data-fmt="pct"></span> or <span class="num" data-id="urban_il_2028_work_req_pct_low" data-fmt="pct"></span> of expansion adults (low, middle and high scenarios), and six-month renewals remove up to another <span class="num" data-id="urban_il_2028_redet_pct_medium" data-fmt="pct"></span>. Urban's range rests on how people responded to work requirements in Arkansas and New Hampshire.<sup class="ref"><a href="#r11">11</a></sup> The noncitizen cut is the state's estimate of <span class="num" data-id="mcd_noncitizen_statewide_loss" data-fmt="int"></span> people statewide,<sup class="ref"><a href="#r9">9</a></sup> times Cook's share of Illinois noncitizens.<sup class="ref"><a href="#r12">12</a></sup></p>
+  <p><strong>What this means.</strong> Medicaid losses start small in October 2026 and grow fast once the work requirement reaches renewals in 2027. By December 2028, between <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> and <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span> Cook adults could be off Medicaid. Some, about <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> in the middle scenario, will still be working enough hours and lose coverage only because they could not prove it in time.</p>
+  <p><strong>How we got these numbers.</strong> We start with HFS's count of <span class="num" data-id="mcd_baseline_aca_adults" data-fmt="int"></span> expansion adults in Cook County.<sup class="ref"><a href="#r5">5</a></sup> The American Community Survey (ACS), a Census Bureau survey of individual households, tells us what share of adults like them must report work (about <span class="num" data-id="mcd_subject_share_a" data-fmt="pct"></span>) and what share already work enough.<sup class="ref"><a href="#r12">12</a></sup> For how many will lose coverage, we use the Urban Institute and Robert Wood Johnson Foundation (RWJF) Illinois estimates.<sup class="ref"><a href="#r10">10</a></sup> The work requirement removes <span class="num" data-id="urban_il_2028_work_req_pct_high" data-fmt="pct"></span>, <span class="num" data-id="urban_il_2028_work_req_pct_medium" data-fmt="pct"></span> or <span class="num" data-id="urban_il_2028_work_req_pct_low" data-fmt="pct"></span> of expansion adults (low, middle and high scenarios), and six-month renewals remove up to another <span class="num" data-id="urban_il_2028_redet_pct_medium" data-fmt="pct"></span>. Urban's range rests on how people responded to work requirements in Arkansas and New Hampshire.<sup class="ref"><a href="#r11">11</a></sup> The noncitizen cut is the state's estimate of <span class="num" data-id="mcd_noncitizen_statewide_loss" data-fmt="int"></span> people statewide,<sup class="ref"><a href="#r9">9</a></sup> times Cook's share of Illinois noncitizens.<sup class="ref"><a href="#r12">12</a></sup></p>
   <div class="bignums medicaid" role="group" aria-label="Medicaid in Cook County: expansion adults now and losses by December 2028">
     <div><span class="lab">Expansion adults on Medicaid now</span><span class="val num" data-id="mcd_baseline_aca_adults" data-fmt="k"></span><span class="note">Before any H.R. 1 Medicaid cut. HFS count<sup class="ref"><a href="#r5">5</a></sup></span></div>
     <div class="after"><span class="lab">Lose Medicaid because of H.R. 1, by Dec. 2028</span><span class="val num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span><span class="note">Middle scenario. Range <span class="num" data-id="mcd_off_coverage_dec_2028_low" data-fmt="k"></span> to <span class="num" data-id="mcd_off_coverage_dec_2028_high" data-fmt="k"></span></span></div>
   </div>
 </section>
 
-<h2 class="col section-break">Both programs, and where the losses land</h2>
+<h2 class="col section-break" id="both">Both programs, and where the losses land</h2>
 <section class="col prose">
   <p>Many residents rely on both programs: about <span class="num" data-id="ovl_share_aca_adults_in_snap_households" data-fmt="pct"></span> of Cook's Medicaid expansion adults live in a household that gets SNAP.<sup class="ref"><a href="#r12">12</a></sup> In the middle scenario, about <span class="num" data-id="ovl_both_central_2028_mid" data-fmt="k"></span> residents would lose both by December 2028. Counting each person once, <span class="num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span> different Cook residents would lose Medicaid, SNAP or both.</p>
   <p>Losses for both programs follow the map of need. The zip areas where the most people rely on Medicaid and SNAP stand to lose the most, and most of them are on Chicago's West and South Sides and in the south suburbs.</p>
@@ -294,6 +337,7 @@ ul.rules li { margin-bottom: 0.6rem; }
 <section class="scrolly wide" id="map-scrolly">
   <figure class="graphic" aria-describedby="map-desc">
     <p class="g-title" id="map-title">People off Medicaid per 1,000 residents, December 2028</p>
+    <p class="g-sub">Darker zip areas lose more residents per 1,000. Use the buttons to switch program and scenario; gray areas have under 1,000 residents. Outline: City of Chicago.</p>
     <div class="controls">
       <div class="seg" role="group" aria-label="Scenario">
         <button type="button" id="sc-low" data-sc="low" aria-pressed="false">Low</button>
@@ -308,7 +352,7 @@ ul.rules li { margin-bottom: 0.6rem; }
     </div>
     <p class="g-hint"><span class="mouse">Hover over a zip area to see its numbers.</span><span class="touch">Tap a zip area to see its numbers.</span></p>
     <div class="g-box" id="map"></div>
-    <div class="g-foot"><span id="map-desc">Cook County portion of each zip area. Outline: City of Chicago. Gray: under 1,000 residents.</span><span>County totals: the Medicaid and SNAP sections above. Split by zip: Medicaid by HFS expansion-adult enrollment per zip;<sup class="ref"><a href="#r6">6</a></sup> SNAP by Census ACS households getting SNAP per zip.<sup class="ref"><a href="#r12">12</a></sup> Residents and zip shapes: Census.<sup class="ref"><a href="#r12">12</a>,<a href="#r13">13</a></sup> Rates per 1,000: this analysis.</span></div>
+    <div class="g-foot"><span id="map-desc">Cook County portion of each zip area. </span><span>County totals: the Medicaid and SNAP sections above. Split by zip: Medicaid by HFS expansion-adult enrollment per zip;<sup class="ref"><a href="#r6">6</a></sup> SNAP by Census ACS households getting SNAP per zip.<sup class="ref"><a href="#r12">12</a></sup> Residents and zip shapes: Census.<sup class="ref"><a href="#r12">12</a>,<a href="#r13">13</a></sup></span></div>
   </figure>
   <div class="steps">
     <div class="step" data-step="0"><span class="tag">Medicaid, middle scenario</span><p>By December 2028, about <span class="num" data-id="mcd_off_coverage_dec_2028_mid" data-fmt="k"></span> Cook adults would be off Medicaid in the middle scenario. The losses are not spread evenly.</p></div>
@@ -320,54 +364,79 @@ ul.rules li { margin-bottom: 0.6rem; }
 </section>
 <div class="col"><details class="table"><summary>See every zip area as a table</summary><div class="tbl-wrap"><table id="zip-table"></table></div></details></div>
 
-<h2 class="col">Who is likely to lose both</h2>
+<h2 class="col" id="both-who">Who is likely to lose both</h2>
 <section class="col prose">
   <p>The residents most likely to lose both Medicaid and SNAP are not a cross-section of the county. In the middle scenario, about <span class="num" data-id="prof_both_black_2028_mid" data-fmt="pct"></span> of them are Black, compared with <span class="num" data-id="prof_all_adults_black" data-fmt="pct"></span> of all Cook adults aged 19 to 64. About <span class="num" data-id="prof_both_did_not_work_2028_mid" data-fmt="pct"></span> did not work at all in the past year, and <span class="num" data-id="prof_both_age_50_64_2028_mid" data-fmt="pct"></span> are aged 50 to 64, an age group H.R. 1 newly brought under SNAP's time limit, which used to stop at 54.<sup class="ref"><a href="#r1">1</a></sup> Most, <span class="num" data-id="prof_both_chicago_2028_mid" data-fmt="pct"></span>, live in Chicago.</p>
 </section>
 <figure class="col static-fig" id="both-fig">
   <p class="g-title">People likely to lose both programs are more often Black, older and out of work than Cook adults overall</p>
-  <p class="g-sub">Green dots show the share of people likely to lose both Medicaid and SNAP by December 2028 (middle scenario) who are in each category. Gray dots show the share of all Cook adults aged 19 to 64 in that category, for comparison. First row: <span class="num" data-id="prof_all_adults_black" data-fmt="pct"></span> of all Cook adults aged 19 to 64 are Black, but <span class="num" data-id="prof_both_black_2028_mid" data-fmt="pct"></span> of the people likely to lose both benefits are Black. (Margin of error: about 2 to 3 points either way.)</p>
-  <p class="g-hint"><span class="mouse">Hover</span><span class="touch">Tap</span> a row for the exact shares.</p>
+  <p class="g-sub">Green: people likely to lose both programs by Dec. 2028 (middle scenario). Gray: all Cook adults 19&ndash;64. Shaded bars: margin of error, about &plusmn;2&ndash;3 points.</p>
+  <p class="g-hint"><span class="mouse">Hover over a row for the exact shares.</span><span class="touch">Tap a row for the exact shares.</span></p>
   <div class="g-box" id="both-chart"></div>
   <div class="g-foot"><span>Census ACS 2020-24 microdata<sup class="ref"><a href="#r12">12</a></sup> for Cook adults covered by, or likely to qualify for, the Medicaid expansion. Each person counts by their estimated chance of losing both programs, from this analysis. Survey taken before H.R. 1: it describes who is likely to lose both, not people counted after losing them. Leaves out the noncitizen cut (about <span class="num" data-id="ovl_both_central_2026_mid" data-fmt="k"></span> people).</span></div>
 </figure>
 <div class="col"><details class="table"><summary>See the profile as a table</summary><div class="tbl-wrap"><table id="both-table"></table></div></details></div>
 
-<h2 class="col section-break">The money that leaves the county</h2>
+<h2 class="col section-break" id="money">The money that leaves the county</h2>
 <section class="col prose">
-  <p>When residents lose Medicaid or SNAP, the money that paid for their care and groceries stops coming to Cook County. We count it in three separate kinds and never add them together: federal dollars lost, state Medicaid dollars that stop with them, and new costs H.R. 1 shifts onto the state.</p>
-  <p><strong>Federal dollars.</strong> In the middle scenario, Cook County loses about <span class="num" data-sum="mcd_usd_federal_countycare_2028_mid,snap_usd_federal_benefits_2028_mid" data-fmt="usdb"></span> in federal money in 2028 alone: <span class="num" data-id="mcd_usd_federal_countycare_2028_mid" data-fmt="usdb"></span> in Medicaid payments for expansion adults' care and <span class="num" data-id="snap_usd_federal_benefits_2028_mid" data-fmt="usdm0"></span> in SNAP benefits that would have been spent at local stores. The range runs from <span class="num" data-sum="mcd_usd_federal_countycare_2028_low,snap_usd_federal_benefits_2028_low" data-fmt="usdb"></span> to <span class="num" data-sum="mcd_usd_federal_countycare_2028_high,snap_usd_federal_benefits_2028_high" data-fmt="usdb"></span>. From 2026 through 2028, the middle scenario adds up to about <span class="num" data-sum="mcd_usd_federal_countycare_2026_mid,mcd_usd_federal_countycare_2027_mid,mcd_usd_federal_countycare_2028_mid,snap_usd_federal_benefits_2026_mid,snap_usd_federal_benefits_2027_mid,snap_usd_federal_benefits_2028_mid" data-fmt="usdb"></span>. The federal government pays 90% of expansion adults' Medicaid costs,<sup class="ref"><a href="#r1">1</a></sup> and all SNAP benefits.</p>
-  <p><strong>State Medicaid dollars.</strong> Illinois pays the other 10% of expansion adults' Medicaid costs. When they lose coverage, that state money stops too: about <span class="num" data-id="mcd_usd_state_countycare_2028_mid" data-fmt="usdm0"></span> in 2028 in the middle scenario.</p>
-  <p><strong>New costs for the state.</strong> H.R. 1 also moves SNAP costs from Washington to Illinois. Since October 2026, the state pays 75% of the cost of running SNAP instead of 50%; Cook County's share of that increase is about <span class="num" data-id="snap_usd_state_admin_2028_mid" data-fmt="usdm0"></span> a year.<sup class="ref"><a href="#r20">20</a></sup> Because Illinois's SNAP payment error rate is high, the state must also pay 15% of SNAP benefits, starting as early as October 2028. If it starts then, Cook's share is about <span class="num" data-id="snap_usd_state_benefit_share_early_2028_mid" data-fmt="usdm0"></span> in the last three months of 2028 alone; if Illinois's error rate stays high again, the start moves to October 2029.<sup class="ref"><a href="#r20">20</a></sup> These are costs to the state budget, not the county's.</p>
+  <p>When residents lose Medicaid or SNAP, the money that paid for their care and groceries stops flowing into Cook County. That money comes in three kinds, and we keep them apart because each one hits a different budget: federal dollars, state Medicaid dollars, and new costs H.R. 1 moves onto Illinois.</p>
+  <p><strong>Federal dollars.</strong> Washington pays 90% of the Medicaid costs for adults covered under the ACA expansion, and all SNAP benefits.<sup class="ref"><a href="#r1">1</a></sup> When those residents lose coverage, the money goes with them. In the middle scenario, Cook County loses about <span class="num" data-id="mcd_usd_federal_countycare_2028_mid" data-fmt="usdb"></span> in federal Medicaid payments in 2028. That figure is the months of coverage lost times CountyCare's average monthly payment for an expansion adult, <span class="num" data-id="mcd_pmpm_countycare" data-fmt="usd"></span>.<sup class="ref"><a href="#r16">16</a></sup> On top of that, about <span class="num" data-id="snap_usd_federal_benefits_2028_mid" data-fmt="usdm0"></span> in SNAP benefits that would have been spent at local grocery stores goes away, figured from Illinois's average benefit of <span class="num" data-id="snap_avg_benefit_person_month" data-fmt="usd"></span> per person a month.<sup class="ref"><a href="#r20">20</a></sup> Together, that's about <span class="num" data-sum="mcd_usd_federal_countycare_2028_mid,snap_usd_federal_benefits_2028_mid" data-fmt="usdb"></span> in 2028 alone, with a range of <span class="num" data-sum="mcd_usd_federal_countycare_2028_low,snap_usd_federal_benefits_2028_low" data-fmt="usdb"></span> to <span class="num" data-sum="mcd_usd_federal_countycare_2028_high,snap_usd_federal_benefits_2028_high" data-fmt="usdb"></span> across the scenarios. Over 2026–2028, the middle scenario totals about <span class="num" data-sum="mcd_usd_federal_countycare_2026_mid,mcd_usd_federal_countycare_2027_mid,mcd_usd_federal_countycare_2028_mid,snap_usd_federal_benefits_2026_mid,snap_usd_federal_benefits_2027_mid,snap_usd_federal_benefits_2028_mid" data-fmt="usdb"></span>.</p>
+  <p><strong>State Medicaid dollars.</strong> Illinois pays the other 10% of expansion adults' Medicaid costs.<sup class="ref"><a href="#r1">1</a></sup> That money stops when they lose coverage too: about <span class="num" data-id="mcd_usd_state_countycare_2028_mid" data-fmt="usdm0"></span> in 2028 in the middle scenario (<span class="num" data-id="mcd_usd_state_countycare_2028_low" data-fmt="usdm0"></span> to <span class="num" data-id="mcd_usd_state_countycare_2028_high" data-fmt="usdm0"></span>). For the state it is a saving; for Cook County hospitals and clinics it is lost revenue.</p>
+  <p><strong>New costs for the state.</strong> H.R. 1 also moves part of SNAP's cost from Washington onto the state budget (not the county's), in two ways:<sup class="ref"><a href="#r1">1</a>,<a href="#r20">20</a></sup></p>
+  <ul class="rules">
+    <li><b>Running the program.</b> Since October 2026, Illinois pays 75% of SNAP's administrative costs instead of 50%. Cook's share of that increase is about <span class="num" data-id="snap_usd_state_admin_2028_mid" data-fmt="usdm0"></span> a year, based on Cook's <span class="num" data-id="snap_cook_share_il" data-fmt="pct"></span> share of Illinois SNAP recipients.<sup class="ref"><a href="#r3">3</a></sup></li>
+    <li><b>Paying for benefits.</b> Illinois's SNAP payment error rate is high, so the state must start paying 15% of benefits, as early as October 2028. If it starts then, Cook's share is about <span class="num" data-id="snap_usd_state_benefit_share_early_2028_mid" data-fmt="usdm0"></span> in the last three months of 2028 alone. If Illinois's error rate stays high again, the start moves to October 2029.<sup class="ref"><a href="#r20">20</a></sup></li>
+  </ul>
 </section>
 <figure class="wide static-fig" id="money-fig">
   <p class="g-title">Money tied to H.R. 1 in Cook County, by year</p>
-  <p class="g-sub">Bars: middle scenario. Thin lines: low to high scenario. Three separate kinds of money, each on its own scale; they are not added together.</p>
-  <p class="g-hint"><span class="mouse">Hover</span><span class="touch">Tap</span> a bar for all three scenarios.</p>
+  <p class="g-sub"><b>Left (1):</b> federal Medicaid and SNAP dollars Cook loses. <b>Middle (2):</b> Illinois's 10% Medicaid share that stops with them. <b>Right (3):</b> new SNAP costs Illinois must pay, Cook's share. Bars are the middle scenario; thin lines span low to high. Each chart has its own scale, and the three are not added together.</p>
+  <p class="g-hint"><span class="mouse">Hover over a bar for all three scenarios.</span><span class="touch">Tap a bar for all three scenarios.</span></p>
   <div class="money-grid">
     <div><p class="panel-title">1. Federal dollars lost</p><div class="g-box money-box" id="money-b1"></div></div>
     <div><p class="panel-title">2. State Medicaid dollars that stop</p><div class="g-box money-box" id="money-b2"></div></div>
     <div><p class="panel-title">3. New state SNAP costs, Cook's share</p><div class="g-box money-box" id="money-b3"></div></div>
   </div>
-  <div class="g-foot"><span>People losing coverage: this analysis (sections above). Medicaid dollars: months of coverage lost times CountyCare's average payment for an expansion adult, <span class="num" data-id="mcd_pmpm_countycare" data-fmt="usd"></span> a month (Cook County Health budget<sup class="ref"><a href="#r16">16</a></sup>), split 90% federal and 10% state.<sup class="ref"><a href="#r1">1</a></sup> SNAP dollars: months of benefits lost times Illinois's average benefit, <span class="num" data-id="snap_avg_benefit_person_month" data-fmt="usd"></span> per person a month. State SNAP costs: Illinois's estimated added administrative cost and the 15% benefit share, times Cook's share of Illinois SNAP recipients.<sup class="ref"><a href="#r3">3</a>,<a href="#r20">20</a></sup> Panel 3, 2028: the benefit share is shown only if it starts in October 2028.</span></div>
+  <div class="g-foot"><span><b>Method.</b> <b>Left:</b> Medicaid = months of coverage lost × CountyCare's average monthly payment, <span class="num" data-id="mcd_pmpm_countycare" data-fmt="usd"></span><sup class="ref"><a href="#r16">16</a></sup> × 90% federal share.<sup class="ref"><a href="#r1">1</a></sup> SNAP = months of benefits lost × Illinois's average benefit, <span class="num" data-id="snap_avg_benefit_person_month" data-fmt="usd"></span> per person.<sup class="ref"><a href="#r20">20</a></sup> <b>Middle:</b> the same Medicaid dollars × 10% state share.<sup class="ref"><a href="#r1">1</a></sup> <b>Right:</b> Illinois's added SNAP administrative cost and 15% benefit share × Cook's share of Illinois SNAP recipients, <span class="num" data-id="snap_cook_share_il" data-fmt="pct"></span>.<sup class="ref"><a href="#r3">3</a>,<a href="#r20">20</a></sup> The 2028 bar includes the benefit share only if it starts in October 2028. People losing coverage each month: this analysis.</span></div>
 </figure>
 <div class="col"><details class="table"><summary>See the money as a table</summary><div class="tbl-wrap"><table id="money-table"></table></div></details></div>
 
 <section class="col prose">
-  <p><strong>What it means for county health services.</strong> Medicaid pays hospitals and clinics across the county, including the county's own. About <span class="num" data-id="countycare_share_of_cook_aca" data-fmt="pct"></span> of Cook's expansion adults are CountyCare members.<sup class="ref"><a href="#r16">16</a></sup> If they lose coverage at the same rate as everyone else, CountyCare loses about <span class="num" data-id="countycare_capitation_lost_fy2027_mid" data-fmt="usdm0"></span> in payments in the county's FY2027 and <span class="num" data-id="countycare_capitation_lost_fy2028_mid" data-fmt="usdm0"></span> in FY2028 (middle scenario). The county's own budget already shows the strain: it expects <span class="num" data-id="county_fy2027_obbba_hospital_fallout" data-fmt="usdm"></span> in H.R. 1 fallout for its hospital system in FY2027, charity care rising by <span class="num" data-id="county_resp_cch_charity_care_increase" data-fmt="usdm"></span>, and it has added <span class="num" data-id="county_resp_cch_added_county_support" data-fmt="usdm"></span> in local tax support for health care.<sup class="ref"><a href="#r15">15</a></sup></p>
-  <p>We do not estimate how much more care the county will be asked to provide. The county's budget documents do not separate H.R. 1's share of new costs, and no public data shows where people who lose coverage go for care. What the numbers do show is the gap between the two. A person who loses Medicaid loses a health plan that pays for care anywhere, from a checkup to a prescription. The county can offer care at its own hospitals and clinics, paid from local taxes, once people come in. That is catching up, not replacing what was lost.</p>
+  <p><strong>What it means for county health services.</strong> Medicaid pays hospitals and clinics across the county, including the county's own. About <span class="num" data-id="countycare_share_of_cook_aca" data-fmt="pct"></span> of Cook's expansion adults are CountyCare members.<sup class="ref"><a href="#r16">16</a></sup> If they lose coverage at the same rate as everyone else, CountyCare loses about <span class="num" data-id="countycare_capitation_lost_fy2027_mid" data-fmt="usdm0"></span> in payments in the county's FY2027 (December to November) and <span class="num" data-id="countycare_capitation_lost_fy2028_mid" data-fmt="usdm0"></span> in FY2028 (middle scenario). <a href="#county">The next section</a> shows how the county's own budget is already absorbing the strain.</p>
+  <p>We do not estimate how much more care the county will be asked to provide, because no public data shows where people who lose coverage go for care (<a href="#limits">see limits</a>).</p>
+  <p class="callout">What the numbers do show is the gap between what people lose and what the county can offer. A person who loses Medicaid loses a health plan that pays for care anywhere, from a checkup to a prescription. The county can offer care at its own hospitals and clinics, paid from local taxes, once people come in. <strong>That is catching up, not replacing what was lost.</strong></p>
   <p><strong>What it means for local spending.</strong> SNAP benefits are spent at grocery stores in the neighborhoods where people live. Using the U.S. Department of Agriculture's estimate that each $1 of SNAP generates <span class="num" data-id="ers_snap_gdp_multiplier" data-fmt="usd2"></span> in economic activity,<sup class="ref"><a href="#r21">21</a></sup> the middle scenario's 2028 SNAP losses mean about <span class="num" data-id="snap_local_activity_lost_2028_mid" data-fmt="usdm0"></span> less local activity and roughly <span class="num" data-id="snap_local_jobs_lost_2028_mid" data-fmt="h"></span> fewer jobs supported. This is a national rule of thumb, so treat it as a sense of scale, not a forecast for Cook County.</p>
 </section>
 
-<h2 class="col section-break">What the county is doing</h2>
+<h2 class="col section-break" id="county">What the county is doing</h2>
 <section class="col prose">
-  <p>Cook County is the second most populous county in the country,<sup class="ref"><a href="#r14">14</a></sup> and it meets H.R. 1 with a budget that is already stretched. Its proposed FY2027 budget, <span class="num" data-id="county_resp_total_budget_fy2027" data-fmt="usdb"></span>, had to close a projected gap of <span class="num" data-id="county_resp_gap_fy2027" data-fmt="usdm"></span>. About <span class="num" data-id="county_fy2027_obbba_hospital_fallout" data-fmt="usdm"></span> of that gap is the expected fallout of H.R. 1 for the county's hospital system.<sup class="ref"><a href="#r15">15</a></sup> The county closed it without new taxes, in part by drawing on reserves (<span class="num" data-id="county_resp_gap_reserves" data-fmt="usdm"></span>), investment income (<span class="num" data-id="county_resp_gap_investing" data-fmt="usdm"></span>), spending cuts (<span class="num" data-id="county_resp_gap_spending_cuts" data-fmt="usdm"></span>) and leaving jobs unfilled (<span class="num" data-id="county_resp_gap_vacancies" data-fmt="usdm"></span>). Hiring stays almost flat.<sup class="ref"><a href="#r15">15</a></sup></p>
-  <p><strong>Health care.</strong> Cook County Health, the county's hospital system and the parent of its CountyCare Medicaid plan, carries most of the strain. Its proposed FY2027 budget is <span class="num" data-id="county_resp_cch_budget_cut_fy2027" data-fmt="usdm"></span> smaller than this year's, mostly because CountyCare expects fewer members. Since 2024 it has cut about <span class="num" data-id="county_resp_cch_expenses_eliminated_since_2024" data-fmt="usdm"></span> in expenses, and it closed <span class="num" data-id="county_resp_cch_gap_closed_by_cch" data-fmt="usdm"></span> of its own <span class="num" data-id="county_fy2027_health_fund_gap" data-fmt="usdm"></span> gap. The county is covering the last <span class="num" data-id="county_resp_cch_added_county_support" data-fmt="usdm"></span> with more tax support, bringing its total to <span class="num" data-id="county_resp_cch_total_county_support" data-fmt="usdm"></span>.<sup class="ref"><a href="#r15">15</a></sup> Without that money, the health system said it would have had to cut services and about <span class="num" data-id="county_resp_cch_alt_layoffs_fte" data-fmt="int"></span> positions.<sup class="ref"><a href="#r16">16</a></sup> Meanwhile, charity care, the free or reduced-cost care it gives patients who cannot pay, is projected to rise by <span class="num" data-id="county_resp_cch_charity_care_increase" data-fmt="usdm"></span> to <span class="num" data-id="county_resp_cch_charity_care_fy2027" data-fmt="usdm"></span> in FY2027.<sup class="ref"><a href="#r15">15</a></sup> To help eligible residents keep Medicaid, Cook County Health leads a Medicaid Impact Working Group, which created GetMedicaidFacts.com, a low-barrier guide to the changes for enrollees and the groups that help them.<sup class="ref"><a href="#r18">18</a></sup></p>
-  <p><strong>Food.</strong> The county expected <span class="num" data-id="county_resp_extra_food_seekers_low" data-fmt="int"></span> to <span class="num" data-id="county_resp_extra_food_seekers_high" data-fmt="int"></span> more residents to seek food help in 2026 because of SNAP's new work rules. Its FY2026 budget set aside <span class="num" data-id="county_resp_food_housing_total" data-fmt="usdm"></span> from a one-time Chicago tax-increment financing (TIF) surplus: <span class="num" data-id="county_resp_food_depository" data-fmt="usdm"></span> to the Greater Chicago Food Depository, <span class="num" data-id="county_resp_rental_assistance" data-fmt="usdm"></span> for court-based rental assistance and <span class="num" data-id="county_resp_homeless_services" data-fmt="usdm"></span> for homeless services.<sup class="ref"><a href="#r17">17</a></sup> Cook County Health opened food pantries at Provident Hospital and Belmont Cragin Health Center, and its primary care sites now screen every patient for food insecurity and refer them to the Food Depository's SNAP outreach hotline.<sup class="ref"><a href="#r19">19</a></sup></p>
+  <p>Cook County is the second most populous county in the country,<sup class="ref"><a href="#r14">14</a></sup> and it meets H.R. 1 with a budget that is already stretched. Its response so far falls in three areas: the overall budget, the county health system, and food help.</p>
+  <p><strong>The budget.</strong> The proposed FY2027 budget, <span class="num" data-id="county_resp_total_budget_fy2027" data-fmt="usdb"></span>, had to close a projected gap of <span class="num" data-id="county_resp_gap_fy2027" data-fmt="usdm"></span>. About <span class="num" data-id="county_fy2027_obbba_hospital_fallout" data-fmt="usdm"></span> of that gap is H.R. 1's expected fallout for the county's hospital system. The county closed the gap without new taxes, in part through:<sup class="ref"><a href="#r15">15</a></sup></p>
+  <ul class="rules">
+    <li><b>Reserves:</b> <span class="num" data-id="county_resp_gap_reserves" data-fmt="usdm"></span></li>
+    <li><b>Investment income:</b> <span class="num" data-id="county_resp_gap_investing" data-fmt="usdm"></span></li>
+    <li><b>Spending cuts:</b> <span class="num" data-id="county_resp_gap_spending_cuts" data-fmt="usdm"></span></li>
+    <li><b>Leaving jobs unfilled:</b> <span class="num" data-id="county_resp_gap_vacancies" data-fmt="usdm"></span>, with hiring held almost flat</li>
+  </ul>
+  <p><strong>Health care.</strong> Cook County Health, the county's hospital system and the parent of its CountyCare Medicaid plan, carries most of the strain:</p>
+  <ul class="rules">
+    <li><b>A smaller budget.</b> Its proposed FY2027 budget is <span class="num" data-id="county_resp_cch_budget_cut_fy2027" data-fmt="usdm"></span> smaller than this year's, mostly because CountyCare expects fewer members.<sup class="ref"><a href="#r15">15</a></sup></li>
+    <li><b>Cuts already made.</b> Since 2024 it has cut about <span class="num" data-id="county_resp_cch_expenses_eliminated_since_2024" data-fmt="usdm"></span> in expenses, and it closed <span class="num" data-id="county_resp_cch_gap_closed_by_cch" data-fmt="usdm"></span> of its own <span class="num" data-id="county_fy2027_health_fund_gap" data-fmt="usdm"></span> gap.<sup class="ref"><a href="#r15">15</a></sup></li>
+    <li><b>More county tax support.</b> The county covers the last <span class="num" data-id="county_resp_cch_added_county_support" data-fmt="usdm"></span>, bringing its total support to <span class="num" data-id="county_resp_cch_total_county_support" data-fmt="usdm"></span>.<sup class="ref"><a href="#r15">15</a></sup> Without it, the health system said it would have had to cut services and about <span class="num" data-id="county_resp_cch_alt_layoffs_fte" data-fmt="int"></span> positions.<sup class="ref"><a href="#r16">16</a></sup></li>
+    <li><b>More charity care.</b> Free or reduced-cost care for patients who cannot pay is projected to rise by <span class="num" data-id="county_resp_cch_charity_care_increase" data-fmt="usdm"></span> to <span class="num" data-id="county_resp_cch_charity_care_fy2027" data-fmt="usdm"></span> in FY2027.<sup class="ref"><a href="#r15">15</a></sup></li>
+    <li><b>Helping people keep Medicaid.</b> Cook County Health leads a Medicaid Impact Working Group, which created GetMedicaidFacts.com, a low-barrier guide to the changes for enrollees and the groups that help them.<sup class="ref"><a href="#r18">18</a></sup></li>
+  </ul>
+  <p><strong>Food.</strong> The county expected <span class="num" data-id="county_resp_extra_food_seekers_low" data-fmt="int"></span> to <span class="num" data-id="county_resp_extra_food_seekers_high" data-fmt="int"></span> more residents to seek food help in 2026 because of SNAP's new work rules. Its FY2026 budget set aside <span class="num" data-id="county_resp_food_housing_total" data-fmt="usdm"></span> from a one-time Chicago tax-increment financing (TIF) surplus:<sup class="ref"><a href="#r17">17</a></sup></p>
+  <ul class="rules">
+    <li><b>Greater Chicago Food Depository:</b> <span class="num" data-id="county_resp_food_depository" data-fmt="usdm"></span></li>
+    <li><b>Court-based rental assistance:</b> <span class="num" data-id="county_resp_rental_assistance" data-fmt="usdm"></span></li>
+    <li><b>Homeless services:</b> <span class="num" data-id="county_resp_homeless_services" data-fmt="usdm"></span></li>
+  </ul>
+  <p>Cook County Health also opened food pantries at Provident Hospital and Belmont Cragin Health Center, and its primary care sites now screen every patient for food insecurity and refer them to the Food Depository's SNAP outreach hotline.<sup class="ref"><a href="#r19">19</a></sup></p>
   <p><strong>Set against the losses.</strong> These steps help, but they are small next to what leaves the county. The <span class="num" data-id="county_resp_food_depository" data-fmt="usdm"></span> for the Food Depository is one-time money; in the middle scenario, Cook residents lose about <span class="num" data-id="snap_usd_federal_benefits_2028_mid" data-fmt="usdm0"></span> in federal SNAP benefits in 2028 alone. The added <span class="num" data-id="county_resp_cch_added_county_support" data-fmt="usdm"></span> for the health system covers one year; by our estimate, CountyCare loses about <span class="num" data-id="countycare_capitation_lost_fy2028_mid" data-fmt="usdm0"></span> in Medicaid payments in FY2028 for expansion adults alone, as the work requirement takes full effect. Much of the cushion the county used this year, reserves and one-time funds, cannot be used twice.</p>
 </section>
 
-<h2 class="col section-break">What this means for Cook County</h2>
+<h2 class="col section-break" id="means">What this means for Cook County</h2>
 <section class="col prose">
   <p>By the end of 2028, H.R. 1 could take Medicaid, SNAP or both from between <span class="num" data-id="ovl_unique_residents_2028_low" data-fmt="k"></span> and <span class="num" data-id="ovl_unique_residents_2028_high" data-fmt="k"></span> Cook County residents, about <span class="num" data-id="ovl_unique_residents_2028_mid" data-fmt="k"></span> in the middle scenario. The two programs are at different stages. SNAP's losses have already happened: by September 2026, between <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_low" data-fmt="k"></span> and <span class="num" data-id="snap_hr1_persons_lost_to_2026_09_high" data-fmt="k"></span> fewer residents were getting help with groceries because of the law. Medicaid's losses are still ahead. Apart from a small noncitizen cut in October 2026, they begin in April 2027 and build through 2028.</p>
   <p>The losses fall hardest where need is already greatest: Chicago's West and South Sides and the south suburbs. And many of the people who lose Medicaid will still be working. In the middle scenario, at least <span class="num" data-id="mcd_work_req_losses_already_compliant_mid" data-fmt="k"></span> of them work enough hours and lose coverage only because they could not prove it in time.</p>
@@ -395,7 +464,8 @@ ul.rules li { margin-bottom: 0.6rem; }
   <p>For readers curious how this study's results line up with other estimates, the table puts them side by side. Outside estimates for Illinois are scaled to Cook County using the same Cook baseline or share we use. Small differences are expected: each study measures a slightly different thing.</p>
 </section>
 <div class="col"><div class="tbl-wrap tbl-open tri"><table id="tri-table"></table></div>
-  <p class="tbl-note">Medicaid: average number of Cook expansion adults off coverage in 2028. Urban Institute: its Illinois shares for 2028 times the HFS Cook count;<sup class="ref"><a href="#r10">10</a></sup> its three settings line up with our three scenarios. HFS internal estimate: 165,000 to 330,000 of about 700,000 Illinois expansion adults, as a share of Cook's count; method not published.<sup class="ref"><a href="#r7">7</a></sup> SNAP: IDHS statewide figures reported in the press, times Cook's share of Illinois SNAP recipients. Our count of adults under the time limit is smaller because survey answers can only approximate the exemptions; the April 2027 losses are calibrated to the losses actually observed in 2026, so this matters little for the totals.<sup class="ref"><a href="#r3">3</a></sup></p>
+  <p class="tbl-note"><b>Note, Medicaid:</b> average number of Cook expansion adults off coverage in 2028. Urban Institute: its Illinois shares for 2028 times the HFS Cook count;<sup class="ref"><a href="#r10">10</a></sup> its three settings line up with our three scenarios. HFS internal estimate: 165,000 to 330,000 of about 700,000 Illinois expansion adults, as a share of Cook's count; method not published.<sup class="ref"><a href="#r7">7</a></sup></p>
+  <p class="tbl-note"><b>Note, SNAP:</b> IDHS statewide figures reported in the press, times Cook's share of Illinois SNAP recipients.<sup class="ref"><a href="#r3">3</a></sup> Our count of adults under the time limit is smaller because survey answers can only approximate the exemptions; the April 2027 losses are calibrated to the losses observed in 2026, so this matters little for the totals.</p>
 </div>
 
 <h2 class="col section-break" id="sources">Sources</h2>
@@ -426,7 +496,7 @@ ul.rules li { margin-bottom: 0.6rem; }
 </section>
 
 <footer class="col">
-  <p>Every number on this page is filled in from the analysis ledger by its id, so the text and the analysis cannot drift apart. Method, sources, limitations, code and data: <a href="https://github.com/Rushikeshay/hr1-cook-il">github.com/Rushikeshay/hr1-cook-il</a>.</p>
+  <p>Method, sources, limitations, code and data: <a href="https://github.com/Rushikeshay/hr1-cook-il">github.com/Rushikeshay/hr1-cook-il</a>.</p>
   <p id="built"></p>
 </footer>
 
@@ -509,7 +579,7 @@ ul.rules li { margin-bottom: 0.6rem; }
     el.textContent = fmt.rate(d3[el.dataset.agg](vals));
   });
   document.querySelectorAll("[data-county]").forEach((el) => { el.textContent = fmt.rate(countyRate("mid", el.dataset.county)); });
-  document.getElementById("built").textContent = "Built " + D.meta.built.replace("T", " ") + " from story_data.json.";
+  document.getElementById("built").textContent = "Last updated " + new Date(D.meta.built.slice(0, 10) + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) + ".";
 
   // =================================================================== SNAP chart
   const snapBox = document.getElementById("snap-chart");
@@ -1096,6 +1166,30 @@ ul.rules li { margin-bottom: 0.6rem; }
   }
   [snapBox, mcdBox, pplBox, mapBox, bothBox, document.getElementById("money-b1")].forEach((b) => ro.observe(b));
   drawSnap(); drawMcd(); drawPpl(); drawMap(); drawZipTable(); drawBoth(); drawMoney(); pplPrev = 0;
+})();
+</script>
+<script>
+// Contents pane: highlight the section in view; open/close on small screens.
+(function () {
+  const toc = document.getElementById("toc"), btn = document.getElementById("toc-btn");
+  const links = Array.from(toc.querySelectorAll("a"));
+  const targets = links.map((a) => document.getElementById(a.getAttribute("href").slice(1)));
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const line = window.innerHeight * 0.3;
+    let cur = 0;
+    targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= line) cur = i; });
+    links.forEach((a, i) => a.classList.toggle("active", i === cur));
+  }
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+  const setOpen = (o) => { toc.classList.toggle("open", o); btn.setAttribute("aria-expanded", String(o)); };
+  btn.addEventListener("click", () => setOpen(!toc.classList.contains("open")));
+  links.forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+  document.addEventListener("click", (e) => { if (!toc.contains(e.target) && e.target !== btn) setOpen(false); });
 })();
 </script>
 

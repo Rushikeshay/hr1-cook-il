@@ -1093,8 +1093,8 @@ step,check,status,expected,actual,detail,run_at
 07_outputs,map has all 177 Cook ZCTAs,PASS,177,177,,2026-11-03T11:26:43
 07_outputs,map file size reasonable (< 2 MB),PASS,"[50, 2,048]",176.7,177 KB,2026-11-03T11:26:43
 07_outputs,five static charts written,PASS,5,5,,2026-11-03T11:26:45
-07b_story_preview,every number id in the template exists in the ledger,PASS,[],[],75 ids used,2026-11-03T11:32:42
-07b_story_preview,every zip named in the text exists in the zip results,PASS,[],[],,2026-11-03T11:32:42
-07b_story_preview,map shapes and zip results cover the same 177 zips,PASS,[],[],,2026-11-03T11:32:42
-07b_story_preview,Medicaid monthly series covers Oct 2025-Dec 2028 for 3 scenarios,PASS,117,117,,2026-11-03T11:32:42
-07b_story_preview,preview size reasonable (< 2 MB),PASS,"[50, 2,048]",388.5,388 KB,2026-11-03T11:32:42
+07b_story_preview,every number id in the template exists in the ledger,PASS,[],[],78 ids used,2026-11-04T12:03:05
+07b_story_preview,every zip named in the text exists in the zip results,PASS,[],[],,2026-11-04T12:03:05
+07b_story_preview,map shapes and zip results cover the same 177 zips,PASS,[],[],,2026-11-04T12:03:05
+07b_story_preview,Medicaid monthly series covers Oct 2025-Dec 2028 for 3 scenarios,PASS,117,117,,2026-11-04T12:03:05
+07b_story_preview,preview size reasonable (< 2 MB),PASS,"[50, 2,048]",393.4,393 KB,2026-11-04T12:03:05

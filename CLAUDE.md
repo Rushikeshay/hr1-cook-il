@@ -184,6 +184,17 @@ Done: Step 0 (checks/ledger/tracer/spotcheck helpers + tests), Step 1 (manifest,
 - Article published on GitHub Pages: https://rushikeshay.github.io/hr1-cook-il/ (docs/index.html, written by 07b on
   every build; commit + push to update). The claude.ai artifact is now only a private preview.
 
+## Round 4 (2026-11-04)
+- Money section: each paragraph = who pays -> number -> method/source -> range; chart subtitle says what left/middle/right
+  show, footnote = method only. One `p.callout` (the "gap" passage after the health-services caveat).
+- County budget figures live only in "What the county is doing" (budget / health care / food as bold leads + lists);
+  the money section links to it (#county). Contents pane: `nav.toc` (fixed left >= 1200px, button + pop-up below);
+  every h2 in it needs an id.
+- Visual checks: Playwright is installed in BED; launch with `p.chromium.launch(channel="msedge")` (uses installed Edge,
+  no browser download). Plain headless Edge screenshots go blank at #fragments; use Playwright instead.
+- Text edit round 5: map and dot chart subtitles = how to read; footnotes = sources only. County $ keep decimals
+  ($550.7M) by user choice. "Last updated" date = story_data.json build date (D.meta.built).
+
 ## Step 8 outputs (2026-10-29)
 - `07_outputs.py`: output/story/story_data.json (headline numbers keep ledger ids; full ledger included),
   output/story/cook_zcta.geojson (Cook-clipped, simplified, GeoJSON not TopoJSON: no topojson lib in env),
